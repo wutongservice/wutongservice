@@ -1,0 +1,15 @@
+cd BorqsServerPlatform3
+svn update
+mvn package
+echo '--- RM'
+rm -rf distribution/target/distribution-r1-release
+echo '--- CP'
+cp -r distribution/target/distribution-r1-distribution distribution/target/distribution-r1-release
+cp ../plugin/*.jar distribution/target/distribution-r1-distribution distribution/target/distribution-r1-release/mod
+cd distribution/target/distribution-r1-release
+
+echo '****** GO! *********'
+chmod +x bin/bsapp
+bin/bsapp  com.borqs.server.base.web.JettyServer -c etc/PlatformWebServer.properties
+
+

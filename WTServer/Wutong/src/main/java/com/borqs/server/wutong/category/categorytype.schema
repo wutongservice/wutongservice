@@ -1,0 +1,13 @@
+{
+    "name":"category_type",
+    "columns": {
+        "category_id":"int",
+        "category":"string",
+        "scope":"int",
+        "user_id":"int",
+        "type":"int",
+        "created_time":"int",
+        "destroyed_time":"int",
+        "sort":"int"
+    }
+}

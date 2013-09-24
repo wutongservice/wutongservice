@@ -1,0 +1,11 @@
+{
+    "name":"report_abuse",
+    "columns": {        
+        "user_id":"string",
+        "target_type":"int",
+        "target_id":"string",
+        "appid":"int",
+        "created_time":"int",
+        "reason":"string"
+    }
+}

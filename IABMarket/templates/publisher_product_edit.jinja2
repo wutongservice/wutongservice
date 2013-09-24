@@ -1,0 +1,266 @@
+{% extends 'publisher_layout.jinja2' %}
+{% macro input_text(name, label='', lang='',placeholder='', id=None, help='', value='', readonly=False, required=False) -%}
+    <label><span class="text-error">{{ '*' if required else ''}}</span><strong>{{ label }}</strong><span class="text-info" style="padding-left: 20px">{{ lang }}</span></label>
+    <input type="text" name="{{ name }}" id="{{ id if id else name }}" placeholder="{{ placeholder }}" value="{{ value }}" {{ 'readonly' if readonly else ''}}/>
+    {% if help %}
+        <span class="help-block">{{ help }}</span>
+    {% endif %}
+{%- endmacro %}
+
+{% macro input_select(name, label='', id=None, help='', options=[], selected=None, required=False) -%}
+    <label><span class="text-error">{{ '*' if required else ''}}</span><strong>{{ label }}</strong></label>
+    <select name="{{ name }}" id="{{ id if id else name }}">
+    {% for opt in options %}
+        <option value="{{ opt[0] }}" {{ 'selected' if selected == opt[0] else '' }}>{{ opt[1] }}</option>
+    {% endfor %}
+    {% if help %}
+        <span class="help-inline">{{ help }}</span>
+    {% endif %}
+    </select>
+{%- endmacro %}
+
+{% macro input_textarea(name, label='', lang='', id=None, help='', rows=6, cols=10, clazz='', value='', required=False) -%}
+    <label><span class="text-error">{{ '*' if required else ''}}</span><strong>{{ label }}</strong><span class="text-info" style="padding-left: 20px">{{ lang }}</span></label>
+    <textarea id="{{ id if id else name }}" rows="{{ rows }}" cols="{{ cols }}" name="{{ name }}"
+              class="{{ clazz }}">{{ value|escape }}</textarea>
+    {% if help %}
+        <span class="help-inline">{{ help }}</span>
+    {% endif %}
+{%- endmacro %}
+
+
+{% macro upload_file(name, id=None, label='', required=False) -%}
+    <label><span class="text-error">{{ '*' if required else ''}}</span><strong>{{ label }}</strong></label>
+    <div class="fileupload fileupload-new" data-provides="fileupload">
+        <div class="input-append">
+            <div class="uneditable-input span3">
+                <i class="icon-file fileupload-exists"></i>
+                <span class="fileupload-preview"></span>
+            </div>
+            <span class="btn btn-file">
+            <span class="fileupload-new">Select file</span>
+            <span class="fileupload-exists">Change</span>
+            <input type="file" name="{{ name }}" id="{{ id if id else name }}"/></span>
+            <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+        </div>
+    </div>
+{%- endmacro %}
+
+{% macro show_image(url) -%}
+    {% if url %}
+        <a class="fancybox" href="{{ url }}"><img src="{{ url }}" alt="No image" class="upload-image"/></a>
+
+    {% else %}
+        <p class="text-error">No image</p>
+    {% endif %}
+{%- endmacro %}
+
+{% block main_content %}
+    {{ nav_bar(paths=nav_paths) }}
+    <h3 class="heading">
+        {% if mod == 'new_product' %}
+            Publish new product
+        {% elif mod == 'new_version' %}
+            Publish new version
+        {% else %}
+            Update version
+        {% endif %}
+    </h3>
+    <div class="row-fluid">
+        <div class="span12">
+            <form method="post" enctype="MULTIPART/FORM-DATA">
+                {% if errors %}
+                    <div class="well text-error">
+                        <ul>
+                            {% for err in errors %}
+                                <li>{{ err|escape }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                {% if mod == 'update_version' %}
+                 <div class="formSep">
+                    {{ input_select(name='lang', id='lang', label='Select a language', options=available_langs, selected=lang) }}
+                 </div>
+                {% else %}
+                    <input type="hidden" name="lang" value="default"/>
+                {% endif %}
+                <input type="hidden" name="app" value="{{ app }}"/>
+                <input type="hidden" name="app_id" value="{{ app }}"/>
+                <input type="hidden" name="category" value="{{ category }}"/>
+                {% if mod != 'new_product' %}
+                <input type="hidden" name="id" value="{{ id }}"/>
+                {% endif %}
+                <div class="formSep">
+                    <div class="row-fluid">
+                        <div class="span4">
+                            {{ input_text(name='name', id="pname", label='Name', lang=lang_name, placeholder='Product name', value=name, readonly=(mod=='new_version'), required=(mod in ['new_product', 'new_version'])) }}
+                        </div>
+                        <div class="span4">
+                            {{ input_text(name='version', label='Version', placeholder='Product version',help='example 1.0.2', value=version, readonly=(mod=='update_version'), required=(mod in ['new_product', 'new_version'])) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="formSep">
+                    {% set prices = [] %}
+                    {% for pt in available_pricetags %}
+                        {% do prices.append((pt.id, pt.price_name)) %}
+                    {% endfor %}
+                    {{ input_select(name='pricetag_id', label='Price', options=prices, selected=pricetag_id, required=(mod in ['new_product', 'new_version'])) }}
+                </div>
+                <div class="formSep">
+                    <div class="row-fluid">
+                        <div class="span6">
+                            {{ input_textarea(name='description', clazz='span12', label='Description', lang=lang_name, value=description, required=(mod in ['new_product', 'new_version'])) }}
+                        </div>
+                        <div class="span6">
+                            {{ input_textarea(name='update_change', clazz='span12', label='Version Description (for the version)', lang=lang_name, value=update_change, required=(mod in ['new_product', 'new_version'])) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="formSep">
+                    <div class="row-fluid">
+                        <div class="span4">
+                            {{ input_select(name='supported_mod', label='Supported mod  (for the version)', options=[
+                                ('*', 'All'),
+                                ('phone', 'Only for phone version'),
+                                ('HD', 'Only for HD version')
+                             ], required=(mod in ['new_product', 'new_version'])) }}
+                        </div>
+                        <div class="span4">
+                            {{ input_text(name='min_app_vc', label='Min app version code (for the version)', placeholder='Input integer', help='example 33', value=('' if min_app_vc <= 0 else max_app_vc)) }}
+                        </div>
+                        <div class="span4">
+                            {{ input_text(name='max_app_vc', label='Max app version code (for the version)', placeholder='Input integer', help='example 77', value=('' if max_app_vc > 100000000 else max_app_vc))}}
+                        </div>
+                    </div>
+                </div>
+                <div class="formSep">
+                    <div class="row-fluid">
+                        <div class="span6">
+                            {{ input_text(name='author_name', label='Your name', placeholder='Input your name', help='example "Jack Wang"', value=author_name, required=(mod in ['new_product', 'new_version'])) }}
+                        </div>
+                        <div class="span6">
+                            {{ input_text(name='author_email', label='Your email', placeholder='Input your email', help='example "jack.wang@abc.com"', value=author_email, required=(mod in ['new_product', 'new_version'])) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="formSep">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td width="34%">
+                                    {{ upload_file(name='logo_file', label='Logo image', required=(mod in ['new_product', 'new_version'])) }}
+                                </td>
+                                <td width="66%" class="upload-image-cell">
+                                    {{ show_image(url=logo_image) }}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="34%">
+                                    {{ upload_file(name='cover_file', label='Cover image', required=(mod in ['new_product', 'new_version'])) }}
+                                </td>
+                                <td width="66%" class="upload-image-cell">
+                                    {{ show_image(url=cover_image) }}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="34%">
+                                    {{ upload_file(name='screenshot1_file', label='Screenshot 1 image') }}
+                                </td>
+                                <td width="66%" class="upload-image-cell">
+                                    {{ show_image(url=screenshot1_image) }}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="34%">
+                                    {{ upload_file(name='screenshot2_file', label='Screenshot 2 image') }}
+                                </td>
+                                <td width="66%" class="upload-image-cell">
+                                    {{ show_image(url=screenshot2_image) }}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="34%">
+                                    {{ upload_file(name='screenshot3_file', label='Screenshot 3 image') }}
+                                </td>
+                                <td width="66%" class="upload-image-cell">
+                                    {{ show_image(url=screenshot3_image) }}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="34%">
+                                    {{ upload_file(name='screenshot4_file', label='Screenshot 4 image') }}
+                                </td>
+                                <td width="66%" class="upload-image-cell">
+                                    {{ show_image(url=screenshot4_image) }}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="34%">
+                                    {{ upload_file(name='screenshot5_file', label='Screenshot 5 image') }}
+                                </td>
+                                <td width="66%" class="upload-image-cell">
+                                    {{ show_image(url=screenshot5_image) }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="formSep">
+                    {% if action_url %}
+                        <span class="text-info" style="padding-right:10px">Download link: </span><a href="{{ action_url }}">{{ action_url|escape }}</a>
+                    {% endif %}
+                    {{ upload_file(name='file', label='Product file', required=(mod in ['new_product', 'new_version'])) }}
+                </div>
+
+                {% set submit_texts = {'new_product':'Publish', 'new_version':'Publish', 'update_version':'Update'} %}
+                <div class="formRow row-fluid">
+                    <input type="submit" value="{{ submit_texts[mod] }}" class="btn-large btn-gebo span3"/>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    {% if mod == 'update_version' %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.fancybox').fancybox();
+
+            var ticket = '{{ ticket }}';
+            $('#lang').change(function() {
+                var selected = $('#lang').children('option:selected').val();
+                BorqsMarket.api_publisher_getProduct(ticket, '{{ id }}', '{{ version }}', selected, function(data) {
+                    $('#pname').attr('value', data['name'][selected] || '');
+                    $('#description').text(data['description'][selected] || '');
+                    $('#update_change').text(data['update_change'][selected] || '');
+                })
+            });
+        });
+    </script>
+    {% endif %}
+{% endblock %}
+
+{% block css %}
+    <style type="text/css">
+        .upload-image {
+            max-width:300px;
+            max-height:300px;
+            border: 1px solid #DDDDDD;
+        }
+
+        .upload-image-cell {
+            padding: 0;
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
+{% endblock %}

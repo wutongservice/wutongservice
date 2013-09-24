@@ -1,0 +1,10 @@
+
+@namespace("com.borqs.server.service.platform")
+protocol Ignore {
+    import schema "../../../../../base/src/main/avro/error.avsc";
+
+    boolean createIgnore(string userId, string targetType, string targetId) throws com.borqs.server.base.ResponseError;
+    boolean deleteIgnore(string userId, string targetType, string targetId) throws com.borqs.server.base.ResponseError;
+    bytes getIgnoreList(string user_id,string target_type, int page, int count) throws com.borqs.server.base.ResponseError;
+    boolean getExistsIgnore(string userId, string targetType, string targetId) throws com.borqs.server.base.ResponseError;
+}

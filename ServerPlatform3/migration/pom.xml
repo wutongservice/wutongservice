@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>platform-parent</artifactId>
+        <groupId>com.borqs.server</groupId>
+        <version>r2</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>migration</artifactId>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.borqs.server</groupId>
+            <artifactId>platform</artifactId>
+            <version>r2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.borqs.server</groupId>
+            <artifactId>stream</artifactId>
+            <version>r2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.borqs.server</groupId>
+            <artifactId>friend</artifactId>
+            <version>r2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.borqs.server</groupId>
+            <artifactId>account</artifactId>
+            <version>r2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.borqs.server</groupId>
+            <artifactId>compatible</artifactId>
+            <version>r2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.borqs.server</groupId>
+            <artifactId>setting</artifactId>
+            <version>r2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.borqs.server</groupId>
+            <artifactId>login</artifactId>
+            <version>r2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.borqs.server</groupId>
+            <artifactId>contact</artifactId>
+            <version>r2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.borqs.server</groupId>
+            <artifactId>photo</artifactId>
+            <version>r2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.borqs.server</groupId>
+            <artifactId>psuggest</artifactId>
+            <version>r2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.borqs.server</groupId>
+            <artifactId>request</artifactId>
+            <version>r2</version>
+        </dependency>
+    </dependencies>
+</project>

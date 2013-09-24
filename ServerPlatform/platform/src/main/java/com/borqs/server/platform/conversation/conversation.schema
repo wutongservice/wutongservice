@@ -1,0 +1,13 @@
+{
+    "name":"conversation_",
+    "columns": {
+        "target_type": "int",
+        "target_id": "string",
+        "reason": "int",
+        "from_": "int",
+        "created_time": "int"
+    }
+}
+
+
+

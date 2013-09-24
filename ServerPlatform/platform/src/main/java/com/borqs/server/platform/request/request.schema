@@ -1,0 +1,16 @@
+{
+    "name":"request",
+    "columns": {
+        "request_id":"int",
+        "user":"int",
+        "source":"int",
+        "app":"int",
+        "type":"string",
+        "created_time":"int",
+        "done_time":"int",
+        "status":"int",
+        "message":"string",
+        "data":"string",
+        "options":"json"
+    }
+}

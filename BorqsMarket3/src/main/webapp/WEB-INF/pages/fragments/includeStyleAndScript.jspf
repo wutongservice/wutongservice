@@ -1,0 +1,23 @@
+<link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/static/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="/static/bootstrap/css/bootstrap-docs.min.css" rel="stylesheet">
+<link href="/static/bootstrap/css/bootstrap-fileupload.min.css" rel="stylesheet">
+<link href="/static/bootstrap/css/bootstrap-tagmanager.css" rel="stylesheet">
+<link href="/static/borqsmarket/css/all.css" rel="stylesheet">
+<link href="/static/borqsmarket/css/datepicker.css" rel="stylesheet">
+
+<script src="/static/jquery/js/jquery.min.js"></script>
+<script src="/static/jquery/js/jquery.cookie.js"></script>
+<script src="/static/jquery/js/jquery.json.min.js"></script>
+<script src="/static/jquery/js/jquery.zclip.min.js"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/bootstrap/js/bootstrap-tooltip.js"></script>
+<script src="/static/borqsmarket/js/bootstrap-datepicker.js"></script>
+<script src="/static/borqsmarket/js/bootstrap-paginator.min.js"></script>
+<script src="/static/bootstrap/js/bootstrap-fileupload.min.js"></script>
+<script src="/static/bootstrap/js/bootstrap-tagmanager.js"></script>
+
+<script module="text/javascript">
+  var BORQS_MARKET_HOST = '<%="http://" + request.getServerName() + ":" + request.getServerPort()%>';
+</script>
+<script src="/static/borqsmarket/js/commons.js"></script>

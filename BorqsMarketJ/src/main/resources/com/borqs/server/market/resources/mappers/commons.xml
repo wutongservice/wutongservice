@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="market">
+    <select id="commons_languageExists_1" parameterType="Map" resultMap="recordMapper">
+        SELECT EXISTS(SELECT * FROM languages WHERE lcid=#{lang})
+    </select>
+</mapper>

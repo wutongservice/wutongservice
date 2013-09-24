@@ -1,0 +1,53 @@
+{
+    "id":"com.home3d.builder",
+    "name":{"en_US":"Test1", "zh_CN":"Test1"},
+    "categories": [
+        {
+            "id":"object",
+            "name":{"en_US":"Object", "zh_CN":"Object"},
+            "pricetags":[
+                {
+                    "id":"USD199",
+                    "price":{"en_US":{"cs":"USD", "amount":1.99}},
+                    "google_iab_sku":"ugc_3dobject_199"
+                },
+                {
+                    "id":"USD299",
+                    "price":{"en_US":{"cs":"USD", "amount":2.99}},
+                    "google_iab_sku":"ugc_3dobject_299"
+                },
+                {
+                    "id":"USD499",
+                    "price":{"en_US":{"cs":"USD", "amount":4.99}},
+                    "google_iab_sku":"ugc_3dobject_499"
+                },
+                {
+                    "id":"RemoveADS",
+                    "price":{"en_US":{"cs":"USD", "amount":5.99}},
+                    "google_iab_sku":"sku_ad_remove"
+                }
+            ]
+        },
+        {
+            "id":"wallpaper",
+            "name":{"en_US":"Wallpaper", "zh_CN":"Wallpaper"},
+            "pricetags":[
+                {
+                    "id":"USD099",
+                    "price":{"en_US":{"cs":"USD", "amount":0.99}},
+                    "google_iab_sku":"ugc_wallpaper_099"
+                },
+                {
+                    "id":"USD199",
+                    "price":{"en_US":{"cs":"USD", "amount":1.99}},
+                    "google_iab_sku":"ugc_wallpaper_199"
+                },
+                {
+                    "id":"USD299",
+                    "price":{"en_US":{"cs":"USD", "amount":2.99}},
+                    "google_iab_sku":"ugc_wallpaper_299"
+                }
+            ]
+        }
+    ]
+}

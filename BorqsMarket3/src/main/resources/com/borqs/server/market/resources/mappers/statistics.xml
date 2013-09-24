@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="statistics">
+
+
+  <select id="findIp" parameterType="Map" resultType="record">
+    SELECT
+      alias
+    FROM
+      ip
+    WHERE #{ip} BETWEEN from_num AND to_num
+    LIMIT 1;
+  </select>
+  <insert id="createStatistics" parameterType="Map">
+    INSERT INTO statistics
+    SET
+      app_id=#{app_id},
+      category_id=#{category_id},
+      product_id=#{product_id},
+      version=#{version},
+      country=#{country},
+      dates=#{dates},
+      count=#{count}
+    ON DUPLICATE KEY UPDATE count = count + 1;
+  </insert>
+
+  <insert id="increaseStatCount" parameterType="Map">
+    INSERT INTO statistics
+    SET
+      app_id=#{app_id},
+      category_id=#{category_id},
+      product_id=#{product_id},
+      version=#{version},
+      country=#{country},
+      dates=#{date},
+      `${count_type}`=#{n}
+    ON DUPLICATE KEY UPDATE
+      `${count_type}` = `${count_type}` + #{n}
+    ;
+  </insert>
+
+  <select id="getTotalCountByVersion" parameterType="Map" resultType="record">
+    SELECT
+      dates,
+      version,
+#sum(count) AS count
+      sum(download_count) AS count
+    FROM
+      statistics
+    WHERE dates >= #{dates}
+          AND product_id = #{product_id}
+    GROUP BY dates, version
+    ORDER BY dates;
+  </select>
+  <select id="getTotalCountByDate" parameterType="Map" resultType="record">
+    SELECT
+      dates,
+#sum(count) AS count
+      sum(download_count) AS count
+    FROM
+      statistics
+    WHERE dates >= #{dates}
+          AND product_id = #{product_id}
+    GROUP BY dates
+    ORDER BY dates;
+  </select>
+
+  <!--find the max download countries of top n-->
+  <select id="getMaxCountCountry" parameterType="Map" resultType="record">
+    SELECT
+      country,
+#SUM(COUNT) AS COUNT
+      SUM(download_count) AS count
+    FROM statistics
+    WHERE dates >= #{dates}
+          AND product_id = #{product_id}
+          AND country
+              &lt;> ''
+    GROUP BY country
+    #ORDER BY SUM(COUNT)DESC
+    ORDER BY SUM(download_count) DESC
+    LIMIT #{limit}
+  </select>
+  <!--get countries line data-->
+  <select id="getTotalCountByCountry" parameterType="Map" resultType="record">
+    SELECT
+    dates,
+    country,
+    #SUM(COUNT) AS count
+    SUM(download_count) AS count
+    FROM statistics
+    WHERE dates >= #{dates}
+    AND product_id = #{product_id}
+    AND country IN
+
+
+    <foreach collection="countries" close=")" open="(" separator="," item="c">
+      #{c}
+    </foreach>
+
+
+    GROUP BY dates,country
+    ORDER BY country DESC
+  </select>
+
+  <select id="getTotalCountByCountryPieChart" parameterType="Map" resultType="record">
+    SELECT
+    -- SUM(COUNT) as value,
+    SUM(download_count) as value,
+    country as label
+    FROM statistics
+    WHERE dates >= #{dates}
+    AND product_id = #{product_id}
+    and
+    country IN
+    <foreach collection="countries" close=")" open="(" separator="," item="c">
+      #{c}
+    </foreach>
+    GROUP BY country UNION SELECT
+    -- SUM(COUNT),
+    SUM(download_count),
+    #{other}
+    FROM statistics
+    WHERE dates >= #{dates}
+    AND product_id = #{product_id}
+    and
+    country NOT IN
+    <foreach collection="countries" close=")" open="(" separator="," item="c">
+      #{c}
+    </foreach>
+  </select>
+
+  <!--boss statistics-->
+  <select id="getMaxApps" parameterType="Map" resultType="record">
+    SELECT
+      app_id AS apps,
+      name
+    FROM statistics
+      LEFT JOIN apps ON app_id = id
+    WHERE dates > #{dates}
+          AND app_id > ''
+    GROUP BY app_id
+    #ORDER BY SUM(COUNT)DESC
+    ORDER BY SUM(download_count) DESC
+    LIMIT 5
+  </select>
+
+  <select id="getAllAppsTotalCountByDate" parameterType="Map" resultType="record">
+    SELECT
+    dates,
+    name,
+    SUM(COUNT) AS count
+    FROM statistics LEFT JOIN apps ON app_id = id
+    WHERE dates >= #{dates}
+    AND app_id IN
+    <foreach collection="apps" close=")" open="(" separator="," item="c">
+      #{c}
+    </foreach>
+
+    GROUP BY app_id,dates
+    ORDER BY dates;
+  </select>
+
+  <select id="getAllAppsTotalCountByDatePieChart" parameterType="Map" resultType="record">
+    SELECT
+    name ,
+    #SUM(COUNT) AS `value`
+    SUM(download_count) AS `value`
+    FROM statistics LEFT JOIN apps ON app_id = id
+    WHERE dates >= #{dates}
+    AND app_id IN
+    <foreach collection="apps" close=")" open="(" separator="," item="c">
+      #{c}
+    </foreach>
+
+    GROUP BY app_id
+  </select>
+
+  <!--product list statistics-->
+  <select id="getTodayDownloads" parameterType="Map" resultType="record">
+    SELECT
+    product_id ,
+    SUM(download_count) AS `value`
+    FROM statistics
+    WHERE dates >= #{dates}
+    AND product_id IN
+    <foreach collection="product_ids" close=")" open="(" separator="," item="c">
+      #{c}
+    </foreach>
+    GROUP BY product_id
+  </select>
+  <select id="getAllDownloads" parameterType="Map" resultType="record">
+    SELECT
+    product_id ,
+    SUM(download_count) AS `value`
+    FROM statistics
+    WHERE product_id IN
+    <foreach collection="product_ids" close=")" open="(" separator="," item="c">
+      #{c}
+    </foreach>
+    GROUP BY product_id
+  </select>
+
+
+  <select id="getTopForDateBasedLineChart" parameterType="Map" resultType="record">
+    SELECT
+    ${dim_col} AS ${dim_as_col},
+    SUM(${count_type}) AS ${count_type}
+    FROM statistics
+    WHERE
+    <if test="min_date == null and max_date == null">
+      1 = 1
+    </if>
+    <if test="min_date == null and max_date != null">
+      dates &lt;= #{max_date}
+    </if>
+    <if test="min_date != null and max_date == null">
+      dates &gt;= #{min_date}
+    </if>
+    <if test="min_date != null and max_date != null">
+      (dates &gt;= #{min_date} AND dates &lt;= #{max_date})
+    </if>
+    <foreach collection="conditions" item="condition">
+      AND ${condition}
+    </foreach>
+    GROUP BY ${dim_as_col}
+    ORDER BY ${count_type} DESC
+    LIMIT #{n}
+  </select>
+
+  <select id="getDataForDateBasedLineChart" parameterType="Map" resultType="record">
+    SELECT
+    dates,
+    ${dim_col} AS ${dim_as_col},
+    SUM(${count_type}) AS ${count_type}
+    FROM
+    statistics
+    WHERE
+    <if test="min_date == null and max_date == null">
+      1 = 1
+    </if>
+    <if test="min_date == null and max_date != null">
+      dates &lt;= #{max_date}
+    </if>
+    <if test="min_date != null and max_date == null">
+      dates &gt;= #{min_date}
+    </if>
+    <if test="min_date != null and max_date != null">
+      (dates &gt;= #{min_date} AND dates &lt;= #{max_date})
+    </if>
+    <foreach collection="conditions" item="condition">
+      AND ${condition}
+    </foreach>
+    <if test="dim_in_cols != null">
+      AND ${dim_col} IN
+      <foreach collection="dim_in_cols" close=")" open="(" separator="," item="c">
+        #{c}
+      </foreach>
+    </if>
+    GROUP BY
+    dates, ${dim_as_col}
+    ORDER BY dates DESC;
+  </select>
+
+  <select id="getDataForDonutChart" parameterType="Map" resultType="record">
+    SELECT
+    SUM(${count_type}) AS `value`,
+    ${dim_col} AS label
+    FROM statistics
+    WHERE
+    <if test="min_date == null and max_date == null">
+      1 = 1
+    </if>
+    <if test="min_date == null and max_date != null">
+      dates &lt;= #{max_date}
+    </if>
+    <if test="min_date != null and max_date == null">
+      dates &gt;= #{min_date}
+    </if>
+    <if test="min_date != null and max_date != null">
+      (dates &gt;= #{min_date} AND dates &lt;= #{max_date})
+    </if>
+    <foreach collection="conditions" item="condition">
+      AND ${condition}
+    </foreach>
+    <if test="dim_in_cols != null">
+      AND ${dim_col} IN
+      <foreach collection="dim_in_cols" close=")" open="(" separator="," item="c">
+        #{c}
+      </foreach>
+    </if>
+    GROUP BY ${dim_col}
+    <if test="dim_in_cols != null">
+      UNION
+      SELECT
+      SUM(${count_type}) AS `value`,
+      #{other_label} AS label
+      FROM
+      statistics
+      WHERE
+      <if test="min_date == null and max_date == null">
+        1 = 1
+      </if>
+      <if test="min_date == null and max_date != null">
+        dates &lt;= #{max_date}
+      </if>
+      <if test="min_date != null and max_date == null">
+        dates &gt;= #{min_date}
+      </if>
+      <if test="min_date != null and max_date != null">
+        (dates &gt;= #{min_date} AND dates &lt;= #{max_date})
+      </if>
+      <foreach collection="conditions" item="condition">
+        AND ${condition}
+      </foreach>
+      AND ${dim_col} NOT IN
+      <foreach collection="dim_in_cols" close=")" open="(" separator="," item="c">
+        #{c}
+      </foreach>
+    </if>
+
+  </select>
+
+  <select id="sumCounts" parameterType="Map" resultType="record">
+    SELECT
+    `${dim_col}` AS `${dim_as_col}`
+    <foreach collection="count_cols" item="cc">
+      , SUM(`${cc}`) AS `${cc}`
+    </foreach>
+    FROM
+    statistics
+    WHERE
+    <if test="min_date == null and max_date == null">
+      1 = 1
+    </if>
+    <if test="min_date == null and max_date != null">
+      dates &lt;= #{max_date}
+    </if>
+    <if test="min_date != null and max_date == null">
+      dates &gt;= #{min_date}
+    </if>
+    <if test="min_date != null and max_date != null">
+      (dates &gt;= #{min_date} AND dates &lt;= #{max_date})
+    </if>
+    <foreach collection="conditions" item="condition">
+      AND ${condition}
+    </foreach>
+    <if test="dim_scope!=null">
+      AND ${dim_as_col} IN
+      <foreach collection="dim_scope" close=")" open="(" separator="," item="c">
+        #{c}
+      </foreach>
+    </if>
+    GROUP BY
+    ${dim_as_col}
+    ;
+  </select>
+</mapper>

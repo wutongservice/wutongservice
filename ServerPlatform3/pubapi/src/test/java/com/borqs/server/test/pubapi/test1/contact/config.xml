@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+
+       default-init-method="init" default-destroy-method="destroy">
+    <!--Sql.executor-->
+    <bean id="sql.executor" class="com.borqs.server.platform.sql.SqlExecutor" scope="singleton">
+        <property name="connectionFactory">
+            <bean class="com.borqs.server.platform.sql.SimpleConnectionFactory" scope="singleton"/>
+        </property>
+    </bean>
+
+    <!-- Tables -->
+    <bean id="table.contact0" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="jdbc:mysql://192.168.5.22:3306/test_account3?user=root&amp;password=111111&amp;allowMultiQueries=true"/>
+        <property name="table" value="contact0"/>
+    </bean>
+
+    <bean id="table.contact1" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                          value="jdbc:mysql://192.168.5.22:3306/test_account3?user=root&amp;password=111111&amp;allowMultiQueries=true"/>
+        <property name="table" value="contact1"/>
+    </bean>
+
+    <!-- Logic -->
+    <bean id="logic.account" class="com.borqs.server.platform.test.mock.ServerTeam" factory-method="account"
+          scope="singleton">
+    </bean>
+
+    <bean id="logic.contact" class="com.borqs.server.impl.contact.ContactImpl" scope="singleton">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="contactTable0" ref="table.contact0"/>
+        <property name="contactTable1" ref="table.contact1"/>
+        <property name="account" ref="logic.account"/>
+    </bean>
+
+
+    <bean id="servlet.pubApi" class="com.borqs.server.platform.web.topaz.HttpApiServlet">
+        <property name="handlers">
+            <list>
+                <bean class="com.borqs.server.pubapi.ContactApi">
+                    <property name="account" ref="logic.account"/>
+                    <property name="contactLogic" ref="logic.contact"/>
+                    <property name="login">
+                        <bean class="com.borqs.server.platform.test.mock.ServerTeam" factory-method="login"/>
+                    </property>
+                    <property name="app">
+                        <bean class="com.borqs.server.platform.test.mock.ServerTeam" factory-method="app"/>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+</beans>

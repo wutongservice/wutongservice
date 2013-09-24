@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+
+       default-init-method="init" default-destroy-method="destroy">
+    <!--Sql.executor-->
+    <bean id="sql.executor" class="com.borqs.server.platform.sql.SqlExecutor" scope="singleton">
+        <property name="connectionFactory">
+            <bean class="com.borqs.server.platform.sql.SimpleConnectionFactory" scope="singleton"/>
+        </property>
+    </bean>
+
+    <!-- Tables -->
+    <bean id="table.video" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db" value="jdbc:mysql://localhost:3306/account2?user=root&amp;password=1234&amp;allowMultiQueries=true"/>
+        <property name="table" value="video"/>
+    </bean>
+    <!-- Logic -->
+    <bean id="logic.video" class="com.borqs.server.impl.video.VideoImpl" scope="singleton">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="videoTable" ref="table.video"/>
+        <property name="account" ref="logic.account"/>
+    </bean>
+
+    <bean id="logic.account" class="com.borqs.server.platform.test.mock.SteveAndBill" factory-method="account" scope="singleton">
+    </bean>
+
+
+
+    <bean id="service.telnetLog" class="com.borqs.server.platform.log.TelnetAppenderService" factory-method="getInstance">
+        <property name="address" value="*:11300" />
+    </bean>
+
+    <!-- app -->
+    <bean id="main" class="com.borqs.server.platform.service.ServiceApp">
+        <property name="services">
+            <list>
+                <ref bean="service.telnetLog"/>
+            </list>
+        </property>
+    </bean>
+
+
+
+</beans>

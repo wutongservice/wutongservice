@@ -1,0 +1,12 @@
+{
+    "name":"tag",
+    "columns": {
+        "user":"int",
+        "tag":"string",
+        "scope":"int",
+        "target_id":"int",
+        "type":"int",
+        "created_time":"int",
+        "destroyed_time":"int"
+    }
+}

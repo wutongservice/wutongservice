@@ -1,0 +1,3 @@
+#!/bin/sh
+kill `cat /home/zhengwei/opt/logs/redis.pid`
+rm -f /home/zhengwei/opt/logs/redis.pid

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+       default-init-method="init" default-destroy-method="destroy">
+
+
+    <!-- table -->
+    <import resource="frag.table.xml"/>
+
+    <!-- logic -->
+    <import resource="frag.logic.xml"/>
+
+    <!-- sender -->
+    <import resource="frag.sender.xml"/>
+
+    <!-- cache -->
+    <import resource="frag.cache.xml"/>
+
+    <!-- sendQueue -->
+    <import resource="frag.queue.xml"/>
+
+    <!-- service -->
+    <import resource="frag.service.xml"/>
+
+    <!-- sfs -->
+    <import resource="frag.sfs.xml"/>
+
+    <!-- const -->
+    <import resource="frag.const.xml"/>
+
+    <!-- fts -->
+    <import resource="frag.fts.xml"/>
+
+
+    <!-- app -->
+    <bean id="main" class="com.borqs.server.platform.tools.BuildUserFtsIndex" scope="singleton">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="account" ref="logic.account"/>
+        <property name="userFts" ref="fts.user"/>
+        <property name="userTable" ref="table.user"/>
+    </bean>
+</beans>

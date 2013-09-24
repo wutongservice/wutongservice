@@ -1,0 +1,15 @@
+{
+    "name":"qapk_suggest",
+    "columns": {
+        "sub_id": "int",
+        "sub_name": "string",
+        "policy": "string",
+        "created_time": "int",
+        "destroyed_time": "int",
+        "img_url": "string",
+        "ifsuggest": "boolean"
+    }
+}
+
+
+

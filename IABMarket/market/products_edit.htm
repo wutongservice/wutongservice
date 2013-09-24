@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>market</title>
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache,no-store, must-revalidate"> 
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
+<link href="main_css.css" rel="stylesheet" type="text/css">
+<!-- favicon -->
+<link rel="shortcut icon" href="favicon.ico" />
+<!--[if lte IE 8]>
+<link rel="stylesheet" href="css/ie.css"  />
+<![endif]-->
+
+<!--[if lt IE 9]>
+<script src="js/ie/html5.js" ></script>
+<script src="lib/flot/excanvas.min.js" ></script>
+<![endif]-->
+<script>
+document.documentElement.className += 'js';
+</script>
+<script src="js/jquery.min.js" ></script>
+<script src="lib/jquery-ui/jquery-ui-1.8.23.custom.min.js" ></script>
+<script src="js/forms/jquery.ui.touch-punch.min.js" ></script>
+<script src="js/jquery.easing.1.3.min.js" ></script>
+<script src="js/jquery.debouncedresize.min.js" ></script>
+<script src="js/jquery.cookie.min.js" ></script>
+<script src="bootstrap/js/bootstrap.min.js" ></script>
+<script src="js/bootstrap.plugins.min.js" ></script>
+<script src="lib/google-code-prettify/prettify.min.js" ></script>
+<script src="lib/sticky/sticky.min.js" ></script>
+<script src="lib/qtip2/jquery.qtip.min.js" ></script>
+<script src="lib/colorbox/jquery.colorbox.min.js" ></script>
+<script src="lib/jBreadcrumbs/js/jquery.jBreadCrumb.1.1.min.js" ></script>
+<script src="js/jquery.actual.min.js" ></script>
+<script src="lib/antiscroll/antiscroll.js" ></script>
+<script src="lib/antiscroll/jquery-mousewheel.js" ></script>
+<script src="js/ios-orientationchange-fix.js" ></script>
+<script src="lib/UItoTop/jquery.ui.totop.min.js" ></script>
+<script src="js/selectNav.js" ></script>
+<script src="lib/datatables/jquery.dataTables.min.js" ></script>
+<script src="lib/datatables/jquery.dataTables.sorting.js" ></script>
+<script src="js/gebo_tables.js" ></script>	
+<script type="text/javascript" src="js/jquery.form.js"></script>
+<script src="js/myjs.js" ></script>	
+	<script type="text/javascript" src="js/jquery.mousewheel-3.0.2.pack.js"></script>
+	<script type="text/javascript" src="js/jquery.fancybox-1.3.1.js"></script>
+	<script type="text/javascript" src="js/pngobject.js"></script>
+	<link rel="stylesheet" href="css/jquery.fancybox-1.3.1.css" type="text/css" />
+<style>
+.dib { display: inline-block; }
+</style>
+<script type="text/javascript">
+	
+$(document).ready(function() {
+(function(a){jQuery.browser.mobile=/android.+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|e\-|e\/|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(di|rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|xda(\-|2|g)|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))})(navigator.userAgent||navigator.vendor||window.opera);
+if(jQuery.browser.mobile) {
+if (top !== self) top.location.href = self.location.href;
+}
+setTimeout('$("html").removeClass("js")',200);
+			$("a[rel=example_group]").fancybox({
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'titlePosition' 	: 'over',
+				'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) {
+					return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
+				}
+			});
+});
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-32339645-1']);
+_gaq.push(['_trackPageview']);
+
+
+
+/*
+$("#i01").powerFloat({
+    targetMode: "ajax",
+    targetAttr: "href",
+    hoverFollow: "y",
+    position: "6-8"
+});
+*/
+</script>
+</head>
+<body>
+<!-----------------------------------------header   begin--------------------------------------->
+<div id="loading_layer" style="display:none"><img src="img/ajax_loader.gif" alt=""/></div>
+<!------------------------------------------style switcher   begin --------------------------------------->
+	<script src="js/style_switcher.js"></script>
+<!------------------------------------------style switcher   end--------------------------------------->
+<div id="maincontainer" class="clearfix">
+<script src="js/header.js"></script>
+<!------------------------------------------header   end --------------------------------------->
+<div id="contentwrapper">
+<div class="main_content" id="mainContent0">
+
+<!----------------------------------------------main ----begin---------------------------------------->                	
+<!---------------------------------------------main ------begin-------------------------------------->
+<!----------------------------------------------main ------begin-------------------------------------->
+
+<div id="jCrumbs" class="breadCrumb module">
+    <ul>
+        <li>
+            <a href="#"><i class="icon-home"></i></a>
+        </li>
+        <li>
+            <a href="#"><span id="a_name"></span></a>
+        </li>
+				<li>
+            <a href="#">New Version</a>
+        </li>
+    </ul>
+</div>	
+<script type="text/javascript">	  
+	    var args = new Object();
+      args = GetUrlParms();
+      
+			var product_id=args["product_id"];
+      var app_name=args["app_name"];
+      var version=args["version"];
+      var app_id=args["app_id"];
+      var category=args["category"];
+      $("#a_name").html(app_name);
+      
+		  function doBack(){
+		 		location.href="products_list.htm?app_id="+app_id+"&app_name="+app_name+"";
+		 	} 
+
+
+		 	
+		 	fillMoney();
+      function fillMoney() {
+        $(document).ready(
+          function () {
+              var fresh = Math.random();
+              invokeApiTemp("api/v1/publisher/pricetags/all", {"app":app_id,"category":category,"fresh":fresh}, function (ret) {
+                  fillPrice(ret);
+              }
+              );
+          });
+      }
+
+      function fillPrice(ret) {
+          var this_DATA_d = eval(ret);
+          var this_DATA = this_DATA_d.data;
+          var selObj = document.getElementById("p_price");
+          selObj.options.length = 0;
+          if (this_DATA.length > 0) {
+              for (var i = 0; i < this_DATA.length; i++) {
+                  var this_DATA_s = eval(this_DATA[i]);
+                  var Option = document.createElement("OPTION");
+                  Option.value = this_DATA_s.id;
+                  Option.text = this_DATA_s.price;
+                  selObj.options.add(Option);
+              }
+          }
+      }
+		 	
+		 	
+		 	getProduct();
+		 	  
+
+			function getProduct() {
+				$(document).ready(
+				function () {
+					var fresh = Math.random();
+	 				invokeApiTemp("api/v1/publisher/products/get", {"id":product_id,"version":version,"ticket":jquerySetCookie("market_user_ticket"),"fresh":fresh}, function (ret) {
+     		 		showEditProduct(ret);
+					}
+					);
+				});
+			}
+	
+			function showEditProduct(ret) {
+				var this_DATA_RETURN = eval(ret);
+		    if (this_DATA_RETURN.code=="0"){
+		    	var this_DATA_RETURN_s = eval(this_DATA_RETURN.data);
+		    	var nl = eval(this_DATA_RETURN_s.name);
+		    	for(var key0 in nl){ 
+							if (key0=="default"){
+								$("#p_name").val(nl[key0]);
+								break;
+							}
+					}
+		    	
+		    	var ptag = this_DATA_RETURN_s.pricetag_id;
+			    for (var k = 0; k < document.getElementById("p_price").options.length; k++) {
+                if (document.getElementById("p_price").options[k].value == ptag)
+                    document.getElementById("p_price").options[k].selected = true;
+          }
+		    	
+		    	var plang0 = this_DATA_RETURN_s.supported_languages;
+			    for (var j = 0; j < document.getElementById("p_lanaguage").options.length; j++) {
+                if (document.getElementById("p_lanaguage").options[j].value == "default")
+                    document.getElementById("p_lanaguage").options[j].selected = true;
+          }
+
+		    	var desc01 = eval(this_DATA_RETURN_s.description);
+		    	for(var key1 in desc01){ 
+							if (key1=="default"){
+								$("#p_description").val(desc01[key1]);
+								break;
+							}
+					}
+          
+          $("#p_user_name").val(this_DATA_RETURN_s.author_name);
+          $("#p_user_email").val(this_DATA_RETURN_s.author_email);
+          
+          var img_logo_ = this_DATA_RETURN_s.logo_image;
+          if (jQuery.isEmptyObject(img_logo_)){
+          	 document.getElementById("img_logo").style.visibility = "hidden";
+          	 $("#img_logo").html("");
+          }else{
+          	document.getElementById("img_logo").style.visibility = "visible";
+          	$("#img_logo").html("<a rel=\"example_group\" href=\""+img_logo_.url+"\" id=\"i01\" class=\"cbox_single thumbnail\" style='width:55px'><img alt=\"\" src=\""+img_logo_.url+"\" style=\"height:50px;width:50px\"></a>");
+          }
+          
+          var img_cover_ = this_DATA_RETURN_s.cover_image;
+          if (jQuery.isEmptyObject(img_cover_)){
+          	 document.getElementById("img_cover").style.visibility = "hidden";
+          	 $("#img_cover").html("");
+          }else{
+          	document.getElementById("img_cover").style.visibility = "visible";
+          	$("#img_cover").html("<a rel=\"example_group\" href=\""+img_cover_.url+"\"  class=\"cbox_single thumbnail\" style='width:55px'><img alt=\"\" src=\""+img_cover_.url+"\" style=\"height:50px;width:50px\"></a>");
+          }
+          
+          var img_ss1_ = this_DATA_RETURN_s.screenshot1_image;
+          if (jQuery.isEmptyObject(img_ss1_)){
+          	 document.getElementById("img_ss1").style.visibility = "hidden";
+          	 $("#img_ss1").html("");
+          }else{
+          	document.getElementById("img_ss1").style.visibility = "visible";
+          	$("#img_ss1").html("<a rel=\"example_group\" href=\""+img_ss1_.url+"\"  title=\"\" class=\"cbox_single thumbnail\" style='width:55px'><img alt=\"\" src=\""+img_ss1_.url+"\" style=\"height:50px;width:50px\"></a>");
+          }
+          
+          var img_ss2_ = this_DATA_RETURN_s.screenshot2_image;
+          if (jQuery.isEmptyObject(img_ss2_)){
+          	 document.getElementById("img_ss2").style.visibility = "hidden";
+          	 $("#img_ss2").html("");
+          }else{
+          	document.getElementById("img_ss2").style.visibility = "visible";
+          	$("#img_ss2").html("<a rel=\"example_group\" href=\""+img_ss2_.url+"\"  class=\"cbox_single thumbnail\" style='width:55px'><img alt=\"\" src=\""+img_ss2_.url+"\" style=\"height:50px;width:50px\"></a>");
+          }
+          
+          var img_ss3_ = this_DATA_RETURN_s.screenshot3_image;
+          if (jQuery.isEmptyObject(img_ss3_)){
+          	 document.getElementById("img_ss3").style.visibility = "hidden";
+          	 $("#img_ss3").html("");
+          }else{
+          	document.getElementById("img_ss3").style.visibility = "visible";
+          	$("#img_ss3").html("<a rel=\"example_group\" href=\""+img_ss3_.url+"\"  class=\"cbox_single thumbnail\" style='width:55px'><img alt=\"\" src=\""+img_ss3_.url+"\" style=\"height:50px;width:50px\"></a>");
+          }
+          
+          var img_ss4_ = this_DATA_RETURN_s.screenshot4_image;
+          if (jQuery.isEmptyObject(img_ss4_)){
+          	 document.getElementById("img_ss4").style.visibility = "hidden";
+          	 $("#img_ss4").html("");
+          }else{
+          	document.getElementById("img_ss4").style.visibility = "visible";
+          	$("#img_ss4").html("<a rel=\"example_group\" href=\""+img_ss4_.url+"\"  class=\"cbox_single thumbnail\" style='width:55px'><img alt=\"\" src=\""+img_ss4_.url+"\" style=\"height:50px;width:50px\"></a>");
+          }
+          
+          var img_ss5_ = this_DATA_RETURN_s.screenshot5_image;
+          if (jQuery.isEmptyObject(img_ss5_)){
+          	 document.getElementById("img_ss5").style.visibility = "hidden";
+          	 $("#img_ss5").html("");
+          }else{
+          	document.getElementById("img_ss5").style.visibility = "visible";
+          	$("#img_ss5").html("<a rel=\"example_group\" href=\""+img_ss5_.url+"\"  class=\"cbox_single thumbnail\" style='width:55px'><img alt=\"\" src=\""+img_ss5_.url+"\" style=\"height:50px;width:50px\"></a>");
+          }
+			  
+				  $("a[rel=example_group]").fancybox({
+						'transitionIn'		: 'none',
+						'transitionOut'		: 'none',
+						'titlePosition' 	: 'over',
+						'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) {
+							return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
+						}
+					});
+			  }
+	  	}
+		 	
+		 	function doCommit() {
+						var p_name_ = document.getElementById("p_name").value;
+						if (p_name_==""){
+							alert("name must be required!");
+							return;
+						}
+						
+						var p_price_=document.getElementById("p_price").options[document.getElementById("p_price").selectedIndex].value;
+						var p_lanaguage_=document.getElementById("p_lanaguage").options[document.getElementById("p_lanaguage").selectedIndex].value;
+						
+						var p_description_ = document.getElementById("p_description").value;
+						if (p_description_==""){
+							alert("description must be required");
+							return;
+						}
+				
+						var p_user_name_ = document.getElementById("p_user_name").value;
+						var p_user_email_ = document.getElementById("p_user_email").value;
+						
+	
+						document.id_form.ticket.value = jquerySetCookie("market_user_ticket");
+						document.id_form.pricetag_id.value = p_price_;
+						document.id_form.id.value = product_id;
+						document.id_form.version.value = version;
+						document.id_form.supported_languages.value = p_lanaguage_;
+						var s_name="{\""+p_lanaguage_+"\":\""+p_name_+"\"}";
+						document.id_form.name.value = s_name;		
+						var s_desc="{\""+p_lanaguage_+"\":\""+p_description_+"\"}";
+						document.id_form.description.value = s_desc;
+						document.id_form.author_name.value = p_user_name_;
+						document.id_form.author_email.value = p_user_email_;
+						document.id_form.author_google_id.value = "";
+
+						var submit_url = wutongaddr() + "api/v1/publisher/products/update?ticket="+jquerySetCookie("market_user_ticket")+"";
+						var options ={
+										type:      'POST', 
+										dataType:  'xml', 
+										url:       submit_url, 
+										success:   callbacksuc, 
+										error:     callbacksuc
+									};
+						$('#id_form').ajaxSubmit(options);
+						return false;
+						
+				}
+     function callbacksuc(json) {
+				alert("success!");
+				location.href="products_list.htm?app_id="+app_id+"&app_name="+app_name+"";
+			}
+			
+			function callbackfail(json) {
+				alert("failed!");
+			}
+		 	
+		function initAdss(layerID) 
+		{ 
+		  document.getElementById(layerID).style.posTop=-200;//设置onLoad事件激发以后，层相对于固定后的y方向位置  
+		  document.getElementById(layerID).style.visibility ='visible'//设置层为可见  
+		  MoveLayer(layerID);//调用函数MoveLayers() 
+		} 
+		
+		function MoveLayer(layerName) 
+		{  
+		  var  xs = document.body.clientWidth-120//940;//层于浏览器的x方向位置 
+		  var  ys = 300;//层固定于浏览器的y方向位置 
+		  var  diffs = (document.body.scrollTop + ys - document.getElementById("AdLayer").style.posTop)*.40;  
+		  var  ys = document.body.scrollTop + ys - diffs; 
+		  eval("document.getElementById(layerName).style.posTop = ys");  
+		  eval("document.getElementById(layerName).style.posLeft = xs");//移动层  
+		  eval("setTimeout(\"MoveLayers('"+layerName+"');\",  20)");//设置20毫秒后再调用函数MoveLayers()  
+		} 	 	    
+</script>	
+
+
+		                    
+<div class="row-fluid">
+	<div id="AdLayer" style='position:absolute;z-index:20;'></div>
+	
+    <div class="span12">
+		<form name="id_form"  encType="multipart/form-data" method="POST" id="id_form">
+			<input type="hidden" name="ticket"/>
+			<input type="hidden" name="id"/>
+			<input type="hidden" name="pricetag_id"/>
+			<input type="hidden" name="supported_languages"/>
+			<input type="hidden" name="name"/>
+			<input type="hidden" name="description"/>
+			<input type="hidden" name="version"/>
+			<input type="hidden" name="author_name"/>
+			<input type="hidden" name="author_email"/>
+			<input type="hidden" name="author_google_id"/>
+
+			<div class="formSep">
+			<div class="row-fluid">
+					<div class="span12" style="text-align:right">
+						<button class="btn" type="button" onclick="doCommit();">Save</button>
+					<button class="btn" type="button" onclick="doBack();">Back</button>
+					</div>
+				</div>	
+			</div>
+
+				<div class="row-fluid">
+					<div class="span12">
+							<div style="width:800px;"><div style="float:left;width:120px;text-align:right;line-height:30px"><font color=red>* </font>Name:</div> 
+						<input type="text"  style="width:510px" id="p_name"/>
+						</div>
+					</div>
+				</div>
+				
+					<div class="row-fluid">
+					<div class="span6" style="width:310px;">
+							<div style="width:310px;">
+								<div style="float:left;width:120px;text-align:right;line-height:30px;"><font color=red>* </font>Price:</div> 
+								<select style="float:left;width:120px;text-align:right;" id="p_price">
+									
+								</select>
+								<select style="float:left;width:60px;text-align:right;" id="p_price_unit">
+									<option value="$">$</option>
+								</select>
+						</div>
+					</div>
+					<div class="span6">
+							<div style="width:310px;"><div style="float:left;width:120px;text-align:right;line-height:30px">Lanaguage:</div> 
+						<select style="float:left;width:180px;text-align:right;" id="p_lanaguage">
+							<option value="default">default</option>
+						</select>
+						</div>
+					</div>
+				</div>
+
+				<div class="row-fluid">
+					<div class="span12">
+							<div style="width:800px;"><div style="float:left;width:120px;text-align:right;line-height:30px">Description:</div> 
+						<textarea name="p_description" cols="10" rows="5" style="width:500px" id="p_description"></textarea>
+						</div>
+					</div>
+				</div>
+
+				<div class="row-fluid">
+					<div class="span6" style="width:310px;">
+							<div style="width:310px;">
+								<div style="float:left;width:120px;text-align:right;line-height:30px;">Your Name:</div> 
+								<input type="text"  style="width:170px" id="p_user_name" />
+						</div>
+					</div>
+					<div class="span6">
+							<div style="width:310px;"><div style="float:left;width:120px;text-align:right;line-height:30px">Your Email:</div> 
+						<input type="text"  style="width:170px" id="p_user_email" />
+						</div>
+					</div>
+				</div>
+
+								<div class="formSep">
+				<div class="row-fluid">
+					<div class="span12">
+							<div><div style="float:left;width:120px;text-align:right;line-height:30px">Logo Image:</div> 
+						<table border=0><tr><td width=65px><span  id="img_logo" style="width:50px;height:50px;"></span></td>
+							<td valign=top>
+						<input type="file" style="width:510px;" size=53 name="logo_file" /></td>
+						</tr></table>
+						</div>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span12">
+						<div style="width:800px;"><div style="float:left;width:120px;text-align:right;line-height:30px">Cover Image:</div> 
+						<table border=0><tr><td width=65px><span  id="img_cover" style="width:50px;height:50px;"></span></td>
+							<td valign=top>
+						<input type="file" style="width:510px" size=53 name="cover_file" /></td>
+						</tr></table>
+						</div>
+					</div>
+				</div>
+				</div>
+				
+				<div class="formSep">
+				<div class="row-fluid">
+					<div class="span12">
+							<div style="width:800px;"><div name="p_sct_1" id="p_sct_1" style="float:left;width:120px;text-align:right;line-height:30px">ScreenShot 1:</div> 
+						<table border=0><tr><td width=65px><span  id="img_ss1" style="width:50px;height:50px;"></span></td>
+							<td valign=top>
+						<input type="file" style="width:510px" size=53 name="screenshot1_file" /></td>
+						</tr></table>
+						</div>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span12">
+						<div style="width:800px;"><div name="p_sct_2" id="p_sct_2" style="float:left;width:120px;text-align:right;line-height:30px">ScreenShot 2:</div> 
+						<table border=0><tr><td width=65px><span  id="img_ss2" style="width:50px;height:50px;"></span></td>
+							<td valign=top>
+						<input type="file" style="width:510px" size=53 name="screenshot2_file" /></td>
+						</tr></table>
+						</div>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span12">
+						<div style="width:800px;"><div name="p_sct_3" id="p_sct_3" style="float:left;width:120px;text-align:right;line-height:30px">ScreenShot 3:</div> 
+						<table border=0><tr><td width=65px><span  id="img_ss3" style="width:50px;height:50px;"></span></td>
+							<td valign=top>
+						<input type="file" style="width:510px" size=53 name="screenshot3_file" /></td>
+						</tr></table>
+						</div>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span12">
+						<div style="width:800px;"><div name="p_sct_4" id="p_sct_4" style="float:left;width:120px;text-align:right;line-height:30px">ScreenShot 4:</div> 
+						<table border=0><tr><td width=65px><span  id="img_ss4" style="width:50px;height:50px;"></span></td>
+							<td valign=top>
+						<input type="file" style="width:510px" size=53 name="screenshot4_file" /></td>
+						</tr></table>
+						</div>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span12">
+						<div style="width:800px;"><div name="p_sct_5" id="p_sct_5" style="float:left;width:120px;text-align:right;line-height:30px">ScreenShot 5:</div> 
+						<table border=0><tr><td width=65px><span  id="img_ss5" style="width:50px;height:50px;"></span></td>
+							<td valign=top>
+						<input type="file" style="width:510px" size=53 name="screenshot5_file" /></td>
+						</tr></table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</form>
+
+        
+    </div>
+</div>       
+
+<!-------------- --------------------main ---end----------------------------------------->   
+<!-------------- -------杩欓噷鏄痬ain_content缁撴潫-------------main ---end----------------------------------------->  
+<!-------------- --------------------main ---end----------------------------------------->  
+</div>
+
+<!---------------- --------------------left begin------------------------------------------>
+<!--<script src="js/left.js"></script>-->
+<a id="iconHidden" href="javascript:clickButtonnShowEditVersion()" class="sidebar_switch on_switch ttip_r" title="Hide Sidebar">Sidebar switch</a>
+        <div class="sidebar"  id="showLeftTab">
+            <div class="sidebar_inner">
+                            <div id="side_accordion" class="accordion" style='margin-top:20px;'>
+
+                                <div class="accordion-group">
+                                    <div class="accordion-heading" style="padding-left:15px;font-size:16px">
+                                        <a href="#0" class="accordion-toggle">
+                                            <b>Borqs Applications</b>
+                                        </a>
+                                    </div>
+                                   <div class="accordion-body">
+																		<div class="accordion-inner">
+																			<ul class="nav nav-list" id="showMemo">
+																				<li><a href="javascript:void(0)">3D HOME</a></li>
+																			</ul>
+																		</div>
+																	</div>
+                                   
+                                   
+                                </div>
+																                              
+                            </div>
+            </div>
+        </div>
+<!---------------- --------------------left end------------------------------------------>
+</div>
+
+<script type="text/javascript">
+	function clickButtonnShowEditVersion(){
+		if (document.getElementById("showLeftTab").style.display=="none"){
+			document.getElementById("showLeftTab").style.display="";
+			document.getElementById("mainContent0").style.marginLeft="240px";
+		}else{
+			document.getElementById("showLeftTab").style.display="none";
+			document.getElementById("mainContent0").style.marginLeft="0px";
+		}
+		
+	}
+
+	    showApp();
+	    function showApp() {
+	    	var fresh = Math.random();
+			 invokeApiTemp("api/v1/publisher/apps/all", {"fresh":fresh}, function (ret) {
+           showAppList(ret);
+         }
+       );
+			}
+		
+		function showAppList(ret) {
+			var this_DATA_RETURN = eval(ret);
+			var this_DATA = eval(this_DATA_RETURN.data);
+			var str1 = "<ul class=\"nav nav-list\" id=\"showMemo\">"
+	
+	    if (this_DATA_RETURN.code =="0"){
+			    for (var i = 0; i < this_DATA.length; i++) {
+			        var this_DATA_s = eval(this_DATA[i]);  
+			        var app_id = this_DATA_s.id;
+			        var app_name = this_DATA_s.name;
+									//str1=str1+" <div class=\"accordion-body\">";
+									//str1=str1+" <div class=\"accordion-inner\">1";
+									//str1=str1+" <li><a href=\"products_list.htm?app_id="+app_id+"&app_name="+app_name+"\" onclick=\"javascript:window.location.href('products_list.htm')\" class=\"accordion-toggle\">";
+									//str1=str1+"<i class=\"icon-leaf\"></i> "+app_name+"";
+									//str1=str1+" </a></li>";
+									//str1=str1+" </div>";
+									//str1=str1+"  </div>";
+									str1=str1+"  <li><a href=\"products_list.htm?app_id="+app_id+"&app_name="+app_name+"\" class=\"accordion-toggle\"> <i class=\"icon-leaf\"></i> "+app_name+" </a></li>";
+			    }
+    	}
+    	tr1=str1+"  </ul>";
+    	$("#showMemo").html(str1);
+		}
+
+		                                
+</script>
+
+
+</div>
+</body>
+</html>

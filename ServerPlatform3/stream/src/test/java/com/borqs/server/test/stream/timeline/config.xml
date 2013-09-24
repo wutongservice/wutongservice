@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+
+       default-init-method="init" default-destroy-method="destroy">
+
+    <bean id="logic.stream" class="com.borqs.server.platform.test.TestStream" scope="singleton">
+    </bean>
+
+    <!--<bean id="timeline.outbox" class="com.borqs.server.platform.feature.stream.timeline.MemoryOutboxTimeline" scope="singleton">-->
+    <!--<property name="stream" ref="logic.stream"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="timeline.wall" class="com.borqs.server.platform.feature.stream.timeline.MemoryWallTimeline" scope="singleton">-->
+    <!--<property name="stream" ref="logic.stream"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="timeline.friends" class="com.borqs.server.platform.feature.stream.timeline.MemoryFriendsTimeline" scope="singleton">-->
+    <!--<property name="stream" ref="logic.stream"/>-->
+    <!--<property name="outboxTimeline" ref="timeline.outbox"/>-->
+    <!--<property name="limit" value="9"/>-->
+    <!--</bean>-->
+
+    <bean id="server.redis" class="com.borqs.server.platform.cache.redis.SingleRedis" scope="singleton">
+        <property name="server" value="localhost:6379"/>
+    </bean>
+
+    <bean id="timeline.outbox" class="com.borqs.server.impl.stream.timeline.RedisOutboxTimeline" scope="singleton">
+        <property name="stream" ref="logic.stream"/>
+        <property name="redis" ref="server.redis"/>
+    </bean>
+
+    <bean id="timeline.wall" class="com.borqs.server.impl.stream.timeline.RedisWallTimeline" scope="singleton">
+        <property name="stream" ref="logic.stream"/>
+        <property name="redis" ref="server.redis"/>
+        <property name="storageLimit" value="5"/>
+    </bean>
+
+    <bean id="timeline.friends" class="com.borqs.server.impl.stream.timeline.RedisFriendsTimeline" scope="singleton">
+        <property name="stream" ref="logic.stream"/>
+        <property name="redis" ref="server.redis"/>
+        <property name="outboxTimeline" ref="timeline.outbox"/>
+        <property name="limit" value="9"/>
+    </bean>
+</beans>

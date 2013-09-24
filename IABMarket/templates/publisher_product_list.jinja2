@@ -1,0 +1,130 @@
+{% extends 'publisher_layout.jinja2' %}
+{% block main_content %}
+    {% if category_products %}
+        {{ nav_bar(paths=nav_paths) }}
+        <h3 class="heading">Your products</h3>
+        <div class="tabbable">
+            <ul class="nav nav-tabs">
+                {% for category in category_products %}
+                    <li class="{{ 'active' if loop.first else '' }}"><a data-toggle="tab"
+                                                                        href="#tab_{{ category.category }}">{{ category.category_name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="tab-content">
+                {% for category in category_products %}
+                    <div id="tab_{{ category.category }}" class="tab-pane {{ 'active' if loop.first else '' }}">
+                        {% if category.products %}
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <p class="lead pull-left">&nbsp</p>
+                                    <button class="btn btn-gebo btn-large pull-right"
+                                            onclick="location.href='/publisher/products/new.html?app={{ category.app }}&category={{ category.category }}'">
+                                        <h4>Publish a new {{ category.category_name }}!</h4>
+                                    </button>
+                                </div>
+
+                                <table class="table table-bordered" style="font-size:16px">
+                                    <thead>
+                                    <tr>
+                                        <th width="65%">Name</th>
+                                        <th width="10%" style="text-align: center">Versions</th>
+                                        <th width="10%" style="text-align: center">Published?</th>
+                                        <th width="15%" style="text-align: center">Actions</th>
+                                    </tr>
+                                    </thead>
+                                    {% for p in category.products %}
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <a href="/publisher/products/versions/update.html?id={{ p.id }}&version={{ p.last_version }}">{{ p.name }}</a>
+                                            </td>
+                                            <td style="text-align: center">
+                                                <ul style="list-style-type:none">
+                                                    {% for ver in p.versions %}
+                                                        <li>
+                                                            <a href="/publisher/products/versions/update.html?id={{ p.id }}&version={{ ver.version }}">{{ ver.version }}</a>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </td>
+                                            <td style="text-align: center">
+                                                {% if p.status %}
+                                                    <button class="btn btn-success span12"
+                                                            onclick="activeProduct($(this), '{{ p.id }}')" flag="true">
+                                                        Cancel
+                                                    </button>
+                                                {% else %}
+                                                    <button class="btn btn-danger span12"
+                                                            onclick="activeProduct($(this), '{{ p.id }}')" flag="false">
+                                                        Publish
+                                                    </button>
+                                                {% endif %}
+                                            </td>
+                                            <td style="text-align: center">
+                                                <button class="btn btn-info span12"
+                                                        onclick="location.href='/publisher/products/versions/new.html?id={{ p.id }}'">
+                                                    New version
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    {% endfor %}
+                                </table>
+                            </div>
+
+                        {% else %}
+                            <div class="row-fluid">
+                                <p class="span6 offset3 text-info lead" style="text-align: center">You haven't published
+                                    any {{ category.category_name }},
+                                    press the follow button to publish a {{ category.category_name }}</p>
+                                <button class="btn btn-gebo btn-large span4 offset4"
+                                        onclick="location.href='/publisher/products/new.html?app={{ category.app }}&category={{ category.category }}'">
+                                    <h3>Publish!</h3></button>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+        </div>
+    {% else %}
+        <h1>No product categories </h1>
+    {% endif %}
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript">
+        function activeProduct(btn, pid) {
+            var ticket = '{{ ticket }}';
+            var flag = btn.attr('flag')
+            BorqsMarket.api_publisher_activeProduct(ticket, pid, flag == 'true' ? 'false' : 'true', function (data) {
+                if (data) {
+                    btn.attr('flag', 'true');
+                    btn.text('Cancel');
+                    btn.removeClass('btn-danger').addClass('btn-success');
+
+                } else {
+                    btn.attr('flag', 'false');
+                    btn.text('Publish');
+                    btn.removeClass('btn-success').addClass('btn-danger');
+                }
+            });
+        }
+
+        function activeVersion(btn, pid, version) {
+            var ticket = '{{ ticket }}';
+            var flag = btn.attr('flag')
+            BorqsMarket.api_publisher_activeVersion(ticket, pid, version, flag == 'true' ? 'false' : 'true', function (data) {
+                if (data) {
+                    btn.attr('flag', 'true');
+                    btn.text('Deactive');
+                    btn.removeClass('btn-danger').addClass('btn-success');
+
+                } else {
+                    btn.attr('flag', 'false');
+                    btn.text('Active');
+                    btn.removeClass('btn-success').addClass('btn-danger');
+                }
+            });
+        }
+    </script>
+{% endblock %}

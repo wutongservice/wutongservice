@@ -1,0 +1,19 @@
+{
+    "name":"static_file",
+    "columns": {        
+        "file_id":"int",
+        "title":"string",
+        "summary":"string",
+        "folder_id":"int",
+        "description":"string",
+        "file_size":"int",
+        "user_id":"int",
+        "exp_name":"string",
+        "html_url":"string",
+        "content_type":"string",
+        "new_file_name":"string",
+        "created_time":"int",
+        "updated_time":"int",
+        "destroyed_time":"int"
+    }
+}

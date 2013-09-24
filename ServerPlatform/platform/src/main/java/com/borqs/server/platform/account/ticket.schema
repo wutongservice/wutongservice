@@ -1,0 +1,9 @@
+{
+    "name": "ticket",
+    "columns": {
+        "ticket": "string",
+        "user" : "int",
+        "app" : "int",
+        "created_time" : "int"
+    }
+}

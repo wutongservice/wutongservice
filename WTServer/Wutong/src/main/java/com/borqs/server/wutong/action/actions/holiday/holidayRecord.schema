@@ -1,0 +1,20 @@
+{
+    "name":"holiday_record",
+    "columns": {
+        "id":"int",
+        "relation_id":"int",
+        "owner_id":"string",
+        "owner":"string",
+        "approver_id":"string",
+        "approver":"string",
+        "mate_id":"string",
+        "mate":"string",
+        "holi_type":"string",
+        "holi_start_time":"string",
+        "dep":"string",
+        "holi_status":"string",
+        "days":"int",
+        "apply_time":"int",
+        "finish_time":"int"
+    }
+}

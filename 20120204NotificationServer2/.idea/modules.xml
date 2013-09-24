@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/notifications.iml" filepath="$PROJECT_DIR$/notifications.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notifications-avro-api/notifications-avro-api.iml" filepath="$PROJECT_DIR$/notifications-avro-api/notifications-avro-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notifications-avro-server/notifications-avro-server.iml" filepath="$PROJECT_DIR$/notifications-avro-server/notifications-avro-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notifications-listener/notifications-listener.iml" filepath="$PROJECT_DIR$/notifications-listener/notifications-listener.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notifications-server/notifications-server.iml" filepath="$PROJECT_DIR$/notifications-server/notifications-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notifications-server-assembly/notifications-server-assembly.iml" filepath="$PROJECT_DIR$/notifications-server-assembly/notifications-server-assembly.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notifications-test/notifications-test.iml" filepath="$PROJECT_DIR$/notifications-test/notifications-test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notifications-thrift-api/notifications-thrift-api.iml" filepath="$PROJECT_DIR$/notifications-thrift-api/notifications-thrift-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notifications_php_web/notifications_php_web.iml" filepath="$PROJECT_DIR$/notifications_php_web/notifications_php_web.iml" />
+    </modules>
+  </component>
+</project>
+

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comment">
+
+  <insert id="createComment" parameterType="Map">
+    INSERT INTO comment
+    SET
+      id=#{id},
+      account_id=#{account_id},
+      product_id=#{product_id},
+      version=#{version},
+      created_at=#{now},
+      updated_at=#{now},
+      message=#{message},
+      device=#{device},
+      rating=#{rating};
+  </insert>
+
+  <select id="listComments" parameterType="Map" resultType="record">
+    SELECT SQL_CALC_FOUND_ROWS
+    C.id AS id,
+    C.account_id AS commenter_id,
+    C.product_id AS product_id,
+    C.version AS version,
+    PV.version_name AS version_name,
+    PV.status AS version_status,
+    C.created_at AS created_at,
+    C.updated_at AS updated_at,
+    C.message AS message,
+    C.rating AS rating
+    FROM
+    `comment` C INNER JOIN product_versions PV ON C.product_id=PV.product_id AND C.version=PV.version
+    WHERE
+    C.product_id=#{product_id}
+    <if test="version != null">
+      AND C.version=#{version}
+    </if>
+    ORDER BY C.updated_at DESC
+    LIMIT #{offset}, #{count};
+  </select>
+
+  <update id="updateComment" parameterType="Map">
+    UPDATE `comment`
+    SET
+    message=#{message},
+    rating=#{rating},
+    device=#{device},
+    updated_at=#{now}
+    WHERE
+    id = #{id}
+    ;
+  </update>
+
+  <!--change rating count and rateavg of productVersions-->
+  <update id="updateCommentCountOfProductVersions" parameterType="Map">
+    UPDATE product_versions
+    SET
+      rating = #{version_rating},
+      rating_count= rating_count + 1,
+      comment_count=comment_count + 1
+    WHERE
+      product_id = #{product_id}
+      AND version = #{version}
+  </update>
+  <!--change rating count and rateavg of products-->
+  <update id="updateCommentCountOfProducts" parameterType="Map">
+    UPDATE products
+    SET
+      rating = #{product_rating},
+      rating_count= rating_count + 1,
+      comment_count=comment_count + 1
+    WHERE
+      id = #{product_id}
+  </update>
+
+  <select id="getAvgRating" parameterType="Map" resultType="record">
+    SELECT
+      TRUNCATE(AVG(rating), 2) AS avg_rating
+    FROM `comment`
+    WHERE product_id = #{product_id}
+          AND version = #{version}
+    UNION ALL
+    SELECT
+      TRUNCATE(AVG(rating), 2) AS avg_rating
+    FROM `comment`
+    WHERE product_id = #{product_id}
+  </select>
+
+  <select id="getComment" parameterType="Map" resultType="record">
+    SELECT
+      C.id AS id,
+      C.account_id AS commenter_id,
+      C.product_id AS product_id,
+      C.version AS version,
+      PV.version_name AS version_name,
+      PV.status AS version_status,
+      C.created_at AS created_at,
+      C.updated_at AS updated_at,
+      C.message AS message,
+      C.rating AS rating
+    FROM
+      `comment` C INNER JOIN product_versions PV ON C.product_id=PV.product_id AND C.version=PV.version
+    WHERE
+      C.id = #{id};
+  </select>
+
+  <select id="getMyCommentForProduct" parameterType="Map" resultType="record">
+    SELECT
+    C.id AS id,
+    C.account_id AS commenter_id,
+    C.product_id AS product_id,
+    C.version AS version,
+    PV.version_name AS version_name,
+    PV.status AS version_status,
+    C.created_at AS created_at,
+    C.updated_at AS updated_at,
+    C.message AS message,
+    C.rating AS rating
+    FROM
+      `comment` C INNER JOIN product_versions PV ON C.product_id=PV.product_id AND C.version=PV.version
+    WHERE
+      C.product_id=#{product_id}
+      <if test="version != null">
+      AND C.version=#{version}
+      </if>
+      AND C.account_id=#{account_id}
+    ORDER BY C.updated_at DESC
+    LIMIT 1;
+  </select>
+
+  <delete id="deleteComment" parameterType="Map">
+    delete from `comment` where id in
+    <foreach item="item" collection="ids" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+</mapper>

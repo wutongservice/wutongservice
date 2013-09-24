@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+                          http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+
+       default-init-method="init" default-destroy-method="destroy">
+    <!-- maker -->
+    <bean id="maker" class="com.borqs.server.impl.notifmk.v1.NotifMakerV1Impl">
+        <property name="acceptSuggestNotifMaker" ref="maker.acceptSuggest"/>
+        <property name="appCommentNotifMaker" ref="maker.appComment"/>
+        <property name="appLikeNotifMaker" ref="maker.appLike"/>
+        <property name="createAccount1NotifMaker" ref="maker.createAccount"/>
+        <property name="requestAttentionNotifMaker" ref="maker.requestAttention"/>
+        <property name="sharedAppNotifMaker" ref="maker.sharedApp"/>
+        <property name="sharedNotifMaker" ref="maker.shared"/>
+        <property name="streamCommentNotifMaker" ref="maker.streamcomment"/>
+        <property name="streamLikeNotifMaker" ref="maker.streamlike"/>
+        <property name="streamRetweetNotifMaker" ref="maker.retweet"/>
+        <property name="suggestUserNotifMaker" ref="maker.suggestUser"/>
+        <property name="updateAccount1NotifMaker" ref="maker.updateAccount"/>
+        <property name="newFollowerNotifMaker" ref="maker.newfollower"/>
+        <property name="updateStatusNotifMaker" ref="maker.updatestatus"/>
+        <property name="photoCommentNotifMaker" ref="maker.photocomment"/>
+        <property name="photoLikeNotifMaker" ref="maker.photolike"/>
+    </bean>
+
+    <!-- maker -->
+    <bean id="maker.acceptSuggest" class="com.borqs.server.impl.notifmk.v1.AcceptSuggestNotifMaker">
+        <property name="account" ref="logic.account"/>
+        <property name="suggest" ref="logic.psuggest"/>
+    </bean>
+    <bean id="maker.createAccount" class="com.borqs.server.impl.notifmk.v1.CreateAccount1NotifMaker">
+        <property name="cibind" ref="logic.cibind"/>
+        <property name="contact" ref="logic.contact"/>
+    </bean>
+    <bean id="maker.updateAccount" class="com.borqs.server.impl.notifmk.v1.UpdateAccount1NotifMaker">
+        <property name="friend" ref="logic.friend"/>
+        <property name="setting" ref="logic.setting"/>
+        <property name="account" ref="logic.account"/>
+    </bean>
+    <bean id="maker.appComment" class="com.borqs.server.impl.notifmk.v1.AppCommentNotifMaker">
+        <property name="account" ref="logic.account"/>
+        <property name="ignore" ref="logic.ignore"/>
+        <property name="conversation" ref="logic.conversation"/>
+    </bean>
+    <bean id="maker.appLike" class="com.borqs.server.impl.notifmk.v1.AppLikeNotifMaker">
+        <property name="account" ref="logic.account"/>
+        <property name="ignore" ref="logic.ignore"/>
+        <property name="conversation" ref="logic.conversation"/>
+
+    </bean>
+    <bean id="maker.retweet" class="com.borqs.server.impl.notifmk.v1.StreamRetweetNotifMaker">
+        <property name="account" ref="logic.account"/>
+        <property name="ignore" ref="logic.ignore"/>
+        <property name="conversation" ref="logic.conversation"/>
+        <property name="stream" ref="logic.stream"/>
+    </bean>
+    <bean id="maker.streamlike" class="com.borqs.server.impl.notifmk.v1.StreamLikeNotifMaker">
+        <property name="ignore" ref="logic.ignore"/>
+        <property name="conversation" ref="logic.conversation"/>
+        <property name="stream" ref="logic.stream"/>
+        <property name="account" ref="logic.account"/>
+    </bean>
+    <bean id="maker.streamcomment" class="com.borqs.server.impl.notifmk.v1.StreamCommentNotifMaker">
+        <property name="account" ref="logic.account"/>
+        <property name="ignore" ref="logic.ignore"/>
+        <property name="conversation" ref="logic.conversation"/>
+        <property name="stream" ref="logic.stream"/>
+    </bean>
+    <bean id="maker.shared" class="com.borqs.server.impl.notifmk.v1.SharedNotifMaker">
+        <property name="account" ref="logic.account"/>
+        <property name="ignore" ref="logic.ignore"/>
+        <property name="conversation" ref="logic.conversation"/>
+        <property name="stream" ref="logic.stream"/>
+        <property name="photo" ref="logic.photo"/>
+    </bean>
+    <bean id="maker.sharedApp" class="com.borqs.server.impl.notifmk.v1.SharedAppNotifMaker">
+        <property name="account" ref="logic.account"/>
+        <property name="ignore" ref="logic.ignore"/>
+        <property name="conversation" ref="logic.conversation"/>
+        <property name="stream" ref="logic.stream"/>
+    </bean>
+    <bean id="maker.requestAttention" class="com.borqs.server.impl.notifmk.v1.RequestAttentionNotifMaker">
+        <property name="account" ref="logic.account"/>
+        <property name="ignore" ref="logic.ignore"/>
+    </bean>
+    <bean id="maker.suggestUser" class="com.borqs.server.impl.notifmk.v1.SuggestUserNotifMaker">
+        <property name="account" ref="logic.account"/>
+        <property name="ignore" ref="logic.ignore"/>
+    </bean>
+    <bean id="maker.newfollower" class="com.borqs.server.impl.notifmk.v1.NewFollowerNotifMaker">
+        <property name="account" ref="logic.account"/>
+        <property name="ignore" ref="logic.ignore"/>
+    </bean>
+    <bean id="maker.updatestatus" class="com.borqs.server.impl.notifmk.v1.UpdateStatusNotifMaker">
+        <property name="account" ref="logic.account"/>
+        <property name="friend" ref="logic.friend"/>
+        <property name="setting" ref="logic.setting"/>
+    </bean>
+    <bean id="maker.photocomment" class="com.borqs.server.impl.notifmk.v1.PhotoCommentNotifMaker">
+        <property name="account" ref="logic.account"/>
+        <property name="conversation" ref="logic.conversation"/>
+        <property name="ignore" ref="logic.ignore"/>
+    </bean>
+    <bean id="maker.photolike" class="com.borqs.server.impl.notifmk.v1.PhotoLikeNotifMaker">
+        <property name="account" ref="logic.account"/>
+        <property name="conversation" ref="logic.conversation"/>
+        <property name="ignore" ref="logic.ignore"/>
+    </bean>
+    <!-- opline -->
+    <bean id="logic.opline" class="com.borqs.server.impl.opline.OpLineImpl" factory-method="getInstance"
+          scope="singleton">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="historyTable" ref="table.opline"/>
+    </bean>
+
+    <!-- account -->
+    <bean id="logic.account" class="com.borqs.server.impl.account.AccountImpl">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="userTable" ref="table.user"/>
+        <property name="propertyTable" ref="table.userProperty"/>
+        <property name="userFts" ref="fts.user"/>
+        <property name="expansions">
+            <list>
+                <bean class="com.borqs.server.platform.feature.account.PhotoUrlPrefixUserExpansion" scope="singleton">
+                    <property name="prefix" value="${account.photoUrlPrefix}"/>
+                </bean>
+                <bean class="com.borqs.server.platform.feature.friend.RelUserExpansion" scope="singleton">
+                    <property name="friend" ref="logic.friend"/>
+                </bean>
+                <!--<bean class="com.borqs.server.platform.feature.request.RequestUserExpansion" scope="singleton">-->
+                <!--<property name="requestLogic" ref="logic.request"/>-->
+                <!--</bean>-->
+                <bean class="com.borqs.server.platform.feature.cibind.CibindUserExpansion" scope="singleton">
+                    <property name="cibind" ref="logic.cibind"/>
+                </bean>
+                <bean class="com.borqs.server.platform.feature.status.StatusUserExpansion" scope="singleton">
+                    <property name="status" ref="logic.account"/>
+                </bean>
+                <bean class="com.borqs.server.qiupu.QiupuUserExpansion" scope="singleton">
+                    <property name="qiupuFactory" ref="logic.qiupuFactory"/>
+                </bean>
+                <!-- privacy expansion must be last! -->
+                <bean class="com.borqs.server.platform.feature.privacy.PrivacyControlUserExpansion" scope="singleton">
+                    <property name="privacyControl" ref="logic.privacy"/>
+                </bean>
+            </list>
+        </property>
+        <property name="createUserHooks">
+            <list>
+                <bean class="com.borqs.server.platform.feature.account.AccountNotifHooks$CreateAccountHook"
+                      scope="singleton">
+                    <property name="maker" ref="maker"/>
+                    <property name="sender" ref="sender.notif"/>
+                </bean>
+            </list>
+        </property>
+        <property name="updateStatusHooks">
+            <bean class="com.borqs.server.platform.feature.status.StatusNotifHooks$UpdateStatusHook" scope="singleton">
+                <property name="maker" ref="maker"/>
+                <property name="sender" ref="sender.notif"/>
+            </bean>
+        </property>
+        <property name="updateUserHooks">
+            <list>
+                <bean class="com.borqs.server.platform.feature.account.AccountNotifHooks$UpdateProfileHook"
+                      scope="singleton">
+                    <property name="maker" ref="maker"/>
+                    <property name="sender" ref="sender.notif"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- app -->
+    <bean id="logic.app" class="com.borqs.server.impl.app.SimpleAppImpl">
+        <property name="apps">
+            <bean class="com.borqs.server.platform.feature.app.App">
+                <property name="appId" value="1"/>
+                <property name="name" value="qiupu"/>
+                <property name="secret" value="appSecret1"/>
+            </bean>
+        </property>
+    </bean>
+
+    <!-- login -->
+    <bean id="logic.login" class="com.borqs.server.impl.login.LoginImpl">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="account" ref="logic.account"/>
+        <property name="ticketTable" ref="table.ticket"/>
+        <property name="cibind" ref="logic.cibind"/>
+    </bean>
+
+
+    <!-- cibind -->
+    <bean id="logic.cibind" class="com.borqs.server.impl.cibind.CibindImpl">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="cibindTable" ref="table.cibind"/>
+        <property name="account" ref="logic.account"/>
+        <property name="limits">
+            <map key-type="java.lang.String" value-type="java.lang.Integer">
+                <entry value="2">
+                    <key>
+                        <util:constant static-field="com.borqs.server.platform.feature.cibind.BindingInfo.MOBILE_TEL"/>
+                    </key>
+                </entry>
+                <entry value="1">
+                    <key>
+                        <util:constant static-field="com.borqs.server.platform.feature.cibind.BindingInfo.EMAIL"/>
+                    </key>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <!-- privacy -->
+    <bean id="logic.privacy" class="com.borqs.server.impl.privacy.PrivacyControlImpl" scope="singleton">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="account" ref="logic.account"/>
+        <property name="friend" ref="logic.friend"/>
+        <property name="privacyTable" ref="table.privacy"/>
+    </bean>
+
+    <!-- friend -->
+    <bean id="logic.friend" class="com.borqs.server.impl.friend.FriendImpl" scope="singleton">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="account" ref="logic.account"/>
+        <property name="circleTable" ref="table.circle"/>
+        <property name="friendTable" ref="table.friend"/>
+        <property name="followerTable" ref="table.follower"/>
+        <property name="remarkTable" ref="table.remark"/>
+        <property name="addFriendsHooks">
+            <list>
+                <bean class="com.borqs.server.impl.psuggest.AcceptedFriendsHook" scope="singleton">
+                    <property name="peopleSuggest" ref="logic.psuggest"/>
+                </bean>
+                <bean class="com.borqs.server.platform.feature.privacy.VcardFriendHook" scope="singleton">
+                    <property name="privacyControl" ref="logic.privacy"/>
+                </bean>
+                <bean class="com.borqs.server.platform.feature.friend.FriendsNotifHooks$CreateFriendsHook"
+                      scope="singleton">
+                    <property name="friend" ref="logic.friend"/>
+                    <property name="maker" ref="maker"/>
+                    <property name="sender" ref="sender.notif"/>
+                </bean>
+                <bean class="com.borqs.server.platform.feature.friend.FriendsNotifHooks$NewFollowerHook"
+                      scope="singleton">
+                    <property name="maker" ref="maker"/>
+                    <property name="sender" ref="sender.notif"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+
+    <!-- comment -->
+    <bean id="logic.comment" class="com.borqs.server.impl.comment.CommentImpl" scope="singleton">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="account" ref="logic.account"/>
+        <!--todo: xxx <property name="like" ref="logic.like"/>-->
+        <property name="commentTable" ref="table.comment"/>
+        <property name="conversation" ref="logic.conversation"/>
+        <property name="commentTargetTable" ref="table.commentTarget"/>
+        <property name="expansions">
+            <list>
+                <bean class="com.borqs.server.platform.feature.like.LikeCommentExpansion" scope="singleton">
+                    <property name="account" ref="logic.account"/>
+                    <property name="like" ref="logic.like"/>
+                    <property name="friend" ref="logic.friend"/>
+                </bean>
+            </list>
+        </property>
+        <property name="createCommentHook">
+            <list>
+                <bean class="com.borqs.server.platform.feature.comment.UpdateTargetTimeCommentHook" scope="singleton">
+                    <property name="stream" ref="logic.stream"/>
+                </bean>
+                <bean class="com.borqs.server.platform.feature.comment.CommentContentDuplicateHook" scope="singleton">
+                    <property name="comment" ref="logic.comment"/>
+                </bean>
+                <bean class="com.borqs.server.platform.feature.comment.CommentNotifHooks$CreateCommentAppHook"
+                      scope="singleton">
+                    <property name="maker" ref="maker"/>
+                    <property name="sender" ref="sender.notif"/>
+                </bean>
+                <bean class="com.borqs.server.platform.feature.comment.CommentNotifHooks$CreateCommentPostHook"
+                      scope="singleton">
+                    <property name="maker" ref="maker"/>
+                    <property name="sender" ref="sender.notif"/>
+                </bean>
+                <bean class="com.borqs.server.platform.feature.comment.CommentNotifHooks$CreateCommentPhotoHook"
+                      scope="singleton">
+                    <property name="maker" ref="maker"/>
+                    <property name="sender" ref="sender.notif"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- contact -->
+    <bean id="logic.contact" class="com.borqs.server.impl.contact.ContactImpl" scope="singleton">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="account" ref="logic.account"/>
+        <property name="contactTable0" ref="table.contact0"/>
+        <property name="contactTable1" ref="table.contact1"/>
+    </bean>
+
+    <!-- conversation -->
+    <bean id="logic.conversation" class="com.borqs.server.impl.conversation.ConversationImpl" scope="singleton">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="account" ref="logic.account"/>
+        <property name="convTable0" ref="table.conversation0"/>
+        <property name="convTable1" ref="table.conversation1"/>
+    </bean>
+
+    <!-- ignore -->
+    <bean id="logic.ignore" class="com.borqs.server.impl.ignore.IgnoreImpl" scope="singleton">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="account" ref="logic.account"/>
+        <property name="ignoreTable" ref="table.ignore"/>
+    </bean>
+
+    <!-- people suggest -->
+    <bean id="logic.psuggest" class="com.borqs.server.impl.psuggest.PeopleSuggestImpl" scope="singleton">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="account" ref="logic.account"/>
+        <property name="friend" ref="logic.friend"/>
+        <property name="psuggestTable" ref="table.psuggest"/>
+        <property name="createSuggestHooks">
+            <list>
+                <bean class="com.borqs.server.impl.psuggest.SuggestNotifHookImpl$SuggestUserHook" scope="singleton">
+                    <property name="maker" ref="maker"/>
+                    <property name="sender" ref="sender.notif"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- setting -->
+    <bean id="logic.setting" class="com.borqs.server.impl.setting.SettingImpl" scope="singleton">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="account" ref="logic.account"/>
+        <property name="settingTable" ref="table.setting"/>
+        <property name="settingCacheEnabled" value="false"/>
+    </bean>
+
+    <!-- stream -->
+    <bean id="logic.stream" class="com.borqs.server.impl.stream.StreamImpl" scope="singleton">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="account" ref="logic.account"/>
+        <property name="conversation" ref="logic.conversation"/>
+        <property name="friend" ref="logic.friend"/>
+        <property name="ignore" ref="logic.ignore"/>
+        <property name="postTable" ref="table.post"/>
+        <property name="outboxTimelineRedis" ref="redis.userTimeline"/>
+        <property name="wallTimelineRedis" ref="redis.wallTimeline"/>
+        <property name="friendsTimelineRedis" ref="redis.friendsTimeline"/>
+        <property name="publicTimelineRedis" ref="redis.publicTimeline"/>
+        <property name="expansions">
+            <list>
+                <bean class="com.borqs.server.platform.feature.comment.CommentPostExpansion" scope="singleton">
+                    <property name="comment" ref="logic.comment"/>
+                    <property name="friend" ref="logic.friend"/>
+                    <property name="lastCommentCount" value="2"/>
+                </bean>
+                <bean class="com.borqs.server.platform.feature.like.LikePostExpansion" scope="singleton">
+                    <property name="account" ref="logic.account"/>
+                    <property name="like" ref="logic.like"/>
+                    <property name="friend" ref="logic.friend"/>
+                </bean>
+                <bean class="com.borqs.server.platform.feature.link.LinkPostExpansion" scope="singleton">
+                    <property name="prefix" value="${stream.linkImageUrlPrefix}"/>
+                </bean>
+                <bean class="com.borqs.server.platform.feature.photo.PhotoPostExpansion" scope="singleton">
+                    <property name="prefix" value="${photo.photoUrlPrefix}"/>
+                    <property name="photo" ref="logic.photo"/>
+                </bean>
+                <bean class="com.borqs.server.qiupu.ApkPostExpansion" scope="singleton">
+                    <property name="qiupuFactory" ref="logic.qiupuFactory"/>
+                </bean>
+            </list>
+        </property>
+        <property name="createPostHooks">
+            <list>
+                <bean class="com.borqs.server.impl.stream.StreamCreateHookImpl" scope="singleton">
+                    <property name="opline" ref="logic.opline"/>
+                    <property name="post" ref="logic.stream"/>
+                    <property name="cache" ref="mc.photoPost"/>
+                </bean>
+                <bean class="com.borqs.server.platform.feature.link.LinkPostHook" scope="singleton">
+                    <property name="link" ref="logic.link"/>
+                    <property name="threadPool">
+                        <bean class="com.borqs.server.platform.util.ThreadPool">
+                            <property name="threadCount" value="4"/>
+                        </bean>
+                    </property>
+                    <property name="stream" ref="logic.stream"/>
+                </bean>
+                <bean class="com.borqs.server.impl.stream.StreamRetweetNotifHookImpl$StreamRetweetHook"
+                      scope="singleton">
+                    <property name="maker" ref="maker"/>
+                    <property name="sender" ref="sender.notif"/>
+                </bean>
+                <bean class="com.borqs.server.impl.stream.StreamRetweetNotifHookImpl$SharedHook" scope="singleton">
+                    <property name="maker" ref="maker"/>
+                    <property name="sender" ref="sender.notif"/>
+                </bean>
+                <bean class="com.borqs.server.impl.stream.StreamRetweetNotifHookImpl$SharedAppHook" scope="singleton">
+                    <property name="maker" ref="maker"/>
+                    <property name="sender" ref="sender.notif"/>
+                </bean>
+            </list>
+        </property>
+        <property name="typeIconUrls">
+            <map>
+                <entry key="com.borqs.server.platform.feature.stream.Post.POST_TEXT" value="${postIconUrl.text}"/>
+                <entry key="com.borqs.server.platform.feature.stream.Post.POST_PHOTO" value="${postIconUrl.photo}"/>
+                <entry key="com.borqs.server.platform.feature.stream.Post.POST_VIDEO" value="${postIconUrl.video}"/>
+                <entry key="com.borqs.server.platform.feature.stream.Post.POST_AUDIO" value="${postIconUrl.audio}"/>
+                <entry key="com.borqs.server.platform.feature.stream.Post.POST_BOOK" value="${postIconUrl.book}"/>
+                <entry key="com.borqs.server.platform.feature.stream.Post.POST_APK" value="${postIconUrl.apk}"/>
+                <entry key="com.borqs.server.platform.feature.stream.Post.POST_LINK" value="${postIconUrl.link}"/>
+                <entry key="com.borqs.server.platform.feature.stream.Post.POST_APK_LINK"
+                       value="${postIconUrl.apkLink}"/>
+                <entry key="com.borqs.server.platform.feature.stream.Post.POST_MUSIC" value="${postIconUrl.music}"/>
+                <entry key="com.borqs.server.platform.feature.stream.Post.POST_SIGN_IN" value="${postIconUrl.signIn}"/>
+                <entry key="com.borqs.server.platform.feature.stream.Post.POST_SYSTEM" value="${postIconUrl.system}"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- request -->
+    <bean id="logic.request" class="com.borqs.server.impl.request.RequestImpl" scope="singleton">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="requestTable" ref="table.request"/>
+        <property name="requestIndex" ref="table.request_index"/>
+        <property name="account" ref="logic.account"/>
+        <property name="createHooks">
+            <list>
+                <bean class="com.borqs.server.platform.feature.privacy.VcardRequestHook" scope="singleton">
+                    <property name="privacyControl" ref="logic.privacy"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- like -->
+    <bean id="logic.like" class="com.borqs.server.platform.feature.like.LikeLogic" scope="singleton">
+        <property name="conversation" ref="logic.conversation"/>
+        <property name="likeHooks">
+            <list>
+                <bean class="com.borqs.server.platform.feature.like.UpdateTargetTimeLikeHook" scope="singleton">
+                    <property name="stream" ref="logic.stream"/>
+                </bean>
+                <bean class="com.borqs.server.platform.feature.like.LikeNotifHooks$CreateFriendsHook"
+                      scope="singleton">
+                    <property name="maker" ref="maker"/>
+                    <property name="sender" ref="sender.notif"/>
+                </bean>
+                <bean class="com.borqs.server.platform.feature.like.LikeNotifHooks$CreatePostHook"
+                      scope="singleton">
+                    <property name="maker" ref="maker"/>
+                    <property name="sender" ref="sender.notif"/>
+                </bean>
+                <bean class="com.borqs.server.platform.feature.like.LikeNotifHooks$LikePhotoHook"
+                      scope="singleton">
+                    <property name="maker" ref="maker"/>
+                    <property name="sender" ref="sender.notif"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- favorite -->
+    <bean id="logic.favorite" class="com.borqs.server.platform.feature.favorite.FavoriteLogic" scope="singleton">
+        <property name="conversation" ref="logic.conversation"/>
+    </bean>
+
+    <!-- link -->
+    <bean id="logic.link" class="com.borqs.server.impl.link.LinkImpl" scope="singleton">
+        <property name="linkSFS" ref="sfs.linkImage"/>
+        <property name="cache" ref="mc.link"/>
+        <property name="expirySeconds" value="${link.expirySeconds}"/>
+    </bean>
+    <!-- video -->
+    <bean id="logic.video" class="com.borqs.server.impl.video.VideoImpl" scope="singleton">
+        <property name="account" ref="logic.account"/>
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="videoTable" ref="table.video"/>
+    </bean>
+    <bean id="logic.audio" class="com.borqs.server.impl.audio.AudioImpl" scope="singleton">
+        <property name="account" ref="logic.account"/>
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="audioTable" ref="table.audio"/>
+    </bean>
+    <bean id="logic.staticfile" class="com.broqs.server.impl.staticfile.StaticFileImpl" scope="singleton">
+        <property name="account" ref="logic.account"/>
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="staticFileTable" ref="table.staticfile"/>
+
+    </bean>
+    <!-- configuration -->
+    <bean id="logic.config" class="com.broqs.server.impl.configration.ConfigImpl" scope="singleton">
+        <property name="account" ref="logic.account"/>
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="configTable" ref="table.config"/>
+
+    </bean>
+    <!-- photo -->
+    <bean id="logic.photo" class="com.borqs.server.impl.photo.PhotoImpl" scope="singleton">
+        <property name="photoSFS" ref="sfs.photoImage"/>
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="conversationLogic" ref="logic.conversation"/>
+        <property name="accountLogic" ref="logic.account"/>
+        <property name="path" value="D:/2workspace/photos"/>
+        <property name="albumTable" ref="table.album"/>
+        <property name="photoTable" ref="table.photo"/>
+        <property name="photoExpansions">
+            <list>
+                <bean class="com.borqs.server.platform.feature.photo.AlbumPhotoExpansion" scope="singleton">
+                    <property name="prefix" value="${album.photoUrlPrefix}"/>
+                    <property name="photo" ref="logic.photo"/>
+                </bean>
+                <bean class="com.borqs.server.platform.feature.like.LikePhotoExpansion" scope="singleton">
+                    <property name="account" ref="logic.account"/>
+                    <property name="like" ref="logic.like"/>
+                    <property name="friend" ref="logic.friend"/>
+                </bean>
+                <bean class="com.borqs.server.platform.feature.comment.CommentPhotoExpansion" scope="singleton">
+                    <property name="comment" ref="logic.comment"/>
+                    <property name="friend" ref="logic.friend"/>
+                    <property name="lastCommentCount" value="2"/>
+                </bean>
+            </list>
+        </property>
+        <property name="albumExpansions">
+            <list>
+                <bean class="com.borqs.server.platform.feature.photo.AlbumPrivacyExpansion" scope="singleton">
+                </bean>
+                <bean class="com.borqs.server.platform.feature.photo.AlbumQueryExpansion" scope="singleton">
+                    <property name="prefix" value="${photo.photoUrlPrefix}"/>
+                    <property name="photo" ref="logic.photo"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- TargetInfoFetcher -->
+    <bean id="logic.targetInfoFetcher" class="com.borqs.server.platform.feature.TargetInfoFetcher" scope="singleton"
+          factory-method="getInstance">
+        <property name="providers">
+            <list>
+                <ref bean="logic.account"/>
+                <ref bean="logic.qiupuFactory"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- qiupu -->
+    <bean id="logic.qiupuFactory" class="com.borqs.server.qiupu.QiupuFactory" scope="singleton">
+        <property name="config" ref="const.qiupuConfig"/>
+        <property name="comment" ref="logic.comment"/>
+        <property name="conversation" ref="logic.conversation"/>
+        <property name="friend" ref="logic.friend"/>
+        <property name="like" ref="logic.like"/>
+        <property name="stream" ref="logic.stream"/>
+        <property name="account" ref="logic.account"/>
+        <property name="app" ref="logic.app"/>
+        <property name="login" ref="logic.login"/>
+    </bean>
+
+</beans>

@@ -1,0 +1,22 @@
+
+@namespace("com.borqs.server.service.platform")
+protocol Comment {
+    import schema "../../../../../base/src/main/avro/error.avsc";
+
+    string createComment(string userId, string targetId, bytes comment) throws com.borqs.server.base.ResponseError;
+    bytes destroyComments(string userId, string commentId,string fromSource,string objectType) throws com.borqs.server.base.ResponseError;
+
+    int getCommentCount(string viewerId,string targetId) throws com.borqs.server.base.ResponseError;
+    bytes getCommentsFor(string targetId, string cols, boolean asc, int page, int count) throws com.borqs.server.base.ResponseError;
+    bytes getCommentsForContainsIgnore(string viewerId, string targetId, string cols, boolean asc, int page, int count) throws com.borqs.server.base.ResponseError;
+    bytes getComments(string commentIds, string cols) throws com.borqs.server.base.ResponseError;
+    bytes getCommentsAll(string commentIds, string cols) throws com.borqs.server.base.ResponseError;
+    bytes getCommentedPost(string userId, int page, int count,int objectType) throws com.borqs.server.base.ResponseError;
+    bytes findWhoCommentTarget(string target, int limit) throws com.borqs.server.base.ResponseError;
+    bytes getObjectCommentByUsers(string viewerId,string userIds,string objectType, int page,int count) throws com.borqs.server.base.ResponseError;
+    boolean updateCanLike(string userId, string commentId, boolean can_like) throws com.borqs.server.base.ResponseError;
+    boolean getIHasCommented(string commenter, string object) throws com.borqs.server.base.ResponseError;
+    bytes getHotTargetByCommented(string targetType,long max,long min, int page,int count) throws com.borqs.server.base.ResponseError;
+    bytes findMyLastedCommented(string target, string commenter) throws com.borqs.server.base.ResponseError;
+    boolean updateCommentTarget(string old_target, string new_target) throws com.borqs.server.base.ResponseError;
+}

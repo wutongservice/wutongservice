@@ -1,0 +1,161 @@
+html {
+    overflow-y: scroll; /*always show v scroll bar*/
+}
+
+body {
+    padding-top: 90px;
+    /*background-color: rgb(238,238,238);*/
+}
+
+div#content {
+    padding-left: 10px;
+    padding-right: 10px;
+    border-right: 1px solid rgb(238,238,238);
+    border-left: 1px solid rgb(238,238,238);
+    box-sizing: border-box;
+    background-color: white;
+}
+
+.hr2 {
+    border-width: 2px;
+}
+
+.submit-button {
+    box-sizing: border-box;
+    margin: 40px 20px 20px;
+    width: 150px;
+}
+
+.single-form {
+    margin-top: 60px;
+}
+
+.display-version {
+
+}
+
+.nav-list > li > div {
+    margin-right: -15px;
+    margin-left: -15px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.nav-list > li > .nav-item {
+    padding: 3px 15px;
+}
+
+.nav-list > .active > .nav-item {
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+    background-color: rgb(0, 127, 255);
+}
+
+.nav-list > li > .nav-item:hover,
+.nav-list > li > .nav-item:focus {
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+    background-color: rgb(0, 127, 255);
+}
+
+.image-upload-delete {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    vertical-align: baseline;
+    line-height: 30px;
+    border: none;
+    border-width: 0;
+    margin: 0;
+}
+
+.image-upload-delete:hover {
+    background-color: rgb(230, 158, 176);
+}
+
+.image-upload-delete:active {
+    background-color: rgb(230, 0, 51);
+}
+
+div.second-nav {
+    margin: 0;
+    position: fixed;
+    top: 50px;
+    height: 30px;
+    right: 0;
+    left: 0;
+    box-sizing: border-box;
+    background-color: rgb(242, 242, 242);
+    z-index:1030;
+}
+
+div.feature-nav {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+div.feature-nav {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+ul#actionList {
+    list-style: none;
+    margin: 0;
+}
+
+ul#actionList > li {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+ul#actionList > li > a {
+    display: block;
+}
+
+#signin-container {
+    width: 350px;
+    padding: 20px;
+}
+
+.signin-form {
+    padding-left: 65px;
+    padding-right: 65px;
+}
+
+.version-beta {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.left-bar {
+    /*margin-left: 0;*/
+}
+
+
+/*alt bootstrap*/
+body > .navbar .brand {
+    color: #ffffff !important;
+}
+
+body > .navbar .brand:hover {
+    color: #007fff !important;
+}
+
+.dropdown-menu {
+    max-height: 600px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+
+/*tags manager */
+.tm-alt {
+    margin: 2px 4px;
+    border-radius: 0;
+}
+
+

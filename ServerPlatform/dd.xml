@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<host_settings>
+    <release>
+        <music_host>http://music.borqs.com</music_host>
+        <book_uri>http://booktest1.borqs.com:8980/brook</book_uri>
+        <book_admin_uri>http://booktest1.borqs.com:8980/brook</book_admin_uri>
+        <xdevice_host>push.borqs.com</xdevice_host>
+        <api_host>http://api.borqs.com</api_host>
+        <sync_syncml_host>http://api.borqs.com/sync/syncml</sync_syncml_host>
+        <sync_webagent_host>http://api.borqs.com/sync/webagent</sync_webagent_host>
+    </release>
+    <prerelease>
+        <music_host>http://music.borqs.com</music_host>
+        <book_uri>http://booktest1.borqs.com:8980/brook</book_uri>
+        <book_admin_uri>http://booktest1.borqs.com:8980/brook</book_admin_uri>
+        <xdevice_host>push.borqs.com</xdevice_host>
+        <api_host>http://api.borqs.com</api_host>
+        <sync_syncml_host>http://api.borqs.com/sync/syncml</sync_syncml_host>
+        <sync_webagent_host>http://api.borqs.com/sync/webagent</sync_webagent_host>
+    </prerelease>
+    <test>
+         <api_host>http://apptest0.borqs.com</api_host>
+         <notification_uri>http://apptest0.borqs.com/bmb</notification_uri>
+         <book_uri>http://apptest0.borqs.com/brook</book_uri>
+         <book_admin_uri>http://apptest0.borqs.com/brook</book_admin_uri>
+         <music_host>http://apptest0.borqs.com/music</music_host>
+         <sync_syncml_host>http://apptest0.borqs.com/sync/syncml</sync_syncml_host>
+         <sync_webagent_host>http://apptest0.borqs.com/sync/webagent</sync_webagent_host>
+         <xdevice_host>apptest2.borqs.com</xdevice_host>
+    </test>
+    <development>
+        <music_host>http://musictest.borqs.com</music_host>
+        <book_uri>http://booktest1.borqs.com</book_uri>
+        <book_admin_uri>http://booktest1.borqs.com</book_admin_uri>
+        <push_host>http://pushtest.borqs.com</push_host>
+        <api_host>http://apitest.borqs.com</api_host>
+        <sync_syncml_host>http://apitest.borqs.com/sync/syncml</sync_syncml_host>
+        <sync_webagent_host>http://apitest.borqs.com/sync/webagent</sync_webagent_host>
+    </development>    
+</host_settings>
+

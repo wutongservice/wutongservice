@@ -1,0 +1,20 @@
+{
+    "name":"vacation",
+    "columns": {
+        "id":"int",
+        "employee_id":"string",
+        "name":"string",
+        "join_date":"string",
+        "city":"string",
+        "company":"string",
+        "year":"string",
+        "legal_vacation":"string",
+        "company_vacation":"string",
+        "total_vacation":"string",
+        "vacation":"string",
+        "remain_vacation":"string",
+        "created_time":"int",
+        "updated_time":"int",
+        "destroyed_time":"int"
+    }
+}

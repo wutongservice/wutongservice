@@ -1,0 +1,12 @@
+#! /usr/bin/expect
+
+set timeout 1800
+
+spawn su [lindex $argv 0]
+set password [lindex $argv 1]
+expect "密码："
+exec sleep 1
+send "$password\r"
+expect "#"
+expect eof
+exit

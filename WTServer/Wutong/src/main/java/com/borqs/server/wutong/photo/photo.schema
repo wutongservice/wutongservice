@@ -1,0 +1,26 @@
+{
+    "name":"photo",
+    "columns": {
+        "photo_id": "int",
+        "album_id": "int",
+        "user_id": "int",
+        "img_original": "string",
+        "img_middle": "string",
+        "img_big": "string",
+        "img_small": "string",
+        "caption": "string",
+        "location": "string",
+        "tag": "string",
+        "tag_ids": "string",
+        "created_time": "int",
+        "updated_time": "int",
+        "from_user": "int",
+        "original_pid": "int",
+        "longitude": "string",
+        "latitude": "string",
+        "orientation": "string",
+        "stream_id": "string",
+        "destroyed_time": "int",
+        "description": "string"
+    }
+}

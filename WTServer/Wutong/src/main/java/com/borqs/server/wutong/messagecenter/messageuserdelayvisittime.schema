@@ -1,0 +1,11 @@
+{
+    "name":"message_user_delaytime",
+    "columns": {
+        "user_id": "int",
+        "type":"int",
+        "delay_time": "int"
+    }
+}
+
+
+

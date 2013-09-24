@@ -1,0 +1,13 @@
+{
+    "name": "address",
+    "columns": {
+        "type": "string",
+        "country": "string",
+        "state": "string",
+        "city": "string",
+        "street": "string",
+        "postal_code": "string",
+        "po_box": "string",
+        "extended_address": "string"
+    }
+}

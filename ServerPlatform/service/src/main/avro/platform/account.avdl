@@ -1,0 +1,51 @@
+
+
+
+@namespace("com.borqs.server.service.platform")
+protocol Account {
+    import schema "../../../../../base/src/main/avro/error.avsc";
+
+    // Auth
+    bytes login(string loginName, string password, string appId) throws com.borqs.server.base.ResponseError;
+    boolean logout(string ticket) throws com.borqs.server.base.ResponseError;
+    string whoLogined(string ticket) throws com.borqs.server.base.ResponseError;
+    bytes getLogined(string userId, string appId) throws com.borqs.server.base.ResponseError;
+    boolean checkLoginNameNotExists(string uid, string names) throws com.borqs.server.base.ResponseError;
+    boolean checkBindNameNotExists(string names) throws com.borqs.server.base.ResponseError;
+    bytes getUsersAuths(string userIds) throws com.borqs.server.base.ResponseError;
+    string getNowGenerateUserId() throws com.borqs.server.base.ResponseError;
+
+    // Account
+    string createAccount(bytes info) throws com.borqs.server.base.ResponseError;
+    boolean destroyAccount(string userId) throws com.borqs.server.base.ResponseError;
+    string resetPassword(string loginName) throws com.borqs.server.base.ResponseError;
+    boolean updateAccount(string userId, bytes info) throws com.borqs.server.base.ResponseError;
+    boolean bindUser(string userId, bytes info) throws com.borqs.server.base.ResponseError;
+    bytes findAllUserIds(boolean all) throws com.borqs.server.base.ResponseError;
+    bytes getUsersPasswordByUserIds(string userIds) throws com.borqs.server.base.ResponseError;
+    boolean changePasswordByUserId(string userId, string password) throws com.borqs.server.base.ResponseError;
+
+    // User
+    bytes getUsers(string userIds, string cols) throws com.borqs.server.base.ResponseError;
+    bytes findUidByMiscellaneous(string miscellaneous) throws com.borqs.server.base.ResponseError;    
+    bytes getUserIds(string loginNames) throws com.borqs.server.base.ResponseError;
+    bytes getUserIdsByNames(string loginNames) throws com.borqs.server.base.ResponseError;
+    bytes hasUsers(string userIds) throws com.borqs.server.base.ResponseError;
+    bytes searchUserByUserName(string username,int page,int count) throws com.borqs.server.base.ResponseError;
+    boolean hasOneUsers(string userIds) throws com.borqs.server.base.ResponseError;
+    boolean hasAllUsers(string userIds) throws com.borqs.server.base.ResponseError;
+    string findUserIdByUserName(string username) throws com.borqs.server.base.ResponseError;
+    
+    // Privacy
+    boolean setPrivacy(string userId, bytes privacyItemList) throws com.borqs.server.base.ResponseError;
+    bytes getAuths(string userId, string resources) throws com.borqs.server.base.ResponseError;
+    boolean getDefaultPrivacy(string resource, string circleId) throws com.borqs.server.base.ResponseError;
+
+    //short url
+    boolean saveShortUrl(string long_url,string short_url) throws com.borqs.server.base.ResponseError;
+    string findLongUrl(string short_url) throws com.borqs.server.base.ResponseError;
+
+    bytes findUidLoginNameNotInID(string name) throws com.borqs.server.base.ResponseError;
+
+    string getBorqsUserIds() throws com.borqs.server.base.ResponseError;
+}

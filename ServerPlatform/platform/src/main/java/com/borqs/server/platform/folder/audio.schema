@@ -1,0 +1,18 @@
+{
+    "name":"video",
+    "columns": {        
+        "file_id":"int",
+        "level":"int",
+        "schools":"int",
+        "file_size":"int",
+        "audio_time_length":"int",
+        "audio_bit_rate":"int",
+        "author":"string",
+        "audio_artists":"string",
+        "record":"string",
+        "record_author":"string",
+        "record_year":"string",
+        "coding_type":"string",
+        "compression_type":"string"
+    }
+}

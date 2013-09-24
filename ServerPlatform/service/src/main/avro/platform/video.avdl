@@ -1,0 +1,12 @@
+
+
+
+@namespace("com.borqs.server.service.platform")
+protocol Video {
+    import schema "../../../../../base/src/main/avro/error.avsc";
+
+    boolean saveVideo(bytes video) throws com.borqs.server.base.ResponseError;
+    bytes getVideo(string userId,boolean asc,int page,int count) throws com.borqs.server.base.ResponseError;
+    bytes getVideoById(string video_id) throws com.borqs.server.base.ResponseError;
+    boolean deleteVideo(string video_ids) throws com.borqs.server.base.ResponseError;
+}

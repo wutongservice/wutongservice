@@ -1,0 +1,17 @@
+
+@namespace("com.borqs.server.service.platform")
+protocol Request {
+    import schema "../../../../../base/src/main/avro/error.avsc";
+
+    string createRequest(string userId, string sourceId, string app, string type, string message, string data, string options) throws com.borqs.server.base.ResponseError;
+    boolean createRequests(string userIds, string sourceId, string app, string type, string message, string data, string options) throws com.borqs.server.base.ResponseError;
+    boolean destroyRequests(string userId, string requests);
+    bytes getRequests(string userId, string app, string type) throws com.borqs.server.base.ResponseError;
+    boolean doneRequest(string userId, string requestIds) throws com.borqs.server.base.ResponseError;
+    int getCount(string userId, string app, string type) throws com.borqs.server.base.ResponseError;
+    
+    string getPeddingRequests(string source, string user) throws com.borqs.server.base.ResponseError;
+    bytes getPeddingRequestsAll(string source, string userIds) throws com.borqs.server.base.ResponseError;
+
+    string getRelatedRequestIds(string sourceIds, string datas) throws com.borqs.server.base.ResponseError;
+}

@@ -1,0 +1,140 @@
+@namespace("com.borqs.information.rpc.service")
+protocol IInformationsService {
+    /* information structure for sending */
+    record SendInfo {
+        // application identity
+        string appId;
+        
+        // sender identity
+        string senderId;
+        
+        // receiver identity
+        string receiverId;
+        
+        // information type
+        string type;
+        
+        // client action
+        union {null,string} action;
+        
+        // URI about information
+        union {null,string} uri;
+        
+        // information title
+        union {null,string} title;
+        
+        // detail information
+        union {null,string} data;
+        
+        // process method(default is 1)
+        // 1 -- start activity for result and result is OK
+        // 2 -- click list item
+        // 3 -- loaded from server
+        union {null, int} processMethod;
+        
+        // importance(default is 30)
+        // 50 -- most important
+        // 40 -- more important
+        // 30 -- normal important
+        // 20 -- less important
+        // 10 -- not important
+        union {null, int} importance;
+        
+        // be used to update information if 'guid' field isn't null
+        union {null, string} guid;
+        union {null, string} body;
+        union {null, string} bodyHtml;
+        union {null, string} titleHtml;
+        
+        // object ID
+        union {null, string} objectId;
+    }
+    
+    // readonly
+    record Info {
+        // information ID
+        union {null, long} id;
+        
+        // application identity
+        string appId;
+        
+        // sender identity
+        string senderId;
+        
+        // receiver identity
+        string receiverId;
+        
+        // information type
+        string type;
+        
+        // client action
+        union {null,string} action;
+        
+        // URI about information
+        union {null,string} uri;
+        
+        // information title
+        union {null,string} title;
+        
+        // detail information
+        union {null,string} data;
+        
+        // process method(default is 1)
+        // 1 -- start activity for result and result is OK
+        // 2 -- click list item
+        // 3 -- loaded from server
+        union {null, int} processMethod;
+        
+        // importance(default is 30)
+        // 50 -- most important
+        // 40 -- more important
+        // 30 -- normal important
+        // 20 -- less important
+        // 10 -- not important
+        union {null, int} importance;
+        
+        // be used to update information if 'guid' field isn't null
+        union {null, string} guid;
+        union {null, string} body;
+        union {null, string} bodyHtml;
+        union {null, string} titleHtml;
+        
+        // create date time, readonly
+        union {null, long} cDateTime;
+        
+        // object ID
+        union {null, string} objectId;
+    }
+    
+    /* returned result */
+    record StateResult {
+        string mid;
+        string status;
+    }
+    
+    // send an information
+    StateResult sendInfo(SendInfo info);
+    // batch send informations
+    StateResult batchSendInfo(array<SendInfo> infos);
+    // mark information processed state
+    StateResult markProcessed(string mid);
+    // query informations by appid, type, object and receiver ID.
+    array<Info> queryInfo(string appId, string type, string receiverId, string objectId);
+    // replace information by appId, type, object and receiver ID.
+    StateResult replaceInfo(SendInfo info);
+    // batch replace information by appId, type, object and receiver ID.
+    StateResult batchReplaceInfo(array<SendInfo> infos);
+    
+    // send and information by JSON
+    string send(string message);
+    // batch send informations by JSON
+    string batchSend(string messages);
+    // mark information processed state by JSON
+    string process(string mid);    
+    // query informations by appid, type, object and receiver ID.
+    string query(string appId, string type, string receiverId, string objectId);
+    // replace information by appId, type, object and receiver ID.
+    string replace(string message);
+    // batch replace information by appId, type, object and receiver ID.
+    string batchReplace(string messages);
+}

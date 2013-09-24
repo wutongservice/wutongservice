@@ -1,0 +1,11 @@
+{
+    "name":"user_qsetting",
+    "columns": {
+        "user": "int",
+        "setting_name": "int",
+        "setting_value": "string"
+    }
+}
+
+
+

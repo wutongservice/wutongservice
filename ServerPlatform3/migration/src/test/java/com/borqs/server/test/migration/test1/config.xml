@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+
+       default-init-method="init" default-destroy-method="destroy">
+    <!--Sql.executor-->
+    <bean id="sql.executor" class="com.borqs.server.platform.sql.SqlExecutor" scope="singleton">
+        <property name="connectionFactory">
+            <bean class="com.borqs.server.platform.sql.DBCPConnectionFactory" scope="singleton"/>
+        </property>
+    </bean>
+
+    <!-- Tables -->
+    <bean id="table.stream" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.toTable}"/>
+        <property name="table" value="post"/>
+    </bean>
+    <bean id="table.friend" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.toTable}"/>
+        <property name="table" value="friend"/>
+    </bean>
+
+    <bean id="table.follower" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.toTable}"/>
+        <property name="table" value="follower"/>
+    </bean>
+    <bean id="table.stream.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.fromTable}"/>
+        <property name="table" value="stream"/>
+    </bean>
+
+    <bean id="table.friendOld.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.fromTable}"/>
+        <property name="table" value="friend"/>
+    </bean>
+
+    <!-- Account Migration Tables -->
+    <bean id="table.account.migration_from" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.fromTable}"/>
+        <property name="table" value="${table.user.from}"/>
+    </bean>
+    <bean id="table.account.property.migration_from" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.fromTable}"/>
+        <property name="table" value="${table.user.property.from}"/>
+    </bean>
+    <bean id="table.user.migration_to" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.toTable}"/>
+        <property name="table" value="${table.user.to}"/>
+    </bean>
+    <bean id="table.userProperty.migration_to" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.toTable}"/>
+        <property name="table" value="${table.user.to.user_property}"/>
+    </bean>
+    <bean id="table.cibind" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.toTable}"/>
+        <property name="table" value="${table.user.cibind}"/>
+    </bean>
+    <bean id="table.newCircle.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.toTable}"/>
+        <property name="table" value="${table.circle.to}"/>
+    </bean>
+    <bean id="table.oldCircle.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.fromTable}"/>
+        <property name="table" value="${table.circle.from}"/>
+    </bean>
+    <bean id="table.newStream.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.toTable}"/>
+        <property name="table" value="${table.stream.to}"/>
+    </bean>
+    <bean id="table.oldStream.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.fromTable}"/>
+        <property name="table" value="${table.stream.from}"/>
+    </bean>
+    <bean id="table.oldComment.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.fromTable}"/>
+        <property name="table" value="${table.comment.from}"/>
+    </bean>
+    <bean id="table.newComment.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.toTable}"/>
+        <property name="table" value="${table.comment.to}"/>
+    </bean>
+    <bean id="table.newCommentTarget.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.toTable}"/>
+        <property name="table" value="${table.commentTarget.to}"/>
+    </bean>
+    <bean id="table.newConversation0.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.toTable}"/>
+        <property name="table" value="${table.newConversation0.to}"/>
+    </bean>
+    <bean id="table.newConversation1.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.toTable}"/>
+        <property name="table" value="${table.newConversation1.to}"/>
+    </bean>
+    <bean id="table.oldConversation.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.fromTable}"/>
+        <property name="table" value="${table.oldConversation.from}"/>
+    </bean>
+
+    <bean id="table.newSetting.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.toTable}"/>
+        <property name="table" value="${table.newSetting.to}"/>
+    </bean>
+    <bean id="table.oldSetting.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.fromTable}"/>
+        <property name="table" value="${table.oldSetting.from}"/>
+    </bean>
+
+    <bean id="table.newTicket.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.toTable}"/>
+        <property name="table" value="${table.newTicket.to}"/>
+    </bean>
+    <bean id="table.oldTicket.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.fromTable}"/>
+        <property name="table" value="${table.oldTicket.from}"/>
+    </bean>
+
+    <bean id="table.newContact0.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.toTable}"/>
+        <property name="table" value="${table.newContact0.to}"/>
+    </bean>
+
+    <bean id="table.newContact1.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.toTable}"/>
+        <property name="table" value="${table.newContact1.to}"/>
+    </bean>
+    <bean id="table.oldSocialContact.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.fromTable}"/>
+        <property name="table" value="${table.oldContactSocial.from}"/>
+    </bean>
+
+    <bean id="table.oldVirtualFriend.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.fromTable}"/>
+        <property name="table" value="${table.oldContactVirtualFriend.from}"/>
+    </bean>
+
+    <bean id="table.newAlbum.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.toTable}"/>
+        <property name="table" value="${table.newAlbum.to}"/>
+    </bean>
+
+    <bean id="table.newPhoto.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.toTable}"/>
+        <property name="table" value="${table.newPhoto.to}"/>
+    </bean>
+    <bean id="table.oldAlbum.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.fromTable}"/>
+        <property name="table" value="${table.oldAlbum.from}"/>
+    </bean>
+
+    <bean id="table.oldPhoto.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.fromTable}"/>
+        <property name="table" value="${table.oldPhoto.from}"/>
+    </bean>
+
+    <bean id="table.newSuggest.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.toTable}"/>
+        <property name="table" value="${table.newSuggest.to}"/>
+    </bean>
+    <bean id="table.oldSuggest.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.fromTable}"/>
+        <property name="table" value="${table.oldSuggest.from}"/>
+    </bean>
+    <bean id="table.newRequest.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.toTable}"/>
+        <property name="table" value="${table.newRequest.to}"/>
+    </bean>
+    <bean id="table.newRequestIndex.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.toTable}"/>
+        <property name="table" value="${table.newRequestIndex.to}"/>
+    </bean>
+    <bean id="table.oldRequest.migration" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="${migration.fromTable}"/>
+        <property name="table" value="${table.oldRequest.from}"/>
+    </bean>
+    <!-- Logic -->
+    <bean id="logic.migration" class="com.borqs.server.impl.migration.MigrationEx" scope="singleton">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="postTable" ref="table.stream"/>
+        <property name="friendTable" ref="table.friend"/>
+        <property name="circleTable" ref="table.newCircle.migration"/>
+        <property name="followerTable" ref="table.follower"/>
+        <property name="streamTable" ref="table.stream.migration"/>
+        <property name="circleOldTable" ref="table.oldCircle.migration"/>
+        <property name="friendOldTable" ref="table.friendOld.migration"/>
+        <property name="accountTable" ref="table.account.migration_from"/>
+        <property name="userTable" ref="table.user.migration_to"/>
+        <property name="userPropertyTable" ref="table.userProperty.migration_to"/>
+    </bean>
+
+
+    <bean id="service.telnetLog" class="com.borqs.server.platform.log.TelnetAppenderService"
+          factory-method="getInstance">
+        <property name="address" value="*:11300"/>
+    </bean>
+
+    <!-- app -->
+    <!--<bean id="main" class="com.borqs.server.platform.service.ServiceApp">
+        <property name="services">
+            <list>
+                <ref bean="service.telnetLog"/>
+            </list>
+        </property>
+    </bean>
+-->
+
+    <!-- the new migration -->
+    <bean id="migration.main" class="com.borqs.server.impl.migration.MigrationMain">
+    </bean>
+
+    <bean id="account.mig" class="com.borqs.server.impl.migration.account.AccountMigImpl">
+        <property name="oldUserTable" ref="table.account.migration_from"/>
+        <property name="oldUserPropertyTable" ref="table.account.property.migration_from"/>
+        <property name="userTable" ref="table.user.migration_to"/>
+        <property name="userPropertyTable" ref="table.userProperty.migration_to"/>
+        <property name="cibindTable" ref="table.cibind"/>
+        <property name="sqlExecutor" ref="sql.executor"/>
+    </bean>
+
+    <bean id="circle.mig" class="com.borqs.server.impl.migration.circle.CircleMigImpl">
+        <property name="oldCircleTable" ref="table.oldCircle.migration"/>
+        <property name="newCircleTable" ref="table.newCircle.migration"/>
+        <property name="sqlExecutor" ref="sql.executor"/>
+    </bean>
+
+    <bean id="friend.mig" class="com.borqs.server.impl.migration.friend.FriendMigImpl">
+        <property name="friendOldTable" ref="table.friendOld.migration"/>
+        <property name="friendTable" ref="table.friend"/>
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="followerTable" ref="table.follower"/>
+    </bean>
+
+    <bean id="stream.mig" class="com.borqs.server.impl.migration.stream.StreamMigImpl">
+        <property name="account" ref="account.mig"/>
+        <property name="newPostTable" ref="table.newStream.migration"/>
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="oldPostTable" ref="table.oldStream.migration"/>
+    </bean>
+    <bean id="comment.mig" class="com.borqs.server.impl.migration.comment.CommentMigImpl">
+        <property name="account" ref="account.mig"/>
+        <property name="newCommentTable" ref="table.newComment.migration"/>
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="newCommentTargetTable" ref="table.newCommentTarget.migration"/>
+        <property name="oldCommentTable" ref="table.oldComment.migration"/>
+    </bean>
+
+    <bean id="conversation.mig" class="com.borqs.server.impl.migration.conversation.ConversationMigImpl">
+        <property name="account" ref="account.mig"/>
+        <property name="post" ref="stream.mig"/>
+        <property name="comment" ref="comment.mig"/>
+        <property name="newConversationTable0" ref="table.newConversation0.migration"/>
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="newConversationTable1" ref="table.newConversation1.migration"/>
+        <property name="oldConversationTable" ref="table.oldConversation.migration"/>
+    </bean>
+
+    <bean id="setting.mig" class="com.borqs.server.impl.migration.setting.SettingMigImpl">
+        <property name="account" ref="account.mig"/>
+        <property name="newSettingTable" ref="table.newSetting.migration"/>
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="oldSettingTable" ref="table.oldSetting.migration"/>
+    </bean>
+
+    <bean id="ticket.mig" class="com.borqs.server.impl.migration.ticket.TicketMigImpl">
+        <property name="account" ref="account.mig"/>
+        <property name="newTicketTable" ref="table.newTicket.migration"/>
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="oldTicketTable" ref="table.oldTicket.migration"/>
+    </bean>
+    <bean id="contact.mig" class="com.borqs.server.impl.migration.contact.ContactMigImpl">
+        <property name="account" ref="account.mig"/>
+        <property name="newContactTable1" ref="table.newContact1.migration"/>
+        <property name="newContactTable0" ref="table.newContact0.migration"/>
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="oldSocialConatctTable" ref="table.oldSocialContact.migration"/>
+        <property name="oldVirtualFriednTable" ref="table.oldVirtualFriend.migration"/>
+    </bean>
+
+     <bean id="photo.mig" class="com.borqs.server.impl.migration.photo.PhotoMigImpl">
+        <property name="account" ref="account.mig"/>
+        <property name="newAlbumTable" ref="table.newAlbum.migration"/>
+        <property name="newPhotoTable" ref="table.newPhoto.migration"/>
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="oldAlbumTable" ref="table.oldAlbum.migration"/>
+        <property name="oldPhotoTable" ref="table.oldPhoto.migration"/>
+    </bean>
+
+    <bean id="suggest.mig" class="com.borqs.server.impl.migration.suggest.SuggestMigImpl">
+        <property name="account" ref="account.mig"/>
+        <property name="newSuggestTable" ref="table.newSuggest.migration"/>
+        <property name="oldSuggestTable" ref="table.oldSuggest.migration"/>
+        <property name="sqlExecutor" ref="sql.executor"/>
+    </bean>
+
+    <bean id="request.mig" class="com.borqs.server.impl.migration.request.RequestMigImpl">
+        <property name="account" ref="account.mig"/>
+        <property name="newRequestIndexTable" ref="table.newRequestIndex.migration"/>
+        <property name="newRequestTable" ref="table.newRequest.migration"/>
+        <property name="oldRequestTable" ref="table.oldRequest.migration"/>
+        <property name="sqlExecutor" ref="sql.executor"/>
+    </bean>
+
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:com/borqs/server/test/migration/test1/migration.properties</value>
+            </list>
+        </property>
+    </bean>
+</beans>

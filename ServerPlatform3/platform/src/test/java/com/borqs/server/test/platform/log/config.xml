@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+
+       default-init-method="init" default-destroy-method="destroy">
+
+    <!-- service -->
+    <bean id="service.telnetLog" class="com.borqs.server.platform.log.TelnetAppenderService" factory-method="getInstance">
+    </bean>
+
+    <!-- app -->
+    <bean id="main" class="com.borqs.server.platform.service.ServiceApp">
+        <property name="services">
+            <list>
+                <ref bean="service.telnetLog"/>
+                <bean class="com.borqs.server.test.platform.log.OutputLogService"/>
+            </list>
+        </property>
+    </bean>
+</beans>

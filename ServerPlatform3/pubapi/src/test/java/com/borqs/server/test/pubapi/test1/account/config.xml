@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+
+       default-init-method="init" default-destroy-method="destroy">
+    <bean id="properties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="systemPropertiesMode" value="1"/>
+        <property name="searchSystemEnvironment" value="true"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+    </bean>
+
+    <!--&lt;!&ndash;Sql.executor&ndash;&gt;-->
+    <!--<bean id="sql.executor" class="com.borqs.server.platform.sql.SqlExecutor" scope="singleton">-->
+        <!--<property name="connectionFactory">-->
+            <!--<bean class="com.borqs.server.platform.sql.SimpleConnectionFactory" scope="singleton"/>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; SFS &ndash;&gt;-->
+    <!--<bean id="sfs.profileImage" class="com.borqs.server.platform.sfs.local.LocalSFS" scope="singleton">-->
+        <!--<property name="root" value="/Users/gaorx/Temp/profileImage"/>-->
+    <!--</bean>-->
+
+
+    <!-- Logic -->
+    <bean id="logic.account" class="com.borqs.server.platform.test.mock.SteveAndBill" factory-method="account"/>
+    <bean id="logic.app" class="com.borqs.server.platform.test.mock.SteveAndBill" factory-method="app"/>
+    <bean id="logic.login" class="com.borqs.server.platform.test.mock.SteveAndBill" factory-method="login"/>
+
+    <bean id="servlet.pubApi" class="com.borqs.server.platform.web.topaz.HttpApiServlet">
+        <property name="handlers">
+            <list>
+                <bean class="com.borqs.server.pubapi.AccountApi$Rpc">
+                    <property name="account" ref="logic.account"/>
+                    <property name="app" ref="logic.app"/>
+                    <property name="login" ref="logic.login"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+</beans>

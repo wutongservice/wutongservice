@@ -1,0 +1,15 @@
+{
+    "type" : "error",
+    "name" : "ResponseError",
+    "namespace" : "com.borqs.server.base",
+    "fields" : [
+        {
+            "name" : "code",
+            "type" : "int"
+        },
+        {
+            "name" : "message",
+            "type" : "string"
+        }
+    ]
+}

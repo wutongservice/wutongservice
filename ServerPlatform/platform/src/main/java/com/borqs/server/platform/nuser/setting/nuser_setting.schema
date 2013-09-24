@@ -1,0 +1,8 @@
+{
+    "name":"setting",
+    "columns": {
+        "user":"string",
+        "setting_key":"string",
+        "setting_value":"string"
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "name":"name_remark",
+    "columns": {
+        "user": "int",
+        "friend": "int",
+        "remark": "string"   
+    }
+}
+
+
+

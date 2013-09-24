@@ -1,0 +1,10 @@
+
+@namespace("com.borqs.server.service")
+protocol SendMail {
+    import schema "../../../../base/src/main/avro/error.avsc";
+
+    boolean sendEmail(string title, string to, string username, string content, string type, string lang) throws com.borqs.server.base.ResponseError;
+    boolean sendCustomEmail(string title, string to, string username, string content, string type, string lang) throws com.borqs.server.base.ResponseError;
+    boolean sendEmailHTML(string title, string to, string username, string content, string type, string lang) throws com.borqs.server.base.ResponseError;
+    boolean sendEmailElearningHTML(string title, string to, string username, string content, string type, string lang) throws com.borqs.server.base.ResponseError;
+}

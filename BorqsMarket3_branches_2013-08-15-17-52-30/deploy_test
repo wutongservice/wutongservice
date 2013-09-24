@@ -1,0 +1,2 @@
+#!/bin/bash
+fab -H 192.168.5.22 -u zhengwei -p borqs.com 'deploy:tomcat_dir=/home/zhengwei/BorqsMarket3/tomcat7'

@@ -1,0 +1,11 @@
+{
+    "name":"department",
+    "columns": {
+        "dept_id": "int",
+        "dept_name": "string",
+        "dept_description": "string",
+        "level": "int",
+        "parent_id": "int"
+    }
+}
+

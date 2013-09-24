@@ -1,0 +1,11 @@
+
+@namespace("com.borqs.server.service.platform")
+protocol Setting {
+    import schema "../../../../../base/src/main/avro/error.avsc";
+
+    boolean set(string userId, bytes values) throws com.borqs.server.base.ResponseError;
+    bytes gets(string userId, string keys) throws com.borqs.server.base.ResponseError;
+    bytes getsByStartsWith(string userId, string startsWith) throws com.borqs.server.base.ResponseError;
+    string getDefault(string userId, string key) throws com.borqs.server.base.ResponseError; 
+    bytes getByUsers(string key, string users) throws com.borqs.server.base.ResponseError;  
+}

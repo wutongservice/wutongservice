@@ -1,0 +1,8 @@
+{
+    "name": "privacy",
+    "columns": {        
+        "user" : "int",
+        "resource": "string",
+        "auths" : "string"
+    }
+}

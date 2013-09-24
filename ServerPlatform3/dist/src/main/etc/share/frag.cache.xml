@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+       default-init-method="init" default-destroy-method="destroy">
+    <!-- timeline -->
+    <bean id="redis.userTimeline" class="com.borqs.server.platform.cache.redis.SingleRedis" scope="singleton">
+        <property name="server" value="${redis.userTimeline}"/>
+    </bean>
+
+    <bean id="redis.wallTimeline" class="com.borqs.server.platform.cache.redis.SingleRedis" scope="singleton">
+        <property name="server" value="${redis.wallTimeline}"/>
+    </bean>
+
+    <bean id="redis.friendsTimeline" class="com.borqs.server.platform.cache.redis.SingleRedis" scope="singleton">
+        <property name="server" value="${redis.friendsTimeline}"/>
+    </bean>
+
+    <bean id="redis.publicTimeline" class="com.borqs.server.platform.cache.redis.SingleRedis" scope="singleton">
+        <property name="server" value="${redis.publicTimeline}"/>
+    </bean>
+    <bean id="mc.link" class="com.borqs.server.platform.cache.memcached.Memcached" scope="singleton">
+        <property name="server" value="${mc.link}"/>
+    </bean>
+    <bean id="mc.photoPost" class="com.borqs.server.platform.cache.memcached.Memcached" scope="singleton">
+        <property name="server" value="${mc.link}"/>
+    </bean>
+</beans>

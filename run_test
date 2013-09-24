@@ -1,0 +1,7 @@
+cd dist-r3-distribution
+
+echo '****** GO! *********'
+chmod +x bin/bsapp
+bin/bsapp -Dlogback.configurationFile=etc/production.logback.xml com.borqs.server.base.web.JettyServer -c etc/production.config.properties
+
+

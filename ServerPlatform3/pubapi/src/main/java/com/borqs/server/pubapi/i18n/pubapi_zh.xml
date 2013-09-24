@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="platformservlet.create.account.success">
+    <![CDATA[
+        恭喜您，播思账号注册成功！
+    ]]>
+    </entry>
+    
+    <entry key="platformservlet.account.register.complete">
+    <![CDATA[
+        请您完成播思账号注册
+    ]]>
+    </entry>
+    <entry key="platformservlet.account.register.dear">
+    <![CDATA[
+        尊敬的
+    ]]>
+    </entry>
+    <entry key="platformservlet.account.register.comleteNotice">
+    <![CDATA[
+        ，请点击以下链接完成注册：
+    ]]>
+    </entry>
+    <entry key="platformservlet.create.account.failed">
+    <![CDATA[
+        创建用户失败，登录名已存在！
+    ]]>
+    </entry>
+    <entry key="platformservlet.create.account.error">
+    <![CDATA[
+        创建用户出错!
+    ]]>
+    </entry>
+    <entry key="registerapi.invite.bind.success">
+        <![CDATA[
+        绑定账号成功!
+    ]]>
+    </entry>
+    <entry key="registerapi.email.invite.email">
+        <![CDATA[
+        		尊敬的${displayName}, ${fromName}邀请您激活播思账号，并希望成为您的好友，请点击以下链接接受邀请：<br>		<a href="${Url}">${Url}</a><br>
+    ]]>
+    </entry>
+    <entry key="registerapi.email.invite.postscript">
+        <![CDATA[
+        以下是他的附言：<br>		${message}
+    ]]>
+    </entry>
+    <entry key="registerapi.email.invite.title">
+        <![CDATA[
+        ${fromName}邀请您激活播思账号
+    ]]>
+    </entry>
+    <entry key="accountapi.email.bind.title">
+        <![CDATA[
+        ${userName}，欢迎您绑定邮箱到播思通行证
+    ]]>
+    </entry>
+    <entry key="accountapi.email.bind.content">
+        <![CDATA[
+        尊敬的${userName}:<br>　　您的播思通行证ID是：${userId}，您已输入 ${email} 绑定到您的播思通行证。要完成该流程，只需验证该电子邮件地址是否属于您即可。请点击下方链接，如果无法点击，请复制链接到地址栏转入。<br>${link}
+    ]]>
+    </entry>
+    <entry key="accountapi.phone.bind.content">
+        <![CDATA[
+        请点击下面的链接，将您的手机号码绑定到播思账号：
+    ]]>
+    </entry>
+    <entry key="registerapi.account.register.message">
+        <![CDATA[
+        		尊敬的${displayName}，请点击以下链接完成注册：<br>		<a href="${regUrl}">${regUrl}</a>
+    ]]>
+    </entry>
+    <entry key="registerapi.create.account.post">
+        <![CDATA[
+        我已经开通了播思账号，大家赶快关注我吧～
+    ]]>
+    </entry>
+    <entry key="resetpwdapi.reset.password.confirm">
+        <![CDATA[
+                您好，如果您确认您已忘记了播思通行证密码，请您在72小时之内点击下面的链接：<br><a href="${resetPwdUrl}">${resetPwdUrl}</a>
+    ]]>
+    </entry>
+    <entry key="resetpwdapi.reset.password.confirm.subject">
+        <![CDATA[
+        请确认您的帐号密码修改
+    ]]>
+    </entry>
+    <entry key="resetpwdapi.reset.password.message">
+        <![CDATA[
+        		您好，您的播思通行证：${loginName}的密码已经修改为${newPwd}。<br>              请用该密码登录播思应用后及时将密码修改为方便您记忆的密码。
+    ]]>
+    </entry>
+    <entry key="resetpwdapi.reset.password.message.subject">
+        <![CDATA[
+        您的播思帐号密码已修改
+    ]]>
+    </entry>
+    <entry key="resetpwdapi.reset.password.notice">
+        <![CDATA[
+        密码已修改，新密码已发送至您的EMAIL，请您查收并牢记新密码！
+    ]]>
+    </entry>
+</properties>

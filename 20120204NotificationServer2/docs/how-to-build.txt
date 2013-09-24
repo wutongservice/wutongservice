@@ -1,0 +1,35 @@
+NotificationServer build process:
+ 
+step 1, install thrift 0.7.0 tool by the following address.
+http://wiki.apache.org/thrift/ThriftInstallation
+ 
+step 2, install maven tool. please download it from http://maven.apache.org/.
+ 
+step 3, configure maven local repository to 192.168.5.182 as following.
+<repositories>
+        <repository>
+          <id>nexus</id>
+          <name>Borqs Nexs</name>
+          <url>http://192.168.5.182:8087/nexus/content/groups/public</url>
+          <layout>default</layout>
+        </repository>
+<repository>
+<id>spring-milestone</id>
+<name>Spring Maven MILESTONE Repository</name>
+<url>http://maven.springframework.org/milestone</url>
+</repository>
+      </repositories>
+ 
+step 4, switch to project home directory and install some components to building machine.
+mvn install:install-file -DgroupId=javax.jms -DartifactId=jms -Dversion=1.1 -Dpackaging=jar -Dfile=libs/jms-1.1.jar
+mvn install:install-file -DgroupId=com.sun.jdmk -DartifactId=jmxtools -Dversion=1.2.1 -Dpackaging=jar -Dfile=libs/jmxtools-1.2.1.jar
+mvn install:install-file -DgroupId=com.sun.jmx -DartifactId=jmxri -Dversion=1.2.1 -Dpackaging=jar -Dfile=libs/jmx-1.2.1.jar
+mvn install:install-file -DgroupId=org.apache.hbase -DartifactId=hbase -Dversion=0.92 -Dpackaging=jar -Dfile=libs/hbase-0.92.0.jar
+mvn install:install-file -DgroupId=org.springframework.data -DartifactId=spring-data-redis -Dversion=1.0.0.RC1 -Dpackaging=jar -Dfile=libs/spring-data-redis-1.0.0.RC1.jar
+ 
+step 5, switch to NotificationServer source code directory and build it as following.
+mvn -Dmaven.test.skip=true clean package
+ 
+step 6, check whether generate the following files:
+notifications-server-assembly/target/notifications-server-dist.tar.gz
+notifications_php_web/target/notifications_php_web-dist.tar.gz

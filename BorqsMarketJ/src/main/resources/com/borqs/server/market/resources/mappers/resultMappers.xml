@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="market">
+    <resultMap type="com.borqs.server.market.utils.record.Record" id="recordMapper">
+        <result property="logo_image" column="logo_image" typeHandler="com.borqs.server.market.utils.mybatis.typehandlers.JsonHandler"/>
+        <result property="cover_image" column="cover_image" typeHandler="com.borqs.server.market.utils.mybatis.typehandlers.JsonHandler"/>
+        <result property="screenshot1_image" column="screenshot1_image" typeHandler="com.borqs.server.market.utils.mybatis.typehandlers.JsonHandler"/>
+        <result property="screenshot2_image" column="screenshot2_image" typeHandler="com.borqs.server.market.utils.mybatis.typehandlers.JsonHandler"/>
+        <result property="screenshot3_image" column="screenshot3_image" typeHandler="com.borqs.server.market.utils.mybatis.typehandlers.JsonHandler"/>
+        <result property="screenshot4_image" column="screenshot4_image" typeHandler="com.borqs.server.market.utils.mybatis.typehandlers.JsonHandler"/>
+        <result property="screenshot5_image" column="screenshot5_image" typeHandler="com.borqs.server.market.utils.mybatis.typehandlers.JsonHandler"/>
+        <result property="name" column="name" typeHandler="com.borqs.server.market.utils.mybatis.typehandlers.JsonHandler"/>
+        <result property="version_name" column="version_name" typeHandler="com.borqs.server.market.utils.mybatis.typehandlers.JsonHandler"/>
+        <result property="description" column="description" typeHandler="com.borqs.server.market.utils.mybatis.typehandlers.JsonHandler"/>
+        <result property="recent_change" column="recent_change" typeHandler="com.borqs.server.market.utils.mybatis.typehandlers.JsonHandler"/>
+        <result property="update_change" column="update_change" typeHandler="com.borqs.server.market.utils.mybatis.typehandlers.JsonHandler"/>
+        <result property="dependencies" column="dependencies" typeHandler="com.borqs.server.market.models.VersionedProductIdArrayHandler"/>
+        <result property="price" column="price" typeHandler="com.borqs.server.market.utils.mybatis.typehandlers.JsonHandler"/>
+        <result property="category_name" column="category_name" typeHandler="com.borqs.server.market.utils.mybatis.typehandlers.JsonHandler"/>
+        <result property="app_name" column="app_name" typeHandler="com.borqs.server.market.utils.mybatis.typehandlers.JsonHandler"/>
+        <!-- <result property="supported_mod" column="supported_mod" javaType="[Ljava.lang.String;"/> -->
+    </resultMap>
+</mapper>

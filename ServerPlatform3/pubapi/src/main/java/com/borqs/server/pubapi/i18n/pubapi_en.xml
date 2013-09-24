@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="platformservlet.create.account.success">
+    <![CDATA[
+        Congratulations, regist borqs account success!
+    ]]>
+    </entry>
+    <entry key="platformservlet.account.register.complete">
+        <![CDATA[
+        Please complete the account registration Borqs
+    ]]>
+    </entry>
+    <entry key="platformservlet.account.register.dear">
+    <![CDATA[
+        Dear
+    ]]>
+    </entry>
+    <entry key="platformservlet.account.register.comleteNotice">
+    <![CDATA[
+        ,Please click the link below to complete the registration:
+    ]]>
+    </entry>
+    <entry key="platformservlet.create.account.failed">
+    <![CDATA[
+        Create account failed, the login name is existed!
+    ]]>
+    </entry>
+    <entry key="platformservlet.create.account.error">
+    <![CDATA[
+        Create account error!
+    ]]>
+    </entry>
+    <entry key="registerapi.invite.bind.success">
+        <![CDATA[
+        Bind account success!
+    ]]>
+    </entry>
+    <entry key="registerapi.email.invite.email">
+    <![CDATA[
+        		Dear ${displayName}, ${fromName} invite you to active borqs account and want to make friend with you, please click the link to accept invitation: <br>		<a href="${Url}">${Url}</a><br>
+    ]]>
+    </entry>
+    <entry key="registerapi.email.invite.postscript">
+    <![CDATA[
+        Here is his postscript: <br>		${message}
+    ]]>
+    </entry>
+    <entry key="registerapi.email.invite.title">
+        <![CDATA[
+        ${fromName} invite you active borqs account
+    ]]>
+    </entry>
+    <entry key="accountapi.email.bind.title">
+        <![CDATA[
+        ${userName}，welcome to bind email
+    ]]>
+    </entry>
+    <entry key="accountapi.email.bind.content">
+        <![CDATA[
+        Dear ${userName}:<br>　　Your Borqs ID is：${userId}, you have input ${email} to bind. To complete, you need verify your email. Please click the link below. if can not click, please copy the link to the browser address bar.<br>${link}
+    ]]>
+    </entry>
+    <entry key="accountapi.phone.bind.content">
+        <![CDATA[
+        Please click the link to bind your phone number to borqs account:
+    ]]>
+    </entry>
+    <entry key="registerapi.account.register.message">
+        <![CDATA[
+        		Dear ${displayName}，please click the link to complete registration:<br>		<a href="${url}">${url}</a>
+    ]]>
+    </entry>
+    <entry key="registerapi.create.account.post">
+        <![CDATA[
+        I have activeted borqs account, please follow me~
+    ]]>
+    </entry>
+    <entry key="resetpwdapi.reset.password.confirm">
+        <![CDATA[
+        		Hello, if you confirm that you forget Borqs's password, please click the link as below in 72 hours: <br><a href="${resetPwdUrl}">${resetPwdUrl}</a>
+    ]]>
+    </entry>
+    <entry key="resetpwdapi.reset.password.confirm.subject">
+        <![CDATA[
+        Confirm your account password change
+    ]]>
+    </entry>
+    <entry key="resetpwdapi.reset.password.message">
+        <![CDATA[
+        		Hello, your Borqs account: ${loginName} password have been changed as: ${newPwd}.<br>              Please use it to login Borqs application and then modify your password soon.
+    ]]>
+    </entry>
+    <entry key="resetpwdapi.reset.password.message.subject">
+        <![CDATA[
+        Your borqs account password have been changed
+    ]]>
+    </entry>
+    <entry key="resetpwdapi.reset.password.notice">
+        <![CDATA[
+        Your password has been modified, the new password has been send to your email, please check it and do not forget it!
+    ]]>
+    </entry>
+</properties>

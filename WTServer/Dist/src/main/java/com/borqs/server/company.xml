@@ -1,0 +1,40 @@
+<tests>
+    <test>
+        <api>/company/belongs</api>
+        <params>
+        </params>
+    </test>
+    <test>
+        <api>/company/employee/list</api>
+        <params>
+            company=15000000024
+        </params>
+    </test>
+    <test>
+        <api>/company/employee/search</api>
+        <params>
+            company=15000000024
+            kw=rongxin.gao@borqs.com
+        </params>
+    </test>
+    <test>
+        <api>/company/employee/info</api>
+        <params>
+            users=41
+        </params>
+    </test>
+
+    <test>
+        <api>/company/users</api>
+        <params>
+            company=15000000024
+        </params>
+    </test>
+    <test>
+        <api>/company/department_circles</api>
+        <params>
+            company=15000000024
+        </params>
+    </test>
+
+</tests>

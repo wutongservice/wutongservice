@@ -1,0 +1,5 @@
+cd /home/zhengwei/workWT/BorqsServerPlatformWT/Dist/target/
+scp -rp dist-r3-distribution wutong@42.121.15.199:/home/wutong/workWT/
+#scp -rp dist-r3-distribution zhengwei@192.168.7.142:/home/zhengwei/workWT/
+#scp -rp dist-r3-distribution zhengwei@192.168.7.146:/home/zhengwei/workWT/
+

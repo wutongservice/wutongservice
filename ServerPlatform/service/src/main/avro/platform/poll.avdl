@@ -1,0 +1,24 @@
+
+@namespace("com.borqs.server.service.platform")
+protocol Poll {
+    import schema "../../../../../base/src/main/avro/error.avsc";
+
+    long createPoll(bytes poll, bytes items) throws com.borqs.server.base.ResponseError;
+    boolean deletePolls(string viewerId, string pollIds) throws com.borqs.server.base.ResponseError;
+    bytes getPolls(string pollIds) throws com.borqs.server.base.ResponseError;
+
+    bytes getItemsByPollId(long pollId) throws com.borqs.server.base.ResponseError;
+    bytes getItemsByItemIds(string itemIds) throws com.borqs.server.base.ResponseError;
+
+    boolean vote(string userId, long pollId, bytes items) throws com.borqs.server.base.ResponseError;
+    long hasVoted(string userId, long pollId) throws com.borqs.server.base.ResponseError;
+
+    bytes getCounts(string pollIds) throws com.borqs.server.base.ResponseError;
+
+    string getCreatedPolls(string viewerId, string userId, int page, int count) throws com.borqs.server.base.ResponseError;
+    string getParticipatedPolls(string viewerId, string userId, int page, int count) throws com.borqs.server.base.ResponseError;
+    string getInvolvedPolls(string viewerId, string userId, int page, int count) throws com.borqs.server.base.ResponseError;
+
+    string getFriendsPolls(string viewerId, string userId, int sort, int page, int count) throws com.borqs.server.base.ResponseError;
+    string getPublicPolls(string viewerId, string userId, int sort, int page, int count) throws com.borqs.server.base.ResponseError;
+}

@@ -1,0 +1,13 @@
+{
+    "name":"folder",
+    "columns": {
+        "folder_id": "int",
+        "folder_type": "int",
+        "user_id": "int",
+        "title": "string",
+        "summary": "string",
+        "privacy": "boolean",
+        "created_time": "int",
+        "destroyed_time": "int"
+    }
+}

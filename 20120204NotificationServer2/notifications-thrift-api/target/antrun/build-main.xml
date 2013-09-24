@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <mkdir dir="target/generated-sources"/>
+  <exec executable="F:/work/notif/thrift/thrift-0.7.0.exe">
+    <arg value="--gen"/>
+    <arg value="py"/>
+    <arg value="-o"/>
+    <arg value="target/generated-sources"/>
+    <arg value="src/main/resources/INotificationsThriftService.thrift"/>
+  </exec>
+</target>
+</project>

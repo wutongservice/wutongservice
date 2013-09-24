@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema name="post" version="1.1">
+    <field name="post_source" map="post_source_txt" pinyin="on" boost="3.0">
+        <alias category="pinyin" field="alias_post_source_pinyin_internal_txt" related = "ext_post_source_pinyin_exf"/>
+    </field>
+    <field name="post_title" map="post_title_txt" pinyin="off" boost="2.9">
+    </field>
+    <field name="post_to" map="post_to_txt" pinyin="on" boost="1.5">
+        <alias category="pinyin" field="alias_post_to_pinyin_internal_txt" related = "ext_post_to_pinyin_exf"/>
+    </field>
+    <field name="post_addto" map="post_addto_txt" pinyin="on" boost="1.5">
+        <alias category="pinyin" field="alias_post_addto_pinyin_internal_txt" related = "ext_post_addto_pinyin_exf"/>
+    </field>
+    <field name="post_created_time" map="post_created_time_dt" pinyin="off" boost="1.1">
+    </field>
+    <field name="post_content" map="post_content_txt" pinyin="off" boost="1.0">
+    </field>
+    <field name="post_group_id" map="post_group_id_l" pinyin="off" boost="0.1">
+    </field>
+    <field name="post_ext1" map="post_ext1_txt" pinyin="off" boost="1.0">
+    </field>
+    <field name="post_ext2" map="post_ext2_txt" pinyin="off" boost="1.0">
+    </field>
+    <field name="post_ext3" map="post_ext3_txt" pinyin="off" boost="1.0">
+    </field>
+</schema>

@@ -1,0 +1,9 @@
+
+
+
+@namespace("com.borqs.server.service.platform")
+protocol Application {
+    import schema "../../../../../base/src/main/avro/error.avsc";
+    string getAppSecret(string appId) throws com.borqs.server.base.ResponseError;
+    string findQiupuMinVersion() throws com.borqs.server.base.ResponseError;
+}

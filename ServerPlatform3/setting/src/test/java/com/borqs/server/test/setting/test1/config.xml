@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+
+       default-init-method="init" default-destroy-method="destroy">
+  <!--Sql.executor-->
+  <bean id="sql.executor" class="com.borqs.server.platform.sql.SqlExecutor" scope="singleton">
+    <property name="connectionFactory">
+      <bean class="com.borqs.server.platform.sql.SimpleConnectionFactory" scope="singleton"/>
+    </property>
+  </bean>
+
+  <!-- Tables -->
+  <bean id="table.setting" class="com.borqs.server.platform.sql.SingleTable">
+    <property name="db" value="jdbc:mysql://localhost:3306/account_platform_test?user=root"/>
+    <property name="table" value="setting"/>
+  </bean>
+
+  <!-- Logic -->
+  <bean id="logic.account" class="com.borqs.server.test.setting.test1.AccountMock" scope="singleton">
+  </bean>
+  <bean id="logic.setting" class="com.borqs.server.impl.setting.SettingImpl" scope="singleton">
+    <property name="account" ref="logic.account"/>
+    <property name="settingTable" ref="table.setting"/>
+    <property name="sqlExecutor" ref="sql.executor"/>
+  </bean>
+
+</beans>

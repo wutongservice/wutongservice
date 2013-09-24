@@ -1,0 +1,57 @@
+{% extends 'base.jinja2' %}
+{% block body %}
+    <div class="login_box">
+        <form id="login_form" method="post">
+            <div class="top_b">Sign in</div>
+            <div class="cnt_b">
+                <div class="formRow">
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="icon-user"></i></span><input type="text" id="username" onfocus="if(this.value=='Username') this.value=''" onblur="if(this.value=='') this.value='Username'"  name="username" placeholder="Username" />
+                    </div>
+                </div>
+                <div class="formRow">
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="icon-lock"></i></span><input type="password" id="password" name="password" placeholder="Password" />
+                    </div>
+                </div>
+            </div>
+            <div class="btm_b clearfix">
+                <button class="btn btn-inverse pull-right" type="submit">sign in</button>
+            </div>
+        </form>
+    </div>
+     <script>
+            $(document).ready(function(){
+                
+				//* boxes animation
+				form_wrapper = $('.login_box');
+				function boxHeight() {
+					form_wrapper.animate({ marginTop : ( - ( form_wrapper.height() / 2) - 24) },400);	
+				}
+				form_wrapper.css({ marginTop : ( - ( form_wrapper.height() / 2) - 24) });
+                $('.linkform a,.link_reg a').on('click',function(e){
+					var target	= $(this).attr('href'),
+						target_height = $(target).actual('height');
+					$(form_wrapper).css({
+						'height'		: form_wrapper.height()
+					});	
+					$(form_wrapper.find('form:visible')).fadeOut(400,function(){
+						form_wrapper.stop().animate({
+                            height	 : target_height,
+							marginTop: ( - (target_height/2) - 24)
+                        },500,function(){
+                            $(target).fadeIn(400);
+                            $('.links_btm .linkform').toggle();
+							$(form_wrapper).css({
+								'height'		: ''
+							});	
+                        });
+					});
+					e.preventDefault();
+				});
+				
+				
+            });
+        </script>
+
+{% endblock %}

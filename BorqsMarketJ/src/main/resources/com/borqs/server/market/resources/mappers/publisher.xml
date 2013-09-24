@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="market">
+    <select id="publisher_listBorqsApps_1" parameterType="Map" resultMap="recordMapper">
+        SELECT
+            id,
+            created_at,
+            `name`
+        FROM borqs_apps
+    </select>
+
+    <select id="publisher_getBorqsApp_1" parameterType="Map" resultMap="recordMapper">
+        SELECT
+            id,
+            created_at,
+            updated_at,
+            name,
+            default_lang
+        FROM
+            bapps
+        WHERE
+            id = #{id}
+    </select>
+
+    <select id="publisher_categoryExists_1" parameterType="Map" resultMap="recordMapper">
+        SELECT
+            EXISTS(SELECT
+                       *
+                   FROM categories
+                   WHERE app_id = #{app} AND category = #{category})
+    </select>
+
+    <select id="publisher_listCategories_1" parameterType="Map" resultMap="recordMapper">
+        SELECT
+            C.app_id       AS app_id,
+            C.category     AS category,
+            C.created_at   AS created_at,
+            C.updated_at   AS updated_at,
+            C.name         AS name,
+            A.default_lang AS default_lang
+        FROM
+                categories C, bapps A
+        WHERE
+            (C.app_id = A.id)
+            AND (C.app_id = #{app_id})
+    </select>
+
+    <select id="publisher_listCategories_1" parameterType="Map" resultMap="recordMapper">
+        SELECT
+        id,
+        created_at,
+        updated_at,
+        <if test="with_app_and_category == true">
+            app_id,
+            category,
+        </if>
+        google_sku,
+        free,
+        prices AS price
+        FROM
+        pricetags
+        WHERE
+        app_id = #{app_id}
+        <if test="category != null">
+            AND (category = #{category})
+        </if>
+    </select>
+
+    <select id="publisher_listProducts_1" parameterType="Map" resultMap="recordMapper">
+        SELECT
+        id,
+        created_at,
+        updated_at,
+        app_id,
+        app_id AS app,
+        category,
+        pricetag_id,
+        `name`,
+        description,
+        type1,
+        type2,
+        type3,
+        logo_image,
+        cover_image,
+        default_lang
+        FROM
+        products
+        WHERE
+        (app_id = #{app_id})
+        <if test="category != null">
+            AND (category=#{category})
+        </if>
+        AND (author_id=#{author_id})
+        ORDER BY
+        updated_at DESC
+    </select>
+
+    <select id="publisher_listVersions_1" parameterType="Map" resultMap="recordMapper">
+        SELECT
+        PV.product_id AS product_id,
+        PV.version AS version,
+        PV.status AS status,
+        PV.updated_at AS updated_at,
+        PV.created_at AS created_at,
+        PV.version_name AS version_name,
+        PV.recent_change AS recent_change,
+        P.default_lang AS default_lang
+        FROM
+        product_versions PV, products P
+        WHERE
+        (PV.product_id=P.id)
+        AND product_id IN
+        <foreach item="pid" collection="product_ids"
+                 open="(" separator="," close=")">
+            #{pid}
+        </foreach>
+    </select>
+
+    <select id="publisher_getProduct_1" parameterType="Map" resultMap="recordMapper">
+        SELECT
+            id,
+            created_at,
+            updated_at,
+            app_id,
+            app_id AS app,
+            category,
+            default_lang,
+            pricetag_id,
+            name,
+            description,
+            type1,
+            type2,
+            type3,
+            logo_image,
+            cover_image
+        FROM
+            products
+        WHERE
+            (id = #{id})
+            AND (author_id = #{author_id})
+    </select>
+
+    <select id="publisher_getVersion_1" parameterType="Map" resultMap="recordMapper">
+        SELECT
+            PV.product_id        AS id,
+            P.created_at         AS product_created_at,
+            P.updated_at         AS product_updated_at,
+            P.app_id             AS app_id,
+            P.category           AS category,
+            P.pricetag_id        AS pricetag_id,
+            P.available_langs    AS available_langs,
+            P.type1              AS type1,
+            P.type2              AS type2,
+            P.type3              AS type3,
+            P.author_name        AS author_name,
+            P.author_email       AS author_email,
+            P.author_phone       AS author_phone,
+            P.author_website     AS author_website,
+            P.author_id          AS author_id,
+            P.logo_image         AS logo_image,
+            P.cover_image        AS cover_image,
+            P.default_lang       AS default_lang,
+            P.name               AS name,
+            P.description        AS description,
+            P.download_count     AS product_download_count,
+            P.rating             AS product_rating,
+            P.rating_count       AS product_rating_count,
+            PV.created_at        AS created_at,
+            PV.updated_at        AS updated_at,
+            PV.status            AS status,
+            PV.min_app_vc        AS min_app_vc,
+            PV.max_app_vc        AS max_app_vc,
+            PV.supported_mod     AS supported_mod,
+            PV.action            AS action,
+            PV.action_url        AS action_url,
+            PV.file_size         AS file_size,
+            PV.file_md5          AS file_md5,
+            PV.screenshot1_image AS screenshot1_image,
+            PV.screenshot2_image AS screenshot2_image,
+            PV.screenshot3_image AS screenshot3_image,
+            PV.screenshot4_image AS screenshot4_image,
+            PV.screenshot5_image AS screenshot5_image,
+            PV.version_name      AS version_name,
+            PV.recent_change     AS recent_change,
+            PV.download_count    AS download_count,
+            PV.rating            AS rating,
+            PV.rating_count      AS rating_count
+        FROM
+                products P, product_versions PV
+        WHERE
+            (P.id = PV.product_id)
+            AND (P.author_id = #{author_id})
+            AND (PV.product_id = #{id} AND PV.version = #{version})
+    </select>
+
+    <select id="publisher_getVersion_2" parameterType="Map" resultMap="recordMapper">
+        SELECT
+            free,
+            prices AS price
+        FROM
+            pricetags
+        WHERE
+            app_id = #{app_id} AND category = #{category} AND id = #{pricetag_id}
+    </select>
+
+    <select id="publisher_productExists_1" parameterType="Map" resultMap="recordMapper">
+        SELECT
+            EXISTS(SELECT
+                       *
+                   FROM products
+                   WHERE id = #{id})
+    </select>
+
+    <select id="publisher_getAuthorId_1" parameterType="Map" resultMap="recordMapper">
+        SELECT
+            author_id
+        FROM products
+        WHERE id = #{id}
+    </select>
+
+    <select id="publisher_getMaxVersion_1" parameterType="Map" resultMap="recordMapper">
+        SELECT
+            MAX(version)
+        FROM product_versions
+        WHERE product_id = #{id}
+    </select>
+
+    <insert id="publisher_publishProduct_1" parameterType="Map">
+        INSERT INTO products (
+            id,
+            created_at,
+            updated_at,
+            app_id,
+            category,
+            pricetag_id,
+            available_langs,
+            type1,
+            type2,
+            type3,
+            author_name,
+            author_email,
+            author_phone,
+            author_id,
+            author_google_id,
+            author_website,
+            default_lang,
+            name,
+            description
+        )
+            VALUES (
+                #{id},
+                #{now},
+                #{now},
+                #{app_id},
+                #{category},
+                '',
+                '',
+                '',
+                '',
+                '',
+                #{author_name},
+                #{author_email},
+                #{author_phone},
+                #{author_id},
+                '',
+                '',
+                #{default_lang},
+                '{}',
+                '{}'
+            )
+    </insert>
+
+    <update id="publisher_updateProduct_1" parameterType="Map">
+        UPDATE products SET
+        <if test="pricetag_id != null">
+            pricetag_id=#{pricetag_id},
+        </if>
+        <if test="available_langs != null">
+            available_langs = #{available_langs} ,
+        </if>
+        <if test="type1 != null">
+            type1 = #{type1},
+        </if>
+        <if test="type2 != null">
+            type2 = #{type2},
+        </if>
+        <if test="type3 != null">
+            type3 = #{type3},
+        </if>
+        <if test="author_name != null">
+            author_name = #{author_name},
+        </if>
+        <if test="author_email != null">
+            author_name = #{author_email},
+        </if>
+        <if test="author_phone != null">
+            author_phone = #{author_phone},
+        </if>
+        <if test="author_google_id != null">
+            author_google_id = #{author_google_id},
+        </if>
+        <if test="author_website != null">
+            author_website = #{author_website},
+        </if>
+        <if test="logo_image != null">
+            author_image = #{logo_image},
+        </if>
+        <if test="cover_image != null">
+            cover_image = #{cover_image},
+        </if>
+        <if test="default_lang != null">
+            default_lang = #{default_lang},
+        </if>
+        <if test="name != null">
+            `name` = #{name},
+        </if>
+        <if test="description != null">
+            description = #{description},
+        </if>
+        updated_at=#{now}
+        WHERE
+        `id` = #{id}
+    </update>
+
+    <insert id="publisher_publishVersion_1" parameterType="Map">
+        INSERT INTO product_versions (
+            product_id,
+            version,
+            created_at,
+            updated_at,
+            version_name,
+            recent_change,
+            status,
+            min_app_version,
+            max_app_version,
+            supported_mod,
+            action,
+            action_url,
+            file_size,
+            file_md5,
+            screenshot1_image,
+            screenshot2_image,
+            screenshot3_image,
+            screenshot4_image,
+            screenshot5_image
+        ) VALUES (
+            #{pid},
+            #{version},
+            #{now},
+            #{now},
+            #{version_name},
+            #{recent_change},
+            1,
+            #{min_app_version},
+            #{max_app_version},
+            #{supported_mod},
+            #{action},
+            #{action_url},
+            #{file_size},
+            #{file_md5},
+            #{s1},
+            #{s2},
+            #{s3},
+            #{s4},
+            #{s5}
+        )
+    </insert>
+
+    <update id="publisher_publishVersion_2" parameterType="Map">
+        UPDATE
+            products
+        SET
+            last_version_created_at=#{now}
+        WHERE
+            id = #{pid}
+    </update>
+
+    <update id="publisher_updateVersion_1" parameterType="Map">
+        UPDATE product_versions SET
+        <if test="min_app_version != null">
+            min_app_version=#{min_app_version},
+        </if>
+        <if test="max_app_version != null">
+            max_app_version=#{max_app_version},
+        </if>
+        <if test="supported_mod != null">
+            supported_mod=#{supported_mod},
+        </if>
+        <if test="action != null">
+            `action`=#{action},
+        </if>
+        <if test="action_url != null">
+            action_url=#{action_url},
+        </if>
+        <if test="file_size != null">
+            file_size=#{file_size},
+        </if>
+        <if test="file_md5 != null">
+            file_md5=#{file_md5},
+        </if>
+        <if test="s1 != null">
+            screenshot1_image=#{s1},
+        </if>
+        <if test="s2 != null">
+            screenshot2_image=#{s2},
+        </if>
+        <if test="s3 != null">
+            screenshot3_image=#{s3},
+        </if>
+        <if test="s4 != null">
+            screenshot4_image=#{s4},
+        </if>
+        <if test="s5 != null">
+            screenshot5_image=#{s5},
+        </if>
+        <if test="version_name != null">
+            version_name=#{version_name},
+        </if>
+        <if test="recent_change != null">
+            recent_change=#{recent_change},
+        </if>
+        updated_at=#{now}
+        WHERE
+        product_id=#{pid} AND version=#{version}
+    </update>
+
+    <select id="publisher_updateVersion_2" parameterType="Map" resultMap="recordMapper">
+        SELECT
+            P.author_id AS author_id
+        FROM
+                products P, product_versions PV
+        WHERE
+            P.id = PV.product_id
+            AND PV.product_id = #{pid} AND PV.version = #{version}
+    </select>
+
+    <select id="publisher_activeVersion_1" parameterType="Map" resultMap="recordMapper">
+        SELECT
+            EXISTS(
+                    SELECT
+                        *
+                    FROM
+                        product_versions
+                    WHERE
+                        product_id = #{pid} AND version = #{version})
+    </select>
+
+    <update id="publisher_activeVersion_2" parameterType="Map">
+        UPDATE
+        product_versions
+        SET
+        `status`=#{status}
+        WHERE
+        product_id = #{pid}
+        <if test="version != null">
+            AND version = #{version}
+        </if>
+    </update>
+
+</mapper>

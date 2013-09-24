@@ -1,0 +1,22 @@
+{
+    "name":"poll",
+    "columns": {
+        "id":"int",
+        "source":"int",
+        "target":"string",
+        "title":"string",
+        "description":"string",
+        "multi":"int",
+        "limit_":"int",
+        "privacy":"int",
+        "anonymous":"int",
+        "mode":"int",
+        "type":"int",
+        "attachments":"string",
+        "created_time":"int",
+        "start_time":"int",
+        "end_time":"int",
+        "updated_time":"int",
+        "destroyed_time":"int"
+    }
+}

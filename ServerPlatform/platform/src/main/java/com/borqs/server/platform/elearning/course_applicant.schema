@@ -1,0 +1,15 @@
+{
+    "name":"course_applicant",
+    "columns": {
+        "course_id":         "int",
+        "user_id":           "int",
+        "applicant_time":    "int",
+        "approve_by_leader": "boolean",
+        "approve_by_admin":  "boolean",
+        "signed":            "boolean",
+        "leader_approved_email":            "int",
+        "approve_accept_email":            "int",
+        "sign_accept_email":            "int"
+    }
+}
+

@@ -1,0 +1,9 @@
+{
+    "name":"department_user",
+    "columns": {
+        "dept_id": "int",
+        "user_id": "string",
+        "leader": "int"
+    }
+}
+

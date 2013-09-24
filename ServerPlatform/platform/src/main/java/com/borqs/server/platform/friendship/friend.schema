@@ -1,0 +1,15 @@
+{
+    "name":"friend",
+    "columns": {
+        "user": "int",
+        "friend": "int",
+        "circle": "int" ,
+        "created_time": "int",
+        "type": "int",
+        "name": "string",
+        "content": "string"
+    }
+}
+
+
+

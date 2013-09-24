@@ -1,0 +1,23 @@
+{
+    "name":"message_center",
+    "columns": {
+        "message_id": "int",
+        "title": "string",
+        "to_": "string",
+        "username": "string",
+        "from_username": "string",
+        "from_id": "int",
+        "target_type":"int",
+        "target_id":"int",
+        "target_name":"string",
+        "content": "json",
+        "send_key": "string",
+        "email_combine": "int",
+        "delay_type": "string",
+        "created_time": "int",
+        "updated_time": "int"
+    }
+}
+
+
+

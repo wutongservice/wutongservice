@@ -1,0 +1,17 @@
+{
+    "name":"qapk_history",
+    "columns": {
+        "qapk_history_id": "int",
+        "user": "int",
+        "package": "string",
+        "version_code": "int",
+        "architecture": "int",
+        "version_name": "string",
+        "created_time": "int",
+        "action": "int",
+        "device": "string"
+    }
+}
+
+
+

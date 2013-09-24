@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+
+       default-init-method="init" default-destroy-method="destroy">
+    <!--Sql.executor-->
+    <bean id="sql.executor" class="com.borqs.server.platform.sql.SqlExecutor" scope="singleton">
+        <property name="connectionFactory">
+            <bean class="com.borqs.server.platform.sql.SimpleConnectionFactory" scope="singleton"/>
+        </property>
+    </bean>
+
+    <!-- SFS -->
+    <bean id="sfs.profileImage" class="com.borqs.server.platform.sfs.local.LocalSFS" scope="singleton">
+        <property name="root" value="/Users/gaorx/Temp/profileImage"/>
+    </bean>
+
+    <!-- Tables -->
+    <bean id="table.user" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="jdbc:mysql://localhost:3306/account_platform_test?user=root&amp;allowMultiQueries=true"/>
+        <property name="table" value="user"/>
+    </bean>
+    <bean id="table.userProperty" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="jdbc:mysql://localhost:3306/account_platform_test?user=root&amp;allowMultiQueries=true"/>
+        <property name="table" value="user_property"/>
+    </bean>
+    <bean id="table.ticket" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db" value="jdbc:mysql://localhost:3306/account_platform_test?user=root&amp;allowMultiQueries=true"/>
+        <property name="table" value="ticket"/>
+    </bean>
+    <bean id="table.cibind" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db" value="jdbc:mysql://localhost:3306/account_platform_test?user=root&amp;allowMultiQueries=true"/>
+        <property name="table" value="cibind"/>
+    </bean>
+
+    <!-- Logic -->
+    <bean id="logic.account2" class="com.borqs.server.platform.test.mock.SteveAndBill" factory-method="account" scope="singleton">
+    </bean>
+
+    <bean id="logic.account" class="com.borqs.server.impl.account.AccountImpl" scope="singleton">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="userTable" ref="table.user"/>
+        <property name="propertyTable" ref="table.userProperty"/>
+    </bean>
+    <bean id="logic.app" class="com.borqs.server.impl.app.SimpleAppImpl">
+        <property name="apps">
+            <bean class="com.borqs.server.platform.feature.app.App">
+                <property name="appId" value="1"/>
+                <property name="name" value="qiupu"/>
+                <property name="secret" value="appSecret1"/>
+            </bean>
+        </property>
+    </bean>
+    <bean id="logic.login" class="com.borqs.server.impl.login.LoginImpl">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="ticketTable" ref="table.ticket"/>
+        <property name="cibind" ref="logic.cibind"/>
+        <property name="account" ref="logic.account"/>
+    </bean>
+    <bean id="logic.cibind" class="com.borqs.server.impl.cibind.CibindImpl">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="cibindTable" ref="table.cibind"/>
+        <property name="account" ref="logic.account2"/>
+        <property name="limits">
+            <map key-type="java.lang.String" value-type="java.lang.Integer">
+                <entry value="2">
+                    <key>
+                        <util:constant static-field="com.borqs.server.platform.feature.cibind.BindingInfo.MOBILE_TEL"/>
+                    </key>
+                </entry>
+                <entry value="1">
+                    <key>
+                        <util:constant static-field="com.borqs.server.platform.feature.cibind.BindingInfo.EMAIL"/>
+                    </key>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="logic.friend" class="com.borqs.server.platform.test.TestFriend">
+        <property name="account" ref="logic.account2"/>
+    </bean>
+
+    <bean id="servlet.pubApi" class="com.borqs.server.platform.web.topaz.HttpApiServlet">
+        <property name="handlers">
+            <list>
+                <bean class="com.borqs.server.pubapi.AccountApi$Rpc">
+                    <property name="account" ref="logic.account"/>
+                    <property name="app" ref="logic.app"/>
+                    <property name="login" ref="logic.login"/>
+                </bean>
+                <bean class="com.borqs.server.pubapi.AccountApi$Rest">
+                    <property name="account" ref="logic.account"/>
+                    <property name="app" ref="logic.app"/>
+                    <property name="login" ref="logic.login"/>
+                </bean>
+                <bean class="com.borqs.server.pubapi.RegisterApi">
+                    <property name="account" ref="logic.account"/>
+                    <property name="app" ref="logic.app"/>
+                    <property name="login" ref="logic.login"/>
+                    <property name="mailSender" ref="sender.mail"/>
+                    <property name="cibind" ref="logic.cibind"/>
+                    <property name="serverHost" value="192.168.7.142"/>
+                    <property name="friend" ref="logic.friend"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="sender.mail" class="com.borqs.server.platform.test.TestMailSender">
+        <property name="executor">
+            <bean class="com.borqs.server.platform.util.ThreadPool">
+                <property name="threadCount" value="4"/>
+            </bean>
+        </property>
+        <property name="smtpAddress" value="smtp.bizmail.yahoo.com:465"/>
+        <property name="smtpUsername" value="borqs.support@borqs.com"/>
+        <property name="smtpPassword" value="borqsbpc"/>
+    </bean>
+
+    <bean id="cibindLogic" class="com.borqs.server.impl.cibind.CibindImpl" scope="singleton">
+    </bean>
+
+</beans>

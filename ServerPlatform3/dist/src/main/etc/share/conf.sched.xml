@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+       default-init-method="init" default-destroy-method="destroy">
+
+
+    <!-- table -->
+    <import resource="frag.table.xml"/>
+
+    <!-- logic -->
+    <import resource="frag.logic.xml"/>
+
+    <!-- sender -->
+    <import resource="frag.sender.xml"/>
+
+    <!-- cache -->
+    <import resource="frag.cache.xml"/>
+
+    <!-- sendQueue -->
+    <import resource="frag.queue.xml"/>
+
+    <!-- service -->
+    <import resource="frag.service.xml"/>
+
+    <!-- sfs -->
+    <import resource="frag.sfs.xml"/>
+
+    <!-- const -->
+    <import resource="frag.const.xml"/>
+
+    <!-- fts -->
+    <import resource="frag.fts.xml"/>
+
+    <!-- job -->
+    <!-- todo: add jobs -->
+
+    <!-- receive service -->
+    <bean id="service.sched" class="com.borqs.server.platform.service.ScheduleService" scope="singleton">
+        <property name="jobs">
+            <list>
+                <bean class="com.borqs.server.platform.service.ScheduleService$Job">
+                    <property name="name" value="$job1"/>
+                    <property name="expression" value="0 40 1 * * ?"/>
+                    <property name="main" ref="job.perhapsNameJob"/>
+                    <property name="args" value="a b c d e"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+    <bean id="job.perhapsNameJob" class="com.borqs.server.schedule.perhapsname.PerhapsNameJob" scope="singleton">
+        <property name="cibind" ref="logic.cibind"/>
+        <property name="perhapsUrl" value="${perhapsNameUrl}"/>
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="userTable" ref="table.user"/>
+        <property name="userPropertyTable" ref="table.userProperty"/>
+        <property name="account" ref="logic.account"/>
+    </bean>
+    <!-- app -->
+    <bean id="main" class="com.borqs.server.platform.service.ServiceApp" scope="singleton">
+        <property name="services">
+            <list>
+                <ref bean="service.sched"/>
+            </list>
+        </property>
+    </bean>
+</beans>

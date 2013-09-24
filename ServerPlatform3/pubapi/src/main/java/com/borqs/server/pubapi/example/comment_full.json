@@ -1,0 +1,25 @@
+[ {
+  "comment_id" : 2809608069503074584,
+  "can_like" : false,
+  "commenter" : 10001,
+  "destroyed_time" : 0,
+  "created_time" : 1339725499536,
+  "device" : "",
+  "message" : "+<a href=\"borqs://profile/details?uid=118\">yang</a>",
+  "target" : "5:1222232434",
+  "commenter" : {
+  "user_id" : 10001,
+  "nickname" : "shengsheng",
+  "photo" : {
+    "middle_url" : "http://apitest.borqs.com/profile_image/profile_10001_1329448012044_M.jpg",
+    "small_url" : "http://apitest.borqs.com/profile_image/profile_10001_1329448012044_S.jpg",
+    "large_url" : "http://apitest.borqs.com/profile_image/profile_10001_1329448012044_L.jpg"
+  },
+  "display_name" : "姜 长 胜"
+},
+  "add_to" : [ {
+  "user_id" : 10008,
+  "nickname" : "",
+  "display_name" : "罗 小 飞"
+} ]
+} ]

@@ -1,0 +1,100 @@
+create column family informations
+    with comparator = AsciiType
+    and column_metadata =
+    [{
+        column_name : id,
+        validation_class : LongType,
+        index_type : KEYS,
+        index_name : id_0
+		}, {
+        column_name : 'appId',
+        validation_class : UTF8Type,
+        index_type : KEYS,
+        index_name : id_1
+    }, {
+        column_name : 'senderId',
+        validation_class : UTF8Type,
+        index_type : KEYS,
+        index_name : id_2
+    }, {
+        column_name : 'receiverId',
+        validation_class : UTF8Type,
+        index_type : KEYS,
+        index_name : id_3
+    }, {
+        column_name : 'type',
+        validation_class : UTF8Type,
+        index_type : KEYS,
+        index_name : id_4
+    }, {
+        column_name : 'action',
+        validation_class : UTF8Type,
+        index_type : KEYS,
+        index_name : id_5
+    }, {
+        column_name : 'date',
+        validation_class : LongType,
+        index_type : KEYS,
+        index_name : id_6
+    }, {
+        column_name : 'title',
+        validation_class : UTF8Type,
+        index_type : KEYS,
+        index_name : id_7
+    }, {
+        column_name : 'data',
+        validation_class : UTF8Type,
+        index_type : KEYS,
+        index_name : id_8
+    }, {
+        column_name : 'uri',
+        validation_class : UTF8Type,
+        index_type : KEYS,
+        index_name : id_9
+    }, {
+        column_name : 'processed',
+        validation_class : LongType,
+        index_type : KEYS,
+        index_name : id_10
+    }, {
+        column_name : 'read',
+        validation_class : LongType,
+        index_type : KEYS,
+        index_name : id_11
+    }, {
+        column_name : 'process_method',
+        validation_class : LongType,
+        index_type : KEYS,
+        index_name : id_12
+    }, {
+        column_name : 'importance',
+        validation_class : LongType,
+        index_type : KEYS,
+        index_name : id_13
+    }, {
+        column_name : 'body',
+        validation_class : UTF8Type,
+        index_type : KEYS,
+        index_name : id_14
+    }, {
+        column_name : 'body_html',
+        validation_class : UTF8Type,
+        index_type : KEYS,
+        index_name : id_15
+    }, {
+        column_name : 'guid',
+        validation_class : UTF8Type,
+        index_type : KEYS,
+        index_name : id_16
+    }, {
+        column_name : 'object_id',
+        validation_class : LongType,
+        index_type : KEYS,
+        index_name : id_17
+    }, {
+        column_name : 'last_modified',
+        validation_class : LongType,
+        index_type : KEYS,
+        index_name : id_18
+    }];
+

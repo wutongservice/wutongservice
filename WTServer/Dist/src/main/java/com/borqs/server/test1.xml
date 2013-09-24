@@ -1,0 +1,10 @@
+<tests>
+    <test>
+        <api>/user/show</api>
+        <comment>测试1</comment>
+        <params>
+            users=41
+        </params>
+    </test>
+
+</tests>

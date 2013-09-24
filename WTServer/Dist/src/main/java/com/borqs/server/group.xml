@@ -1,0 +1,106 @@
+<tests>
+    <!-- test>
+        <api>/v2/public_circle/create</api>
+        <comment>create</comment>
+        <params>
+            name=wutongtest
+            members=182,changsheng.jiang@borqs.com,$10000000000
+            names=孔秀丽,长胜,梧桐俱乐部
+            need_invited_confirm=0
+        </params>
+    </test -->
+    <!-- test>
+        <api>/v2/public_circle/update</api>
+        <comment>update</comment>
+        <params>
+            id=10000000022
+            label=重构测试
+        </params>
+    </test -->
+    <!-- test>
+        <api>/v2/public_circle/show</api>
+        <comment>show</comment>
+        <params>
+            ids=10000000022,10000000023
+        </params>
+    </test -->
+    <!--test>
+        <api>/v2/public_circle/detail</api>
+        <comment>detail</comment>
+        <params>
+            id=10000000022
+        </params>
+    </test-->
+    <!-- test>
+        <api>/v2/public_circle/users</api>
+        <comment>users</comment>
+        <params>
+            id=10000000022
+            status=2
+        </params>
+    </test -->
+    <!-- test>
+        <api>/v2/public_circle/search</api>
+        <comment>search</comment>
+        <params>
+            name=wutong
+        </params>
+    </test -->
+    <!-- test>
+        <api>/v2/public_circle/def_notif</api>
+        <comment>def_notif</comment>
+        <params>
+            id=10000000022
+            users=42
+        </params>
+    </test -->
+    <!-- test>
+        <api>/v2/public_circle/get_notif</api>
+        <comment>get_notif</comment>
+        <params>
+            id=10000000022
+        </params>
+    </test -->
+    <!-- test>
+        <api>/v2/public_circle/get_notif</api>
+        <comment>get_notif</comment>
+        <params>
+            id=10000000022
+        </params>
+    </test -->
+    <!-- test>
+       <api>/post/top_posts_get</api>
+       <comment>top_posts_get</comment>
+       <params>
+           id=10000000022
+       </params>
+   </test -->
+    <!-- test>
+       <api>/poll/get</api>
+       <comment>get</comment>
+       <params>
+           ids=2841152732387143648
+           with_items=true
+       </params>
+   </test -->
+    <!-- test>
+        <api>/poll/list/public</api>
+        <comment>public</comment>
+        <params>
+        </params>
+    </test -->
+    <!-- test>
+        <api>/poll/list/user</api>
+        <comment>user</comment>
+        <params>
+            user_id=10000000022
+            type=2
+        </params>
+    </test -->
+    <test>
+        <api>/poll/list/friends</api>
+        <comment>friends</comment>
+        <params>
+        </params>
+    </test>
+</tests>

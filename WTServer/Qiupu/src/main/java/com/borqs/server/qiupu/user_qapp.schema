@@ -1,0 +1,15 @@
+{
+    "name":"user_qapp",
+    "columns": {
+        "user": "int",
+        "package": "string",
+        "reason": "int",
+        "privacy": "int",
+        "version_code": "int",
+        "architecture": "int",
+        "device": "string"
+    }
+}
+
+
+

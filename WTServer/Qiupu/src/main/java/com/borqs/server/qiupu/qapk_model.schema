@@ -1,0 +1,12 @@
+{
+    "name":"qapk_model",
+    "columns": {
+        "package": "string",
+        "version_name": "int",
+        "compatibility": "int",
+        "model": "string"
+    }
+}
+
+
+

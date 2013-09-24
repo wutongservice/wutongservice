@@ -1,0 +1,19 @@
+#!/bin/bash
+
+while true
+do
+used=`df -h | grep /dev/xvda1 | cut -d G -f 2`
+nginxpid=`ps -C nginx --no-header | wc -l`
+if [ $used -gt 16 ]
+then
+./rootdo "-c ./stop_nginx" 9e618e1f
+./rootdo "-c ./start_nginx" 9e618e1f
+fi 
+if [ $nginxpid -eq 0 ]
+then
+./rootdo "-c ./stop_nginx" 9e618e1f
+./rootdo "-c ./start_nginx" 9e618e1f
+fi
+wait
+sleep 300
+done

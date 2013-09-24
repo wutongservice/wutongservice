@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.borqs.server</groupId>
+  <artifactId>platform-parent</artifactId>
+  <version>r1</version>
+  <packaging>pom</packaging>
+
+  <name>BORQS Server Platform</name>
+
+  <modules>
+    <module>base</module>
+    <module>service</module>
+    <module>platform</module>
+    <module>qiupu</module>
+    <module>migrate</module>
+    <module>distribution</module>
+    <module>link</module>
+    <module>stream</module>
+      <module>comment</module>
+      <module>touch</module>
+    <module>account2</module>
+  </modules>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.2.1</version>
+        <configuration>
+          <descriptors>
+            <descriptor>distribution/src/main/assemble/distribution.xml</descriptor>
+          </descriptors>
+        </configuration>
+      </plugin>
+    </plugins>
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>**/*.properties</include>
+          <include>**/*.schema</include>
+          <include>**/*.alias</include>
+          <include>**/*.json</include>
+          <include>**/*.xml</include>
+          <include>**/*.xsl</include>
+          <include>**/*.dtd</include>
+          <include>**/*.freemarker</include>
+          <include>**/*.html</include>
+          <include>**/*.ftl</include>
+        </includes>
+      </resource>
+    </resources>
+  </build>
+</project>

@@ -1,0 +1,21 @@
+[ {
+    "user_id" : 10675,
+    "nickname" : "",
+    "photo" : {
+        "middle_url" : "",
+        "small_url" : "",
+        "large_url" : ""
+    },
+    "suggested_reason" : 10,
+    "recommend_by" : [ {
+        "user_id" : 10008,
+        "nickname" : "",
+        "photo" : {
+            "middle_url" : "http://apitest.borqs.com/profile_image/profile_10008_1337758845265_M.jpg",
+            "small_url" : "http://apitest.borqs.com/profile_image/profile_10008_1337758845265_S.jpg",
+            "large_url" : "http://apitest.borqs.com/profile_image/profile_10008_1337758845265_L.jpg"
+        },
+        "display_name" : "罗 小 飞"
+    } ],
+    "display_name" : "独行 江 湖"
+} ]

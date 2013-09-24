@@ -1,0 +1,15 @@
+
+@namespace("com.borqs.server.service.platform")
+protocol Like {
+    import schema "../../../../../base/src/main/avro/error.avsc";
+
+    boolean createLike(string userId, string targetId) throws com.borqs.server.base.ResponseError;
+    boolean destroyLike(string userId, string targetId) throws com.borqs.server.base.ResponseError;
+    boolean ifUserLiked(string userId, string targetId) throws com.borqs.server.base.ResponseError;
+
+    int getLikeCount(string targetId) throws com.borqs.server.base.ResponseError;
+    bytes loadLikedUsers(string targetId, int page, int count) throws com.borqs.server.base.ResponseError;
+    bytes getLikedPost(string userId, int page, int count,int objectType) throws com.borqs.server.base.ResponseError;
+    bytes getObjectLikedByUsers(string viewerId,string userIds,string objectType, int page, int count) throws com.borqs.server.base.ResponseError;
+    boolean updateLikeTarget(string old_target, string new_target) throws com.borqs.server.base.ResponseError;
+}

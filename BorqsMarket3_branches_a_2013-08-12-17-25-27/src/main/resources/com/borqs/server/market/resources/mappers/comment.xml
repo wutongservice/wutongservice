@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comment">
+    <insert id="createComment" parameterType="Map">
+          INSERT INTO comment
+          SET
+            id=#{id},
+            account_id=#{account_id},
+            product_id=#{product_id},
+            version=#{version},
+            created_at=#{created_at},
+            updated_at=#{updated_at},
+            message=#{message},
+            device=#{device},
+            rating=#{rating};
+    </insert>
+    <select id="getComments" parameterType="Map" resultType="record">
+        SELECT SQL_CALC_FOUND_ROWS
+        id,
+        account_id,
+        product_id,
+        version,
+        created_at,
+        updated_at,
+        message,
+        device,
+        rating
+        FROM
+        comment
+        WHERE 1=1
+        <if test="user_id!=null">
+            and account_id=#{account_id}
+        </if>
+        <if test="product_id!=null">
+            and product_id=#{product_id}
+        </if>
+        <if test="version!=null">
+            and version=#{version}
+        </if>
+        LIMIT #{count}, #{pages};
+    </select>
+
+    <update id="updateComment" parameterType="Map">
+        UPDATE comment
+        set
+        updated_at=#{updated_at},
+        message=#{message}
+        <if test="rating!=null">
+            ,rating=#{rating}
+        </if>
+        <if test="device!=null">
+            ,device=#{device}
+        </if>
+        where
+        id = #{id};
+    </update>
+
+    <!--change rating count and rateavg of productVersions-->
+    <update id="updateCommentCountOfProductVersions" parameterType="Map">
+      update product_versions
+      set
+        rating = #{rating_version},
+        rating_count= rating_count+1,
+        comment_count=comment_count+1
+      where
+        product_id=#{product_id}
+        and version= #{version}
+    </update>
+    <!--change rating count and rateavg of products-->
+    <update id="updateCommentCountOfProducts" parameterType="Map">
+      update products
+      set
+        rating = #{rating_product},
+        rating_count= rating_count+1,
+        comment_count=comment_count+1
+      where
+        id=#{product_id}
+    </update>
+
+    <select id="getAvgRating" parameterType="Map" resultType="record">
+        SELECT TRUNCATE(AVG(rating),1) as rating_version
+          FROM comment
+          WHERE product_id=#{product_id}
+          and version=#{version}
+        UNION ALL
+            SELECT
+          TRUNCATE(AVG(rating),1) AS rating_product
+        FROM comment
+        WHERE product_id =#{product_id}
+    </select>
+
+    <select id="getComment" parameterType="Map" resultType="record">
+        SELECT
+        id,
+        account_id,
+        product_id,
+        version,
+        created_at,
+        updated_at,
+        message,
+        device,
+        rating
+        FROM
+        comment
+        WHERE
+         id=#{id};
+
+    </select>
+</mapper>

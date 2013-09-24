@@ -1,0 +1,14 @@
+cd BorqsServerPlatform3
+mvn package
+echo '--- RM'
+rm -rf mytest/target/distribution-r1-release
+echo '--- CP'
+cp -r mytest/target/distribution-r1-distribution mytest/target/distribution-r1-release
+cp ../plugin/*.jar distribution/target/distribution-r1-distribution mytest/target/distribution-r1-release/mod
+cd mytest/target/
+rm dist.tar.gz 
+cp -r distribution-r1-release dist
+tar -zcvf dist.tar.gz dist
+rm -rf dist
+
+

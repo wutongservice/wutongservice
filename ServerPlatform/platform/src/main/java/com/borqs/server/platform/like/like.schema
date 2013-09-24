@@ -1,0 +1,11 @@
+{
+    "name":"like",
+    "columns": {
+        "target": "string",
+        "liker": "int",
+        "created_time": "int"
+    }
+}
+
+
+

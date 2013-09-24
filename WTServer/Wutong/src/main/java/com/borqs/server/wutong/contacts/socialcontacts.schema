@@ -1,0 +1,11 @@
+{
+    "name":"social_contacts",
+    "columns": {
+        "id": "int",
+        "owner": "int",
+        "username": "string",
+        "type": "int",
+        "content": "string",
+        "uid": "int"   
+    }
+}

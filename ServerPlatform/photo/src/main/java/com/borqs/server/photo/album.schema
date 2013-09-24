@@ -1,0 +1,15 @@
+{
+    "name":"album",
+    "columns": {
+        "aid": "string",
+        "cover_pid": "string",
+        "user_id": "string",
+        "name": "string",
+        "description": "string",
+        "location": "string",
+        "visible": "string",
+        "asize":"int",
+        "created": "int",
+        "modified": "int"
+    }
+}

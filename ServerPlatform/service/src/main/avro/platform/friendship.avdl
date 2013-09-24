@@ -1,0 +1,42 @@
+
+@namespace("com.borqs.server.service.platform")
+protocol Friendship {
+    import schema "../../../../../base/src/main/avro/error.avsc";
+
+    boolean createBuiltinCircles(string userId) throws com.borqs.server.base.ResponseError;
+    string createCircle(string userId, string name) throws com.borqs.server.base.ResponseError;
+    boolean destroyCircles(string userId, string circleIds) throws com.borqs.server.base.ResponseError;
+    boolean updateCircleName(string userId, string circleId, string name) throws com.borqs.server.base.ResponseError;
+    boolean updateCircleMemberCount(string userId, string circleId, int member_count) throws com.borqs.server.base.ResponseError;
+    boolean updateMyCircleMemberCount(string userId, string circleId) throws com.borqs.server.base.ResponseError;
+    bytes getCircles(string userId, string circleIds, boolean withMembers) throws com.borqs.server.base.ResponseError;
+    boolean setContactFriend(string userId, string friendId, string fname, string content, string circleIds,int reason,boolean isadd,boolean deleteOld) throws com.borqs.server.base.ResponseError;
+    boolean getIfHeInMyCircles(string my_id, string other_id, string circle_id) throws com.borqs.server.base.ResponseError;
+
+    boolean setFriend(string userId, string friendId, string circleIds,int reason) throws com.borqs.server.base.ResponseError;
+    boolean setFriends(string userId, string friendId, string circleId,int reason,boolean isadd) throws com.borqs.server.base.ResponseError;
+    bytes getFriends(string userId, string circleIds, int page, int count) throws com.borqs.server.base.ResponseError;
+	bytes getFollowers(string userId, string circleIds, int page, int count) throws com.borqs.server.base.ResponseError;
+    bytes getBothFriendsIds(string viewerId, string userId, int page, int count) throws com.borqs.server.base.ResponseError;
+
+	bytes getRelation(string sourceUserId, string targetUserId, string circleId) throws com.borqs.server.base.ResponseError;
+	bytes getBidiRelation(string sourceUserId, string targetUserId, string circleId) throws com.borqs.server.base.ResponseError;
+
+	boolean setRemark(string userId, string friendId, string remark) throws com.borqs.server.base.ResponseError;
+    bytes getRemarks(string userId, string friendIds) throws com.borqs.server.base.ResponseError;
+    bytes isDeleteRecent(string userId, string friendIds, long period) throws com.borqs.server.base.ResponseError;
+    bytes getFriendOrFollowers(string userIds, string byFriendOrFollowers) throws com.borqs.server.base.ResponseError;
+    bytes getAllRelation(string viewerId, string userIds, string circleId, string inTheirOrInMine) throws com.borqs.server.base.ResponseError;
+    bytes topuserFollowers(long userId,int limit) throws com.borqs.server.base.ResponseError;
+    bytes getMyFriends(string userId, string friendId) throws com.borqs.server.base.ResponseError;
+    int getFollowersCount(string userId) throws com.borqs.server.base.ResponseError;
+    int getFriendsCount(string userId) throws com.borqs.server.base.ResponseError;
+
+    boolean createVirtualFriendId(string userId, string friendId, string content, string name) throws com.borqs.server.base.ResponseError;
+    boolean updateVirtualFriendIdToAct(string friendId, string content) throws com.borqs.server.base.ResponseError;
+    bytes getContactFriend(string userIds) throws com.borqs.server.base.ResponseError;
+    bytes getContactFriendByFid(string friendIds) throws com.borqs.server.base.ResponseError;
+    bytes getVirtualFriendId(string content) throws com.borqs.server.base.ResponseError;
+    string getUserFriendhasVirtualFriendId(string userId, string content) throws com.borqs.server.base.ResponseError;
+    bytes getVirtualFriendIdByName(string userId,string name) throws com.borqs.server.base.ResponseError;
+}

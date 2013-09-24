@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+
+       default-init-method="init" default-destroy-method="destroy">
+    <!-- Sql.executor -->
+    <bean id="sql.executor" class="com.borqs.server.platform.sql.SqlExecutor" scope="singleton">
+        <property name="connectionFactory">
+            <bean class="com.borqs.server.platform.sql.DBCPConnectionFactory" scope="singleton"/>
+        </property>
+    </bean>
+
+    <!-- opline -->
+    <bean id="table.opline" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db" value="${db.opline}"/>
+        <property name="table" value="op_history"/>
+    </bean>
+
+    <!-- account -->
+    <bean id="table.user" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db" value="${db.account}"/>
+        <property name="table" value="user"/>
+    </bean>
+    <bean id="table.userProperty" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db" value="${db.account}"/>
+        <property name="table" value="user_property"/>
+    </bean>
+    <bean id="table.userFts" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db" value="${db.account}"/>
+        <property name="table" value="user_fts"/>
+    </bean>
+
+    <!-- login -->
+    <bean id="table.ticket" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db" value="${db.login}"/>
+        <property name="table" value="ticket"/>
+    </bean>
+
+    <!-- cibind -->
+    <bean id="table.cibind" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db" value="${db.cibind}"/>
+        <property name="table" value="cibind"/>
+    </bean>
+
+    <!-- privacy -->
+    <bean id="table.privacy" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db" value="${db.privacy}"/>
+        <property name="table" value="privacy"/>
+    </bean>
+
+    <!-- comment -->
+    <bean id="table.comment" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db" value="${db.comment}"/>
+        <property name="table" value="comment"/>
+    </bean>
+    <bean id="table.commentTarget" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db" value="${db.comment}"/>
+        <property name="table" value="comment_target_index"/>
+    </bean>
+
+    <!-- friend -->
+    <bean id="table.circle" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db" value="${db.friend}"/>
+        <property name="table" value="circle"/>
+    </bean>
+    <bean id="table.friend" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db" value="${db.friend}"/>
+        <property name="table" value="friend"/>
+    </bean>
+    <bean id="table.follower" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db" value="${db.friend}"/>
+        <property name="table" value="follower"/>
+    </bean>
+    <bean id="table.remark" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db" value="${db.friend}"/>
+        <property name="table" value="remark"/>
+    </bean>
+
+    <!-- contact -->
+    <bean id="table.contact0" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db" value="${db.contact}"/>
+        <property name="table" value="contact0"/>
+    </bean>
+    <bean id="table.contact1" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db" value="${db.contact}"/>
+        <property name="table" value="contact1"/>
+    </bean>
+
+    <!-- conversation -->
+    <bean id="table.conversation0" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db" value="${db.contact}"/>
+        <property name="table" value="conversation0"/>
+    </bean>
+    <bean id="table.conversation1" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db" value="${db.contact}"/>
+        <property name="table" value="conversation1"/>
+    </bean>
+
+    <!-- ignore -->
+    <bean id="table.ignore" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db" value="${db.ignore}"/>
+        <property name="table" value="ignore"/>
+    </bean>
+
+    <!-- psuggest -->
+    <bean id="table.psuggest" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db" value="${db.psuggest}"/>
+        <property name="table" value="psuggest"/>
+    </bean>
+
+    <!-- setting -->
+    <bean id="table.setting" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db" value="${db.setting}"/>
+        <property name="table" value="setting"/>
+    </bean>
+
+    <!-- stream -->
+    <bean id="table.post" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db" value="${db.stream}"/>
+        <property name="table" value="post"/>
+    </bean>
+
+    <!-- activity -->
+    <bean id="table.activity" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db" value="${db.activity}"/>
+        <property name="table" value="activity"/>
+    </bean>
+    <bean id="table.activityMembers" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db" value="${db.activity}"/>
+        <property name="table" value="activity_members"/>
+    </bean>
+    <bean id="table.activityMembersIndex" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db" value="${db.activity}"/>
+        <property name="table" value="activity_members_index"/>
+    </bean>
+
+    <!-- request -->
+    <bean id="table.request" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db" value="${db.request}"/>
+        <property name="table" value="request"/>
+    </bean>
+
+    <bean id="table.request_index" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db" value="${db.request}"/>
+        <property name="table" value="request_index"/>
+    </bean>
+
+    <bean id="table.album" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="jdbc:mysql://192.168.5.22:3306/test_account3?user=root&amp;password=111111&amp;allowMultiQueries=true"/>
+        <property name="table" value="album"/>
+    </bean>
+    <bean id="table.photo" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="jdbc:mysql://192.168.5.22:3306/test_account3?user=root&amp;password=111111&amp;allowMultiQueries=true"/>
+        <property name="table" value="photos"/>
+    </bean>
+    <bean id="table.video" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="jdbc:mysql://192.168.5.22:3306/test_account3?user=root&amp;password=111111&amp;allowMultiQueries=true"/>
+        <property name="table" value="video"/>
+    </bean>
+    <bean id="table.audio" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="jdbc:mysql://192.168.5.22:3306/test_account3?user=root&amp;password=111111&amp;allowMultiQueries=true"/>
+        <property name="table" value="audio"/>
+    </bean>
+    <bean id="table.staticfile" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="jdbc:mysql://192.168.5.22:3306/test_account3?user=root&amp;password=111111&amp;allowMultiQueries=true"/>
+        <property name="table" value="static_file"/>
+    </bean>
+    <bean id="table.config" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="jdbc:mysql://192.168.5.22:3306/test_account3?user=root&amp;password=111111&amp;allowMultiQueries=true"/>
+        <property name="table" value="configration"/>
+    </bean>
+</beans>

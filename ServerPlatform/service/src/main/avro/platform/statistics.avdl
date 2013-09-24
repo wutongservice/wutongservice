@@ -1,0 +1,7 @@
+
+@namespace("com.borqs.server.service.platform")
+protocol Statistics {
+    import schema "../../../../../base/src/main/avro/error.avsc";
+
+    boolean save(bytes statistics) throws com.borqs.server.base.ResponseError;
+}

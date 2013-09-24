@@ -1,0 +1,8 @@
+{
+    "name":"user_role",
+    "columns": {
+        "role_id": "int",
+        "user_id": "int"
+    }
+}
+

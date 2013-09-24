@@ -1,0 +1,7 @@
+{
+    "name":"qapk_manual",
+    "columns": {
+        "apk_id": "string",
+        "type": "int"
+    }
+}

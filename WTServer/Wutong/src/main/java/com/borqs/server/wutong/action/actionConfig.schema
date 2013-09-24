@@ -1,0 +1,14 @@
+{
+    "name":"action_config",
+    "columns": {
+        "id":"int",
+        "scope":"int",
+        "name":"string",
+        "url":"string",
+        "submit_type":"string",
+        "content":"string",
+        "user":"int",
+        "created_time":"int",
+        "destroyed_time":"int"
+    }
+}

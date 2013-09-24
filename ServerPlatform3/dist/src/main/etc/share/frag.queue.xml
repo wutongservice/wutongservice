@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+       default-init-method="init" default-destroy-method="destroy">
+    <bean id="mq.comment" class="com.borqs.server.platform.mq.memcacheq.MemcacheQ" scope="singleton">
+        <property name="server" value="${mq.comment}"/>
+    </bean>
+    <bean id="mq.post" class="com.borqs.server.platform.mq.memcacheq.MemcacheQ" scope="singleton">
+        <property name="server" value="${mq.post}"/>
+    </bean>
+    <bean id="mq.link" class="com.borqs.server.platform.mq.memcacheq.MemcacheQ" scope="singleton">
+        <property name="server" value="${mq.link}"/>
+    </bean>
+</beans>

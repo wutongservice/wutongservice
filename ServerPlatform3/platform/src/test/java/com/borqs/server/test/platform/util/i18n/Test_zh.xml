@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+  <comment>注释</comment>
+  <entry key="test.key1">值1</entry>
+  <entry key="test.key2">值2</entry>
+</properties>

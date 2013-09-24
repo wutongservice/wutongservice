@@ -1,0 +1,14 @@
+{
+    "name":"album",
+    "columns": {
+        "album_id": "int",
+        "album_type": "int",
+        "user_id": "int",
+        "title": "string",
+        "summary": "string",
+        "privacy": "boolean",
+        "created_time": "int",
+        "updated_time": "int",
+        "destroyed_time": "int"
+    }
+}

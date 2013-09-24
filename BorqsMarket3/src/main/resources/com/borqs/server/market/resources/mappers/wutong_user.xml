@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wutong_user">
+
+
+    <select id="findAccountByEmail" parameterType="Map" resultType="record">
+            SELECT
+            password,
+            login_email1,
+            login_email2,
+            login_email3,
+            login_phone1,
+            display_name
+            FROM
+            wutong_user
+            WHERE destroyed_time=0 and
+            login_email1 = #{email}
+            or login_email2 = #{email}
+            or login_email3 = #{email}
+            ;
+        </select>
+
+
+    <select id="findAccountById" parameterType="Map" resultType="record">
+        SELECT
+        password,
+        login_email1,
+        login_email2,
+        login_email3,
+        login_phone1,
+        display_name
+        FROM
+        wutong_user
+        WHERE destroyed_time=0 and
+        user_id = #{id};
+    </select>
+
+</mapper>

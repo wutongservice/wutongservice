@@ -1,0 +1,18 @@
+
+@namespace("com.borqs.server.service.platform")
+protocol SocialContacts {
+    import schema "../../../../../base/src/main/avro/error.avsc";
+
+    boolean createSocialContacts(string owner, string username, int type, string content, string uid) throws com.borqs.server.base.ResponseError;
+    bytes getSocialContacts(string owner, int type, int page, int count) throws com.borqs.server.base.ResponseError;
+    bytes getSocialContactsUid(string owner) throws com.borqs.server.base.ResponseError;
+    bytes getSocialContactsOwner(string duserId,string uids) throws com.borqs.server.base.ResponseError;
+
+    bytes getCommSocialContactsM(string userId) throws com.borqs.server.base.ResponseError;
+    bytes getCommSocialContactsU(string userId,string friendId) throws com.borqs.server.base.ResponseError;
+    bytes getWhohasMyContacts(string userId,string email,string phone) throws com.borqs.server.base.ResponseError;
+    bytes getDistinctUsername(string uide) throws com.borqs.server.base.ResponseError;
+    bytes getDistinctOwner(string uid,string username) throws com.borqs.server.base.ResponseError;
+    bytes getUserName(string owner,string uid) throws com.borqs.server.base.ResponseError;
+    bytes getCommSocialContactsByUid(string owner,string userId) throws com.borqs.server.base.ResponseError;
+}

@@ -1,0 +1,12 @@
+{
+    "name":"ignore_",
+    "columns": {
+        "user": "int",
+        "target_type": "int",
+        "target_id": "int",
+        "created_time": "int"
+    }
+}
+
+
+

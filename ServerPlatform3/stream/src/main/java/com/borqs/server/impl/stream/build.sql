@@ -1,0 +1,31 @@
+
+CREATE TABLE IF NOT EXISTS post (
+  `post_id` BIGINT(20) NOT NULL,
+  `source` BIGINT(20) NOT NULL,
+  `created_time` BIGINT(20) NOT NULL,
+  `updated_time` BIGINT(20) DEFAULT '0',
+  `destroyed_time` BIGINT(20) DEFAULT '0',
+  `quote` BIGINT(20) DEFAULT '0',
+  `to` VARCHAR(4000) DEFAULT NULL,
+  `add_to` VARCHAR(1024) DEFAULT '',
+  `app` INT(11) NOT NULL,
+  `type` INT(11) NOT NULL,
+  `message` TEXT NOT NULL,
+  `app_data` VARCHAR(2048) DEFAULT '',
+  `attachments` TEXT NOT NULL,
+  attachment_ids varchar(2048) NOT NULL DEFAULT '[]',
+  `device` VARCHAR(256) DEFAULT '',
+  `can_comment` TINYINT(4) NOT NULL DEFAULT '1',
+  `can_like` TINYINT(4) NOT NULL DEFAULT '1',
+  `can_quote` TINYINT(4) NOT NULL DEFAULT '1',
+  `private` TINYINT(4) NOT NULL DEFAULT '0',
+
+  `location` varchar(255) NOT NULL DEFAULT '',
+  `latitude` VARCHAR(512) DEFAULT '',
+  `longitude` VARCHAR(512) DEFAULT '',
+  PRIMARY KEY (`post_id`),
+  KEY `source` (`source`),
+  KEY `quote` (`quote`),
+  KEY `created_time` (`created_time`),
+  KEY `destroyed_time` (`destroyed_time`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8

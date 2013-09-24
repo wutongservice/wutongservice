@@ -1,0 +1,2 @@
+#/bin/sh
+curl -F 'ticket=MTQ1NDFfMTM1Mjg3NjYyNjg3NF8yMTY=' -F 'appid=1' -F 'sign_method=md5' -F 'sign=yJ/b+WIQKMneCM4Kmxd+nQ==' -F 'company=15000000016' -F 'merge=false' -F 'file=@/cygdrive/c/Documents and Settings/rongxin.gao/Desktop/BorqsEmployees.xls' http://localhost:8080/company/upload_employees

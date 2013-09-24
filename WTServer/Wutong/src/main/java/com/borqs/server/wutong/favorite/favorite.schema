@@ -1,0 +1,13 @@
+{
+    "name":"like",
+    "columns": {
+        "user_id": "string",
+        "target_type": "string",
+        "target_id": "string",
+        "appid": "int",
+        "created_time": "int"
+    }
+}
+
+
+

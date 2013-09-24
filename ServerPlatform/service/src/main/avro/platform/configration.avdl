@@ -1,0 +1,13 @@
+
+
+
+@namespace("com.borqs.server.service.platform")
+protocol UserConfigration {
+    import schema "../../../../../base/src/main/avro/error.avsc";
+
+    boolean saveConfigration(bytes configration) throws com.borqs.server.base.ResponseError;
+    bytes getConfigration(string userId, string key, int version_code) throws com.borqs.server.base.ResponseError;
+    boolean deleteConfigration(string userId, string key, int version_code) throws com.borqs.server.base.ResponseError;
+    bytes getUserConfigration(string userId) throws com.borqs.server.base.ResponseError;
+
+}

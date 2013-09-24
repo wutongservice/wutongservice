@@ -1,0 +1,163 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+  <bean class="com.borqs.server.market.deploy.DeploymentPropertyPlaceholderConfigurer" scope="singleton"/>
+
+  <context:component-scan base-package="com.borqs.server.market"/>
+
+  <mvc:default-servlet-handler/>
+
+  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="prefix" value="/WEB-INF/pages/"/>
+    <property name="suffix" value=".jsp"/>
+  </bean>
+
+  <bean id="db.dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+    <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+    <property name="url" value="${db.url}"/>
+    <property name="username" value="${db.user}"/>
+    <property name="password" value="${db.password}"/>
+    <property name="maxActive" value="80"/>
+    <property name="maxIdle" value="20"/>
+    <property name="maxWait" value="3000"/>
+    <property name="connectionProperties" value="useUnicode=yes;characterEncoding=utf8;autoReconnect=true;"/>
+  </bean>
+
+  <bean id="db.recordSessionFactory" class="com.borqs.server.market.utils.mybatis.record.RecordSessionFactory"
+        scope="singleton">
+    <property name="dataSource" ref="db.dataSource"/>
+    <property name="configLocation" value="classpath:com/borqs/server/market/resources/mappers/mybatisConfig.xml"/>
+    <property name="mapperLocations">
+      <array>
+        <value>classpath:com/borqs/server/market/resources/mappers/account.xml</value>
+        <value>classpath:com/borqs/server/market/resources/mappers/purchase.xml</value>
+        <value>classpath:com/borqs/server/market/resources/mappers/publish.xml</value>
+        <value>classpath:com/borqs/server/market/resources/mappers/tools.xml</value>
+        <value>classpath:com/borqs/server/market/resources/mappers/wutong_user.xml</value>
+        <value>classpath:com/borqs/server/market/resources/mappers/statistics.xml</value>
+        <value>classpath:com/borqs/server/market/resources/mappers/oper.xml</value>
+        <value>classpath:com/borqs/server/market/resources/mappers/order.xml</value>
+        <value>classpath:com/borqs/server/market/resources/mappers/comment.xml</value>
+        <value>classpath:com/borqs/server/market/resources/mappers/share.xml</value>
+      </array>
+    </property>
+  </bean>
+
+  <bean id="helper.localeSelector" class="com.borqs.server.market.models.LocaleSelector" scope="singleton">
+    <property name="defaultLocale" value="${locale.default}"/>
+  </bean>
+
+  <bean id="helper.urlCompleter" class="com.borqs.server.market.models.UrlCompleter" scope="singleton">
+    <property name="imagePrefix" value="${url.imagePrefix}"/>
+    <property name="productPrefix" value="${url.productPrefix}"/>
+  </bean>
+
+  <bean id="helper.sharesUrlCompleter" class="com.borqs.server.market.models.UrlCompleter" scope="singleton">
+    <property name="imagePrefix" value="${url.sharesPrefix}"/>
+    <property name="productPrefix" value="${url.sharesPrefix}"/>
+  </bean>
+
+  <bean id="storage.one" class="com.borqs.server.market.sfs.ProxyStorage" init-method="init">
+    <property name="storage">
+      <bean class="com.borqs.server.market.sfs.FileStorageFactory" factory-method="create">
+        <constructor-arg value="${storage.productDir}"/>
+        <constructor-arg value="${oss.accessId}"/>
+        <constructor-arg value="${oss.accessKey}"/>
+        <constructor-arg value="${oss.endpoint}"/>
+        <constructor-arg value="${oss.bucket}"/>
+        <constructor-arg value="borqsmarket/products/"/>
+      </bean>
+    </property>
+  </bean>
+
+  <bean id="storage.shares" class="com.borqs.server.market.sfs.ProxyStorage" init-method="init">
+    <property name="storage">
+      <bean class="com.borqs.server.market.sfs.FileStorageFactory" factory-method="create">
+        <constructor-arg value="${storage.sharesDir}"/>
+        <constructor-arg value="${oss.accessId}"/>
+        <constructor-arg value="${oss.accessKey}"/>
+        <constructor-arg value="${oss.endpoint}"/>
+        <constructor-arg value="${oss.bucket}"/>
+        <constructor-arg value="borqsmarket/shares/"/>
+      </bean>
+    </property>
+  </bean>
+
+  <bean id="storage.account" class="com.borqs.server.market.sfs.ProxyStorage" init-method="init">
+    <property name="storage">
+      <bean class="com.borqs.server.market.sfs.FileStorageFactory" factory-method="create">
+        <constructor-arg value="${storage.accountDir}"/>
+        <constructor-arg value="${oss.accessId}"/>
+        <constructor-arg value="${oss.accessKey}"/>
+        <constructor-arg value="${oss.endpoint}"/>
+        <constructor-arg value="${oss.bucket}"/>
+        <constructor-arg value="borqsmarket/accounts/"/>
+      </bean>
+    </property>
+  </bean>
+
+  <alias name="storage.one" alias="storage.image"/>
+  <alias name="storage.one" alias="storage.product"/>
+  <alias name="storage.one" alias="storage.partition"/>
+  <alias name="storage.one" alias="storage.promotion"/>
+
+  <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+    <property name="basenames">
+      <array>
+        <value>i18n.message</value>
+      </array>
+    </property>
+    <property name="defaultEncoding" value="UTF-8"/>
+  </bean>
+
+  <bean class="com.borqs.server.market.utils.i18n.SpringMessage" factory-method="getInstance" scope="singleton">
+    <property name="messageSource" ref="messageSource"/>
+    <property name="localeResolver" ref="localeResolver"/>
+  </bean>
+
+  <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+    <property name="paramName" value="lang"/>
+  </bean>
+
+  <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+    <property name="defaultLocale" value=""/>
+  </bean>
+
+  <bean id="handlerMapping" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+    <property name="interceptors" ref="localeChangeInterceptor"/>
+  </bean>
+
+  <bean id="productFileValidators" class="com.borqs.server.market.controllers.filevalidators.ProductFileValidators">
+    <property name="validatorsExpression" value="${fileValidatorsExpression}"/>
+  </bean>
+
+  <mvc:interceptors>
+    <mvc:interceptor>
+      <mvc:mapping path="/**"/>
+      <mvc:exclude-mapping path="/static/**"/>
+      <mvc:exclude-mapping path="/favicon.ico"/>
+      <bean class="com.borqs.server.market.controllers.RoleBasedPermissionInterceptor"/>
+    </mvc:interceptor>
+    <mvc:interceptor>
+      <mvc:mapping path="/**"/>
+      <mvc:exclude-mapping path="/static/**"/>
+      <mvc:exclude-mapping path="/favicon.ico"/>
+      <bean class="com.borqs.server.market.controllers.HttpParams$CleanerInterceptor"/>
+    </mvc:interceptor>
+    <mvc:interceptor>
+      <mvc:mapping path="/api/**"/>
+      <bean class="com.borqs.server.market.controllers.APIAccessLogInterceptor"/>
+    </mvc:interceptor>
+  </mvc:interceptors>
+
+  <mvc:annotation-driven>
+    <mvc:argument-resolvers>
+      <bean class="com.borqs.server.market.controllers.HttpParamsResolver"/>
+      <bean class="com.borqs.server.market.controllers.ServiceContextResolver"/>
+    </mvc:argument-resolvers>
+  </mvc:annotation-driven>
+</beans>

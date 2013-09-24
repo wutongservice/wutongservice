@@ -1,0 +1,7 @@
+
+v2/public_circle/directory/import
+v2/public_circle/directory/add
+v2/public_circle/directory/delete
+v2/public_circle/directory/show
+v2/public_circle/directory/
+v2/public_circle/directory/search

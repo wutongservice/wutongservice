@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>module.notif:en</comment>
+    <entry key="profile.update.notif.displayname">display name</entry>
+    <entry key="profile.update.notif.nickname">nick name</entry>
+    <entry key="profile.update.notif.gender">gender</entry>
+    <entry key="profile.update.notif.female">female</entry>
+    <entry key="profile.update.notif.male">male</entry>
+    <entry key="profile.update.notif.hidegender">hide gender</entry>
+    <entry key="profile.update.notif.commentapp"> comment app</entry>
+    <entry key="profile.update.notif.commentphoto"> comment photo</entry>
+    <entry key="profile.update.notif.likephoto"> like photo</entry>
+
+    <entry key="profile.update.notif.birthday">birthday</entry>
+    <entry key="profile.update.notif.interests">interests</entry>
+    <entry key="profile.update.notif.marriage">marriage</entry>
+    <entry key="profile.update.notif.married">married</entry>
+    <entry key="profile.update.notif.unmarried">unmarried</entry>
+    <entry key="profile.update.notif.religion">religion</entry>
+    <entry key="profile.update.notif.company">company</entry>
+    <entry key="profile.update.notif.image">profile image</entry>
+    <entry key="profile.update.notif.contact">contact information</entry>
+    <entry key="profile.update.notif.address">address</entry>
+    <entry key="profile.update.notif.status">status</entry>
+    <entry key="profile.update.notif.other">profile</entry>
+    <entry key="profile.update.notif.title">{0} update profile</entry>
+    <entry key="platform.profile.sex.man">him</entry>
+    <entry key="platform.profile.sex.woman">her</entry>
+    <entry key="platform.create.accountcreate.notification">Your contacts friend {0} have been borqs user,please follow {1} quickly.</entry>
+    <entry key="platform.like.like">like!</entry>
+
+    <entry key="platform.notif.suggestuser.title">recommend a friend{0} to you</entry>
+    <entry key="platform.notif.suggestuser.titles">recommend friend {0} etc.{1} friends to you</entry>
+    <entry key="platform.notif.retweet.title">{0}Quoted comes from your sharing:{1}</entry>
+    <entry key="platform.notif.streamlike.title">liked post</entry>
+    <entry key="platform.notif.streamcomment.title">comment post</entry>
+    <entry key="platform.notif.shareapp.title">shared app to you</entry>
+    <entry key="platform.notif.requestattention.title">Request you to join your circle of</entry>
+    <entry key="platform.notif.acceptsuggest.title">based on your recommendation，{0} and {1} become a friend</entry>
+    <entry key="platform.notif.applike.title">{0} liked app {1}</entry>
+    <entry key="platform.notif.newfollower.title">you have new follower {0}</entry>
+</properties>

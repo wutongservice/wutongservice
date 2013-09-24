@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS request;
+DROP TABLE IF EXISTS request_index;

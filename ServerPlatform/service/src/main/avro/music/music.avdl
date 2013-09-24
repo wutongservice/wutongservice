@@ -1,0 +1,9 @@
+
+@namespace("com.borqs.server.music.service")
+protocol MusicInterface {
+    import schema "error.avsc";
+
+    bytes getAllSongs(string sort, int page, int count, boolean isFullColumns) throws com.borqs.server.base.ResponseError;
+    bytes getSongsBySinger(string sort,int singerId, int page, int count, boolean isFullColumns) throws com.borqs.server.base.ResponseError;
+    bytes getSongInfoById(int songId) throws com.borqs.server.base.ResponseError;
+}

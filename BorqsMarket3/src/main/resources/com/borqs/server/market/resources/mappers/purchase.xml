@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="market">
+
+  <select id="listVersionedProductIdsForPurchase" parameterType="Map" resultType="record">
+    SELECT
+    SQL_CALC_FOUND_ROWS
+    PV.product_id AS id,
+    P.app_id AS app_id,
+    MAX(PV.version) AS version
+    FROM
+    product_versions PV, products P, product_pricetags PT
+    <where>
+      (PV.product_id = P.id)
+      AND (P.app_id=PT.app_id) AND (P.category_id=PT.category_id) AND (P.pricetag_id=PT.pricetag_id)
+      AND (P.app_id=#{app_id})
+      <if test="category_id != null and category_id != ''">
+        AND (P.category_id=#{category_id})
+      </if>
+      <if test="app_version > 0">
+        AND (#{app_version} BETWEEN PV.min_app_version AND PV.max_app_version)
+      </if>
+      AND (PV.status = 3) <!-- Published -->
+      AND (PV.supported_mod='' OR PV.supported_mod='*'
+      <if test="app_mod != null and app_mod != ''">
+        OR CONCAT(',', PV.supported_mod, ',') LIKE CONCAT('%,',#{app_mod},',%')
+      </if>
+      )
+      AND (P.available_locales='' OR P.available_locales='*' OR CONCAT(',', P.available_locales, ',') LIKE
+      CONCAT('%,',#{locale},',%'))
+      <if test="tag != null">
+        AND (CONCAT(',', P.tags, ',') LIKE CONCAT('%,',#{tag},',%'))
+      </if>
+      <if test="not (beta==true or beta!=0)">
+        AND (PV.beta = 0)
+      </if>
+      AND (P.publish_channels = '' OR P.publish_channels='*' OR CONCAT(',', P.publish_channels, ',') LIKE
+      CONCAT('%,',#{publish_channel},',%'))
+      AND (P.pricetag_id != '')
+      <choose>
+        <when test="paid == 1"> <!-- Free -->
+          AND (PT.${paid_field}=1)
+        </when>
+        <when test="paid == 2"> <!-- paid -->
+          AND (PT.${paid_field}=2)
+        </when>
+      </choose>
+      GROUP BY
+      PV.product_id
+      ORDER BY
+      <choose>
+        <when test="order_by == 1"> <!-- PO_DOWNLOAD_COUNT -->
+          P.download_count DESC
+        </when>
+        <when test="order_by == 2"> <!-- PO_RATING -->
+          P.rating DESC
+        </when>
+        <when test="order_by == 3"> <!-- PO_PURCHASE_COUNT -->
+          P.purchase_count DESC
+        </when>
+        <otherwise>
+          P.last_version_created_at DESC
+        </otherwise>
+      </choose>
+      LIMIT
+      #{offset}, #{count}
+    </where>
+    ;
+  </select>
+
+  <select id="findProductMaxVersionForPurchase" parameterType="Map" resultType="record">
+    SELECT
+    MAX(PV.version) AS version
+    FROM
+    product_versions PV, products P
+    WHERE
+    PV.product_id=P.id AND PV.product_id=#{product_id}
+    AND (PV.supported_mod='' OR PV.supported_mod='*'
+    <if test="app_mod != null and app_mod != ''">
+      OR CONCAT(',', PV.supported_mod, ',') LIKE CONCAT('%,',#{app_mod},',%')
+    </if>
+    )
+    AND (P.publish_channels = '' OR P.publish_channels='*' OR CONCAT(',', P.publish_channels, ',') LIKE
+    CONCAT('%,',#{publish_channel},',%'))
+    <if test="not (beta==true or beta!=0)">
+      AND (PV.beta = 0)
+    </if>
+    AND (PV.status = 3) <!-- published -->
+    ;
+  </select>
+
+  <select id="getSimpleVersionedProductForPurchase" parameterType="Map" resultType="record">
+    SELECT
+    P.id AS id,
+    PV.version AS version,
+    PV.version_name AS version_name,
+    P.name AS name,
+    P.app_id AS app_id,
+    P.category_id AS category_id,
+    C.name AS category_name,
+    PT.${paid_field} AS paid,
+    PT.${price_field} AS price,
+    PT.payment_type AS payment_type,
+    P.logo_image AS logo_image,
+    P.cover_image AS cover_image,
+    P.purchase_count AS purchase_count,
+    P.download_count AS download_count,
+    P.rating AS rating,
+    P.rating_count AS rating_count,
+    P.default_locale AS default_locale,
+    PV.file_size AS file_size,
+    PV.file_md5 AS file_md5,
+    PV.supported_mod AS supported_mod
+    FROM
+    product_versions PV,
+    products P,
+    product_pricetags PT,
+    product_categories C
+    <where>
+      (PV.product_id = P.id)
+      AND (P.pricetag_id = PT.pricetag_id AND P.app_id = PT.app_id AND P.category_id = PT.category_id)
+      AND (PT.app_id = C.app_id AND PT.category_id = C.category_id)
+      AND (PV.product_id = #{id})
+      AND (PV.version = #{version})
+    </where>
+  </select>
+
+  <select id="getDetailedVersionedProductForPurchase" parameterType="Map" resultType="record">
+    SELECT
+    PV.product_id AS id,
+    PV.version AS version,
+    PV.version_name AS version_name,
+    P.name AS `name`,
+    P.id AS app_id,
+    P.category_id AS category_id,
+    C.name AS category_name,
+    PT.paid AS paid,
+    PT.price AS price,
+    PT.payment_type AS payment_type,
+    P.author_name AS author_name,
+    P.author_email AS author_email,
+    P.author_id AS author_id,
+    P.created_at AS created_at,
+    P.updated_at AS updated_at,
+    P.description AS description,
+    P.logo_image AS logo_image,
+    P.cover_image AS cover_image,
+    P.promotion_image AS promotion_image,
+    PV.recent_change AS recent_change,
+    P.screenshot1_image AS screenshot1_image,
+    P.screenshot2_image AS screenshot2_image,
+    P.screenshot3_image AS screenshot3_image,
+    P.screenshot4_image AS screenshot4_image,
+    P.screenshot5_image AS screenshot5_image,
+    P.purchase_count AS purchase_count,
+    P.download_count AS download_count,
+    P.rating AS rating,
+    P.rating_count AS rating_count,
+    P.comment_count AS comment_count,
+    P.like_count AS like_count,
+    P.dislike_count AS dislike_count,
+    P.default_locale AS default_locale,
+    PT.google_iab_sku AS google_iab_sku,
+    PT.cmcc_mm_paycode AS cmcc_mm_paycode,
+    PT.cmcc_mm_amount AS cmcc_mm_amount,
+    PV.file_size AS file_size,
+    PV.file_md5 AS file_md5,
+    PV.supported_mod AS supported_mod
+    FROM
+    product_versions PV, products P, product_pricetags PT, product_categories C
+    <where>
+      (PV.product_id=P.id)
+      AND (P.pricetag_id=PT.pricetag_id AND P.app_id=PT.app_id AND P.category_id=PT.category_id)
+      AND (PT.app_id=C.app_id AND PT.category_id=C.category_id)
+      AND (PV.product_id=#{id})
+      AND (PV.version=#{version})
+      AND (PV.status = 3) <!-- Published -->
+    </where>
+  </select>
+
+
+  <select id="getSimpleVersionedProductForPurchase2" parameterType="Map" resultType="record">
+    SELECT
+    P.id AS id,
+    PV.version AS version,
+    P.app_id AS app_id,
+    P.category_id AS category_id,
+    PT.${paid_field} AS paid,
+    PT.${price_field}  AS price,
+    PT.payment_type AS payment_type,
+    PV.action AS `action`,
+    PV.url AS url,
+    PV.file_size AS file_size,
+    PV.file_md5 AS file_md5,
+    PV.supported_mod AS supported_mod
+    FROM
+    product_versions PV, products P, product_pricetags PT
+    <where>
+      (PV.product_id=P.id)
+      AND (P.pricetag_id=PT.pricetag_id AND P.app_id=PT.app_id AND P.category_id=PT.category_id)
+      AND (PV.product_id=#{id})
+      AND (PV.version=#{version})
+      AND (PV.status=3) <!-- published -->
+    </where>
+    LIMIT 1;
+  </select>
+
+  <select id="findOrderIdForPurchase" parameterType="Map" resultType="record">
+    SELECT
+    id
+    FROM
+    orders
+    <where>
+      product_id=#{id}
+      <if test="purchaser_id != null">
+        AND purchaser_id=#{purchaser_id}
+      </if>
+      <if test="purchaser_id == null ">
+        <if test="device_id != null">
+          AND purchaser_device_id=#{device_id}
+        </if>
+        <if test="device_id == null">
+          AND (1 = 0)
+        </if>
+      </if>
+    </where>
+    ORDER BY created_at DESC
+    LIMIT 1
+  </select>
+
+  <insert id="createOrderForPurchase" parameterType="Map">
+    INSERT INTO orders
+    SET
+    id = #{order_id},
+    created_at = #{now},
+    purchaser_id = #{purchaser_id},
+
+    `status` = 0,
+    product_id = #{product_id},
+    product_version = #{product_version},
+    product_category_id = #{product_category_id},
+    product_app_id = #{product_app_id},
+
+    purchaser_device_id = #{purchaser_device_id},
+    purchaser_locale = #{purchaser_locale},
+    purchaser_ip = #{purchaser_ip},
+
+
+    <if test="google_iab_order!=null">
+      google_iab_order = #{google_iab_order},
+    </if>
+    <if test="cmcc_mm_order!=null">
+      cmcc_mm_order = #{cmcc_mm_order},
+    </if>
+    <if test="cmcc_mm_trade!=null">
+      cmcc_mm_trade = #{cmcc_mm_trade},
+    </if>
+    <if test="pay_cs!=null">
+      pay_cs = #{pay_cs},
+    </if>
+    <if test="pay_amount!=null">
+      pay_amount = #{pay_amount},
+    </if>
+    <if test="data1!=null">
+      data1 = #{data1},
+    </if>
+    <if test="data2!=null">
+      data2 = #{data2},
+    </if>
+    purchaser_ua = #{purchaser_ua}
+    ;
+  </insert>
+
+  <update id="increaseProductPurchaseCountForPurchase" parameterType="Map">
+    UPDATE products
+    SET purchase_count=purchase_count + 1
+    WHERE id = #{id}
+    ;
+  </update>
+
+  <update id="increaseVersionPurchaseCountForPurchase" parameterType="Map">
+    UPDATE product_versions
+    SET purchase_count=purchase_count + 1
+    WHERE product_id = #{id} AND version = #{version}
+    ;
+  </update>
+
+
+  <update id="increaseProductDownloadCountForPurchase" parameterType="Map">
+    UPDATE products
+    SET download_count=download_count + 1
+    WHERE id = #{id}
+    ;
+  </update>
+
+  <update id="increaseVersionDownloadCountForPurchase" parameterType="Map">
+    UPDATE product_versions
+    SET download_count=download_count + 1
+    WHERE product_id = #{id} AND version = #{version}
+    ;
+  </update>
+
+  <select id="orderExistsForPurchase" parameterType="Map" resultType="record">
+    SELECT EXISTS (
+    SELECT
+    id
+    FROM
+    orders
+    <where>
+      <choose>
+        <when test="purchaser_id!=null">
+          (product_id=#{id} AND purchaser_id=#{purchaser_id})
+        </when>
+        <when test="device_id!=null">
+          (product_id=#{id} AND purchaser_device_id=#{device_id})
+        </when>
+        <otherwise>
+          1 = 0
+        </otherwise>
+      </choose>
+    </where>
+    ) AS order_exists;
+  </select>
+
+  <select id="findPurchasedVersionedProductIdForPurchase" parameterType="Map" resultType="record">
+    SELECT
+      id         AS order_id,
+      product_id,
+      product_version,
+      created_at AS purchased_at
+    FROM
+      orders
+    WHERE
+      purchaser_id = #{purchaser_id}
+      <if test="app_id!=null">
+        AND product_app_id=#{app_id}
+      </if>
+      <if test="category_id!=null">
+        AND product_category_id=#{category_id}
+      </if>
+    ORDER BY
+      created_at DESC
+    LIMIT
+      #{offset}, #{count}
+    ;
+
+  </select>
+
+  <!--
+  <select id="listPartitionsForPurchase" parameterType="Map" resultType="record">
+    SELECT
+      id,
+      created_at,
+      app_id,
+      category_id,
+      `name`,
+      description,
+      logo_image
+    FROM
+      `partitions`
+    WHERE
+      `status` > 0
+      AND app_id = #{app_id}
+      AND category_id = #{category_id}
+    ORDER BY
+      `status`
+    ;
+  </select>
+  -->
+
+  <select id="getPartitionByIdForPurchase" parameterType="Map" resultType="record">
+    SELECT
+      id,
+      `name`,
+      description,
+      logo_image,
+      `list`,
+      app_id,
+      category_id
+    FROM
+      `partitions`
+    WHERE
+      id = #{id}
+    ;
+  </select>
+
+  <select id="listLastVersionedProductIdsForPurchase" parameterType="Map" resultType="record">
+    SELECT
+    SQL_CALC_FOUND_ROWS
+    PV.product_id AS id,
+    P.app_id AS app_id,
+    MAX(PV.version) AS version
+    FROM
+    product_versions PV, products P
+    <where>
+      (PV.product_id = P.id)
+      AND PV.product_id IN
+      <foreach item="item" collection="product_ids" open="(" separator="," close=")">
+        #{item}
+      </foreach>
+
+      <if test="app_version != null and app_version > 0">
+        AND (#{app_version} BETWEEN PV.min_app_version AND PV.max_app_version)
+      </if>
+      AND (PV.status = 3) <!-- Published -->
+      <if test="app_mod != null and app_mod != ''">
+        AND (PV.supported_mod='' OR PV.supported_mod='*' OR INSTR(PV.supported_mod, #{app_mod})>0)
+      </if>
+      AND (P.available_locales='' OR P.available_locales='*' OR INSTR(P.available_locales, #{locale}))
+      <if test="not (beta==true or beta!=0)">
+        AND (PV.beta = 0)
+      </if>
+      AND (P.publish_channels = '' OR P.publish_channels='*' OR CONCAT(',', P.publish_channels, ',') LIKE
+      CONCAT('%,',#{publish_channel},',%'))
+      GROUP BY
+      PV.product_id
+      ORDER BY
+      find_in_set(PV.product_id, #{joined_product_ids})
+      LIMIT
+      #{offset}, #{count}
+    </where>
+    ;
+  </select>
+
+  <select id="getProductPriceForPurchase" parameterType="Map" resultType="record">
+    SELECT
+      PT.price
+    FROM
+        products P, product_pricetags PT
+    WHERE
+      P.app_id = PT.app_id AND P.category_id = PT.category_id AND P.pricetag_id = PT.pricetag_id
+      AND P.id = #{id} AND paid = 2
+    ;
+  </select>
+
+  <select id="hasPurchasedForPurchase" parameterType="Map" resultType="record">
+    SELECT
+    DISTINCT (product_id) AS purchased_product_id
+    FROM
+    orders
+    <where>
+      product_id IN
+      <foreach item="item" collection="product_ids" open="(" separator="," close=")">
+        #{item}
+      </foreach>
+      AND
+      <choose>
+        <when test="purchaser_id!=null">
+          purchaser_id=#{purchaser_id}
+        </when>
+        <when test="device_id!=null">
+          purchaser_device_id=#{device_id}
+        </when>
+        <otherwise>
+          1 = 0
+        </otherwise>
+      </choose>
+    </where>
+    ;
+  </select>
+
+  <select id="findFirstDownloadIdForPurchase" parameterType="Map" resultType="record">
+    SELECT
+    id
+    FROM
+    downloads
+    WHERE
+    product_id=#{product_id}
+    AND (
+    1 = 0
+    <if test="purchaser_id != null">
+      OR purchaser_id=#{purchaser_id}
+    </if>
+    <if test="device_id != null">
+      OR download_device_id=#{device_id}
+    </if>
+    )
+    LIMIT 1
+    ;
+  </select>
+
+
+  <insert id="insertDownloadForPurchase" parameterType="Map">
+    INSERT INTO downloads
+    SET
+      id = #{id},
+      created_at=#{now},
+      purchaser_id=#{purchaser_id},
+      order_id=#{order_id},
+      product_id=#{product_id},
+      product_version=#{product_version},
+      product_category_id=#{product_category_id},
+      product_app_id=#{product_app_id},
+      download_device_id=#{device_id},
+      download_locale=#{locale},
+      download_ip=#{ip},
+      download_ua=#{ua}
+    ;
+  </insert>
+
+  <select id="getAppIdAndCategoryIdByProductIdForPurchase" parameterType="Map" resultType="record">
+    SELECT
+      id,
+      app_id,
+      category_id
+    FROM
+      products
+    WHERE
+      id = #{id}
+    ;
+  </select>
+
+  <select id="getPromotionsForPurchase" parameterType="Map" resultType="record">
+    SELECT
+      app_id,
+      category_id,
+      `list`
+    FROM
+      promotions
+    WHERE
+      app_id = #{app_id} AND category_id = #{category_id}
+    ;
+  </select>
+
+  <select id="getDefaultPublishChannelForPurchase" parameterType="Map" resultType="record">
+    SELECT
+      default_publish_channel
+    FROM
+      apps
+    WHERE
+      id=#{id}
+    ;
+  </select>
+
+  <select id="getProductAppIdForPurchase" parameterType="Map" resultType="record">
+    SELECT
+      app_id
+    FROM
+      products
+    WHERE
+      id=#{id}
+    ;
+  </select>
+</mapper>

@@ -1,0 +1,14 @@
+{
+    "name":"photo",
+    "columns": {
+        "pid": "string",
+        "aid": "string",
+        "user_id": "string",
+        "src": "string",
+        "src_big": "string",
+        "src_small": "string",
+        "caption": "string",
+        "created": "int",
+        "modified": "int"
+    }
+}

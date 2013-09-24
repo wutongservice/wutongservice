@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="market">
+  <insert id="createAppTool" parameterType="Map">
+    INSERT INTO apps
+    SET
+      id=#{id},
+      created_at=#{now},
+      updated_at=#{now},
+      disabled_at=0,
+      `name`=#{name},
+      creator_id=#{creator_id},
+      operator_id=''
+    ;
+  </insert>
+
+  <insert id="createCategoryTool" parameterType="Map">
+    INSERT INTO product_categories
+    SET
+      category_id=#{category_id},
+      app_id=#{app_id},
+      created_at=#{now},
+      updated_at=#{now},
+      `name`=#{name}
+    ;
+  </insert>
+
+  <insert id="createPricetagTool" parameterType="Map">
+    INSERT INTO product_pricetags
+    SET
+    pricetag_id=#{pricetag_id},
+    category_id=#{category_id},
+    app_id=#{app_id},
+    payment_type=1,
+    <choose>
+      <when test="price!=null">
+        paid=2,
+        price=#{price},
+          <if test="google_iab_sku!=null">
+            google_iab_sku=#{google_iab_sku},
+          </if>
+      </when>
+      <otherwise>
+        paid=1,
+        price='',
+      </otherwise>
+    </choose>
+    <choose>
+      <when test="cmcc_mm_price!=null">
+        cmcc_mm_paid=2,
+        cmcc_mm_price=#{cmcc_mm_price},
+        <if test="cmcc_mm_paycode!=null">
+          cmcc_mm_paycode=#{cmcc_mm_paycode},
+        </if>
+        <if test="cmcc_mm_amount!=null">
+          cmcc_mm_amount=#{cmcc_mm_amount},
+        </if>
+      </when>
+      <otherwise>
+        cmcc_mm_paid=1,
+        cmcc_mm_price='',
+      </otherwise>
+    </choose>
+    created_at=#{now},
+    updated_at=#{now}
+    ;
+  </insert>
+
+  <delete id="deleteOrderTool">
+    DELETE FROM orders WHERE id=#{id};
+  </delete>
+
+  <delete id="deleteOrderByProductIdTool">
+    DELETE FROM orders WHERE product_id=#{product_id} AND purchaser_id=#{account_id};
+  </delete>
+
+  <select id="listAllNoSupportedModTool" parameterType="Map" resultType="record">
+    SELECT
+      PV.product_id AS id,
+      PV.version AS version
+    FROM
+        product_versions PV LEFT JOIN  products P ON PV.product_id=P.id
+    WHERE
+      P.app_id=#{app_id}
+      AND P.category_id=#{category_id}
+      AND PV.supported_mod=''
+    ;
+  </select>
+
+  <update id="fillDefaultSupportedModTool" parameterType="Map">
+    UPDATE
+      product_versions
+    SET
+      supported_mod=#{supported_mod}
+    WHERE
+      product_id=#{id} AND version=#{version}
+    ;
+  </update>
+
+  <select id="getProductAppIdAndCategoryIdTool" parameterType="Map" resultType="record">
+    SELECT
+      app_id,
+      category_id
+    FROM
+      products
+    WHERE
+      id=#{id};
+  </select>
+
+  <select id="listAllAccountIdsTool" parameterType="Map" resultType="record">
+    SELECT id FROM accounts
+    <if test="only_external == true">
+    WHERE
+      NOT (borqs=1 OR (email IS NOT NULL AND email LIKE '%@borqs.com'));
+    </if>
+    ;
+  </select>
+</mapper>

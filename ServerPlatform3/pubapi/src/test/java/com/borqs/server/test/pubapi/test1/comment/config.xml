@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+
+       default-init-method="init" default-destroy-method="destroy">
+    <!--Sql.executor-->
+    <bean id="sql.executor" class="com.borqs.server.platform.sql.SqlExecutor" scope="singleton">
+        <property name="connectionFactory">
+            <bean class="com.borqs.server.platform.sql.SimpleConnectionFactory" scope="singleton"/>
+        </property>
+    </bean>
+
+    <!-- Tables -->
+    <bean id="table.conversation0" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db" value="jdbc:mysql://localhost:3306/account2?user=root&amp;password=1234"/>
+        <property name="table" value="conversation0"/>
+    </bean>
+
+    <bean id="table.conversation1" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db" value="jdbc:mysql://localhost:3306/account2?user=root&amp;password=1234"/>
+        <property name="table" value="conversation1"/>
+    </bean>
+    <bean id="table.comment" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="jdbc:mysql://localhost:3306/account2?user=root&amp;password=1234&amp;allowMultiQueries=true"/>
+        <property name="table" value="comment"/>
+    </bean>
+    <bean id="table.commentTarget" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="jdbc:mysql://localhost:3306/account2?user=root&amp;password=1234&amp;allowMultiQueries=true"/>
+        <property name="table" value="comment_target_index"/>
+    </bean>
+    <bean id="logic.account" class="com.borqs.server.platform.test.mock.SteveAndBill" factory-method="account"
+          scope="singleton">
+    </bean>
+    <!-- Logic -->
+    <bean id="logic.conversation" class="com.borqs.server.impl.conversation.ConversationImpl" scope="singleton">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="convTable0" ref="table.conversation0"/>
+        <property name="convTable1" ref="table.conversation1"/>
+        <property name="account" ref="logic.account"/>
+    </bean>
+    <bean id="logic.comment" class="com.borqs.server.impl.comment.CommentImpl" scope="singleton">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="commentTable" ref="table.comment"/>
+        <property name="commentTargetTable" ref="table.commentTarget"/>
+        <property name="account" ref="logic.account"/>
+        <property name="conversation" ref="logic.conversation"/>
+    </bean>
+    <bean id="memMQ" class="com.borqs.server.platform.mq.MemoryMQ" scope="singleton">
+
+    </bean>
+
+    <bean id="servlet.pubApi" class="com.borqs.server.platform.web.topaz.HttpApiServlet">
+        <property name="handlers">
+            <list>
+                <bean class="com.borqs.server.pubapi.CommentApi">
+                    <property name="account" ref="logic.account"/>
+                    <property name="comment" ref="logic.comment"/>
+                    <property name="login">
+                        <bean class="com.borqs.server.platform.test.mock.SteveAndBill" factory-method="login"/>
+                    </property>
+                    <property name="app">
+                        <bean class="com.borqs.server.platform.test.mock.SteveAndBill" factory-method="app"/>
+                    </property>
+                    <property name="commentQueue" ref="memMQ"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+</beans>

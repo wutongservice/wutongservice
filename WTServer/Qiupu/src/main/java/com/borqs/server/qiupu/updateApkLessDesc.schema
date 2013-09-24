@@ -1,0 +1,9 @@
+{
+    "name":"qapk_notin_pool",
+    "columns": {
+        "package": "string",
+        "version_code": "int",
+        "app_name": "string",
+        "description": "string"
+    }
+}

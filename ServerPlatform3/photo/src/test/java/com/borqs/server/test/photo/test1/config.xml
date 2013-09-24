@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+
+       default-init-method="init" default-destroy-method="destroy">
+    <!--Sql.executor-->
+    <bean id="sql.executor" class="com.borqs.server.platform.sql.SqlExecutor" scope="singleton">
+        <property name="connectionFactory">
+            <bean class="com.borqs.server.platform.sql.SimpleConnectionFactory" scope="singleton"/>
+        </property>
+    </bean>
+
+    <!-- Tables -->
+    <bean id="table.album" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db" value="jdbc:mysql://192.168.5.22:3306/test_account3?user=root&amp;password=111111&amp;allowMultiQueries=true"/>
+        <property name="table" value="album"/>
+    </bean>
+    <bean id="table.photo" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db" value="jdbc:mysql://192.168.5.22:3306/test_account3?user=root&amp;password=111111&amp;allowMultiQueries=true"/>
+        <property name="table" value="photos"/>
+    </bean>
+             <bean id="table.conversation0" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db" value="jdbc:mysql://192.168.5.22:3306/test_account3?user=root&amp;password=111111"/>
+        <property name="table" value="conversation0"/>
+    </bean>
+
+    <bean id="table.conversation1" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db" value="jdbc:mysql://192.168.5.22:3306/test_account3?user=root&amp;password=111111"/>
+        <property name="table" value="conversation1"/>
+    </bean>
+
+     <bean id="sfs.photo" class="com.borqs.server.platform.sfs.local.LocalSFS" scope="singleton">
+           <property name="root" value="D:/2workspace/photos"/>
+    </bean>
+
+    <!-- Logic -->
+    <bean id="logic.account" class="com.borqs.server.platform.test.mock.SteveAndBill" factory-method="account" scope="singleton">
+    </bean>
+         <bean id="logic.conversation" class="com.borqs.server.impl.conversation.ConversationImpl" scope="singleton">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="convTable0" ref="table.conversation0"/>
+        <property name="convTable1" ref="table.conversation1"/>
+        <property name="account" ref="logic.account"/>
+    </bean>
+    <bean id="logic.photo" class="com.borqs.server.impl.photo.PhotoImpl" scope="singleton">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="conversationLogic" ref="logic.conversation"/>
+        <property name="accountLogic" ref="logic.account"/>
+        <property name="path" value="D:/2workspace/photos"/>
+        <property name="albumTable" ref="table.album"/>
+        <property name="photoTable" ref="table.photo"/>
+
+    </bean>
+
+
+
+    <bean id="service.telnetLog" class="com.borqs.server.platform.log.TelnetAppenderService" factory-method="getInstance">
+        <property name="address" value="*:11300" />
+    </bean>
+
+    <!-- app -->
+    <bean id="main" class="com.borqs.server.platform.service.ServiceApp">
+        <property name="services">
+            <list>
+                <ref bean="service.telnetLog"/>
+            </list>
+        </property>
+    </bean>
+
+
+
+</beans>

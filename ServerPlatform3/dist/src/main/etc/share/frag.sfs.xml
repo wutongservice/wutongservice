@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+
+       default-init-method="init" default-destroy-method="destroy">
+
+    <!--
+    <bean id="sfs.profileImage" class="com.borqs.server.platform.sfs.local.LocalSFS" scope="singleton">
+        <property name="root" value="${sfs.profileImageRoot}"/>
+    </bean>
+    <bean id="sfs.linkImage" class="com.borqs.server.platform.sfs.local.LocalSFS" scope="singleton">
+        <property name="root" value="${link.path}"/>
+    </bean>
+    -->
+    <bean id="sfs.profileImage" class="com.borqs.server.platform.sfs.ftp.FtpSFS" scope="singleton">
+        <property name="ftpRoot" value="${sfs.profileImageRoot}"/>
+    </bean>
+    <bean id="sfs.linkImage" class="com.borqs.server.platform.sfs.ftp.FtpSFS" scope="singleton">
+        <property name="ftpRoot" value="${link.path}"/>
+    </bean>
+    <bean id="sfs.photoImage" class="com.borqs.server.platform.sfs.ftp.FtpSFS" scope="singleton">
+        <property name="ftpRoot" value="${photo.path}"/>
+    </bean>
+    <bean id="sfs.apk" class="com.borqs.server.platform.sfs.ftp.FtpSFS" scope="singleton">
+        <property name="ftpRoot" value="${apk.path}"/>
+    </bean>
+    <bean id="sfs.apkSubImg" class="com.borqs.server.platform.sfs.ftp.FtpSFS" scope="singleton">
+        <property name="ftpRoot" value="${apkSubImg.path}"/>
+    </bean>
+    <bean id="sfs.video" class="com.borqs.server.platform.sfs.ftp.FtpSFS" scope="singleton">
+        <property name="ftpRoot" value="${video.path}"/>
+    </bean>
+    <bean id="sfs.audio" class="com.borqs.server.platform.sfs.ftp.FtpSFS" scope="singleton">
+        <property name="ftpRoot" value="${audio.path}"/>
+    </bean>
+    <bean id="sfs.staticfile" class="com.borqs.server.platform.sfs.ftp.FtpSFS" scope="singleton">
+        <property name="ftpRoot" value="${staticfile.path}"/>
+    </bean>
+    <bean id="sfs.config" class="com.borqs.server.platform.sfs.ftp.FtpSFS" scope="singleton">
+        <property name="ftpRoot" value="${configfile.path}"/>
+    </bean>
+</beans>

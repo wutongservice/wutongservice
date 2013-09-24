@@ -1,0 +1,12 @@
+#!/usr/bin/expect
+
+set host [lindex $argv 0]
+set user [lindex $argv 1]
+set password [lindex $argv 2]
+set local [lindex $argv 3]
+set remote [lindex $argv 4]
+
+spawn scp -r $local "$user@$host:$remote"
+set password [lindex $argv 2]
+expect "password" {send "$password\r"}
+expect eof

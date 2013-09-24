@@ -1,0 +1,16 @@
+{
+    "name":"comment",
+    "columns": {
+        "comment_id": "int",
+        "target": "string",
+        "created_time": "int",
+        "commenter": "int",
+        "commenter_name": "string",
+        "message": "string",
+        "device": "string",
+        "can_like": "boolean",
+        "destroyed_time": "int",
+        "add_to": "string"
+    }
+}
+

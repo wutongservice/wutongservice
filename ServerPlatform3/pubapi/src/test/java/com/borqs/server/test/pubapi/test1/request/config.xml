@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+
+       default-init-method="init" default-destroy-method="destroy">
+    <!--Sql.executor-->
+    <bean id="sql.executor" class="com.borqs.server.platform.sql.SqlExecutor" scope="singleton">
+        <property name="connectionFactory">
+            <bean class="com.borqs.server.platform.sql.SimpleConnectionFactory" scope="singleton"/>
+        </property>
+    </bean>
+
+    <!-- Tables -->
+    <bean id="table.request" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="jdbc:mysql://localhost:3306/account_platform_test?user=root&amp;allowMultiQueries=true"/>
+        <property name="table" value="request"/>
+    </bean>
+
+    <bean id="table.request_index" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="jdbc:mysql://localhost:3306/account_platform_test?user=root&amp;allowMultiQueries=true"/>
+        <property name="table" value="request_index"/>
+    </bean>
+
+    <!-- Logic -->
+    <bean id="logic.account" class="com.borqs.server.platform.test.mock.ServerTeam" factory-method="account" scope="singleton">
+    </bean>
+
+    <bean id="logic.request" class="com.borqs.server.impl.request.RequestImpl" scope="singleton">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="requestTable" ref="table.request"/>
+        <property name="requestIndex" ref="table.request_index"/>
+        <property name="account" ref="logic.account"/>
+    </bean>
+
+
+    <bean id="servlet.pubApi" class="com.borqs.server.platform.web.topaz.HttpApiServlet">
+        <property name="handlers">
+            <list>
+                <bean class="com.borqs.server.pubapi.RequestApi">
+                    <property name="account" ref="logic.account"/>
+                    <property name="request" ref="logic.request"/>
+                    <property name="login">
+                        <bean class="com.borqs.server.platform.test.mock.ServerTeam" factory-method="login"/>
+                    </property>
+                    <property name="app">
+                        <bean class="com.borqs.server.platform.test.mock.ServerTeam" factory-method="app"/>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+</beans>

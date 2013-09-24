@@ -1,0 +1,1487 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type">
+<title>播思通知服务API v0.3</title></head>
+
+<body>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+		<span style="font-weight: bold; font-size: 14pt; font-family: '宋体';">播思通知服务</span><span style="font-weight: bold; font-size: 14pt; font-family: '宋体';">API&nbsp;v0.4</span><span style="font-weight: bold; font-size: 14pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="text-indent: 1.15pt; margin-bottom: 0pt; margin-top: 0pt; text-align: justify;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">一、</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">术语与约定</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<span style="font-weight: normal; font-size: 10.5pt; font-family: 'Wingdings';"></span>
+	<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">{host}<font face="宋体">：指通知服务具体部署的主机</font><font face="Times New Roman">IP</font><font face="宋体">或 者域名。</font>
+	</span>
+	<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+	</span>
+	<br>
+	<span style="font-weight: normal; font-size: 10.5pt; font-family: 'Wingdings';"></span>
+	<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">{port}<font face="宋体">：指通知服务的访问端口号。</font>
+	</span>
+	<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+	</span>
+	<br>
+	<span style="font-size: 10.5pt; font-family: 'Wingdings';"></span>
+	<span style="font-size: 10.5pt; font-family: '宋体';">{ticket}<font face="宋体">：身份认证信息。</font>
+	</span>
+	<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+	</span>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: justify;">
+		<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 21pt; text-indent: -21pt; margin-bottom: 0pt; margin-top: 0pt; text-align: justify;">
+		<span style="font-weight: normal; font-size: 10.5pt; font-family: 'Wingdings';"></span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">(</span><span style="color: rgb(255, 0, 0); font-weight: normal; font-size: 10.5pt; font-family: '宋体';">暂不处理</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">)<font face="宋体">：当前不需要处理的内容，但以后可能需要处理的内容。</font>
+		</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 21pt; text-indent: -21pt; margin-bottom: 0pt; margin-top: 0pt; text-align: justify;">
+		<span style="font-weight: normal; font-size: 10.5pt; font-family: 'Wingdings';"></span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">(</span><span style="color: rgb(255, 0, 0); font-weight: normal; font-size: 10.5pt; font-family: '宋体';">暂时使用</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">)<font face="宋体">：是指为了当前开发需要保留的内容，应用开发完成后具有此标记的内容可能会被移除。</font>
+		</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 21pt; text-indent: -21pt; margin-bottom: 0pt; margin-top: 0pt; text-align: justify;">
+		<span style="font-weight: normal; font-size: 10.5pt; font-family: 'Wingdings';"></span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">请求参数列表中，加粗行为当前需要实现的参数。</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: justify;">
+		<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	<br></p>
+	<p class="p0" style="text-indent: 1.15pt; margin-bottom: 0pt; margin-top: 0pt; text-align: justify;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">二、</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">通知结构</span></p><table style="padding: 0pt 5.4pt; border-collapse: collapse; margin-left: 6.8pt;"><tbody><tr style="height: 9.75pt;"><td style="border: 0.5pt solid rgb(0, 0, 0); padding: 0pt 5.4pt; width: 56.25pt;" valign="top" width="75"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;"><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Name</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: solid solid solid none; border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 51pt;" valign="top" width="68"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;"><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Type</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: solid solid solid none; border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 41.6pt;" valign="top" width="55"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;"><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Range</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: solid solid solid none; border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;"><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Remark</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td></tr><tr style="height: 9.75pt;"><td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0); border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 56.25pt;" valign="top" width="75"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">id</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 51pt;" valign="top" width="68"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">String</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 41.6pt;" valign="top" width="55"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">通知<font face="Times New Roman">ID</font></span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td></tr><tr style="height: 9.75pt;"><td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0); border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 56.25pt;" valign="top" width="75"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">type</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 51pt;" valign="top" width="68"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">String</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 41.6pt;" valign="top" width="55"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">64c</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">通知类型</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td></tr><tr style="height: 9.75pt;"><td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0); border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 56.25pt;" valign="top" width="75"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">appId</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 51pt;" valign="top" width="68"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">String</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 41.6pt;" valign="top" width="55"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">64c</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">应用<font face="Times New Roman">ID</font></span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td></tr><tr style="height: 9.75pt;"><td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0); border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 56.25pt;" valign="top" width="75"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">senderId</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 51pt;" valign="top" width="68"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">String</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 41.6pt;" valign="top" width="55"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">64c</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">发送者<font face="Times New Roman">ID</font></span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td></tr><tr style="height: 9.75pt;"><td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0); border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 56.25pt;" valign="top" width="75"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">receiverId</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 51pt;" valign="top" width="68"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">String</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 41.6pt;" valign="top" width="55"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">64c</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">接收者<font face="Times New Roman">ID</font></span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td></tr><tr style="height: 9.75pt;"><td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0); border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 56.25pt;" valign="top" width="75"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">uri</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 51pt;" valign="top" width="68"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">String</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 41.6pt;" valign="top" width="55"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">1024</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">网址</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td></tr><tr style="height: 9.75pt;"><td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0); border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 56.25pt;" valign="top" width="75"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">date</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 51pt;" valign="top" width="68"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">Long</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 41.6pt;" valign="top" width="55"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">通知发送时间</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td></tr><tr style="height: 9.75pt;"><td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0); border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 56.25pt;" valign="top" width="75"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">processed</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 51pt;" valign="top" width="68"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">Int</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 41.6pt;" valign="top" width="55"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">0,1</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">通知处理标记，<font face="Times New Roman">0</font><font face="宋体">－未处理；</font><font face="Times New Roman">1</font><font face="宋体">－已处理</font></span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td></tr><tr style="height: 9.75pt;"><td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0); border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 56.25pt;" valign="top" width="75"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">action</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 51pt;" valign="top" width="68"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">String</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 41.6pt;" valign="top" width="55"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">64c</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">消息动作</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td></tr><tr style="height: 9.75pt;"><td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0); border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 56.25pt;" valign="top" width="75"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">data</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 51pt;" valign="top" width="68"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">String</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 41.6pt;" valign="top" width="55"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">2048c</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td><td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279"><p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;"><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">内容，最多<font face="Times New Roman">2048</font><font face="宋体">个字符</font></span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p></span></p></td></tr></tbody></table><p class="p0" style="text-indent: 1.15pt; margin-bottom: 0pt; margin-top: 0pt; text-align: justify;"><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><br></span></p><p class="p0" style="text-indent: 1.15pt; margin-bottom: 0pt; margin-top: 0pt; text-align: justify;"><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">三、</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">接口及说明</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 21.25pt; text-indent: -21.25pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: 'Times New Roman';">1.&nbsp;</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">informations/send</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">功能</span><span style="font-size: 10.5pt; font-family: '宋体';">：
+			用户发送一条通知</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">地址</span><span style="font-size: 10.5pt; font-family: '宋体';">：</span><span style="font-size: 10.5pt; font-family: '宋体';">http://{host}:{port}/bmb/service/informations/send.json</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">响应数据格式</span><span style="font-size: 10.5pt; font-family: '宋体';">：<font face="Times New Roman">JSON</font>
+		</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">HTTP<font face="宋体">请求方式</font>
+		</span><span style="font-size: 10.5pt; font-family: '宋体';">：<font face="Times New Roman">POST</font>
+		</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">权限控制</span><span style="font-size: 10.5pt; font-family: '宋体';">： 是</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">请求参数：</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<table style="padding: 0pt 5.4pt; border-collapse: collapse; margin-left: 6.8pt;">
+		<tbody>
+			<tr style="height: 9.75pt;">
+				<td style="border: 0.5pt solid rgb(0, 0, 0); padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Name</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: solid solid solid none; border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Type</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: solid solid solid none; border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 57.2pt;" valign="top" width="76">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Required</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: solid solid solid none; border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 44.6pt;" valign="top" width="59">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Range</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: solid solid solid none; border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Remark</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+			</tr>
+			<tr style="height: 9.75pt;">
+				<td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0); border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">ticket</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">String</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 57.2pt;" valign="top" width="76">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">True</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 44.6pt;" valign="top" width="59">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">身份验证信息</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+			</tr>
+		</tbody>
+	</table>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">请求示例</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">请求<font face="Times New Roman">URL</font>
+		</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">http://{host}:{port}/bmb/service/informations/send.json?ticket={ticket}</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">请求数据</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">{"appId":"testapp","receiverId":"123","title":"this&nbsp;is&nbsp;a&nbsp;test&nbsp;title",&nbsp;"type":"type1","action":"action.test",
+"data":"this is test data."}</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">返回结果</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">{"result":{"status":"success"}}</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">或者</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">{"result":{"status":"failed"}}</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 21.25pt; text-indent: -21.25pt; margin-bottom: 0pt; margin-top: 15pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: 'Times New Roman';">2.&nbsp;</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">informations/list</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">功能：</span><span style="font-size: 10.5pt; font-family: '宋体';">获
+			取用户通知列表</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">地址</span><span style="font-size: 10.5pt; font-family: '宋体';">：</span><span style="font-size: 10.5pt; font-family: '宋体';">http://{host}:{port}/bmb/service/informations/list.json</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">响应数据格式</span><span style="font-size: 10.5pt; font-family: '宋体';">：<font face="Times New Roman">JSON</font>
+		</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">HTTP<font face="宋体">请求方式</font>
+		</span><span style="font-size: 10.5pt; font-family: '宋体';">：<font face="Times New Roman">GET</font>
+		</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">权限控制</span><span style="font-size: 10.5pt; font-family: '宋体';">： 是</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">请求参数：</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<table style="padding: 0pt 5.4pt; border-collapse: collapse; margin-left: 6.8pt;">
+		<tbody>
+			<tr style="height: 9.75pt;">
+				<td style="border: 0.5pt solid rgb(0, 0, 0); padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Name</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: solid solid solid none; border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Type</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: solid solid solid none; border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 54.2pt;" valign="top" width="72">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Required</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: solid solid solid none; border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 47.6pt;" valign="top" width="63">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Range</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: solid solid solid none; border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Remark</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+			</tr>
+			<tr style="height: 9.75pt;">
+				<td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0); border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">ticket</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">String</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 54.2pt;" valign="top" width="72">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">True</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 47.6pt;" valign="top" width="63">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">身份验证信息</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+			</tr>
+			<tr style="height: 9.75pt;">
+				<td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0); border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">status</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">int</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 54.2pt;" valign="top" width="72">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">False</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 47.6pt;" valign="top" width="63">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">0<font face="宋体">或者</font><font face="Times New Roman">1</font>
+						</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">0<font face="宋体">－表示未处理（默认）；</font><font face="Times New Roman">1</font><font face="宋体">－ 表示已处理</font>
+						</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+			</tr>
+			<tr style="height: 9.75pt;">
+				<td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0); border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="color: rgb(0, 128, 0); font-weight: normal; font-size: 10.5pt; font-family: '宋体';">from</span><span style="color: rgb(0, 128, 0); font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="color: rgb(0, 128, 0); font-weight: normal; font-size: 10.5pt; font-family: '宋体';">Int</span><span style="color: rgb(0, 128, 0); font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 54.2pt;" valign="top" width="72">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="color: rgb(0, 128, 0); font-weight: normal; font-size: 10.5pt; font-family: '宋体';">False</span><span style="color: rgb(0, 128, 0); font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 47.6pt;" valign="top" width="63">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="color: rgb(0, 128, 0); font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="color: rgb(0, 128, 0); font-weight: normal; font-size: 10.5pt; font-family: '宋体';">从第几条通知开始取，默认为<font face="Times New Roman">0</font>
+						</span><span style="color: rgb(0, 128, 0); font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+			</tr>
+			<tr style="height: 9.75pt;">
+				<td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0); border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="color: rgb(0, 128, 0); font-weight: normal; font-size: 10.5pt; font-family: '宋体';">size</span><span style="color: rgb(0, 128, 0); font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="color: rgb(0, 128, 0); font-weight: normal; font-size: 10.5pt; font-family: '宋体';">Int</span><span style="color: rgb(0, 128, 0); font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 54.2pt;" valign="top" width="72">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="color: rgb(0, 128, 0); font-weight: normal; font-size: 10.5pt; font-family: '宋体';">False</span><span style="color: rgb(0, 128, 0); font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 47.6pt;" valign="top" width="63">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="color: rgb(0, 128, 0); font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="color: rgb(0, 128, 0); font-weight: normal; font-size: 10.5pt; font-family: '宋体';">取多少条通知，默认为<font face="Times New Roman">20,&nbsp;-1</font><font face="宋体">时取所有符合条件的通知</font>
+						</span><span style="color: rgb(0, 128, 0); font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+			</tr>
+		</tbody>
+	</table>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">请求示例</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">请求数据</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">http://{host}:{port}/bmb/service/informations/list.json?ticket={ticket}&amp;status=0</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">返回结果</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">{</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"</span><span style="color: rgb(0, 128, 0); font-weight: bold; font-size: 10.5pt; font-family: '宋体';">result</span><span style="font-size: 10.5pt; font-family: '宋体';">":{</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 21pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"count":1,</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 21pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"informations":[</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 42pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">{</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"id":"3",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"type":"type1",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"date":0,</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"processed":0,</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"senderId":"234",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"receiverId":"123",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"title":"this&nbsp;is&nbsp;a&nbsp;test&nbsp;title",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"uri":null,</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"appId":"123",</span></p><p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;"><span style="font-size: 10.5pt; font-family: '宋体';">"action":"action.test",</span><br><span style="font-size: 10.5pt; font-family: '宋体';">&nbsp;&nbsp;&nbsp; "data":"this is test data."</span><span style="font-size: 10.5pt; font-family: '宋体';"></span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 42pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">},</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 42pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">{</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"id":"4",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"type":"type1",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"date":0,</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"processed":0,</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"senderId":"234",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"receiverId":"456",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"title":"this&nbsp;is&nbsp;a&nbsp;test&nbsp;title",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"uri":null,</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"appId":"123"</span><span style="font-size: 10.5pt; font-family: '宋体';">,</span></p><p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;"><span style="font-size: 10.5pt; font-family: '宋体';">"action":"action.test",</span><br><span style="font-size: 10.5pt; font-family: '宋体';">&nbsp;&nbsp;&nbsp; "data":"this is test data."</span></p><p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;"><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 42pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">}</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 21pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">]</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">}</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">}</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 21.25pt; text-indent: -21.25pt; margin-bottom: 0pt; margin-top: 15pt;">
+		<span style="color: rgb(0, 128, 0); font-weight: bold; font-size: 10.5pt; font-family: 'Times New Roman';">3.&nbsp;</span><span style="color: rgb(0, 128, 0); font-weight: bold; font-size: 10.5pt; font-family: '宋体';">informations/listbyid</span><span style="color: rgb(0, 128, 0); font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">功能：</span><span style="font-size: 10.5pt; font-family: '宋体';">获
+			取用户通知列表</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">地址</span><span style="font-size: 10.5pt; font-family: '宋体';">：</span><span style="font-size: 10.5pt; font-family: '宋体';">http://{host}:{port}/bmb/service/informations/listbyid.json</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">响应数据格式</span><span style="font-size: 10.5pt; font-family: '宋体';">：<font face="Times New Roman">JSON</font>
+		</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">HTTP<font face="宋体">请求方式</font>
+		</span><span style="font-size: 10.5pt; font-family: '宋体';">：<font face="Times New Roman">GET</font>
+		</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">权限控制</span><span style="font-size: 10.5pt; font-family: '宋体';">： 是</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">请求参数：</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<table style="padding: 0pt 5.4pt; border-collapse: collapse; margin-left: 6.8pt;">
+		<tbody>
+			<tr style="height: 9.75pt;">
+				<td style="border: 0.5pt solid rgb(0, 0, 0); padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Name</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: solid solid solid none; border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Type</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: solid solid solid none; border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 54.2pt;" valign="top" width="72">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Required</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: solid solid solid none; border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 47.6pt;" valign="top" width="63">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Range</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: solid solid solid none; border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Remark</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+			</tr>
+			<tr style="height: 9.75pt;">
+				<td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0); border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">ticket</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">String</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 54.2pt;" valign="top" width="72">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">True</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 47.6pt;" valign="top" width="63">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">身份验证信息</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+			</tr>
+			<tr style="height: 9.75pt;">
+				<td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0); border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">status</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">int</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 54.2pt;" valign="top" width="72">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">False</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 47.6pt;" valign="top" width="63">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">0<font face="宋体">或者</font><font face="Times New Roman">1</font>
+						</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">0<font face="宋体">－表示未处理；</font><font face="Times New Roman">1</font><font face="宋体">－表示已处理</font>
+						</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+			</tr>
+			<tr style="height: 9.75pt;">
+				<td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0); border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">mid</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">Int</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 54.2pt;" valign="top" width="72">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">False</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 47.6pt;" valign="top" width="63">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">起始位置，<font face="Times New Roman">ID</font><font face="宋体">号，为空时取所有符合条件的通知</font>
+						</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+			</tr>
+			<tr style="height: 9.75pt;">
+				<td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0); border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">count</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">Int</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 54.2pt;" valign="top" width="72">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">False</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 47.6pt;" valign="top" width="63">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">取多少条通知，默认为<font face="Times New Roman">null</font><font face="宋体">。</font><font face="Times New Roman">Count&lt;0</font><font face="宋体">时取</font><font face="Times New Roman">mid</font><font face="宋体">向前取；</font><font face="Times New Roman">count&gt;0</font><font face="宋体">时向后取；</font><font face="Times New Roman">null</font><font face="宋体">或者</font><font face="Times New Roman">0</font><font face="宋体">时向后取所有</font>
+						</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+			</tr>
+		</tbody>
+	</table>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">请求示例</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">请求数据</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">http://{host}:{port}/bmb/service/informations/listbyid.json?ticket={ticket}&amp;status=0&amp;mid={msgid}&amp;count=2</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">返回结果</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">{</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"</span><span style="color: rgb(0, 128, 0); font-weight: bold; font-size: 10.5pt; font-family: '宋体';">result</span><span style="font-size: 10.5pt; font-family: '宋体';">":{</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 21pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"total":10,</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 21pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"count":1,</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 21pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"informations":[</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 42pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">{</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"id":"3",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"type":"type1",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"date":0,</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"processed":0,</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"senderId":"234",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"receiverId":"123",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"title":"this&nbsp;is&nbsp;a&nbsp;test&nbsp;title",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"uri":null,</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"appId":"123"</span><span style="font-size: 10.5pt; font-family: '宋体';">,</span></p><p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;"><span style="font-size: 10.5pt; font-family: '宋体';">"action":"action.test",</span><br><span style="font-size: 10.5pt; font-family: '宋体';">&nbsp;&nbsp;&nbsp; "data":"this is test data."</span></p><p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;"><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 42pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">},</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 42pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">{</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"id":"4",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"type":"type1",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"date":0,</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"processed":0,</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"senderId":"234",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"receiverId":"456",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"title":"this&nbsp;is&nbsp;a&nbsp;test&nbsp;title",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"uri":null,</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"appId":"123"</span><span style="font-size: 10.5pt; font-family: '宋体';">,</span></p><p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;"><span style="font-size: 10.5pt; font-family: '宋体';">"action":"action.test",</span><br><span style="font-size: 10.5pt; font-family: '宋体';">&nbsp;&nbsp;&nbsp; "data":"this is test data."</span></p><p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;"><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 42pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">}</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 21pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">]</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">}</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">}</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 21.25pt; text-indent: -21.25pt; margin-bottom: 0pt; margin-top: 15pt;">
+		<span style="color: rgb(0, 128, 0); font-weight: bold; font-size: 10.5pt; font-family: 'Times New Roman';">4.&nbsp;</span><span style="color: rgb(0, 128, 0); font-weight: bold; font-size: 10.5pt; font-family: '宋体';">informations/count</span><span style="color: rgb(0, 128, 0); font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">功能：</span><span style="font-size: 10.5pt; font-family: '宋体';">获
+			取用户通知总数</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">地址</span><span style="font-size: 10.5pt; font-family: '宋体';">：</span><span style="font-size: 10.5pt; font-family: '宋体';">http://{host}:{port}/bmb/service/informations/count.json</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">响应数据格式</span><span style="font-size: 10.5pt; font-family: '宋体';">：<font face="Times New Roman">JSON</font>
+		</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">HTTP<font face="宋体">请求方式</font>
+		</span><span style="font-size: 10.5pt; font-family: '宋体';">：<font face="Times New Roman">GET</font>
+		</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">权限控制</span><span style="font-size: 10.5pt; font-family: '宋体';">： 是</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">请求参数：</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<table style="padding: 0pt 5.4pt; border-collapse: collapse; margin-left: 6.8pt;">
+		<tbody>
+			<tr style="height: 9.75pt;">
+				<td style="border: 0.5pt solid rgb(0, 0, 0); padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Name</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: solid solid solid none; border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Type</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: solid solid solid none; border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 53.45pt;" valign="top" width="71">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Required</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: solid solid solid none; border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 48.35pt;" valign="top" width="64">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Range</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: solid solid solid none; border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Remark</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+			</tr>
+			<tr style="height: 9.75pt;">
+				<td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0); border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">ticket</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">String</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 53.45pt;" valign="top" width="71">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">True</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 48.35pt;" valign="top" width="64">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">身份验证信息</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+			</tr>
+			<tr style="height: 9.75pt;">
+				<td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0); border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">uid</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">String</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 53.45pt;" valign="top" width="71">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">True</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 48.35pt;" valign="top" width="64">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">用户<font face="Times New Roman">ID</font>
+						</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+			</tr>
+			<tr style="height: 9.75pt;">
+				<td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0); border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">status</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">int</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 53.45pt;" valign="top" width="71">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">False</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 48.35pt;" valign="top" width="64">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">0<font face="宋体">或者</font><font face="Times New Roman">1</font>
+						</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">0<font face="宋体">－表示未处理（默认）；</font><font face="Times New Roman">1</font><font face="宋体">－ 表示已处理</font>
+						</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+			</tr>
+		</tbody>
+	</table>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">示例</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">请求数据</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">http://{host}:{port}/bmb/service/informations/count.json?ticket={ticket}&amp;status=0</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">返回结果</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">{"result":{"count":"10"}}</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 21.25pt; text-indent: -21.25pt; margin-bottom: 0pt; margin-top: 15pt;">
+		<span style="color: rgb(0, 128, 0); font-weight: bold; font-size: 10.5pt; font-family: 'Times New Roman';">5.&nbsp;</span><span style="color: rgb(0, 128, 0); font-weight: bold; font-size: 10.5pt; font-family: '宋体';">informations/top</span><span style="color: rgb(0, 128, 0); font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">功
+			能：</span><span style="font-size: 10.5pt; font-family: '宋体';">获 取用户最新前<font face="Times New Roman">n</font><font face="宋体">条通知</font>
+		</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">地址</span><span style="font-size: 10.5pt; font-family: '宋体';">：</span><span style="font-size: 10.5pt; font-family: '宋体';">http://{host}:{port}/bmb/service/informations/top.json</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">响应数据格式</span><span style="font-size: 10.5pt; font-family: '宋体';">：<font face="Times New Roman">JSON</font>
+		</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">HTTP<font face="宋体">请求方式</font>
+		</span><span style="font-size: 10.5pt; font-family: '宋体';">：<font face="Times New Roman">GET</font>
+		</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">权限控制</span><span style="font-size: 10.5pt; font-family: '宋体';">： 是</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">请求参数：</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<table style="padding: 0pt 5.4pt; border-collapse: collapse; margin-left: 6.8pt;">
+		<tbody>
+			<tr style="height: 9.75pt;">
+				<td style="border: 0.5pt solid rgb(0, 0, 0); padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Name</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: solid solid solid none; border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Type</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: solid solid solid none; border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 54.2pt;" valign="top" width="72">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Required</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: solid solid solid none; border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 47.6pt;" valign="top" width="63">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Range</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: solid solid solid none; border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Remark</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+			</tr>
+			<tr style="height: 9.75pt;">
+				<td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0); border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">ticket</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">String</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 54.2pt;" valign="top" width="72">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">True</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 47.6pt;" valign="top" width="63">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">身份验证信息</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+			</tr>
+			<tr style="height: 9.75pt;">
+				<td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0); border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">status</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">int</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 54.2pt;" valign="top" width="72">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">False</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 47.6pt;" valign="top" width="63">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">0<font face="宋体">或者</font><font face="Times New Roman">1</font>
+						</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">0<font face="宋体">－表示未处理（默认）；</font><font face="Times New Roman">1</font><font face="宋体">－ 表示已处理</font>
+						</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+			</tr>
+			<tr style="height: 9.75pt;">
+				<td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0); border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">topn</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-size: 10.5pt; font-family: '宋体';">Int</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 54.2pt;" valign="top" width="72">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-size: 10.5pt; font-family: '宋体';">False</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 47.6pt;" valign="top" width="63">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-size: 10.5pt; font-family: '宋体';">获取最新的前<font face="Times New Roman">n</font><font face="宋体">条 信息，默认为</font><font face="Times New Roman">5</font><font face="宋体">条</font>
+						</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+			</tr>
+		</tbody>
+	</table>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">请求示例</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">请求数据</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">http://{host}:{port}/bmb/service/informations/top.json?ticket={ticket}&amp;status=0&amp;topn=2</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">返回结果</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">{</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"</span><span style="color: rgb(0, 128, 0); font-weight: bold; font-size: 10.5pt; font-family: '宋体';">result</span><span style="font-size: 10.5pt; font-family: '宋体';">":{</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 21pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"count":1,</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 21pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"informations":[</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 42pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">{</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"id":"3",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"type":"type1",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"date":0,</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"processed":0,</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"senderId":"234",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"receiverId":"123",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"title":"this&nbsp;is&nbsp;a&nbsp;test&nbsp;title",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"uri":null,</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"appId":"123"</span><span style="font-size: 10.5pt; font-family: '宋体';">,</span></p><p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;"><span style="font-size: 10.5pt; font-family: '宋体';">"action":"action.test",</span><br><span style="font-size: 10.5pt; font-family: '宋体';">&nbsp;&nbsp;&nbsp; "data":"this is test data."</span></p><p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;"><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 42pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">},</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 42pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">{</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"id":"4",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"type":"type1",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"date":0,</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"processed":0,</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"senderId":"234",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"receiverId":"456",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"title":"this&nbsp;is&nbsp;a&nbsp;test&nbsp;title",</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"uri":null,</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">"appId":"123"</span><span style="font-size: 10.5pt; font-family: '宋体';">,</span></p><p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;"><span style="font-size: 10.5pt; font-family: '宋体';">"action":"action.test",</span><br><span style="font-size: 10.5pt; font-family: '宋体';">&nbsp;&nbsp;&nbsp; "data":"this is test data."</span></p><p class="p0" style="margin-left: 63pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;"><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 42pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">}</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 21pt; text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">]</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="text-indent: 21pt; margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">}</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">}</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-left: 21.25pt; text-indent: -21.25pt; margin-bottom: 0pt; margin-top: 15pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: 'Times New Roman';">6.&nbsp;</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">informations/done</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">功能</span><span style="font-size: 10.5pt; font-family: '宋体';">： 通知处理标记</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">地址</span><span style="font-size: 10.5pt; font-family: '宋体';">：</span><span style="font-size: 10.5pt; font-family: '宋体';">http://{host}:{port}/bmb/service/informations/done.json</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">响应数据格式</span><span style="font-size: 10.5pt; font-family: '宋体';">：<font face="Times New Roman">JSON</font>
+		</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">HTTP<font face="宋体">请求方式</font>
+		</span><span style="font-size: 10.5pt; font-family: '宋体';">：<font face="Times New Roman">PUT</font>
+		</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">权限控制</span><span style="font-size: 10.5pt; font-family: '宋体';">： 是</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">请求参数：</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<table style="padding: 0pt 5.4pt; border-collapse: collapse; margin-left: 6.8pt;">
+		<tbody>
+			<tr style="height: 9.75pt;">
+				<td style="border: 0.5pt solid rgb(0, 0, 0); padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Name</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: solid solid solid none; border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Type</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: solid solid solid none; border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 57.2pt;" valign="top" width="76">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Required</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: solid solid solid none; border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 44.6pt;" valign="top" width="59">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Range</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: solid solid solid none; border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">Remark</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+			</tr>
+			<tr style="height: 9.75pt;">
+				<td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0); border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">ticket</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">String</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 57.2pt;" valign="top" width="76">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">True</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 44.6pt;" valign="top" width="59">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">身份验证信息</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+			</tr>
+			<tr style="height: 9.75pt;">
+				<td style="border-style: none solid solid; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0); border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">mid</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 50.9pt;" valign="top" width="67">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">String</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 57.2pt;" valign="top" width="76">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">True</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 44.6pt;" valign="top" width="59">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+				<td style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(0, 0, 0) rgb(0, 0, 0) -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 209.65pt;" valign="top" width="279">
+					<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+						<span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">通知<font face="Times New Roman">ID</font>
+						</span><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+						</span>
+					</p></td>
+			</tr>
+		</tbody>
+	</table>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';">请求示例</span><span style="font-weight: bold; font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">请求数据</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">http://{host}:{port}/bmb/service/informations/done.json?ticket={ticket}&amp;mid=id1</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">返回结果</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">{"result":{"status":"success"}}</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">或者</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';">{"result":{"status":"failed"}}</span><span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';"><o:p></o:p>
+		</span>
+	</p>
+	<p class="p0" style="margin-bottom: 0pt; margin-top: 0pt;">
+		<span style="font-size: 10.5pt; font-family: '宋体';"></span>
+	</p>
+</body></html>

@@ -1,0 +1,39 @@
+#!/usr/bin/python
+
+import sys
+import os
+import os.path
+import glob
+
+if 'win' in sys.platform:
+    sep = ';' 
+else:
+    sep = ':' 
+
+
+def to_xm(s):
+    ss = s.split('-', 2)
+    if len(ss) >= 2:
+        return ' -Xms%sm -Xmx%sm ' % (ss[0], ss[1])
+    else:
+        return ''
+
+
+xm = to_xm(sys.argv[1])
+    
+basedir = os.path.abspath(sys.argv[0] + '/../..')
+modjars = glob.glob(os.path.join(basedir, 'mod/*.jar'))
+libjars = glob.glob(os.path.join(basedir, 'lib/*.jar'))
+
+if len(modjars) + len(libjars) > 0:
+    cmd = 'java -Xms128m -Xmx512m -verbose:gc -Xloggc:/home/zhengwei/work2/logs/gc/gc.log -XX:ErrorFile=/home/zhengwei/work2/logs/jvm/java_error_%%p.log -classpath %s:%s ' % (sep.join(modjars), sep.join(libjars))
+else:
+    cmd = 'java -Xms128m -Xmx512m -verbose:gc -Xloggc:/home/zhengwei/work2/logs/gc/gc.log -XX:ErrorFile=/home/zhengwei/work2/logs/jvm/java_error_%%p.log'
+
+for x in sys.argv[1:]:
+    cmd = cmd + " '" + x + "' "
+#cmd += ' '.join(sys.argv[1:])
+
+# GO
+print cmd
+os.system(cmd)

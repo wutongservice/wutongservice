@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>  
+    <title>软件包信息管理</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META content="MSHTML 5.50.4613.1700" name=GENERATOR>	
+  </head>
+  
+  <body>
+    目前秋浦服务器共有${appCount}个应用，今日共上传${todayCount}个应用，
+    <br>共有${apkNeedInfoCount}个apk需要手工填入信息，共有${appNeedInfoCount}个应用需要手工填入信息。
+    <table border=0>
+        <form name="XForm" method="post" enctype="multipart/form-data" action="update" onsubmit="return false">
+        <input type="hidden" name="source" value="2" />
+        <tr>
+        <td>请选择需要编辑信息的应用: </td>
+        <td>
+        <select id="packagename" name="packagename">
+        ${qapp}
+        </select>
+        </td>
+        <tr>
+            <td>或输入需要编辑的应用包名: </td>
+            <td><input type="text" name="input_pkg" /></td>
+        </tr>
+        </tr>
+        <tr>
+        	<td colspan="2">描述:</td>
+        </tr>
+        <tr>
+        	<td colspan="2">
+        		<textarea name="apkdesc" rows="20" cols="45"></textarea>
+        	</td>
+        </tr>
+        <tr>
+            <td colspan="2">新版本特性:</td>
+        </tr>
+        <tr>
+             <td colspan="2">
+                <textarea name="recentChange" rows="20" cols="45"></textarea>
+             </td>
+        </tr>
+        <tr>
+        	<td>评分（满分5）: </td>
+        	<td>
+        		<input type="text" name="rating" />
+        	</td>
+        </tr>
+        <tr>
+        <td>分类: </td>
+        <td>
+        <select id="category" name="category">             
+          <option value="${application}">应用</option>    
+          <option value="${game}">游戏</option>  
+        </select>
+        </td>
+        </tr>
+        <tr>
+        <td>子分类: </td>
+        <td>
+        <select id="subcategory" name="subcategory">
+        ${subcategory}
+        </select>
+        </td>
+        </tr>
+        <tr>
+        	<td>中文软件名称: </td>
+        	<td>
+        		<input type="text" name="appname" />
+        	</td>
+        </tr>
+        <tr>
+        	<td>英文软件名称: </td>
+        	<td>
+        		<input type="text" name="app_en_name" />
+        	</td>
+        </tr>
+        <tbody id="tFile">
+        <tr>
+            <td nowrap="nowrap" align="left" colspan="2">软件截图: </td>            
+        </tr>
+        <tr>
+            <td nowrap="nowrap" colspan="2">     
+            <input type="file" maxlength="255" name="screenshot1" size="64">      
+            </td>           
+        </tr>
+        <tr>
+            <td nowrap="nowrap" colspan="2">     
+            <input type="file" maxlength="255" name="screenshot2" size="64">      
+            </td>           
+        </tr>
+        <tr>
+            <td nowrap="nowrap" colspan="2">     
+            <input type="file" maxlength="255" name="screenshot3" size="64">      
+            </td>           
+        </tr>
+        <tr>
+            <td nowrap="nowrap" colspan="2">     
+            <input type="file" maxlength="255" name="screenshot4" size="64">      
+            </td>           
+        </tr>
+        <tr>
+            <td nowrap="nowrap" colspan="2">     
+            <input type="file" maxlength="255" name="screenshot5" size="64">      
+            </td>           
+        </tr>
+        </tbody>            
+        <tr>
+        	<td><input type="button" value="确定" ID="WRITE" onclick="document.XForm.submit();" /></td>
+        	<td><input type="reset" value="重置" /></td>
+        </tr>
+        </form>
+      </table>
+  </body>
+</html>

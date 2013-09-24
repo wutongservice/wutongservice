@@ -1,0 +1,2027 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE>消息访问接口</TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 3.2  (Unix)">
+	<META NAME="AUTHOR" CONTENT="test">
+	<META NAME="CREATED" CONTENT="20111011;1101100">
+	<META NAME="CHANGED" CONTENT="18991230;8000000">
+	<META NAME="Info 2" CONTENT="">
+	<META NAME="Info 3" CONTENT="">
+	<META NAME="Info 4" CONTENT="">
+	<META NAME="KSOProductBuildVer" CONTENT="2052-6.6.0.2877">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { size: 8.27in 11.69in; margin-right: 1.25in; margin-top: 1in; margin-bottom: 1in }
+		P { margin-bottom: 0.08in; direction: ltr; color: #000000; text-align: justify; widows: 0; orphans: 0 }
+		P.western { font-family: "Times New Roman", serif; font-size: 10pt; so-language: en-US }
+		P.cjk { font-family: "宋体"; font-size: 10pt; so-language: zh-CN }
+		P.ctl { font-family: "Times New Roman", serif; font-size: 10pt; so-language: hi-IN }
+		A:link { color: #0000ff; text-decoration: none }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" TEXT="#000000" LINK="#0000ff" DIR="LTR">
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=4><SPAN LANG="zh-CN"><B>播思通知服务</B></SPAN></FONT></SPAN></FONT><FONT SIZE=4><SPAN LANG="en-US"><B>API
+v1.3.0</B></SPAN></FONT></P>
+<OL>
+	<LI><P CLASS="western" ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><B>术语与约定</B></SPAN></FONT></P>
+</OL>
+<UL>
+	<LI><P CLASS="western" ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">{host}</SPAN></SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">：指通知服务具体部署的主机</SPAN></SPAN></SPAN></FONT><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">IP</SPAN></SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">或者域名。</SPAN></SPAN></SPAN></FONT></P>
+	<LI><P CLASS="western" ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">{port}</SPAN></SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">：指通知服务的访问端口号。</SPAN></SPAN></SPAN></FONT></P>
+	<LI><P CLASS="western" ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#000000">{ticket}<FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN">：身份认证信息。</SPAN></FONT></SPAN></FONT></P>
+	<LI><P CLASS="western" ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT COLOR="#000000">{mid}<FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN">：消息</SPAN></FONT></SPAN></FONT><FONT COLOR="#000000">ID</FONT></P>
+</UL>
+<P CLASS="western" ALIGN=JUSTIFY STYLE="margin-bottom: 0in; font-weight: normal">
+<BR>
+</P>
+<UL>
+	<LI><P CLASS="western" ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">(</SPAN></SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT COLOR="#ff0000"><SPAN LANG="zh-CN">暂不处理</SPAN></FONT></SPAN></FONT><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">)</SPAN></SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">：当前不需要处理的内容，但以后可能需要处理的内容。</SPAN></SPAN></SPAN></FONT></P>
+	<LI><P CLASS="western" ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">(</SPAN></SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT COLOR="#ff0000"><SPAN LANG="zh-CN">暂时使用</SPAN></FONT></SPAN></FONT><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">)</SPAN></SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">：是指为了当前开发需要保留的内容，应用开发完成后具有此标记的内容可能会被移除。</SPAN></SPAN></SPAN></FONT></P>
+	<LI><P CLASS="western" ALIGN=JUSTIFY STYLE="margin-bottom: 0in; font-weight: normal">
+	<FONT FACE="宋体"><SPAN LANG="zh-CN">请求参数列表中，加粗行为当前需要实现的参数。</SPAN></FONT></P>
+</UL>
+<P CLASS="western" ALIGN=JUSTIFY STYLE="margin-bottom: 0in; font-weight: normal">
+<BR>
+</P>
+<OL START=2>
+	<LI><P CLASS="western" ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><B>通知结构</B></SPAN></FONT></P>
+</OL>
+<TABLE WIDTH=480 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+	<COL WIDTH=77>
+	<COL WIDTH=37>
+	<COL WIDTH=41>
+	<COL WIDTH=267>
+	<TR VALIGN=TOP>
+		<TD WIDTH=77>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Name</B></FONT></P>
+		</TD>
+		<TD WIDTH=37>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Type</B></FONT></P>
+		</TD>
+		<TD WIDTH=41>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Range</B></FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Remark</B></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=77>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">id</FONT></P>
+		</TD>
+		<TD WIDTH=37>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=41>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">通知</SPAN></SPAN></FONT></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">ID</SPAN></SPAN></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=77>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">type</FONT></P>
+		</TD>
+		<TD WIDTH=37>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=41>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">64c</FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT FACE="宋体"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN">通知类型</SPAN></FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=77>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">appId</FONT></P>
+		</TD>
+		<TD WIDTH=37>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=41>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">64c</FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">应用</SPAN></SPAN></FONT></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">ID</SPAN></SPAN></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=77>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">senderId</FONT></P>
+		</TD>
+		<TD WIDTH=37>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=41>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">64c</FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">发送者</SPAN></SPAN></FONT></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">ID</SPAN></SPAN></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=77>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">receiverId</FONT></P>
+		</TD>
+		<TD WIDTH=37>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=41>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">64c</FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">接收者</SPAN></SPAN></FONT></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">ID</SPAN></SPAN></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=77>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">uri</FONT></P>
+		</TD>
+		<TD WIDTH=37>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=41>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">1024</FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT FACE="宋体"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN">网址</SPAN></FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=77>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">date</FONT></P>
+		</TD>
+		<TD WIDTH=37>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">Long</FONT></P>
+		</TD>
+		<TD WIDTH=41>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT FACE="宋体"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN">通知发送时间</SPAN></FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=77>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">processed</FONT></P>
+		</TD>
+		<TD WIDTH=37>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">Int</FONT></P>
+		</TD>
+		<TD WIDTH=41>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">0,1</FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">通知处理标记，</SPAN></SPAN></FONT></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">0</SPAN></SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">－未处理；</SPAN></SPAN></FONT></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">1</SPAN></SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">－已处理</SPAN></SPAN></FONT></SPAN></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=77>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">read</FONT></P>
+		</TD>
+		<TD WIDTH=37>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">Int</FONT></P>
+		</TD>
+		<TD WIDTH=41>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">0,1</FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">已读标记，</SPAN></SPAN></FONT></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">0</SPAN></SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">－未读；</SPAN></SPAN></FONT></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">1</SPAN></SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">－已读</SPAN></SPAN></FONT></SPAN></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=77>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">action</FONT></P>
+		</TD>
+		<TD WIDTH=37>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=41>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">64c</FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT FACE="宋体"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN">消息动作</SPAN></FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=77>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">data</FONT></P>
+		</TD>
+		<TD WIDTH=37>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=41>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">2048c</FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">内容，最多</SPAN></SPAN></FONT></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">2048</SPAN></SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">个字符</SPAN></SPAN></FONT></SPAN></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=77>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">title</FONT></P>
+		</TD>
+		<TD WIDTH=37>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=41>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">256c</FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">标题，最多</SPAN></SPAN></FONT></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">256</SPAN></SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">个字符</SPAN></SPAN></FONT></SPAN></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=77>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">titleHtml</FONT></P>
+		</TD>
+		<TD WIDTH=37>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=41>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">1024c</FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">HTML</SPAN></SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">格式的标题，可空，最多</SPAN></SPAN></FONT></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">1024</SPAN></SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">个字符</SPAN></SPAN></FONT></SPAN></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=77>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">body</FONT></P>
+		</TD>
+		<TD WIDTH=37>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=41>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">2048c</FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">消息体，可空，最多</SPAN></SPAN></FONT></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">2048</SPAN></SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">个字符</SPAN></SPAN></FONT></SPAN></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=77>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">bodyHtml</FONT></P>
+		</TD>
+		<TD WIDTH=37>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=41>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">4096c</FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">HTML</SPAN></SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">格式的消息体，可空，最多</SPAN></SPAN></FONT></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">4096</SPAN></SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">个字符</SPAN></SPAN></FONT></SPAN></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=77>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">guid</FONT></P>
+		</TD>
+		<TD WIDTH=37>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=41>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">256c</FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT FACE="宋体"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN">全局唯一标识，用于覆盖消息内容</SPAN></FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=77>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">objectId</FONT></P>
+		</TD>
+		<TD WIDTH=37>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=41>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">256c</FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN STYLE="text-decoration: none"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">对象</SPAN></SPAN></FONT></SPAN></SPAN></FONT><SPAN STYLE="text-decoration: none"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">ID</SPAN></SPAN></FONT></SPAN></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=77>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">lastModified</FONT></P>
+		</TD>
+		<TD WIDTH=37>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">Long</FONT></P>
+		</TD>
+		<TD WIDTH=41>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT FACE="宋体"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN">消息最后一次更新时间</SPAN></FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=77>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">push</FONT></P>
+		</TD>
+		<TD WIDTH=37>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">bool</FONT></P>
+		</TD>
+		<TD WIDTH=41>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">Default is false, control
+			whether push a message to Push server when send information.</FONT></P>
+		</TD>
+	</TR>
+</TABLE>
+<P CLASS="western" ALIGN=JUSTIFY STYLE="margin-left: 0.02in; margin-bottom: 0in">
+<BR>
+</P>
+<OL START=3>
+	<LI><P CLASS="western" ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><B>接口及说明</B></SPAN></FONT></P>
+</OL>
+<OL>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0in; font-weight: normal">
+	informations/send</P>
+</OL>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>功能</B></SPAN><SPAN LANG="zh-CN">：用户发送一条通知</SPAN></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>地址</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><FONT COLOR="#000000">http://{host}:{port}/bmb/service/informations/send.json</FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>响应数据格式</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><SPAN LANG="en-US">JSON</SPAN></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><SPAN LANG="en-US"><B>HTTP</B></SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>请求方式</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><SPAN LANG="en-US">POST</SPAN></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>权限控制</B></SPAN><SPAN LANG="zh-CN">：是</SPAN></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><B>请求参数：</B></SPAN></FONT></P>
+<TABLE WIDTH=553 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+	<COL WIDTH=53>
+	<COL WIDTH=54>
+	<COL WIDTH=62>
+	<COL WIDTH=45>
+	<COL WIDTH=267>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Name</B></FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Type</B></FONT></P>
+		</TD>
+		<TD WIDTH=62>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Required</B></FONT></P>
+		</TD>
+		<TD WIDTH=45>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Range</B></FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Remark</B></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">ticket</FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=62>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">True</FONT></P>
+		</TD>
+		<TD WIDTH=45>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT FACE="宋体"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN">身份验证信息</SPAN></FONT></FONT></P>
+		</TD>
+	</TR>
+</TABLE>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><B>请求示例</B></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">请求</SPAN></SPAN></SPAN></FONT><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">URL</SPAN></SPAN></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">http://{host}:{port}/bmb/service/informations/send.json?ticket={ticket}</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN">请求数据</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">{&quot;appId&quot;:&quot;testapp&quot;,&quot;receiverId&quot;:&quot;123&quot;,&quot;title&quot;:&quot;this
+is a test title&quot;, &quot;type&quot;:&quot;type1&quot;}</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN">返回结果</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">{&quot;result&quot;:{&quot;status&quot;:&quot;success&quot;}}</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN">或者</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">{&quot;result&quot;:{&quot;status&quot;:&quot;failed&quot;}}</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=2>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0in; font-weight: normal">
+	informations/list</P>
+</OL>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>功能：</B></SPAN><SPAN LANG="zh-CN">获取用户通知列表</SPAN></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>地址</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><FONT COLOR="#000000">http://{host}:{port}/bmb/service/informations/list.json</FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>响应数据格式</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><SPAN LANG="en-US">JSON</SPAN></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><SPAN LANG="en-US"><B>HTTP</B></SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>请求方式</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><SPAN LANG="en-US">GET</SPAN></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>权限控制</B></SPAN><SPAN LANG="zh-CN">：是</SPAN></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><B>请求参数：</B></SPAN></FONT></P>
+<TABLE WIDTH=553 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+	<COL WIDTH=53>
+	<COL WIDTH=54>
+	<COL WIDTH=58>
+	<COL WIDTH=49>
+	<COL WIDTH=267>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Name</B></FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Type</B></FONT></P>
+		</TD>
+		<TD WIDTH=58>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Required</B></FONT></P>
+		</TD>
+		<TD WIDTH=49>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Range</B></FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Remark</B></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">ticket</FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=58>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">True</FONT></P>
+		</TD>
+		<TD WIDTH=49>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT FACE="宋体"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN">身份验证信息</SPAN></FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">status</FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">int</FONT></P>
+		</TD>
+		<TD WIDTH=58>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">False</FONT></P>
+		</TD>
+		<TD WIDTH=49>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-weight: normal">0</SPAN></SPAN></SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN STYLE="text-decoration: none"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">或者</SPAN></SPAN></FONT></SPAN></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-weight: normal">1</SPAN></SPAN></SPAN></FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-weight: normal">0</SPAN></SPAN></SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN STYLE="text-decoration: none"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">－表示未处理（默认）；</SPAN></SPAN></FONT></SPAN></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-weight: normal">1</SPAN></SPAN></SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN STYLE="text-decoration: none"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">－表示已处理</SPAN></SPAN></FONT></SPAN></SPAN></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT COLOR="#008000">from</FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT COLOR="#008000">Int</FONT></P>
+		</TD>
+		<TD WIDTH=58>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT COLOR="#008000">False</FONT></P>
+		</TD>
+		<TD WIDTH=49>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT COLOR="#008000"><SPAN LANG="zh-CN">从第几条通知开始取，默认为</SPAN></FONT></SPAN></FONT><FONT COLOR="#008000"><SPAN LANG="en-US">0</SPAN></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT COLOR="#008000">size</FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT COLOR="#008000">Int</FONT></P>
+		</TD>
+		<TD WIDTH=58>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT COLOR="#008000">False</FONT></P>
+		</TD>
+		<TD WIDTH=49>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT COLOR="#008000"><SPAN LANG="zh-CN">取多少条通知，默认为</SPAN></FONT></SPAN></FONT><FONT COLOR="#008000"><SPAN LANG="en-US">20,
+			-1</SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN">时取所有符合条件的通知</SPAN></FONT></SPAN></FONT></P>
+		</TD>
+	</TR>
+</TABLE>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><B>请求示例</B></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN">请求数据</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">http://{host}:{port}/bmb/service/informations/list.json?ticket={ticket}&amp;status=0</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN">返回结果</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">{</P>
+<P CLASS="western" STYLE="text-indent: 0.29in; margin-bottom: 0in"><SPAN LANG="en-US">&quot;</SPAN><FONT COLOR="#008000">result</FONT><SPAN LANG="en-US">&quot;:{</SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.29in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;count&quot;:1,</P>
+<P CLASS="western" STYLE="margin-left: 0.29in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;informations&quot;:[</P>
+<P CLASS="western" STYLE="margin-left: 0.58in; text-indent: 0.29in; margin-bottom: 0in">
+{</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;id&quot;:&quot;3&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;type&quot;:&quot;type1&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;date&quot;:0,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;processed&quot;:0,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;senderId&quot;:&quot;234&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;receiverId&quot;:&quot;123&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;title&quot;:&quot;this is a test title&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;uri&quot;:null,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;appId&quot;:&quot;123&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;action&quot;:&quot;action.test&quot;, 
+</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;data&quot;:&quot;this is test data.&quot;</P>
+<P CLASS="western" STYLE="margin-left: 0.58in; text-indent: 0.29in; margin-bottom: 0in">
+},</P>
+<P CLASS="western" STYLE="margin-left: 0.58in; text-indent: 0.29in; margin-bottom: 0in">
+{</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;id&quot;:&quot;4&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;type&quot;:&quot;type1&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;date&quot;:0,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;processed&quot;:0,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;senderId&quot;:&quot;234&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;receiverId&quot;:&quot;456&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;title&quot;:&quot;this is a test title&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;uri&quot;:null,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;appId&quot;:&quot;123&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;action&quot;:&quot;action.test&quot;, 
+</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;data&quot;:&quot;this is test data.&quot;</P>
+<P CLASS="western" STYLE="margin-left: 0.58in; text-indent: 0.29in; margin-bottom: 0in">
+}</P>
+<P CLASS="western" STYLE="margin-left: 0.29in; text-indent: 0.29in; margin-bottom: 0in">
+]</P>
+<P CLASS="western" STYLE="text-indent: 0.29in; margin-bottom: 0in">}</P>
+<P CLASS="western" STYLE="margin-bottom: 0in">}</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=3>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#008000">informations/listbyid</FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>功能：</B></SPAN><SPAN LANG="zh-CN">获取用户通知列表</SPAN></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>地址</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><FONT COLOR="#000000">http://{host}:{port}/bmb/service/informations/listbyid.json</FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>响应数据格式</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><SPAN LANG="en-US">JSON</SPAN></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><SPAN LANG="en-US"><B>HTTP</B></SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>请求方式</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><SPAN LANG="en-US">GET</SPAN></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>权限控制</B></SPAN><SPAN LANG="zh-CN">：是</SPAN></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><B>请求参数：</B></SPAN></FONT></P>
+<TABLE WIDTH=553 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+	<COL WIDTH=53>
+	<COL WIDTH=54>
+	<COL WIDTH=58>
+	<COL WIDTH=49>
+	<COL WIDTH=267>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Name</B></FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Type</B></FONT></P>
+		</TD>
+		<TD WIDTH=58>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Required</B></FONT></P>
+		</TD>
+		<TD WIDTH=49>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Range</B></FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Remark</B></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">ticket</FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=58>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">True</FONT></P>
+		</TD>
+		<TD WIDTH=49>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT FACE="宋体"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN">身份验证信息</SPAN></FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">status</FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">int</FONT></P>
+		</TD>
+		<TD WIDTH=58>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">False</FONT></P>
+		</TD>
+		<TD WIDTH=49>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-weight: normal">0</SPAN></SPAN></SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN STYLE="text-decoration: none"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">或者</SPAN></SPAN></FONT></SPAN></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-weight: normal">1</SPAN></SPAN></SPAN></FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-weight: normal">0</SPAN></SPAN></SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN STYLE="text-decoration: none"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">－表示未处理；</SPAN></SPAN></FONT></SPAN></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-weight: normal">1</SPAN></SPAN></SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN STYLE="text-decoration: none"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">－表示已处理</SPAN></SPAN></FONT></SPAN></SPAN></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			mid</P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			Int</P>
+		</TD>
+		<TD WIDTH=58>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			False</P>
+		</TD>
+		<TD WIDTH=49>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT COLOR="#000000"><SPAN LANG="zh-CN">起始位置，</SPAN></FONT></SPAN></FONT><FONT COLOR="#000000"><SPAN LANG="en-US">ID</SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN">号，为空时取所有符合条件的通知</SPAN></FONT></SPAN></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			count</P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			Int</P>
+		</TD>
+		<TD WIDTH=58>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			False</P>
+		</TD>
+		<TD WIDTH=49>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT COLOR="#000000"><SPAN LANG="zh-CN">取多少条通知，默认为</SPAN></FONT></SPAN></FONT><FONT COLOR="#000000"><SPAN LANG="en-US">null</SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN">。</SPAN></FONT></SPAN></FONT><FONT COLOR="#000000"><SPAN LANG="en-US">Count&lt;0</SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN">时取</SPAN></FONT></SPAN></FONT><FONT COLOR="#000000"><SPAN LANG="en-US">mid</SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN">向前取；</SPAN></FONT></SPAN></FONT><FONT COLOR="#000000"><SPAN LANG="en-US">count&gt;0</SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN">时向后取；</SPAN></FONT></SPAN></FONT><FONT COLOR="#000000"><SPAN LANG="en-US">null</SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN">或者</SPAN></FONT></SPAN></FONT><FONT COLOR="#000000"><SPAN LANG="en-US">0</SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN">时向后取所有</SPAN></FONT></SPAN></FONT></P>
+		</TD>
+	</TR>
+</TABLE>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><B>请求示例</B></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN">请求数据</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">http://{host}:{port}/bmb/service/informations/listbyid.json?ticket={ticket}&amp;status=0&amp;mid={msgid}&amp;count=2</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN">返回结果</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">{</P>
+<P CLASS="western" STYLE="text-indent: 0.29in; margin-bottom: 0in"><SPAN LANG="en-US">&quot;</SPAN><FONT COLOR="#008000">result</FONT><SPAN LANG="en-US">&quot;:{</SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.29in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;total&quot;:10,</P>
+<P CLASS="western" STYLE="margin-left: 0.29in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;count&quot;:1,</P>
+<P CLASS="western" STYLE="margin-left: 0.29in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;informations&quot;:[</P>
+<P CLASS="western" STYLE="margin-left: 0.58in; text-indent: 0.29in; margin-bottom: 0in">
+{</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;id&quot;:&quot;3&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;type&quot;:&quot;type1&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;date&quot;:0,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;processed&quot;:0,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;senderId&quot;:&quot;234&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;receiverId&quot;:&quot;123&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;title&quot;:&quot;this is a test title&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;uri&quot;:null,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;appId&quot;:&quot;123&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;action&quot;:&quot;action.test&quot;, 
+</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;data&quot;:&quot;this is test data.&quot;</P>
+<P CLASS="western" STYLE="margin-left: 0.58in; text-indent: 0.29in; margin-bottom: 0in">
+},</P>
+<P CLASS="western" STYLE="margin-left: 0.58in; text-indent: 0.29in; margin-bottom: 0in">
+{</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;id&quot;:&quot;4&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;type&quot;:&quot;type1&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;date&quot;:0,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;processed&quot;:0,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;senderId&quot;:&quot;234&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;receiverId&quot;:&quot;456&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;title&quot;:&quot;this is a test title&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;uri&quot;:null,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;appId&quot;:&quot;123&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;action&quot;:&quot;action.test&quot;, 
+</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;data&quot;:&quot;this is test data.&quot;</P>
+<P CLASS="western" STYLE="margin-left: 0.58in; text-indent: 0.29in; margin-bottom: 0in">
+}</P>
+<P CLASS="western" STYLE="margin-left: 0.29in; text-indent: 0.29in; margin-bottom: 0in">
+]</P>
+<P CLASS="western" STYLE="text-indent: 0.29in; margin-bottom: 0in">}</P>
+<P CLASS="western" STYLE="margin-bottom: 0in">}</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=4>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#008000">informations/listbytime</FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>功能：</B></SPAN><SPAN LANG="zh-CN">获取用户通知列表</SPAN></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>地址</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><FONT COLOR="#000000">http://{host}:{port}/bmb/service/informations/listbytime.json</FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>响应数据格式</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><SPAN LANG="en-US">JSON</SPAN></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><SPAN LANG="en-US"><B>HTTP</B></SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>请求方式</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><SPAN LANG="en-US">GET</SPAN></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>权限控制</B></SPAN><SPAN LANG="zh-CN">：是</SPAN></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><B>请求参数：</B></SPAN></FONT></P>
+<TABLE WIDTH=553 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+	<COL WIDTH=53>
+	<COL WIDTH=54>
+	<COL WIDTH=58>
+	<COL WIDTH=49>
+	<COL WIDTH=267>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Name</B></FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Type</B></FONT></P>
+		</TD>
+		<TD WIDTH=58>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Required</B></FONT></P>
+		</TD>
+		<TD WIDTH=49>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Range</B></FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Remark</B></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">ticket</FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=58>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">True</FONT></P>
+		</TD>
+		<TD WIDTH=49>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT FACE="宋体"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN">身份验证信息</SPAN></FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">status</FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">int</FONT></P>
+		</TD>
+		<TD WIDTH=58>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">False</FONT></P>
+		</TD>
+		<TD WIDTH=49>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-weight: normal">0</SPAN></SPAN></SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN STYLE="text-decoration: none"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">或者</SPAN></SPAN></FONT></SPAN></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-weight: normal">1</SPAN></SPAN></SPAN></FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-weight: normal">0</SPAN></SPAN></SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN STYLE="text-decoration: none"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">－表示未处理；</SPAN></SPAN></FONT></SPAN></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-weight: normal">1</SPAN></SPAN></SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN STYLE="text-decoration: none"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">－表示已处理</SPAN></SPAN></FONT></SPAN></SPAN></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			from</P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			long</P>
+		</TD>
+		<TD WIDTH=58>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			False</P>
+		</TD>
+		<TD WIDTH=49>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT FACE="宋体"><SPAN LANG="zh-CN">起始位置，时间，为空时取所有符合条件的通知</SPAN></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			count</P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			int</P>
+		</TD>
+		<TD WIDTH=58>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			False</P>
+		</TD>
+		<TD WIDTH=49>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT COLOR="#000000"><SPAN LANG="zh-CN">取多少条通知，默认为</SPAN></FONT></SPAN></FONT><FONT COLOR="#000000"><SPAN LANG="en-US">null</SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN">。</SPAN></FONT></SPAN></FONT><FONT COLOR="#000000"><SPAN LANG="en-US">Count&lt;0</SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN">时取</SPAN></FONT></SPAN></FONT><FONT COLOR="#000000"><SPAN LANG="en-US">mid</SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN">向前取；</SPAN></FONT></SPAN></FONT><FONT COLOR="#000000"><SPAN LANG="en-US">count&gt;0</SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN">时向后取；</SPAN></FONT></SPAN></FONT><FONT COLOR="#000000"><SPAN LANG="en-US">null</SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN">或者</SPAN></FONT></SPAN></FONT><FONT COLOR="#000000"><SPAN LANG="en-US">0</SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN">时向后取所有</SPAN></FONT></SPAN></FONT></P>
+		</TD>
+	</TR>
+</TABLE>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><B>请求示例</B></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN">请求数据</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">http://{host}:{port}/bmb/service/informations/listbytime.json?ticket={ticket}&amp;status=0&amp;from={from}&amp;count=2</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN">返回结果</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">{</P>
+<P CLASS="western" STYLE="text-indent: 0.29in; margin-bottom: 0in"><SPAN LANG="en-US">&quot;</SPAN><FONT COLOR="#008000">result</FONT><SPAN LANG="en-US">&quot;:{</SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.29in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;total&quot;:10,</P>
+<P CLASS="western" STYLE="margin-left: 0.29in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;count&quot;:1,</P>
+<P CLASS="western" STYLE="margin-left: 0.29in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;informations&quot;:[</P>
+<P CLASS="western" STYLE="margin-left: 0.58in; text-indent: 0.29in; margin-bottom: 0in">
+{</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;id&quot;:&quot;3&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;type&quot;:&quot;type1&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;date&quot;:0,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;processed&quot;:0,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;senderId&quot;:&quot;234&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;receiverId&quot;:&quot;123&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;title&quot;:&quot;this is a test title&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;uri&quot;:null,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;appId&quot;:&quot;123&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;action&quot;:&quot;action.test&quot;, 
+</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;data&quot;:&quot;this is test data.&quot;</P>
+<P CLASS="western" STYLE="margin-left: 0.58in; text-indent: 0.29in; margin-bottom: 0in">
+},</P>
+<P CLASS="western" STYLE="margin-left: 0.58in; text-indent: 0.29in; margin-bottom: 0in">
+{</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;id&quot;:&quot;4&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;type&quot;:&quot;type1&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;date&quot;:0,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;processed&quot;:0,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;senderId&quot;:&quot;234&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;receiverId&quot;:&quot;456&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;title&quot;:&quot;this is a test title&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;uri&quot;:null,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;appId&quot;:&quot;123&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;action&quot;:&quot;action.test&quot;, 
+</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;data&quot;:&quot;this is test data.&quot;</P>
+<P CLASS="western" STYLE="margin-left: 0.58in; text-indent: 0.29in; margin-bottom: 0in">
+}</P>
+<P CLASS="western" STYLE="margin-left: 0.29in; text-indent: 0.29in; margin-bottom: 0in">
+]</P>
+<P CLASS="western" STYLE="text-indent: 0.29in; margin-bottom: 0in">}</P>
+<P CLASS="western" STYLE="margin-bottom: 0in">}</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=5>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#008000">informations/count</FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>功能：</B></SPAN><SPAN LANG="zh-CN">获取用户通知总数</SPAN></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>地址</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><FONT COLOR="#000000">http://{host}:{port}/bmb/service/informations/count.json</FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>响应数据格式</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><SPAN LANG="en-US">JSON</SPAN></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><SPAN LANG="en-US"><B>HTTP</B></SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>请求方式</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><SPAN LANG="en-US">GET</SPAN></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>权限控制</B></SPAN><SPAN LANG="zh-CN">：是</SPAN></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><B>请求参数：</B></SPAN></FONT></P>
+<TABLE WIDTH=553 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+	<COL WIDTH=53>
+	<COL WIDTH=54>
+	<COL WIDTH=57>
+	<COL WIDTH=50>
+	<COL WIDTH=267>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Name</B></FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Type</B></FONT></P>
+		</TD>
+		<TD WIDTH=57>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Required</B></FONT></P>
+		</TD>
+		<TD WIDTH=50>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Range</B></FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Remark</B></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">ticket</FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=57>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">True</FONT></P>
+		</TD>
+		<TD WIDTH=50>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT FACE="宋体"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN">身份验证信息</SPAN></FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">uid</FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=57>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">True</FONT></P>
+		</TD>
+		<TD WIDTH=50>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">用户</SPAN></SPAN></FONT></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">ID</SPAN></SPAN></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">status</FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">int</FONT></P>
+		</TD>
+		<TD WIDTH=57>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">False</FONT></P>
+		</TD>
+		<TD WIDTH=50>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-weight: normal">0</SPAN></SPAN></SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN STYLE="text-decoration: none"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">或者</SPAN></SPAN></FONT></SPAN></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-weight: normal">1</SPAN></SPAN></SPAN></FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-weight: normal">0</SPAN></SPAN></SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN STYLE="text-decoration: none"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">－表示未处理（默认）；</SPAN></SPAN></FONT></SPAN></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-weight: normal">1</SPAN></SPAN></SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN STYLE="text-decoration: none"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">－表示已处理</SPAN></SPAN></FONT></SPAN></SPAN></FONT></P>
+		</TD>
+	</TR>
+</TABLE>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><B>示例</B></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN">请求数据</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">http://{host}:{port}/bmb/service/informations/count.json?ticket={ticket}&amp;status=0</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN">返回结果</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">{&quot;result&quot;:{&quot;count&quot;:&quot;10&quot;}}</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=6>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#008000">informations/top</FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>功能：</B></SPAN><SPAN LANG="zh-CN">获取用户最新前</SPAN></SPAN></FONT><SPAN LANG="en-US">n</SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN">条通知</SPAN></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>地址</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><FONT COLOR="#000000">http://{host}:{port}/bmb/service/informations/top.json</FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>响应数据格式</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><SPAN LANG="en-US">JSON</SPAN></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><SPAN LANG="en-US"><B>HTTP</B></SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>请求方式</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><SPAN LANG="en-US">GET</SPAN></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>权限控制</B></SPAN><SPAN LANG="zh-CN">：是</SPAN></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><B>请求参数：</B></SPAN></FONT></P>
+<TABLE WIDTH=553 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+	<COL WIDTH=53>
+	<COL WIDTH=54>
+	<COL WIDTH=58>
+	<COL WIDTH=49>
+	<COL WIDTH=267>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Name</B></FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Type</B></FONT></P>
+		</TD>
+		<TD WIDTH=58>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Required</B></FONT></P>
+		</TD>
+		<TD WIDTH=49>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Range</B></FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Remark</B></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">ticket</FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=58>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">True</FONT></P>
+		</TD>
+		<TD WIDTH=49>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT FACE="宋体"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN">身份验证信息</SPAN></FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">status</FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">int</FONT></P>
+		</TD>
+		<TD WIDTH=58>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal; text-decoration: none">
+			<FONT SIZE=2 STYLE="font-size: 10pt">False</FONT></P>
+		</TD>
+		<TD WIDTH=49>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-weight: normal">0</SPAN></SPAN></SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN STYLE="text-decoration: none"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">或者</SPAN></SPAN></FONT></SPAN></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-weight: normal">1</SPAN></SPAN></SPAN></FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-weight: normal">0</SPAN></SPAN></SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN STYLE="text-decoration: none"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">－表示未处理（默认）；</SPAN></SPAN></FONT></SPAN></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-weight: normal">1</SPAN></SPAN></SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN STYLE="text-decoration: none"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">－表示已处理</SPAN></SPAN></FONT></SPAN></SPAN></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">topn</FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt">Int</FONT></P>
+		</TD>
+		<TD WIDTH=58>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt">False</FONT></P>
+		</TD>
+		<TD WIDTH=49>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN">获取最新的前</SPAN></FONT></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US">n</SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN">条信息，默认为</SPAN></FONT></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US">5</SPAN></FONT><FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN">条</SPAN></FONT></SPAN></FONT></P>
+		</TD>
+	</TR>
+</TABLE>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><B>请求示例</B></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN">请求数据</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">http://{host}:{port}/bmb/service/informations/top.json?ticket={ticket}&amp;status=0&amp;topn=2</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN">返回结果</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">{</P>
+<P CLASS="western" STYLE="text-indent: 0.29in; margin-bottom: 0in"><SPAN LANG="en-US">&quot;</SPAN><FONT COLOR="#008000">result</FONT><SPAN LANG="en-US">&quot;:{</SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.29in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;count&quot;:1,</P>
+<P CLASS="western" STYLE="margin-left: 0.29in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;informations&quot;:[</P>
+<P CLASS="western" STYLE="margin-left: 0.58in; text-indent: 0.29in; margin-bottom: 0in">
+{</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;id&quot;:&quot;3&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;type&quot;:&quot;type1&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;date&quot;:0,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;processed&quot;:0,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;senderId&quot;:&quot;234&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;receiverId&quot;:&quot;123&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;title&quot;:&quot;this is a test title&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;uri&quot;:null,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;appId&quot;:&quot;123&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;action&quot;:&quot;action.test&quot;, 
+</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;data&quot;:&quot;this is test data.&quot;</P>
+<P CLASS="western" STYLE="margin-left: 0.58in; text-indent: 0.29in; margin-bottom: 0in">
+},</P>
+<P CLASS="western" STYLE="margin-left: 0.58in; text-indent: 0.29in; margin-bottom: 0in">
+{</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;id&quot;:&quot;4&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;type&quot;:&quot;type1&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;date&quot;:0,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;processed&quot;:0,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;senderId&quot;:&quot;234&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;receiverId&quot;:&quot;456&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;title&quot;:&quot;this is a test title&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;uri&quot;:null,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;appId&quot;:&quot;123&quot;,</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;action&quot;:&quot;action.test&quot;, 
+</P>
+<P CLASS="western" STYLE="margin-left: 0.88in; text-indent: 0.29in; margin-bottom: 0in">
+&quot;data&quot;:&quot;this is test data.&quot;</P>
+<P CLASS="western" STYLE="margin-left: 0.58in; text-indent: 0.29in; margin-bottom: 0in">
+}</P>
+<P CLASS="western" STYLE="margin-left: 0.29in; text-indent: 0.29in; margin-bottom: 0in">
+]</P>
+<P CLASS="western" STYLE="text-indent: 0.29in; margin-bottom: 0in">}</P>
+<P CLASS="western" STYLE="margin-bottom: 0in">}</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=7>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0in; font-weight: normal">
+	informations/done</P>
+</OL>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>功能</B></SPAN><SPAN LANG="zh-CN">：通知处理标记</SPAN></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>地址</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><FONT COLOR="#000000">http://{host}:{port}/bmb/service/informations/done.json</FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>响应数据格式</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><SPAN LANG="en-US">JSON</SPAN></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><SPAN LANG="en-US"><B>HTTP</B></SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>请求方式</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><SPAN LANG="en-US">PUT</SPAN></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>权限控制</B></SPAN><SPAN LANG="zh-CN">：是</SPAN></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><B>请求参数：</B></SPAN></FONT></P>
+<TABLE WIDTH=553 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+	<COL WIDTH=53>
+	<COL WIDTH=54>
+	<COL WIDTH=62>
+	<COL WIDTH=45>
+	<COL WIDTH=267>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Name</B></FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Type</B></FONT></P>
+		</TD>
+		<TD WIDTH=62>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Required</B></FONT></P>
+		</TD>
+		<TD WIDTH=45>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Range</B></FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Remark</B></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">ticket</FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=62>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">True</FONT></P>
+		</TD>
+		<TD WIDTH=45>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT FACE="宋体"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN">身份验证信息</SPAN></FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">mid</FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=62>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">True</FONT></P>
+		</TD>
+		<TD WIDTH=45>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">通知</SPAN></SPAN></FONT></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">ID</SPAN></SPAN></FONT></P>
+		</TD>
+	</TR>
+</TABLE>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><B>请求示例</B></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN">请求数据</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">http://{host}:{port}/bmb/service/informations/done.json?ticket={ticket}&amp;mid=id1</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN">返回结果</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">{&quot;result&quot;:{&quot;status&quot;:&quot;success&quot;}}</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN">或者</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">{&quot;result&quot;:{&quot;status&quot;:&quot;failed&quot;}}</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=8>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0in; font-weight: normal">
+	informations/read</P>
+</OL>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>功能</B></SPAN><SPAN LANG="zh-CN">：通知处理标记</SPAN></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>地址</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><FONT COLOR="#000000">http://{host}:{port}/bmb/service/informations/read.json</FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>响应数据格式</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><SPAN LANG="en-US">JSON</SPAN></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><SPAN LANG="en-US"><B>HTTP</B></SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>请求方式</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><SPAN LANG="en-US">PUT</SPAN></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>权限控制</B></SPAN><SPAN LANG="zh-CN">：是</SPAN></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><B>请求参数：</B></SPAN></FONT></P>
+<TABLE WIDTH=553 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+	<COL WIDTH=53>
+	<COL WIDTH=54>
+	<COL WIDTH=62>
+	<COL WIDTH=45>
+	<COL WIDTH=267>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Name</B></FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Type</B></FONT></P>
+		</TD>
+		<TD WIDTH=62>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Required</B></FONT></P>
+		</TD>
+		<TD WIDTH=45>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Range</B></FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Remark</B></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">ticket</FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=62>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">True</FONT></P>
+		</TD>
+		<TD WIDTH=45>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT FACE="宋体"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN">身份验证信息</SPAN></FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">mid</FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=62>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">True</FONT></P>
+		</TD>
+		<TD WIDTH=45>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN"><SPAN STYLE="font-weight: normal">通知</SPAN></SPAN></FONT></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">ID</SPAN></SPAN></FONT></P>
+		</TD>
+	</TR>
+</TABLE>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><B>请求示例</B></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN">请求数据</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">http://{host}:{port}/bmb/service/informations/read.json?ticket={ticket}&amp;mid={mid}</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN">返回结果</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">{&quot;result&quot;:{&quot;status&quot;:&quot;success&quot;}}</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN">或者</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">{&quot;result&quot;:{&quot;status&quot;:&quot;failed&quot;}}</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in; page-break-before: always">
+<BR>
+</P>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>保留接口</B></SPAN></SPAN></FONT><SPAN LANG="en-US"><B>(</B></SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT COLOR="#ff0000"><SPAN LANG="zh-CN">暂不处理</SPAN></FONT></SPAN></FONT><SPAN LANG="en-US"><B>)</B></SPAN></P>
+<OL START=9>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0in; font-weight: normal">
+	informations/unreads</P>
+</OL>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>功能：</B></SPAN><SPAN LANG="zh-CN">获取用户未读通知列表</SPAN></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>地址</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><FONT COLOR="#000000">http://{host}:{port}/bmb/service/informations/unreads.json</FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>响应数据格式</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><SPAN LANG="en-US">JSON</SPAN></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><SPAN LANG="en-US"><B>HTTP</B></SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>请求方式</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><SPAN LANG="en-US">GET</SPAN></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>权限控制</B></SPAN><SPAN LANG="zh-CN">：是</SPAN></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><B>请求参数：</B></SPAN></FONT></P>
+<TABLE WIDTH=553 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+	<COL WIDTH=53>
+	<COL WIDTH=54>
+	<COL WIDTH=60>
+	<COL WIDTH=47>
+	<COL WIDTH=267>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Name</B></FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Type</B></FONT></P>
+		</TD>
+		<TD WIDTH=60>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Required</B></FONT></P>
+		</TD>
+		<TD WIDTH=47>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Range</B></FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Remark</B></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">ticket</FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=60>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt">True</FONT></P>
+		</TD>
+		<TD WIDTH=47>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT FACE="宋体"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN">身份验证信息</SPAN></FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">uid</FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=60>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt">True</FONT></P>
+		</TD>
+		<TD WIDTH=47>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT FACE="宋体"><SPAN LANG="zh-CN"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN">用户</SPAN></FONT></SPAN></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US">ID</SPAN></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">from</FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt">Int</FONT></P>
+		</TD>
+		<TD WIDTH=60>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt">False</FONT></P>
+		</TD>
+		<TD WIDTH=47>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT FACE="宋体"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN">从第几条通知开始取</SPAN></FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">size</FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt">Int</FONT></P>
+		</TD>
+		<TD WIDTH=60>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt">False</FONT></P>
+		</TD>
+		<TD WIDTH=47>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT FACE="宋体"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN">取多少条通知</SPAN></FONT></FONT></P>
+		</TD>
+	</TR>
+</TABLE>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><B>请求示例</B></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN">请求数据</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN">返回结果</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<OL START=10>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0in; font-weight: normal">
+	informations/view/{id}</P>
+</OL>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>功能：</B></SPAN><SPAN LANG="zh-CN">获取用户的某条通知信息</SPAN></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>地址</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><FONT COLOR="#000000">http://{host}:{port}/bmb/service/informations/view/{id}.json</FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>响应数据格式</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><SPAN LANG="en-US">JSON</SPAN></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><SPAN LANG="en-US"><B>HTTP</B></SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>请求方式</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><SPAN LANG="en-US">POST</SPAN></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>权限控制</B></SPAN><SPAN LANG="zh-CN">：是</SPAN></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><B>请求参数：</B></SPAN></FONT></P>
+<TABLE WIDTH=553 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+	<COL WIDTH=53>
+	<COL WIDTH=54>
+	<COL WIDTH=61>
+	<COL WIDTH=46>
+	<COL WIDTH=267>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Name</B></FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Type</B></FONT></P>
+		</TD>
+		<TD WIDTH=61>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Required</B></FONT></P>
+		</TD>
+		<TD WIDTH=46>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Range</B></FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Remark</B></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">ticket</FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt">String</FONT></P>
+		</TD>
+		<TD WIDTH=61>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt">True</FONT></P>
+		</TD>
+		<TD WIDTH=46>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<FONT FACE="宋体"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="zh-CN">身份验证信息</SPAN></FONT></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=61>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=46>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<BR>
+			</P>
+		</TD>
+	</TR>
+</TABLE>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><B>请求示例</B></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN">请求数据</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN">返回结果</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=11>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0in; font-weight: normal">
+	informations/update/{id}</P>
+</OL>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>功能：</B></SPAN><SPAN LANG="zh-CN">修改通知信息</SPAN></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>地址</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><FONT COLOR="#000000">http://{host}:{port}/bmb/service/informations/update/{id}.json</FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>响应数据格式</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><SPAN LANG="en-US">JSON</SPAN></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><SPAN LANG="en-US"><B>HTTP</B></SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>请求方式</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><SPAN LANG="en-US">POST</SPAN></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>权限控制</B></SPAN><SPAN LANG="zh-CN">：是</SPAN></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><B>请求参数：</B></SPAN></FONT></P>
+<TABLE WIDTH=553 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+	<COL WIDTH=53>
+	<COL WIDTH=54>
+	<COL WIDTH=58>
+	<COL WIDTH=49>
+	<COL WIDTH=267>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Name</B></FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Type</B></FONT></P>
+		</TD>
+		<TD WIDTH=58>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Required</B></FONT></P>
+		</TD>
+		<TD WIDTH=49>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Range</B></FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt"><B>Remark</B></FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=58>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=49>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<BR>
+			</P>
+		</TD>
+	</TR>
+</TABLE>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><B>请求示例</B></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN">请求数据</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN">返回结果</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><SPAN LANG="en-US"><B>Java</B></SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>代码示例</B></SPAN></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL START=12>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0in; font-weight: normal">
+	informations/remove/{id}</P>
+</OL>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>功能：</B></SPAN><SPAN LANG="zh-CN">删除一条通知</SPAN></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>地址</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><FONT COLOR="#000000">http://{host}:{port}/bmb/service/informations/remove/{id}.json</FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>响应数据格式</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><SPAN LANG="en-US">JSON</SPAN></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><SPAN LANG="en-US"><B>HTTP</B></SPAN><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>请求方式</B></SPAN><SPAN LANG="zh-CN">：</SPAN></SPAN></FONT><SPAN LANG="en-US">POST</SPAN></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><SPAN LANG="zh-CN"><B>权限控制</B></SPAN><SPAN LANG="zh-CN">：是</SPAN></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><B>请求参数：</B></SPAN></FONT></P>
+<TABLE WIDTH=553 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+	<COL WIDTH=53>
+	<COL WIDTH=54>
+	<COL WIDTH=54>
+	<COL WIDTH=54>
+	<COL WIDTH=267>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<FONT SIZE=2 STYLE="font-size: 10pt">Name</FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt">Type</FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt">Required</FONT></P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt">Range</FONT></P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<FONT SIZE=2 STYLE="font-size: 10pt">Remark</FONT></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=53>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in; font-weight: normal">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=54>
+			<P CLASS="western" ALIGN=CENTER STYLE="background: transparent; border: none; padding: 0in">
+			<BR>
+			</P>
+		</TD>
+		<TD WIDTH=267>
+			<P CLASS="western" ALIGN=LEFT STYLE="background: transparent; border: none; padding: 0in">
+			<BR>
+			</P>
+		</TD>
+	</TR>
+</TABLE>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN"><B>请求示例</B></SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN">请求数据</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="宋体"><SPAN LANG="zh-CN">返回结果</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+</BODY>
+</HTML>

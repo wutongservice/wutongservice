@@ -1,0 +1,22 @@
+{
+    "name":"course",
+    "columns": {
+        "course_id":            "int",
+        "course_name":          "string",
+        "course_code":          "string",
+        "duration":             "string",
+        "course_desc":          "string",
+        "instructor":           "string",
+        "instructor_desc":      "string",
+        "address":              "string",
+        "schedule":             "string",
+        "approve":              "int",
+        "category":             "string",
+        "audience_num":         "int",
+        "course_state":         "int",
+        "attachment_orig_name": "string",
+        "attachment_real_name": "string",
+        "video_name": "string"
+    }
+}
+

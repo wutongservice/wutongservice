@@ -1,0 +1,8 @@
+#!/bin/bash
+read -p "Please input the process name:" pro
+cpuinfo=`ps aux|grep $pro|grep -v "grep"|awk '{print $3}'`
+echo The CPU USAGE of the process $pro is:
+echo $cpuinfo
+meminfo=`ps aux|grep $pro|grep -v "grep"|awk '{print $4}'`
+echo The MEM USAGE of the process $pro is:
+echo $meminfo

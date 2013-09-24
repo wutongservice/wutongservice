@@ -1,0 +1,18 @@
+
+@namespace("com.borqs.server.service.platform")
+protocol SuggestedUser {
+    import schema "../../../../../base/src/main/avro/error.avsc";
+
+    boolean refuseSuggestUser(string userId, string suggested) throws com.borqs.server.base.ResponseError;
+    boolean deleteSuggestUser(string userId, string suggested) throws com.borqs.server.base.ResponseError;
+    bytes getSuggestUser(string userId, int limit) throws com.borqs.server.base.ResponseError;
+    bytes getIfExistSuggestUser(string userId, string suggestUserId) throws com.borqs.server.base.ResponseError;
+    boolean createSuggestUser(string userId, string suggestedUsers, int type, string reason) throws com.borqs.server.base.ResponseError;
+    boolean updateSuggestUser(string userId, string suggestedUsers, int type, string reason) throws com.borqs.server.base.ResponseError;
+    string getWhoSuggest(string to, string beSuggested) throws com.borqs.server.base.ResponseError;
+    boolean backSuggestUser(string userId,long dateDiff) throws com.borqs.server.base.ResponseError;
+    bytes getSuggestFromBothFriend(string userId) throws com.borqs.server.base.ResponseError;
+    bytes getSuggestFromHasMyContactinfo(string userId) throws com.borqs.server.base.ResponseError;
+    bytes getSuggestUserHistory(string userId,int limit) throws com.borqs.server.base.ResponseError;
+    bytes getWhoSuggestedHim(string userId,string beSuggested) throws com.borqs.server.base.ResponseError;
+}

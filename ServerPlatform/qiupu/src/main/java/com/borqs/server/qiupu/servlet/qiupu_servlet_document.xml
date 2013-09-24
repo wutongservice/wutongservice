@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/document/template"?>
+<document>
+  <title>Platform API</title>
+  <schemas>
+    <schema name="qapk">
+      <description>APP 相关信息</description>
+      <columns>
+        <column name="apk_id" type="string" readonly="true">APKID 格式为 package-version_code-architecture</column>
+        <column name="package" type="string" readonly="true">包名称</column>
+        <column name="app_name" type="string" readonly="true">应用名称</column>
+        <column name="version_code" type="int" readonly="true">version code</column>
+        <column name="version_name" type="string" readonly="true">version name</column>
+        <column name="min_sdk_version" type="int" readonly="true">适用最小SDK版本</column>
+        <column name="target_sdk_version" type="int" readonly="true">目标SDK版本</column>
+        <column name="max_sdk_version" type="int" readonly="true">适用最大SDK版本</column>
+        <column name="architecture" type="string" readonly="true">适用CPU架构，x86|arm</column>
+        <column name="created_time" type="int" readonly="true">此APK创建时间</column>
+        <column name="info_updated_time" type="int" readonly="true">此APK信息更新时间</column>
+        <column name="description" type="string" readonly="true">此APK描述</column>
+        <column name="recent_change" type="string" readonly="true">此APK最新版本的改动</column>
+        <column name="category" type="int" readonly="true">此APK分类</column>
+        <column name="sub_category" type="int" readonly="true">此APK子分类</column>
+        <column name="rating" type="string" readonly="true">此APK评分</column>
+        <column name="download_count" type="int" readonly="true">此APK下载次数</column>
+        <column name="install_count" type="int" readonly="true">此APK安装次数</column>
+        <column name="uninstall_count" type="int" readonly="true">此APK卸载次数</column>
+        <column name="favorite_count" type="int" readonly="true">此APK收藏数量</column>
+        <column name="upload_user" type="int" readonly="true">此APK上传用户</column>
+        <column name="screen_support" type="string" readonly="true">此APK对屏幕支持情况</column>
+        <column name="icon_url" type="string" readonly="true">ICON的URL</column>
+        <column name="screenshots_urls" type="json" readonly="true">截图URL，JSON数组</column>
+        <column name="price" type="float" readonly="true">此APK价格，0为免费</column>
+        <column name="borqs" type="boolean" readonly="true">是否为borqs开发</column>
+        <column name="developer" type="string" readonly="true">此APK开发者</column>
+        <column name="developer_email" type="string" readonly="true">此APK开发者邮件</column>
+        <column name="developer_phone" type="string" readonly="true">此APK开发者电话</column>
+        <column name="developer_website" type="string" readonly="true">此APK开发者网站</column>
+        <column name="market_url" type="string" readonly="true">google market url</column>
+        <column name="other_urls" type="json" readonly="true">此APK其他连接</column>
+        <column name="file_url" type="string" readonly="true">此APK下载文件相对URL</column>
+        <column name="file_size" type="int" readonly="true">此APK文件大小（BYTE）</column>
+        <column name="file_md5" type="string" readonly="true">此文件MD5</column>
+        <column name="tag" type="string" readonly="true">此APK其他信息</column>
+
+        <!-- extend -->
+        <column name="app_comment_count" type="int" readonly="true">此APK 所在APP comment数量</column>
+        <column name="app_comments" type="json" readonly="true">此APK所在APP最新几条评论</column>
+        <column name="app_like_count" type="int" readonly="true">此APK 所在APP like数量</column>
+        <column name="app_liked_users" type="json" readonly="true">此APK 所在APP 最新的几个like用户</column>
+        <column name="app_likes" type="boolean" readonly="true">此用户是否like过此APK所在APP</column>
+        <column name="compatibility" type="boolean" readonly="true">此用户的机型是否兼容与此APK</column>
+        <column name="app_used" type="boolean" readonly="true">此登陆用户的APP关联是否包含此APK所属的APP，如果此用户未登陆，返回false</column>
+        <column name="app_favorite" type="boolean" readonly="true">此登陆用户是否正在收藏此APK所属的APP，如果此用户未登陆，返回false</column>
+        <column name="app_installing" type="boolean" readonly="true">此登陆用户是否正在安装此APK所属的APP，如果此用户未登陆，返回false</column>
+        <column name="app_installed" type="boolean" readonly="true">此登陆用户是否安装过此APK所属的APP，如果此用户未登陆，返回false</column>
+        <column name="app_uninstalled" type="boolean" readonly="true">此登陆用户是否卸载过此APK所属的APP，如果此用户未登陆，返回false</column>
+        <column name="app_downloaded" type="boolean" readonly="true">此登陆用户是否下载过此APK所属的APP，如果此用户未登陆，返回false</column>
+
+        <!-- aggregation -->
+        <column name="app_rating" type="string" readonly="true">此APK所在app的评分</column>
+        <column name="app_download_count" type="int" readonly="true">此APK所在APP的下载总数量</column>
+        <column name="app_install_count" type="int" readonly="true">此APK所在APP总安装数量</column>
+        <column name="app_uninstall_count" type="int" readonly="true">此APK所在APP总卸载数量</column>
+        <column name="app_favorite_count" type="int" readonly="true">此APK所在APP总收藏数量</column>
+        <column name="app_versions" type="json" readonly="true">此APK所在APP包含所有版本列表，json数组</column>
+      </columns>
+    </schema>
+  </schemas>
+  <methods>
+    <method name="qiupu/app/all" login="false" appId="false">
+      <description>查询所有qiupu的应用</description>
+      <arguments>
+        <argument name="category" optional="true">此分类和子分类信息，格式为"category,sub_category"，如果为空或者缺省则表示所有分类</argument>
+        <argument name="sort">返回应用的排序依据为 download, rating, updated 之一</argument>
+        <argument name="columns" optional="true">APP列名，逗号分隔</argument>
+        <argument name="page" optional="true">分页</argument>
+        <argument name="count" optional="true">每页数量</argument>
+      </arguments>
+      <return schema="qapk">返回符合结果的所有APP列表</return>
+    </method>
+
+    <method name="qiupu/suggest" login="false" appId="false">
+      <description>获取推荐的应用</description>
+      <arguments>
+        <argument name="columns" optional="true">APP列名，逗号分隔</argument>
+        <argument name="page" optional="true">分页</argument>
+        <argument name="count" optional="true">每页数量</argument>
+        <argument name="category" optional="true">此分类和子分类信息，格式为"category,sub_category"，如果为空或者缺省则表示所有分类</argument>
+      </arguments>
+      <return schema="qapk">返回推荐的应用，如果调用此方法未登陆，则返回随机的热门应用</return>
+    </method>
+    
+    <method name="qiupu/hot" login="false" appId="false">
+      <description>获取热门的应用</description>
+      <arguments>
+        <argument name="columns" optional="true">APP列名，逗号分隔</argument>
+        <argument name="page" optional="true">分页</argument>
+        <argument name="count" optional="true">每页数量</argument>
+        <argument name="category" optional="true">此分类和子分类信息，格式为"category,sub_category"，如果为空或者缺省则表示所有分类</argument>
+      </arguments>
+      <return schema="qapk">返回热门的应用</return>
+    </method>
+    
+    <method name="qiupu/selected" login="false" appId="false">
+      <description>获取精选的应用</description>
+      <arguments>
+        <argument name="columns" optional="true">APP列名，逗号分隔</argument>
+        <argument name="page" optional="true">分页</argument>
+        <argument name="count" optional="true">每页数量</argument>
+        <argument name="category" optional="true">此分类和子分类信息，格式为"category,sub_category"，如果为空或者缺省则表示所有分类</argument>
+      </arguments>
+      <return schema="qapk">返回精选的应用</return>
+    </method>
+
+    <method name="qiupu/app/for">
+      <description>查看指定用户的应用列表</description>
+      <arguments>
+        <argument name="user" optional="true">指定要查看的用户的ID，如果此参数缺失，则为查看自己的应用</argument>
+        <argument name="reason" optional="true">查看此应用的过滤器为 installing,uninstalled,favorite, installed的一项或者多项（使用逗号分隔），如果缺失，则相当于"install,uninstall,favorite" </argument>
+        <argument name="columns" optional="true">APP列名，逗号分隔</argument>
+        <argument name="page" optional="true">分页</argument>
+        <argument name="count" optional="true">每页数量</argument>
+      </arguments>
+      <return schema="qapk">返回推荐的应用，如果调用此方法未登陆，则返回随机的热门应用</return>
+    </method>
+
+    <method name="qiupu/sync">
+      <description>同步应用</description>
+      <arguments>
+        <argument name="apps">逗号分隔的apkid格式</argument>
+        <argument name="all">true|false, 是否同步本机所有的应用</argument>
+      </arguments>
+      <return schema="qapk">返回同步的apk列表</return>
+    </method>
+
+    <method name="qiupu/app/get">
+      <description>获取指定某几个APP的信息</description>
+      <arguments>
+        <argument name="apps">APP ID列表，逗号分隔</argument>
+        <argument name="columns" optional="true">APP列名，逗号分隔</argument>
+      </arguments>
+      <return schema="qapk">APP应用列表</return>
+    </method>
+
+    <method name="qiupu/download">
+      <description>下载一个应用</description>
+      <arguments>
+        <argument name="app">格式为"package:version_code[:arm|x86]"</argument>
+      </arguments>
+      <return>APK文件内容</return>
+    </method>
+
+    <method name="qiupu/upload">
+      <description>上传一个APK</description>
+      <arguments>
+        <argument name="package">应用包名</argument>
+        <argument name="app_name">此APK的应用名称</argument>
+        <argument name="version_code">APK version code</argument>
+        <argument name="version_name">APK version name</argument>
+        <argument name="min_sdk">min sdk version</argument>
+        <argument name="target_sdk">target sdk version</argument>
+        <argument name="max_sdk" optional="true">max sdk version</argument>
+        <argument name="arch" optional="true">architecture</argument>
+        <argument name="icon">ICON文件</argument>
+        <argument name="apk">APK文件</argument>        
+      </arguments>
+      <return>BOOLEAN类型，成功为true</return>
+    </method>
+
+    <method name="qiupu/user">
+      <description>查看有哪些用户和此应用相关</description>
+      <arguments>
+        <argument name="app">指定APP的package name</argument>
+        <argument name="reason">installing|installed|uninstalled|favorite|commented|liked</argument>
+      </arguments>
+      <return>用户列表，适用platform中的user schema</return>
+    </method>
+
+    <method name="qiupu/user/setting">
+      <description>设置某个用户在秋浦内的个人设定</description>
+      <arguments>
+        <argument name="name">用户设置的选项名称</argument>
+        <argument name="value">设置的值</argument>
+        <argument name="app">相关的APP package名</argument>
+      </arguments>
+    </method>
+
+    <method name="qiupu/remove_app">
+      <description>删除某用户的的个人应用关联</description>
+      <arguments>
+        <argument name="apps">逗号分隔的APP package列表</argument>
+      </arguments>
+    </method>
+
+    <method name="qiupu/search">
+      <description>搜索一个应用</description>
+      <arguments>
+        <argument name="value">搜索的应用名称/包名/...</argument>
+      </arguments>
+    </method>
+       
+    <method name="qiupu/fill_info">
+      <description>软件包填充信息页面</description>
+      <arguments>
+        <argument name="all" optional="true">是否返回全部应用，默认为false</argument>
+      </arguments>
+    </method>
+    
+    <method name="qiupu/update">
+      <description>上传一个APK</description>
+      <arguments>
+        <argument name="packagename">格式：package#version_code#architecture</argument>
+        <argument name="apkdesc" optional="true">此APK的描述</argument>
+        <argument name="apk_en_desc" optional="true">此APK的英文描述</argument>
+        <argument name="rating" optional="true">此APK的评级</argument>
+        <argument name="category" optional="true">此APK的分类</argument>
+        <argument name="subcategory" optional="true">此APK的子分类</argument> 
+        <argument name="appname" optional="true">此应用的名称</argument> 
+        <argument name="app_en_name" optional="true">此应用的英文名称</argument>
+        <argument name="source" optional="true">此应用扩展信息的来源</argument>       
+        <argument name="screenshot1" optional="true">软件截图1</argument>
+        <argument name="screenshot2" optional="true">软件截图2</argument>
+        <argument name="screenshot3" optional="true">软件截图3</argument>
+        <argument name="screenshot4" optional="true">软件截图4</argument>
+        <argument name="screenshot5" optional="true">软件截图5</argument>                
+      </arguments>
+      <return>BOOLEAN类型，成功为true</return>
+    </method>
+    
+    <method name="search">
+      <description>下载一个应用的最新版本</description>
+      <arguments>
+        <argument name="q">要下载应用的包名</argument>
+      </arguments>
+    </method>
+  </methods>
+</document>

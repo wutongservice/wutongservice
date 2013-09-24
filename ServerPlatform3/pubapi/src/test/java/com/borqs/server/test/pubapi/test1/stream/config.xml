@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+
+       default-init-method="init" default-destroy-method="destroy">
+    <!--Sql.executor-->
+    <bean id="sql.executor" class="com.borqs.server.platform.sql.SqlExecutor" scope="singleton">
+        <property name="connectionFactory">
+            <bean class="com.borqs.server.platform.sql.SimpleConnectionFactory" scope="singleton"/>
+        </property>
+    </bean>
+
+    <!-- Tables -->
+    <bean id="table.conversation0" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db" value="jdbc:mysql://localhost:3306/account2?user=root&amp;password=1234"/>
+        <property name="table" value="conversation0"/>
+    </bean>
+
+    <bean id="table.conversation1" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db" value="jdbc:mysql://localhost:3306/account2?user=root&amp;password=1234"/>
+        <property name="table" value="conversation1"/>
+    </bean>
+    <bean id="table.stream" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="jdbc:mysql://localhost:3306/account2?user=root&amp;password=1234&amp;allowMultiQueries=true"/>
+        <property name="table" value="post"/>
+    </bean>
+    <bean id="table.commentTarget" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db"
+                  value="jdbc:mysql://localhost:3306/account2?user=root&amp;password=1234&amp;allowMultiQueries=true"/>
+        <property name="table" value="comment_target_index"/>
+    </bean>
+    <bean id="logic.account" class="com.borqs.server.platform.test.mock.SteveAndBill" factory-method="account"
+          scope="singleton">
+    </bean>
+    <bean id="table.circle" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db"
+                  value="jdbc:mysql://localhost:3306/account2?user=root&amp;password=1234&amp;allowMultiQueries=true"/>
+        <property name="table" value="circle"/>
+    </bean>
+    <bean id="table.friend" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db"
+                  value="jdbc:mysql://localhost:3306/account2?user=root&amp;password=1234&amp;allowMultiQueries=true"/>
+        <property name="table" value="friend"/>
+    </bean>
+    <bean id="table.follower" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db"
+                  value="jdbc:mysql://localhost:3306/account2?user=root&amp;password=1234&amp;allowMultiQueries=true"/>
+        <property name="table" value="follower"/>
+    </bean>
+    <bean id="table.remark" class="com.borqs.server.platform.sql.SingleTable" scope="singleton">
+        <property name="db"
+                  value="jdbc:mysql://localhost:3306/account2?user=root&amp;password=1234&amp;allowMultiQueries=true"/>
+        <property name="table" value="remark"/>
+    </bean>
+    <!-- Logic -->
+    <bean id="logic.conversation" class="com.borqs.server.impl.conversation.ConversationImpl" scope="singleton">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="convTable0" ref="table.conversation0"/>
+        <property name="convTable1" ref="table.conversation1"/>
+        <property name="account" ref="logic.account"/>
+    </bean>
+    <bean id="logic.stream" class="com.borqs.server.impl.stream.StreamImpl" scope="singleton">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="postTable" ref="table.stream"/>
+        <property name="account" ref="logic.account"/>
+        <property name="conversation" ref="logic.conversation"/>
+        <property name="friend" ref="logic.friend"/>
+        <property name="redis" ref="server.redis"/>
+        <property name="outboxTimelineRedis" ref="server.redis"/>
+        <property name="wallTimelineRedis" ref="server.redis"/>
+        <property name="friendsTimelineRedis" ref="server.redis.memory"/>
+        <property name="publicTimelineRedis" ref="server.redis.memory"/>
+    </bean>
+    <bean id="logic.friend" class="com.borqs.server.impl.friend.FriendImpl" scope="singleton">
+        <property name="account" ref="logic.account"/>
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="circleTable" ref="table.circle"/>
+        <property name="friendTable" ref="table.friend"/>
+        <property name="followerTable" ref="table.follower"/>
+        <property name="remarkTable" ref="table.remark"/>
+    </bean>
+    <bean id="streamMQService" class="com.borqs.server.platform.mq.MqReceiveService" scope="singleton">
+        <property name="name" value="stream"/>
+        <property name="queue" value="stream"/>
+        <property name="processor" ref="streamRecv"/>
+    </bean>
+    <bean id="streamRecv" class="com.borqs.server.recv.stream.StreamRecv">
+        <property name="stream" ref="logic.stream"/>
+    </bean>
+    <bean id="streamApi" class="com.borqs.server.pubapi.StreamApi">
+        <property name="account" ref="logic.account"/>
+        <property name="stream" ref="logic.stream"/>
+        <property name="login">
+            <bean class="com.borqs.server.platform.test.mock.SteveAndBill" factory-method="login"/>
+        </property>
+        <property name="app">
+            <bean class="com.borqs.server.platform.test.mock.SteveAndBill" factory-method="app"/>
+        </property>
+        <property name="postQueue">
+            <bean class="com.borqs.server.platform.mq.QueueName">
+                <property name="queue" ref="memMQ"/>
+                <property name="name" value="post"/>
+            </bean>
+        </property>
+    </bean>
+    <bean id="memMQ" class="com.borqs.server.platform.mq.MemoryMQ" scope="singleton">
+
+    </bean>
+    <bean id="servlet.pubApi" class="com.borqs.server.platform.web.topaz.HttpApiServlet">
+        <property name="handlers">
+            <list>
+                <bean class="com.borqs.server.pubapi.StreamApi">
+                    <property name="account" ref="logic.account"/>
+                    <property name="stream" ref="logic.stream"/>
+                    <property name="login">
+                        <bean class="com.borqs.server.platform.test.mock.SteveAndBill" factory-method="login"/>
+                    </property>
+                    <property name="app">
+                        <bean class="com.borqs.server.platform.test.mock.SteveAndBill" factory-method="app"/>
+                    </property>
+                </bean>
+                <ref bean="streamMQService"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="server.redis" class="com.borqs.server.platform.cache.redis.SingleRedis" scope="singleton">
+        <property name="server" value="localhost:6379"/>
+    </bean>
+    <bean id="server.redis.memory" class="com.borqs.server.platform.cache.redis.SingleRedis" scope="singleton">
+        <property name="server" value="localhost:6371"/>
+    </bean>
+</beans>

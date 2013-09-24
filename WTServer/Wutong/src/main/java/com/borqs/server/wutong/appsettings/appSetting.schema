@@ -1,0 +1,13 @@
+{
+    "name":"app_setting",
+    "columns": {
+        "id":"int",
+        "user_id":"int",
+        "key_":"string",
+        "version":"int",
+        "value_":"json",
+        "description":"string",
+        "created_time":"int",
+        "destroyed_time":"int"
+    }
+}

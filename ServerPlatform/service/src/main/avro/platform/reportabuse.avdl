@@ -1,0 +1,12 @@
+
+
+
+@namespace("com.borqs.server.service.platform")
+protocol ReportAbuse {
+    import schema "../../../../../base/src/main/avro/error.avsc";
+
+    boolean saveReportAbuse(bytes reportAbuse) throws com.borqs.server.base.ResponseError;
+    int getReportAbuseCount(string post_id) throws com.borqs.server.base.ResponseError;
+    int iHaveReport(string viewerId,string post_id) throws com.borqs.server.base.ResponseError;
+
+}

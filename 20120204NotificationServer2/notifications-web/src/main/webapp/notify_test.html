@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Information Server API Test Page</title>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.json.js"></script>
+<script type="text/javascript">
+
+$(function(){
+    
+	$('button[id="json_get"]').bind('click',function(){
+		var ticket = $('input[name="ticket"]').val();
+		var to = $('select[id="to"]').val(); 
+		var dataType = "json";
+		
+		var param = { "ticket": ticket, "status":0};
+		var r = parseInt(Math.random()*1000000);
+		$.ajax({
+            url: 'service/informations/list.json?r='+r,
+            contentType: "application/json",//application/xml
+            processData: true,//contentType为xml时，此值为false
+            dataType: dataType,//json--返回json数据类型；xml--返回xml
+            data: param,
+            success: function(data) {//alert(JSON.stringify(data));
+            	/*
+            	data = {"informations":{"count":0,"informations":[
+            	        {"id":"0cc9bc6b-f1a7-4bea-b1e5-4bdc36d9f9d1"},
+            	        {"id":"0e19f0ce-dba5-4ad3-b1b3-31a988e28684"},
+            	        {"id":"1140de63-51f2-456d-89e7-5b567c113759"}
+            	        ]}};
+            	*/
+            	listMessages(data);
+            },            
+            error:function(e){
+           		alert("error--"+e.information);
+            }
+		});
+	});
+
+	$('button[id="json_post"]').bind('click',function(){
+		var ticket = $('input[name="ticket"]').val();
+		var appid = $('input[name="appid"]').val();
+		var to = $('select[id="to"]').val();
+		var title = $('input[name="title"]').val();
+		var data = $('textarea[name="data"]').val();
+		var type = $('select[id="mt"]').val();
+		var action = $('input[name="action"]').val();
+		
+		var dataType = $('select[id="t"]').val();
+
+		var param = {"appId": appid, "receiverId": to, 
+				"title": title, "senderId": "", "data":data, 
+				"type": type, "action":action};
+		var url = 'service/informations/send.json?ticket='+ticket;
+		
+		$.postJSON(url,param,function(d){
+			renderContent(d);
+		});
+	});			
+});
+
+function listMessages(data){
+    var html = '';
+    if(data==null || data=='undefined') {
+    	html = 'no informations!';
+    } else {
+    	html = '<table border="1">';
+    	var msgs = data.result.informations;
+    	if(msgs.length==0) {
+    		html += '<tr><td>no informations!</td></tr>';
+    	} else {
+        	for(var i=0; i<msgs.length; i++) {
+        		var msg = msgs[i];
+        		html += '<tr>';
+        		html += '<td>'+JSON.stringify(msg)+'</td><td><a href="JavaScript:process(\''+msg.id+'\')">Process</a></td>';    		
+        		html += '</tr>';
+        	}    		
+    	}
+    	html += '</table>'
+    }
+    //alert(html);
+    //html = JSON.stringify(data);
+	$('#content').empty().html(html);
+}
+
+function renderContent(data){
+    var html = '';
+    html = JSON.stringify(data);
+	$('#content').empty().html(html);
+}
+
+function process(mid) {
+	var ticket = $('input[name="ticket"]').val();
+	var dataType = "json";
+	//alert(ticket);
+	$.ajax({
+        url: 'service/informations/done.json?ticket='+ticket+"&mid="+mid,
+        contentType: "application/json",//application/xml
+        processData: true,//contentType为xml时，此值为false
+        dataType: dataType,//json--返回json数据类型；xml--返回xml
+        type:"PUT",
+        success: function(data) {
+		    renderContent(data);
+        },            
+        error:function(e){
+       		alert("error--"+e.information);
+        }
+	});		
+}
+
+</script>
+</head>
+<body>
+  <table>
+  	<tr>
+	  	<td><label> app id : </label></td>
+	  	<td><input type="text" name="appid" value="com.android.contacts" /></td>
+    </tr>
+    <tr>
+	    <td><label> msg type : </label></td>
+	    <td>
+		    <select id="mt">
+		      <option value="type1">type1</option>
+		      <option value="type2">type2</option>
+		      <option value="type3">type3</option>
+		    </select>
+	    </td>
+    </tr>
+    <tr>
+	    <td><label> action: </label></td>
+	    <td>
+	    	<input type="text" name="action" size="32" value="com.borqs.information.action.test" />
+	    </td>
+    </tr>    
+    <tr>
+	    <td><label> ticket : </label></td>
+	    <td>
+		  	<input type="text" name="ticket" size="32" value="MTAyMTRfMTMxODMyNDQ0MjQyNF8yOTY1" />
+	    </td>
+    </tr>
+    <tr>
+	    <td><label> to : </label></td>
+	    <td>
+		    <select id="to">
+		      <option value="274">tian.ke@borqs.com</option>
+		      <option value="10212" selected>zihao.zhang@borqs.com</option>
+		      <option value="10208">chunrong.liu@yahoo.com</option>
+		      <option value="10214">hu.zhou@borqs.com</option>
+		    </select>
+	    </td>
+    </tr>
+    <tr>
+	    <td><label> title: </label></td>
+	    <td>
+	    	<input type="text" name="title" size="32" value="I am a information!" />
+	    </td>
+    </tr>
+    <tr>
+	    <td><label> data: </label></td>
+	    <td>
+	    	<textarea type="text" name="data" rows="5">this is test data.</textarea>
+	    </td>
+    </tr>
+    <tr>
+		<td><button id="json_get">JSON Get</button></td>
+	    <td><button id="json_post">JSON Post</button></td>
+	</tr>
+  </table>
+  
+  <div id="content"></div>
+</body>
+</html>

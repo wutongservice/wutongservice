@@ -1,0 +1,8 @@
+{
+    "name":"notif",
+    "columns": {
+        "recv_notif":"int",
+        "notif_email":"string",
+        "notif_phone":"string"
+    }
+}

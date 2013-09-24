@@ -1,0 +1,63 @@
+{
+  "protocol" : "MusicInterface",
+  "namespace" : "com.borqs.server.music.service",
+  "types" : [ {
+    "type" : "error",
+    "name" : "ResponseError",
+    "namespace" : "com.borqs.server.base",
+    "fields" : [ {
+      "name" : "code",
+      "type" : "int"
+    }, {
+      "name" : "message",
+      "type" : "string"
+    } ]
+  } ],
+  "messages" : {
+    "getAllSongs" : {
+      "request" : [ {
+        "name" : "sort",
+        "type" : "string"
+      }, {
+        "name" : "page",
+        "type" : "int"
+      }, {
+        "name" : "count",
+        "type" : "int"
+      }, {
+        "name" : "isFullColumns",
+        "type" : "boolean"
+      } ],
+      "response" : "bytes",
+      "errors" : [ "com.borqs.server.base.ResponseError" ]
+    },
+    "getSongsBySinger" : {
+      "request" : [ {
+        "name" : "sort",
+        "type" : "string"
+      }, {
+        "name" : "singerId",
+        "type" : "int"
+      }, {
+        "name" : "page",
+        "type" : "int"
+      }, {
+        "name" : "count",
+        "type" : "int"
+      }, {
+        "name" : "isFullColumns",
+        "type" : "boolean"
+      } ],
+      "response" : "bytes",
+      "errors" : [ "com.borqs.server.base.ResponseError" ]
+    },
+    "getSongInfoById" : {
+      "request" : [ {
+        "name" : "songId",
+        "type" : "int"
+      } ],
+      "response" : "bytes",
+      "errors" : [ "com.borqs.server.base.ResponseError" ]
+    }
+  }
+}

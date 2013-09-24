@@ -1,0 +1,26 @@
+{
+    "name":"questionnaire_record",
+    "columns": {
+        "user_id":      "int",
+        "course_id":    "int",
+        "created_time": "int",
+        "average":      "float",
+        "score1":       "int",
+        "score2":       "int",
+        "score3":       "int",
+        "score4":       "int",
+        "score5":       "int",
+        "score6":       "int",
+        "score7":       "int",
+        "score8":       "int",
+        "score9":       "int",
+        "score10":      "int",
+        "score11":      "int",
+        "score12":      "int",
+        "score13":      "int",
+        "remark1":      "string",
+        "remark2":      "string",
+        "remark3":      "string"
+    }
+}
+

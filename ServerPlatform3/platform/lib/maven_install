@@ -1,0 +1,4 @@
+#!/bin/sh
+mvn install:install-file -Dfile=aliyun-openservices.jar -DgroupId=aliyun-openservices -DartifactId=aliyun-openservices -Dversion=1.0 -Dpackaging=jar
+mvn install:install-file -Dfile=IKAnalyzer2012.jar -DgroupId=ik_analyzer.google.com -DartifactId=ik_analyzer -Dversion=2012u5 -Dpackaging=jar
+mvn install:install-file -Dfile=pinyin4j-1.0.jar -DgroupId=pinyin4j -DartifactId=pinyin4j -Dversion=1.0 -Dpackaging=jar

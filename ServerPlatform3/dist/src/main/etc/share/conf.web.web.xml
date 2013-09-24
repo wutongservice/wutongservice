@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd "
+         version="2.5">
+    <servlet>
+        <display-name>pubApiServlet</display-name>
+        <servlet-name>pubApiServlet</servlet-name>
+        <servlet-class>com.borqs.server.platform.web.GlobalApplicationContextDelegateServlet</servlet-class>
+        <init-param>
+            <param-name>bean</param-name>
+            <param-value>servlet.pubApi</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet>
+        <display-name>pubApiServlet1</display-name>
+        <servlet-name>pubApiServlet1</servlet-name>
+        <servlet-class>com.borqs.server.platform.web.GlobalApplicationContextDelegateServlet</servlet-class>
+        <init-param>
+            <param-name>bean</param-name>
+            <param-value>servlet.pubApi1</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet>
+        <display-name>intrApiServlet1</display-name>
+        <servlet-name>intrApiServlet1</servlet-name>
+        <servlet-class>com.borqs.server.platform.web.GlobalApplicationContextDelegateServlet</servlet-class>
+        <init-param>
+            <param-name>bean</param-name>
+            <param-value>servlet.intrApi1</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet>
+        <display-name>qiupuServlet</display-name>
+        <servlet-name>qiupuServlet</servlet-name>
+        <servlet-class>com.borqs.server.platform.web.GlobalApplicationContextDelegateServlet</servlet-class>
+        <init-param>
+            <param-name>bean</param-name>
+            <param-value>servlet.qiupu</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>pubApiServlet</servlet-name>
+        <url-pattern>/v2/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>pubApiServlet1</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>intrApiServlet1</servlet-name>
+        <url-pattern>/internal/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>qiupuServlet</servlet-name>
+        <url-pattern>/qiupu/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>qiupuServlet</servlet-name>
+        <url-pattern>/search</url-pattern> <!-- search for qiupu -->
+    </servlet-mapping>
+</web-app>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                          http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+
+       default-init-method="init" default-destroy-method="destroy">
+    <bean id="fts.user" class="com.borqs.server.platform.feature.account.UserSimpleFts" scope="singleton">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="ftIndexTable" ref="table.userFts"/>
+    </bean>
+</beans>

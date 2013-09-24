@@ -1,0 +1,13 @@
+{
+    "name":"employee",
+    "columns": {
+        "name":"string",
+        "name_en":"string",
+        "employee_id":"string",
+        "department":"string",
+        "job_title":"string",
+        "tel":"string",
+        "mobile_tel":"string",
+        "sk":"string"
+    }
+}

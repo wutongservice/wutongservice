@@ -1,0 +1,175 @@
+<!--  configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%-5level] %d{HH:mm:ss.SSS} %logger{60} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="trace">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration -->
+
+<configuration scan="true">
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+    <file>/home/zhengwei/work2/logs/borqs_server.log</file>  
+   
+    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">   
+      <fileNamePattern>/home/zhengwei/work2/logs/borqs_server.%i.log</fileNamePattern>   
+      <minIndex>1</minIndex>   
+      <maxIndex>12</maxIndex>   
+    </rollingPolicy>   
+   
+    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">   
+      <maxFileSize>30MB</maxFileSize>   
+    </triggeringPolicy>   
+    <encoder>
+      <pattern>[%-5level] %d{HH:mm:ss.SSS} %logger{60} - %msg%n</pattern>
+    </encoder>   
+  </appender>
+  
+  <appender name="IMP" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+    <file>/home/zhengwei/work2/logs/borqs_server_imp.log</file>  
+   
+    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">   
+      <fileNamePattern>/home/zhengwei/work2/logs/borqs_server_imp.%i.log</fileNamePattern>   
+      <minIndex>1</minIndex>   
+      <maxIndex>12</maxIndex>   
+    </rollingPolicy>   
+   
+    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">   
+      <maxFileSize>30MB</maxFileSize>   
+    </triggeringPolicy>   
+    <encoder>
+      <pattern>[%-5level] %d{HH:mm:ss.SSS} %logger{60} - %msg%n</pattern>
+    </encoder>   
+  </appender>    
+  
+  <appender name="MARKET" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+    <file>/home/zhengwei/work2/logs/androidmarket_api.log</file>  
+   
+    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">   
+      <fileNamePattern>/home/zhengwei/work2/logs/androidmarket_api.%i.log</fileNamePattern>   
+      <minIndex>1</minIndex>   
+      <maxIndex>12</maxIndex>   
+    </rollingPolicy>   
+   
+    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">   
+      <maxFileSize>30MB</maxFileSize>   
+    </triggeringPolicy>   
+    <encoder>
+      <pattern>[%-5level] %d{HH:mm:ss.SSS} %logger{60} - %msg%n</pattern>
+    </encoder>   
+  </appender>
+
+  <appender name="LINKSHARE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>/home/zhengwei/work2/logs/share_link.log</file>
+
+    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+      <fileNamePattern>/home/zhengwei/work2/logs/share_link.%i.log</fileNamePattern>
+      <minIndex>1</minIndex>
+      <maxIndex>12</maxIndex>
+    </rollingPolicy>
+
+    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+      <maxFileSize>10MB</maxFileSize>
+    </triggeringPolicy>
+    <encoder>
+      <pattern>[%-5level] %d{HH:mm:ss.SSS} %logger{60} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+    <appender name="NOTIF" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/home/zhengwei/work2/logs/notif.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>/home/zhengwei/work2/logs/notif.%i.log</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>12</maxIndex>
+        </rollingPolicy>
+
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>10MB</maxFileSize>
+        </triggeringPolicy>
+        <encoder>
+            <pattern>[%-5level] %d{HH:mm:ss.SSS} %logger{60} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+  
+  <appender name="PAGE" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+    <file>/home/zhengwei/work2/logs/androidmarket_page.log</file>  
+   
+    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">   
+      <fileNamePattern>/home/zhengwei/work2/logs/androidmarket_page.%i.log</fileNamePattern>   
+      <minIndex>1</minIndex>   
+      <maxIndex>12</maxIndex>   
+    </rollingPolicy>   
+   
+    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">   
+      <maxFileSize>30MB</maxFileSize>   
+    </triggeringPolicy>   
+    <encoder>
+      <pattern>[%-5level] %d{HH:mm:ss.SSS} %logger{60} - %msg%n</pattern>
+    </encoder>   
+  </appender>
+  
+  <appender name="MQ" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+    <file>/home/zhengwei/work2/logs/mq_receiver.log</file>  
+   
+    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">   
+      <fileNamePattern>/home/zhengwei/work2/logs/mq_receiver.%i.log</fileNamePattern>   
+      <minIndex>1</minIndex>   
+      <maxIndex>12</maxIndex>   
+    </rollingPolicy>   
+   
+    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">   
+      <maxFileSize>30MB</maxFileSize>   
+    </triggeringPolicy>   
+    <encoder>
+      <pattern>[%-5level] %d{HH:mm:ss.SSS} %logger{60} - %msg%n</pattern>
+    </encoder>   
+  </appender>  
+   
+  <appender name="NOP" class="ch.qos.logback.core.helpers.NOPAppender">
+  </appender>
+
+    <appender name="TELNET" class="com.borqs.server.base.log.TelnetAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>[%-5level] %d{HH:mm:ss.SSS} %logger{60} - %msg%n</pattern>
+        </layout>
+    </appender>
+           
+  <logger name="com.borqs.server.qiupu.util.market.AppMarketInfoReader" level="trace">
+    <appender-ref ref="MARKET" />
+  </logger>
+  
+  <logger name="com.borqs.server.qiupu.util.market.AppMarketPageReader" level="trace">
+    <appender-ref ref="PAGE" />
+  </logger>
+  
+  <logger name="com.borqs.server.platform.mq.receiver" level="trace">
+    <appender-ref ref="MQ" />
+  </logger>
+
+  <logger name="com.borqs.server.sharelink" level="trace">
+    <appender-ref ref="LINKSHARE" />
+  </logger>
+
+  <logger name="com.borqs.server.service.notification" level="trace">
+    <appender-ref ref="NOTIF" />
+  </logger>
+  
+  <logger name="com.borqs" level="trace">   
+    <appender-ref ref="FILE" />
+    <appender-ref ref="TELNET"/>
+  </logger>
+  
+  <!-- logger name="com.borqs" level="info">   
+    <appender-ref ref="IMP" />   
+  </logger -->
+    
+  <root level="trace">
+    <appender-ref ref="NOP"/>
+  </root>   
+</configuration>

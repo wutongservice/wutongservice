@@ -1,0 +1,12 @@
+{
+    "name": "education_history",
+    "columns": {
+        "from": "string",
+        "to": "string",
+        "type": "string",
+        "school": "string",
+        "class": "string",
+        "degree": "string",
+        "major": "string"
+    }
+}

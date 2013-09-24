@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" {{ 'class="%s"' % page_class if page_class else '' }}>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{{ 'Borqs Market%s' % (' - ' + page_title) if page_title else ''}}</title>
+    <link rel="shortcut icon" href="favicon.ico"/>
+
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="/static/lib/jquery-ui/css/Aristo/Aristo.css">
+    <link rel="stylesheet" href="/static/css/blue.css">
+    <link rel="stylesheet" href="/static/lib/jBreadcrumbs/css/BreadCrumb.css">
+    <link rel="stylesheet" href="/static/lib/qtip2/jquery.qtip.min.css">
+    <link rel="stylesheet" href="/static/lib/colorbox/colorbox.css">
+    <link rel="stylesheet" href="/static/lib/google-code-prettify/prettify.css">
+    <link rel="stylesheet" href="/static/lib/sticky/sticky.css">
+    <link rel="stylesheet" href="/static/img/splashy/splashy.css">
+    <link rel="stylesheet" href="/static/img/flags/flags.css">
+    <link rel="stylesheet" href="/static/lib/fullcalendar/fullcalendar_gebo.css">
+    <link rel="stylesheet" href="/static/lib/datepicker/datepicker.css">
+    <link rel="stylesheet" href="/static/lib/tag_handler/css/jquery.taghandler.css">
+    <link rel="stylesheet" href="/static/lib/uniform/Aristo/uniform.aristo.css">
+    <link rel="stylesheet" href="/static/lib/multi-select/css/multi-select.css">
+    <link rel="stylesheet" href="/static/lib/chosen/chosen.css">
+    <link rel="stylesheet" href="/static/lib/stepy/css/jquery.stepy.css">
+    <link rel="stylesheet" href="/static/lib/plupload/js/jquery.plupload.queue/css/plupload-gebo.css">
+    <link rel="stylesheet" href="/static/lib/CLEditor/jquery.cleditor.css">
+    <link rel="stylesheet" href="/static/lib/colorpicker/css/colorpicker.css">
+    <link rel="stylesheet" href="/static/lib/smoke/themes/gebo.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/fancybox/jquery.fancybox-1.3.4.css">
+
+
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/lib/jquery-ui/jquery-ui-1.8.23.custom.min.js"></script>
+    <script src="/static/js/forms/jquery.ui.touch-punch.min.js"></script>
+    <script src="/static/js/jquery.easing.1.3.min.js"></script>
+    <script src="/static/js/jquery.debouncedresize.min.js"></script>
+    <script src="/static/js/jquery.cookie.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/js/bootstrap.plugins.min.js"></script>
+    <script src="/static/lib/google-code-prettify/prettify.min.js"></script>
+    <script src="/static/lib/sticky/sticky.min.js"></script>
+    <script src="/static/lib/qtip2/jquery.qtip.min.js"></script>
+    <script src="/static/lib/colorbox/jquery.colorbox.min.js"></script>
+    <script src="/static/lib/jBreadcrumbs/js/jquery.jBreadCrumb.1.1.min.js"></script>
+    <script src="/static/js/jquery.actual.min.js"></script>
+    <script src="/static/lib/antiscroll/antiscroll.js"></script>
+    <script src="/static/lib/antiscroll/jquery-mousewheel.js"></script>
+    <script src="/static/js/ios-orientationchange-fix.js"></script>
+    <script src="/static/lib/UItoTop/jquery.ui.totop.min.js"></script>
+    <script src="/static/js/selectNav.js"></script>
+    <script src="/static/js/gebo_common.js"></script>
+    <script src="/static/lib/datatables/jquery.dataTables.min.js"></script>
+    <script src="/static/lib/datatables/jquery.dataTables.sorting.js"></script>
+    <script src="/static/js/gebo_tables.js"></script>
+    <script src="/static/fancybox/jquery.easing-1.3.pack.js"></script>
+    <script src="/static/fancybox/jquery.fancybox-1.3.4.js"></script>
+
+{#    <link rel="stylesheet" href="/static/lib/all.css">#}
+{#    <script src="/static/all.js"></script>#}
+    <script src="/static/market.js"></script>
+    {% block css %}
+    {% endblock %}
+</head>
+<body>
+    {% block body %}
+        <h1>Body</h1>
+    {% endblock %}
+    {% block footer %}
+    {% endblock %}
+    {% block script %}
+    {% endblock %}
+</body>

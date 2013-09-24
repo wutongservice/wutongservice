@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+
+       default-init-method="init" default-destroy-method="destroy">
+  <!--Sql.executor-->
+  <bean id="sql.executor" class="com.borqs.server.platform.sql.SqlExecutor" scope="singleton">
+    <property name="connectionFactory">
+      <bean class="com.borqs.server.platform.sql.SimpleConnectionFactory" scope="singleton"/>
+    </property>
+  </bean>
+
+  <!-- Logic -->
+  <bean id="logic.app" class="com.borqs.server.impl.app.SimpleAppImpl" scope="singleton">
+    <property name="apps">
+      <list>
+        <bean class="com.borqs.server.platform.feature.app.App">
+          <property name="appId">
+            <util:constant static-field="com.borqs.server.test.app.test1.SimpleAppLogicTest1.APP1_ID"/>
+          </property>
+          <property name="secret">
+              <util:constant static-field="com.borqs.server.test.app.test1.SimpleAppLogicTest1.APP1_SECRET"/>
+          </property>
+          <property name="name">
+            <util:constant static-field="com.borqs.server.test.app.test1.SimpleAppLogicTest1.APP1_NAME"/>
+          </property>
+        </bean>
+        <bean class="com.borqs.server.platform.feature.app.App">
+          <property name="appId">
+            <util:constant static-field="com.borqs.server.test.app.test1.SimpleAppLogicTest1.APP2_ID"/>
+          </property>
+          <property name="secret">
+              <util:constant static-field="com.borqs.server.test.app.test1.SimpleAppLogicTest1.APP2_SECRET"/>
+          </property>
+          <property name="name">
+            <util:constant static-field="com.borqs.server.test.app.test1.SimpleAppLogicTest1.APP2_NAME"/>
+          </property>
+        </bean>
+      </list>
+    </property>
+  </bean>
+
+</beans>

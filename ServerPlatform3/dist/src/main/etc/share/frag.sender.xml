@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+
+       default-init-method="init" default-destroy-method="destroy">
+    <!-- email sender -->
+    <bean id="sender.mail" class="com.borqs.server.platform.util.sender.email.AsyncMailSender" scope="singleton">
+        <property name="executor">
+            <bean class="com.borqs.server.platform.util.ThreadPool">
+                <property name="threadCount" value="4"/>
+            </bean>
+        </property>
+        <property name="smtpAddress" value="smtp.bizmail.yahoo.com:465"/>
+        <property name="smtpUsername" value="borqs.support@borqs.com"/>
+        <property name="smtpPassword" value="borqsbpc"/>
+    </bean>
+    <bean id="sender.sms" class="com.borqs.server.platform.util.sender.sms.AsyncProxyMessageSender" scope="singleton">
+        <property name="executor">
+            <bean class="com.borqs.server.platform.util.ThreadPool">
+                <property name="threadCount" value="4"/>
+            </bean>
+        </property>
+        <property name="host" value="${sms.proxy}"/>
+    </bean>
+    <bean id="sender.notif" class="com.borqs.server.platform.util.sender.notif.AsyncNotifSender" scope="singleton">
+        <property name="executor">
+            <bean class="com.borqs.server.platform.util.ThreadPool">
+                <property name="threadCount" value="4"/>
+            </bean>
+        </property>
+        <property name="server" value="192.168.7.144:8083"/>
+    </bean>
+</beans>

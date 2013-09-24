@@ -1,0 +1,744 @@
+---------------- gcutil -----------------
+  S0     S1     E      O      P     YGC     YGCT    FGC    FGCT     GCT   
+  1.57   0.00   0.00  96.78  99.65   8132   94.259     6    1.512   95.771
+---------------- gccapacity -------------
+ NGCMN    NGCMX     NGC     S0C   S1C       EC      OGCMN      OGCMX       OGC         OC      PGCMN    PGCMX     PGC       PC     YGC    FGC 
+ 43648.0 174720.0  98880.0 9856.0 9856.0  79168.0    87424.0   349568.0   212284.0   212284.0  21248.0  83968.0  38784.0  38784.0   8132     6
+---------------- compilation ------------
+Compiled  Size  Type Method
+    2329    206    1 com/drew/metadata/iptc/IptcReader extract
+    2329    206    1 com/drew/metadata/iptc/IptcReader extract
+    2329    206    1 com/drew/metadata/iptc/IptcReader extract
+    2329    206    1 com/drew/metadata/iptc/IptcReader extract
+    2329    206    1 com/drew/metadata/iptc/IptcReader extract
+    2329    206    1 com/drew/metadata/iptc/IptcReader extract
+    2329    206    1 com/drew/metadata/iptc/IptcReader extract
+    2329    206    1 com/drew/metadata/iptc/IptcReader extract
+    2329    206    1 com/drew/metadata/iptc/IptcReader extract
+    2329    206    1 com/drew/metadata/iptc/IptcReader extract
+---------------- thread stack -----------
+2013-02-20 18:37:25
+Full thread dump Java HotSpot(TM) 64-Bit Server VM (20.5-b03 mixed mode):
+
+"qtp929364180-923" prio=10 tid=0x00007fdd1801b800 nid=0x423b runnable [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+   Locked ownable synchronizers:
+	- None
+
+"qtp929364180-922 - /post/qiupufriendtimeline?callback=jQuery183039076750888489187_1361351230253&page=0&count=1&call_id=1361356510381&ticket=d2VpLmx1QGJvcnFzLmNvbV8xMzYxMDY4MTI2NjMxXzE5ODk%3D&appid=1&sign=7zF8Oc9DYltexPZC7fWJrQ%3D%3D&_=1361356510385" prio=10 tid=0x00007fdd1801a000 nid=0x423a runnable [0x00007fdd399c5000]
+   java.lang.Thread.State: RUNNABLE
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.read(SocketInputStream.java:129)
+	at com.mysql.jdbc.util.ReadAheadInputStream.fill(ReadAheadInputStream.java:114)
+	at com.mysql.jdbc.util.ReadAheadInputStream.readFromUnderlyingStreamIfNecessary(ReadAheadInputStream.java:161)
+	at com.mysql.jdbc.util.ReadAheadInputStream.read(ReadAheadInputStream.java:189)
+	- locked <0x00000000eb2db048> (a com.mysql.jdbc.util.ReadAheadInputStream)
+	at com.mysql.jdbc.MysqlIO.readFully(MysqlIO.java:2537)
+	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:2990)
+	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:2979)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3520)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:1990)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2151)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2619)
+	- locked <0x00000000e5d51cb0> (a com.mysql.jdbc.JDBC4Connection)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2569)
+	at com.mysql.jdbc.StatementImpl.executeQuery(StatementImpl.java:1510)
+	- locked <0x00000000e5d51cb0> (a com.mysql.jdbc.JDBC4Connection)
+	- locked <0x00000000daf240d8> (a com.mysql.jdbc.StatementImpl)
+	at org.apache.commons.dbcp.DelegatingStatement.executeQuery(DelegatingStatement.java:208)
+	at org.apache.commons.dbcp.DelegatingStatement.executeQuery(DelegatingStatement.java:208)
+	at com.borqs.server.base.sql.SQLExecutor.executeQuery0(SQLExecutor.java:60)
+	at com.borqs.server.base.sql.SQLExecutor.executeRecord(SQLExecutor.java:270)
+	at com.borqs.server.base.sql.SQLExecutor$3.handle(SQLExecutor.java:313)
+	at com.borqs.server.base.sql.SQLExecutor.executeStatement(SQLExecutor.java:107)
+	at com.borqs.server.base.sql.SQLExecutor.executeRecord(SQLExecutor.java:310)
+	at com.borqs.server.base.sql.SQLExecutor.executeRecord(SQLExecutor.java:440)
+	at com.borqs.server.wutong.account2.AccountImpl.findUserByTicket(AccountImpl.java:1984)
+	at com.borqs.server.wutong.account2.AccountImpl.whoLogined(AccountImpl.java:2442)
+	at com.borqs.server.wutong.commons.WutongContext.getContext(WutongContext.java:156)
+	at com.borqs.server.wutong.stream.StreamServlet.getFriendTimelineForQiuPu(StreamServlet.java:854)
+	at sun.reflect.GeneratedMethodAccessor8.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet$Invoker.invoke(WebMethodServlet.java:275)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet.process(WebMethodServlet.java:172)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet.doProcess(WebMethodServlet.java:219)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet.doGet(WebMethodServlet.java:130)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:707)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet.service(WebMethodServlet.java:232)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:538)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:478)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:223)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:937)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:406)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:183)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:871)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:117)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:110)
+	at org.eclipse.jetty.server.Server.handle(Server.java:342)
+	at org.eclipse.jetty.server.HttpConnection.handleRequest(HttpConnection.java:589)
+	at org.eclipse.jetty.server.HttpConnection$RequestHandler.headerComplete(HttpConnection.java:1048)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:601)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:214)
+	at org.eclipse.jetty.server.HttpConnection.handle(HttpConnection.java:411)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:535)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:40)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:529)
+	at java.lang.Thread.run(Thread.java:662)
+
+   Locked ownable synchronizers:
+	- None
+
+"qtp929364180-921 - /post/qiupufriendtimeline?callback=jQuery183017172549091949585_1361356086911&page=0&count=1&call_id=1361356507588&ticket=MTM4MDExOTAyNzNfMTM2MTE1MTE4MzM0Nl85MzM3&appid=1&sign=7zF8Oc9DYltexPZC7fWJrQ%3D%3D&_=1361356507590" prio=10 tid=0x00007fdd18008800 nid=0x4239 runnable [0x00007fdd3a16b000]
+   java.lang.Thread.State: RUNNABLE
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.read(SocketInputStream.java:129)
+	at com.mysql.jdbc.util.ReadAheadInputStream.fill(ReadAheadInputStream.java:114)
+	at com.mysql.jdbc.util.ReadAheadInputStream.readFromUnderlyingStreamIfNecessary(ReadAheadInputStream.java:161)
+	at com.mysql.jdbc.util.ReadAheadInputStream.read(ReadAheadInputStream.java:189)
+	- locked <0x00000000eb2c1038> (a com.mysql.jdbc.util.ReadAheadInputStream)
+	at com.mysql.jdbc.MysqlIO.readFully(MysqlIO.java:2537)
+	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:2990)
+	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:2979)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3520)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:1990)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2151)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2619)
+	- locked <0x00000000e5d83570> (a com.mysql.jdbc.JDBC4Connection)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2569)
+	at com.mysql.jdbc.StatementImpl.executeQuery(StatementImpl.java:1510)
+	- locked <0x00000000e5d83570> (a com.mysql.jdbc.JDBC4Connection)
+	- locked <0x00000000daf03018> (a com.mysql.jdbc.StatementImpl)
+	at org.apache.commons.dbcp.DelegatingStatement.executeQuery(DelegatingStatement.java:208)
+	at org.apache.commons.dbcp.DelegatingStatement.executeQuery(DelegatingStatement.java:208)
+	at com.borqs.server.base.sql.SQLExecutor.executeQuery0(SQLExecutor.java:60)
+	at com.borqs.server.base.sql.SQLExecutor.executeRecordSet(SQLExecutor.java:325)
+	at com.borqs.server.base.sql.SQLExecutor$4.handle(SQLExecutor.java:343)
+	at com.borqs.server.base.sql.SQLExecutor.executeStatement(SQLExecutor.java:107)
+	at com.borqs.server.base.sql.SQLExecutor.executeRecordSet(SQLExecutor.java:340)
+	at com.borqs.server.base.sql.SQLExecutor.executeRecordSet(SQLExecutor.java:445)
+	at com.borqs.server.wutong.friendship.FriendshipImpl.getFriends0(FriendshipImpl.java:772)
+	at com.borqs.server.wutong.friendship.FriendshipImpl$$EnhancerByCGLIB$$1b3701d3.CGLIB$getFriends0$2(<generated>)
+	at com.borqs.server.wutong.friendship.FriendshipImpl$$EnhancerByCGLIB$$1b3701d3$$FastClassByCGLIB$$53a9b8a2.invoke(<generated>)
+	at net.sf.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:228)
+	at com.borqs.server.base.log.TraceCallInterceptor.intercept(TraceCallInterceptor.java:23)
+	at com.borqs.server.wutong.friendship.FriendshipImpl$$EnhancerByCGLIB$$1b3701d3.getFriends0(<generated>)
+	at com.borqs.server.wutong.friendship.FriendshipImpl.getFriends(FriendshipImpl.java:793)
+	at com.borqs.server.wutong.friendship.FriendshipImpl$$EnhancerByCGLIB$$1b3701d3.CGLIB$getFriends$3(<generated>)
+	at com.borqs.server.wutong.friendship.FriendshipImpl$$EnhancerByCGLIB$$1b3701d3$$FastClassByCGLIB$$53a9b8a2.invoke(<generated>)
+	at net.sf.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:228)
+	at com.borqs.server.base.log.TraceCallInterceptor.intercept(TraceCallInterceptor.java:51)
+	at com.borqs.server.wutong.friendship.FriendshipImpl$$EnhancerByCGLIB$$1b3701d3.getFriends(<generated>)
+	at com.borqs.server.wutong.friendship.FriendshipImpl.getFriendsP(FriendshipImpl.java:1932)
+	at com.borqs.server.wutong.friendship.FriendshipImpl$$EnhancerByCGLIB$$1b3701d3.CGLIB$getFriendsP$6(<generated>)
+	at com.borqs.server.wutong.friendship.FriendshipImpl$$EnhancerByCGLIB$$1b3701d3$$FastClassByCGLIB$$53a9b8a2.invoke(<generated>)
+	at net.sf.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:228)
+	at com.borqs.server.base.log.TraceCallInterceptor.intercept(TraceCallInterceptor.java:51)
+	at com.borqs.server.wutong.friendship.FriendshipImpl$$EnhancerByCGLIB$$1b3701d3.getFriendsP(<generated>)
+	at com.borqs.server.wutong.stream.StreamImpl.getFriendsTimelineP(StreamImpl.java:3112)
+	at com.borqs.server.wutong.stream.StreamImpl.getFullFriendsTimelineForQiuPuP(StreamImpl.java:3095)
+	at com.borqs.server.wutong.stream.StreamServlet.getFriendTimelineForQiuPu(StreamServlet.java:868)
+	at sun.reflect.GeneratedMethodAccessor8.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet$Invoker.invoke(WebMethodServlet.java:275)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet.process(WebMethodServlet.java:172)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet.doProcess(WebMethodServlet.java:219)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet.doGet(WebMethodServlet.java:130)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:707)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet.service(WebMethodServlet.java:232)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:538)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:478)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:223)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:937)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:406)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:183)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:871)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:117)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:110)
+	at org.eclipse.jetty.server.Server.handle(Server.java:342)
+	at org.eclipse.jetty.server.HttpConnection.handleRequest(HttpConnection.java:589)
+	at org.eclipse.jetty.server.HttpConnection$RequestHandler.headerComplete(HttpConnection.java:1048)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:601)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:214)
+	at org.eclipse.jetty.server.HttpConnection.handle(HttpConnection.java:411)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:535)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:40)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:529)
+	at java.lang.Thread.run(Thread.java:662)
+
+   Locked ownable synchronizers:
+	- None
+
+"qtp929364180-920 - /company/employee/list?company=15000000016&page=0&count=200&call_id=1361356461715&sign=YD04qH0L2H3M6whRGmZv0A%3D%3D&sign_method=md5" prio=10 tid=0x00007fdd18008000 nid=0x4238 runnable [0x00007fdd4ccfa000]
+   java.lang.Thread.State: RUNNABLE
+	at java.lang.Throwable.getStackTraceElement(Native Method)
+	at java.lang.Throwable.getOurStackTrace(Throwable.java:591)
+	- locked <0x00000000daebc458> (a com.borqs.server.ServerException)
+	at java.lang.Throwable.printStackTrace(Throwable.java:510)
+	- locked <0x00000000daebc928> (a java.io.PrintWriter)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet.writeError(WebMethodServlet.java:342)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet.access$300(WebMethodServlet.java:45)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet$Invoker.invoke(WebMethodServlet.java:289)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet.process(WebMethodServlet.java:172)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet.doProcess(WebMethodServlet.java:219)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet.doGet(WebMethodServlet.java:130)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:707)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet.service(WebMethodServlet.java:232)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:538)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:478)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:223)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:937)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:406)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:183)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:871)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:117)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:110)
+	at org.eclipse.jetty.server.Server.handle(Server.java:342)
+	at org.eclipse.jetty.server.HttpConnection.handleRequest(HttpConnection.java:589)
+	at org.eclipse.jetty.server.HttpConnection$RequestHandler.headerComplete(HttpConnection.java:1048)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:601)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:214)
+	at org.eclipse.jetty.server.HttpConnection.handle(HttpConnection.java:411)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:535)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:40)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:529)
+	at java.lang.Thread.run(Thread.java:662)
+
+   Locked ownable synchronizers:
+	- None
+
+"qtp929364180-919 - /account/who" prio=10 tid=0x00007fdd18027000 nid=0x4237 runnable [0x00007fdd5411b000]
+   java.lang.Thread.State: RUNNABLE
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.read(SocketInputStream.java:129)
+	at com.mysql.jdbc.util.ReadAheadInputStream.fill(ReadAheadInputStream.java:114)
+	at com.mysql.jdbc.util.ReadAheadInputStream.readFromUnderlyingStreamIfNecessary(ReadAheadInputStream.java:161)
+	at com.mysql.jdbc.util.ReadAheadInputStream.read(ReadAheadInputStream.java:189)
+	- locked <0x00000000eb52fbe0> (a com.mysql.jdbc.util.ReadAheadInputStream)
+	at com.mysql.jdbc.MysqlIO.readFully(MysqlIO.java:2537)
+	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:2990)
+	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:2979)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3520)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:1990)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2151)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2619)
+	- locked <0x00000000e5d87b08> (a com.mysql.jdbc.JDBC4Connection)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2569)
+	at com.mysql.jdbc.StatementImpl.executeQuery(StatementImpl.java:1510)
+	- locked <0x00000000e5d87b08> (a com.mysql.jdbc.JDBC4Connection)
+	- locked <0x00000000dae87b60> (a com.mysql.jdbc.StatementImpl)
+	at org.apache.commons.dbcp.DelegatingStatement.executeQuery(DelegatingStatement.java:208)
+	at org.apache.commons.dbcp.DelegatingStatement.executeQuery(DelegatingStatement.java:208)
+	at com.borqs.server.base.sql.SQLExecutor.executeQuery0(SQLExecutor.java:60)
+	at com.borqs.server.base.sql.SQLExecutor.executeRecord(SQLExecutor.java:270)
+	at com.borqs.server.base.sql.SQLExecutor$3.handle(SQLExecutor.java:313)
+	at com.borqs.server.base.sql.SQLExecutor.executeStatement(SQLExecutor.java:107)
+	at com.borqs.server.base.sql.SQLExecutor.executeRecord(SQLExecutor.java:310)
+	at com.borqs.server.base.sql.SQLExecutor.executeRecord(SQLExecutor.java:440)
+	at com.borqs.server.wutong.account2.AccountImpl.findUserByLoginName(AccountImpl.java:1908)
+	at com.borqs.server.wutong.account2.AccountImpl.findUserIdByLoginName(AccountImpl.java:3104)
+	at com.borqs.server.wutong.account2.AccountImpl.getUserIds(AccountImpl.java:2879)
+	at com.borqs.server.wutong.account2.AccountServlet.who(AccountServlet.java:401)
+	at sun.reflect.GeneratedMethodAccessor13.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet$Invoker.invoke(WebMethodServlet.java:275)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet.process(WebMethodServlet.java:172)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet.doProcess(WebMethodServlet.java:219)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet.doPost(WebMethodServlet.java:125)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:727)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet.service(WebMethodServlet.java:232)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:538)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:478)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:223)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:937)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:406)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:183)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:871)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:117)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:110)
+	at org.eclipse.jetty.server.Server.handle(Server.java:342)
+	at org.eclipse.jetty.server.HttpConnection.handleRequest(HttpConnection.java:589)
+	at org.eclipse.jetty.server.HttpConnection$RequestHandler.content(HttpConnection.java:1065)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:823)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:220)
+	at org.eclipse.jetty.server.HttpConnection.handle(HttpConnection.java:411)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:535)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:40)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:529)
+	at java.lang.Thread.run(Thread.java:662)
+
+   Locked ownable synchronizers:
+	- None
+
+"qtp929364180-918 - /post/qiupufriendtimeline?callback=jQuery18306012953652514321_1361339215778&page=0&count=1&call_id=1361356565880&ticket=MTAwMTVfMTM2MTMzOTE2MTQ5Nl8yMg%3D%3D&appid=1&sign=7zF8Oc9DYltexPZC7fWJrQ%3D%3D&_=1361356565882" prio=10 tid=0x00007fdd18005000 nid=0x4236 runnable [0x00007fdd4cdfb000]
+   java.lang.Thread.State: RUNNABLE
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.read(SocketInputStream.java:129)
+	at com.mysql.jdbc.util.ReadAheadInputStream.fill(ReadAheadInputStream.java:114)
+	at com.mysql.jdbc.util.ReadAheadInputStream.readFromUnderlyingStreamIfNecessary(ReadAheadInputStream.java:161)
+	at com.mysql.jdbc.util.ReadAheadInputStream.read(ReadAheadInputStream.java:189)
+	- locked <0x00000000e5cd5d90> (a com.mysql.jdbc.util.ReadAheadInputStream)
+	at com.mysql.jdbc.MysqlIO.readFully(MysqlIO.java:2537)
+	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:2990)
+	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:2979)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3520)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:1990)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2151)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2619)
+	- locked <0x00000000e5cc40a8> (a com.mysql.jdbc.JDBC4Connection)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2569)
+	at com.mysql.jdbc.StatementImpl.executeQuery(StatementImpl.java:1510)
+	- locked <0x00000000e5cc40a8> (a com.mysql.jdbc.JDBC4Connection)
+	- locked <0x00000000daf6d980> (a com.mysql.jdbc.StatementImpl)
+	at org.apache.commons.dbcp.DelegatingStatement.executeQuery(DelegatingStatement.java:208)
+	at org.apache.commons.dbcp.DelegatingStatement.executeQuery(DelegatingStatement.java:208)
+	at com.borqs.server.base.sql.SQLExecutor.executeQuery0(SQLExecutor.java:60)
+	at com.borqs.server.base.sql.SQLExecutor.executeList(SQLExecutor.java:508)
+	at com.borqs.server.wutong.account2.UserDb.handleConnection3(UserDb.java:211)
+	at com.borqs.server.wutong.account2.UserDb.getUsers(UserDb.java:254)
+	at com.borqs.server.wutong.account2.AccountImpl.getUsers(AccountImpl.java:373)
+	at com.borqs.server.wutong.account2.AccountImpl.findUsersByUserIds(AccountImpl.java:2173)
+	at com.borqs.server.wutong.account2.AccountImpl.getUsers(AccountImpl.java:2840)
+	at com.borqs.server.wutong.account2.AccountImpl.getUsersBaseColumnsContainsRemarkRequest(AccountImpl.java:1089)
+	at com.borqs.server.wutong.friendship.FriendshipImpl.getFriendsP(FriendshipImpl.java:1948)
+	at com.borqs.server.wutong.friendship.FriendshipImpl$$EnhancerByCGLIB$$1b3701d3.CGLIB$getFriendsP$6(<generated>)
+	at com.borqs.server.wutong.friendship.FriendshipImpl$$EnhancerByCGLIB$$1b3701d3$$FastClassByCGLIB$$53a9b8a2.invoke(<generated>)
+	at net.sf.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:228)
+	at com.borqs.server.base.log.TraceCallInterceptor.intercept(TraceCallInterceptor.java:51)
+	at com.borqs.server.wutong.friendship.FriendshipImpl$$EnhancerByCGLIB$$1b3701d3.getFriendsP(<generated>)
+	at com.borqs.server.wutong.stream.StreamImpl.getFriendsTimelineP(StreamImpl.java:3112)
+	at com.borqs.server.wutong.stream.StreamImpl.getFullFriendsTimelineForQiuPuP(StreamImpl.java:3095)
+	at com.borqs.server.wutong.stream.StreamServlet.getFriendTimelineForQiuPu(StreamServlet.java:868)
+	at sun.reflect.GeneratedMethodAccessor8.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet$Invoker.invoke(WebMethodServlet.java:275)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet.process(WebMethodServlet.java:172)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet.doProcess(WebMethodServlet.java:219)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet.doGet(WebMethodServlet.java:130)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:707)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet.service(WebMethodServlet.java:232)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:538)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:478)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:223)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:937)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:406)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:183)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:871)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:117)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:110)
+	at org.eclipse.jetty.server.Server.handle(Server.java:342)
+	at org.eclipse.jetty.server.HttpConnection.handleRequest(HttpConnection.java:589)
+	at org.eclipse.jetty.server.HttpConnection$RequestHandler.headerComplete(HttpConnection.java:1048)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:601)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:214)
+	at org.eclipse.jetty.server.HttpConnection.handle(HttpConnection.java:411)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:535)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:40)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:529)
+	at java.lang.Thread.run(Thread.java:662)
+
+   Locked ownable synchronizers:
+	- None
+
+"qtp929364180-916 - /post/create" prio=10 tid=0x00007fdd18020000 nid=0x41b5 runnable [0x00007fdd397c3000]
+   java.lang.Thread.State: RUNNABLE
+	at com.sun.imageio.plugins.jpeg.JPEGImageReader.readImage(Native Method)
+	at com.sun.imageio.plugins.jpeg.JPEGImageReader.readInternal(JPEGImageReader.java:1137)
+	at com.sun.imageio.plugins.jpeg.JPEGImageReader.read(JPEGImageReader.java:948)
+	at javax.imageio.ImageIO.read(ImageIO.java:1422)
+	at javax.imageio.ImageIO.read(ImageIO.java:1282)
+	at com.borqs.server.wutong.photo.PhotoImpl.saveUploadPhoto(PhotoImpl.java:948)
+	at com.borqs.server.wutong.stream.StreamServlet.createPost(StreamServlet.java:208)
+	at sun.reflect.GeneratedMethodAccessor45.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet$Invoker.invoke(WebMethodServlet.java:275)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet.process(WebMethodServlet.java:172)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet.doProcess(WebMethodServlet.java:219)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet.doPost(WebMethodServlet.java:125)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:727)
+	at com.borqs.server.base.web.webmethod.WebMethodServlet.service(WebMethodServlet.java:232)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:538)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:478)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:223)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:937)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:406)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:183)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:871)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:117)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:110)
+	at org.eclipse.jetty.server.Server.handle(Server.java:342)
+	at org.eclipse.jetty.server.HttpConnection.handleRequest(HttpConnection.java:589)
+	at org.eclipse.jetty.server.HttpConnection$RequestHandler.content(HttpConnection.java:1065)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:823)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:220)
+	at org.eclipse.jetty.server.HttpConnection.handle(HttpConnection.java:411)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:535)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:40)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:529)
+	at java.lang.Thread.run(Thread.java:662)
+
+   Locked ownable synchronizers:
+	- None
+
+"qtp929364180-911" prio=10 tid=0x00007fdd1801e800 nid=0x414b runnable [0x00007fdd4c6d9000]
+   java.lang.Thread.State: RUNNABLE
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.idleJobPoll(QueuedThreadPool.java:512)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.access$600(QueuedThreadPool.java:38)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:558)
+	at java.lang.Thread.run(Thread.java:662)
+
+   Locked ownable synchronizers:
+	- None
+
+"qtp929364180-910" prio=10 tid=0x00007fdd18019000 nid=0x414a runnable [0x00007fdd395c2000]
+   java.lang.Thread.State: RUNNABLE
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.idleJobPoll(QueuedThreadPool.java:512)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.access$600(QueuedThreadPool.java:38)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:558)
+	at java.lang.Thread.run(Thread.java:662)
+
+   Locked ownable synchronizers:
+	- None
+
+"qtp929364180-909" prio=10 tid=0x00007fdd1800e800 nid=0x4149 runnable [0x00007fdd398c5000]
+   java.lang.Thread.State: RUNNABLE
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.idleJobPoll(QueuedThreadPool.java:512)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.access$600(QueuedThreadPool.java:38)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:558)
+	at java.lang.Thread.run(Thread.java:662)
+
+   Locked ownable synchronizers:
+	- None
+
+"qtp929364180-887" prio=10 tid=0x00007fdd18006800 nid=0x3ef3 runnable [0x00007fdd4c1d4000]
+   java.lang.Thread.State: RUNNABLE
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.idleJobPoll(QueuedThreadPool.java:512)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.access$600(QueuedThreadPool.java:38)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:558)
+	at java.lang.Thread.run(Thread.java:662)
+
+   Locked ownable synchronizers:
+	- None
+
+"qtp929364180-877" prio=10 tid=0x00007fdd18007000 nid=0x3dff runnable [0x00007fdd4cffe000]
+   java.lang.Thread.State: RUNNABLE
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.idleJobPoll(QueuedThreadPool.java:512)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.access$600(QueuedThreadPool.java:38)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:558)
+	at java.lang.Thread.run(Thread.java:662)
+
+   Locked ownable synchronizers:
+	- None
+
+"Attach Listener" daemon prio=10 tid=0x00007fdd34001000 nid=0x3aec waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+   Locked ownable synchronizers:
+	- None
+
+"1884189533@Async-thread-pool-1" prio=10 tid=0x00007fdd50659000 nid=0x3721 in Object.wait() [0x00007fdd4cbfa000]
+   java.lang.Thread.State: TIMED_WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x00000000e98ac020> (a com.borqs.server.base.util.threadpool.QueuedThreadPool$PoolThread)
+	at com.borqs.server.base.util.threadpool.QueuedThreadPool$PoolThread.run(QueuedThreadPool.java:581)
+	- locked <0x00000000e98ac020> (a com.borqs.server.base.util.threadpool.QueuedThreadPool$PoolThread)
+
+   Locked ownable synchronizers:
+	- None
+
+"1142111132@Async-thread-pool-0" prio=10 tid=0x00007fdd5078f800 nid=0x3720 in Object.wait() [0x00007fdd3a06c000]
+   java.lang.Thread.State: TIMED_WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x00000000e98ac0a0> (a com.borqs.server.base.util.threadpool.QueuedThreadPool$PoolThread)
+	at com.borqs.server.base.util.threadpool.QueuedThreadPool$PoolThread.run(QueuedThreadPool.java:581)
+	- locked <0x00000000e98ac0a0> (a com.borqs.server.base.util.threadpool.QueuedThreadPool$PoolThread)
+
+   Locked ownable synchronizers:
+	- None
+
+"Java2D Disposer" daemon prio=10 tid=0x00007fdd14053000 nid=0x2c1e runnable [0x00007fdd4c2d5000]
+   java.lang.Thread.State: RUNNABLE
+	at sun.java2d.DefaultDisposerRecord.invokeNativeDispose(Native Method)
+	at sun.java2d.DefaultDisposerRecord.dispose(DefaultDisposerRecord.java:24)
+	at sun.java2d.Disposer.run(Disposer.java:130)
+	at java.lang.Thread.run(Thread.java:662)
+
+   Locked ownable synchronizers:
+	- None
+
+"pool-1-thread-2" prio=10 tid=0x00007fdd1400d800 nid=0x2bb5 waiting on condition [0x00007fdd4c4d7000]
+   java.lang.Thread.State: WAITING (parking)
+	at sun.misc.Unsafe.park(Native Method)
+	- parking to wait for  <0x00000000e5b3b700> (a java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject)
+	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:156)
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1987)
+	at java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:399)
+	at java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:947)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:907)
+	at java.lang.Thread.run(Thread.java:662)
+
+   Locked ownable synchronizers:
+	- None
+
+"pool-1-thread-1" prio=10 tid=0x00007fdd14016800 nid=0x2bb3 waiting on condition [0x00007fdd4c5d8000]
+   java.lang.Thread.State: WAITING (parking)
+	at sun.misc.Unsafe.park(Native Method)
+	- parking to wait for  <0x00000000e5b3b700> (a java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject)
+	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:156)
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1987)
+	at java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:399)
+	at java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:947)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:907)
+	at java.lang.Thread.run(Thread.java:662)
+
+   Locked ownable synchronizers:
+	- None
+
+"qtp929364180-20 Selector0 SelectChannelConnector@0.0.0.0:8080 STARTING" prio=10 tid=0x00007fdd50748000 nid=0x2ba9 runnable [0x00007fdd5421d000]
+   java.lang.Thread.State: RUNNABLE
+	at org.eclipse.jetty.io.nio.ChannelEndPoint.<init>(ChannelEndPoint.java:38)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.<init>(SelectChannelEndPoint.java:59)
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.newEndPoint(SelectChannelConnector.java:306)
+	at org.eclipse.jetty.server.nio.SelectChannelConnector$ConnectorSelectorManager.newEndPoint(SelectChannelConnector.java:399)
+	at org.eclipse.jetty.io.nio.SelectorManager$SelectSet.createEndPoint(SelectorManager.java:849)
+	at org.eclipse.jetty.io.nio.SelectorManager$SelectSet.doSelect(SelectorManager.java:433)
+	at org.eclipse.jetty.io.nio.SelectorManager.doSelect(SelectorManager.java:228)
+	at org.eclipse.jetty.server.nio.SelectChannelConnector$1.run(SelectChannelConnector.java:268)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:529)
+	at java.lang.Thread.run(Thread.java:662)
+
+   Locked ownable synchronizers:
+	- None
+
+"qtp929364180-19 Acceptor0 SelectChannelConnector@0.0.0.0:8080 STARTING" prio=10 tid=0x00007fdd506f3000 nid=0x2ba8 runnable [0x00007fdd5431e000]
+   java.lang.Thread.State: RUNNABLE
+	at sun.nio.ch.ServerSocketChannelImpl.accept0(Native Method)
+	at sun.nio.ch.ServerSocketChannelImpl.accept(ServerSocketChannelImpl.java:152)
+	- locked <0x00000000e5a25788> (a java.lang.Object)
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.accept(SelectChannelConnector.java:92)
+	at org.eclipse.jetty.server.AbstractConnector$Acceptor.run(AbstractConnector.java:830)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:529)
+	at java.lang.Thread.run(Thread.java:662)
+
+   Locked ownable synchronizers:
+	- None
+
+"Timer-1" prio=10 tid=0x00007fdd50740000 nid=0x2ba7 runnable [0x00007fdd5441e000]
+   java.lang.Thread.State: RUNNABLE
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.read(SocketInputStream.java:129)
+	at com.mysql.jdbc.util.ReadAheadInputStream.fill(ReadAheadInputStream.java:114)
+	at com.mysql.jdbc.util.ReadAheadInputStream.readFromUnderlyingStreamIfNecessary(ReadAheadInputStream.java:161)
+	at com.mysql.jdbc.util.ReadAheadInputStream.read(ReadAheadInputStream.java:189)
+	- locked <0x00000000e5ee70d0> (a com.mysql.jdbc.util.ReadAheadInputStream)
+	at com.mysql.jdbc.MysqlIO.readFully(MysqlIO.java:2537)
+	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:2990)
+	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:2979)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3520)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:1990)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2151)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2619)
+	- locked <0x00000000e5ee1818> (a com.mysql.jdbc.JDBC4Connection)
+	at com.mysql.jdbc.StatementImpl.executeUpdate(StatementImpl.java:1698)
+	- locked <0x00000000e5ee1818> (a com.mysql.jdbc.JDBC4Connection)
+	- locked <0x00000000daf8aec8> (a com.mysql.jdbc.StatementImpl)
+	at com.mysql.jdbc.StatementImpl.executeUpdate(StatementImpl.java:1617)
+	at com.mysql.jdbc.StatementImpl.executeUpdate(StatementImpl.java:1791)
+	- locked <0x00000000daf8aec8> (a com.mysql.jdbc.StatementImpl)
+	at org.apache.commons.dbcp.DelegatingStatement.executeUpdate(DelegatingStatement.java:323)
+	at org.apache.commons.dbcp.DelegatingStatement.executeUpdate(DelegatingStatement.java:323)
+	at com.borqs.server.base.sql.SQLExecutor.executeUpdate0(SQLExecutor.java:38)
+	at com.borqs.server.base.sql.SQLExecutor.access$000(SQLExecutor.java:20)
+	at com.borqs.server.base.sql.SQLExecutor$1.handle(SQLExecutor.java:178)
+	at com.borqs.server.base.sql.SQLExecutor.executeStatement(SQLExecutor.java:107)
+	at com.borqs.server.base.sql.SQLExecutor.executeUpdate(SQLExecutor.java:174)
+	at com.borqs.server.base.sql.SQLExecutor.executeUpdate(SQLExecutor.java:195)
+	at com.borqs.server.base.sql.SQLExecutor.executeUpdate(SQLExecutor.java:381)
+	at com.borqs.server.base.sql.SQLExecutor.executeUpdate(SQLExecutor.java:395)
+	at com.borqs.server.wutong.statistics.StatisticsImpl.save(StatisticsImpl.java:81)
+	at com.borqs.server.wutong.statistics.StatisticsServlet.saveStatistics(StatisticsServlet.java:44)
+	at com.borqs.server.wutong.statistics.StatisticsServlet.access$100(StatisticsServlet.java:15)
+	at com.borqs.server.wutong.statistics.StatisticsServlet$StatisticsTask.run(StatisticsServlet.java:33)
+	at java.util.TimerThread.mainLoop(Timer.java:512)
+	at java.util.TimerThread.run(Timer.java:462)
+
+   Locked ownable synchronizers:
+	- None
+
+"Timer-0" prio=10 tid=0x00007fdd5071a800 nid=0x2ba6 in Object.wait() [0x00007fdd54520000]
+   java.lang.Thread.State: TIMED_WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x00000000e5a17c38> (a java.util.TaskQueue)
+	at java.util.TimerThread.mainLoop(Timer.java:509)
+	- locked <0x00000000e5a17c38> (a java.util.TaskQueue)
+	at java.util.TimerThread.run(Timer.java:462)
+
+   Locked ownable synchronizers:
+	- None
+
+"HashSessionScavenger-0" daemon prio=10 tid=0x00007fdd507ed000 nid=0x2ba5 in Object.wait() [0x00007fdd54621000]
+   java.lang.Thread.State: TIMED_WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x00000000e5aee150> (a java.util.TaskQueue)
+	at java.util.TimerThread.mainLoop(Timer.java:509)
+	- locked <0x00000000e5aee150> (a java.util.TaskQueue)
+	at java.util.TimerThread.run(Timer.java:462)
+
+   Locked ownable synchronizers:
+	- None
+
+"Heal-Session-Thread" prio=10 tid=0x00007fdd18001000 nid=0x2ba4 waiting on condition [0x00007fdd54722000]
+   java.lang.Thread.State: WAITING (parking)
+	at sun.misc.Unsafe.park(Native Method)
+	- parking to wait for  <0x00000000e5aee218> (a java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject)
+	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:156)
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1987)
+	at java.util.concurrent.DelayQueue.take(DelayQueue.java:160)
+	at net.rubyeye.xmemcached.impl.MemcachedConnector$SessionMonitor.run(MemcachedConnector.java:110)
+
+   Locked ownable synchronizers:
+	- None
+
+"Xmemcached-Reactor-3" prio=10 tid=0x00007fdd506f8800 nid=0x2ba3 runnable [0x00007fdd54823000]
+   java.lang.Thread.State: RUNNABLE
+	at sun.nio.ch.EPollArrayWrapper.epollWait(Native Method)
+	at sun.nio.ch.EPollArrayWrapper.poll(EPollArrayWrapper.java:210)
+	at sun.nio.ch.EPollSelectorImpl.doSelect(EPollSelectorImpl.java:65)
+	at sun.nio.ch.SelectorImpl.lockAndDoSelect(SelectorImpl.java:69)
+	- locked <0x00000000e5aee3a8> (a sun.nio.ch.Util$2)
+	- locked <0x00000000e5aee3b8> (a java.util.Collections$UnmodifiableSet)
+	- locked <0x00000000e5aee360> (a sun.nio.ch.EPollSelectorImpl)
+	at sun.nio.ch.SelectorImpl.select(SelectorImpl.java:80)
+	at com.google.code.yanf4j.nio.impl.Reactor.run(Reactor.java:114)
+
+   Locked ownable synchronizers:
+	- None
+
+"Xmemcached-Reactor-2" prio=10 tid=0x00007fdd50723800 nid=0x2ba2 runnable [0x00007fdd54924000]
+   java.lang.Thread.State: RUNNABLE
+	at sun.nio.ch.EPollArrayWrapper.epollWait(Native Method)
+	at sun.nio.ch.EPollArrayWrapper.poll(EPollArrayWrapper.java:210)
+	at sun.nio.ch.EPollSelectorImpl.doSelect(EPollSelectorImpl.java:65)
+	at sun.nio.ch.SelectorImpl.lockAndDoSelect(SelectorImpl.java:69)
+	- locked <0x00000000e5aee4f8> (a sun.nio.ch.Util$2)
+	- locked <0x00000000e5aee508> (a java.util.Collections$UnmodifiableSet)
+	- locked <0x00000000e5aee4b0> (a sun.nio.ch.EPollSelectorImpl)
+	at sun.nio.ch.SelectorImpl.select(SelectorImpl.java:80)
+	at com.google.code.yanf4j.nio.impl.Reactor.run(Reactor.java:114)
+
+   Locked ownable synchronizers:
+	- None
+
+"Xmemcached-Reactor-1" prio=10 tid=0x00007fdd50720800 nid=0x2ba1 runnable [0x00007fdd54a25000]
+   java.lang.Thread.State: RUNNABLE
+	at sun.nio.ch.EPollArrayWrapper.epollWait(Native Method)
+	at sun.nio.ch.EPollArrayWrapper.poll(EPollArrayWrapper.java:210)
+	at sun.nio.ch.EPollSelectorImpl.doSelect(EPollSelectorImpl.java:65)
+	at sun.nio.ch.SelectorImpl.lockAndDoSelect(SelectorImpl.java:69)
+	- locked <0x00000000e5aee648> (a sun.nio.ch.Util$2)
+	- locked <0x00000000e5aee658> (a java.util.Collections$UnmodifiableSet)
+	- locked <0x00000000e5aee600> (a sun.nio.ch.EPollSelectorImpl)
+	at sun.nio.ch.SelectorImpl.select(SelectorImpl.java:80)
+	at com.google.code.yanf4j.nio.impl.Reactor.run(Reactor.java:114)
+
+   Locked ownable synchronizers:
+	- None
+
+"Xmemcached-Reactor-0" prio=10 tid=0x00007fdd505d4000 nid=0x2ba0 runnable [0x00007fdd54b26000]
+   java.lang.Thread.State: RUNNABLE
+	at sun.nio.ch.EPollArrayWrapper.epollWait(Native Method)
+	at sun.nio.ch.EPollArrayWrapper.poll(EPollArrayWrapper.java:210)
+	at sun.nio.ch.EPollSelectorImpl.doSelect(EPollSelectorImpl.java:65)
+	at sun.nio.ch.SelectorImpl.lockAndDoSelect(SelectorImpl.java:69)
+	- locked <0x00000000e5aee798> (a sun.nio.ch.Util$2)
+	- locked <0x00000000e5aee7a8> (a java.util.Collections$UnmodifiableSet)
+	- locked <0x00000000e5aee750> (a sun.nio.ch.EPollSelectorImpl)
+	at sun.nio.ch.SelectorImpl.select(SelectorImpl.java:80)
+	at com.google.code.yanf4j.nio.impl.Reactor.run(Reactor.java:114)
+
+   Locked ownable synchronizers:
+	- None
+
+"Low Memory Detector" daemon prio=10 tid=0x00007fdd5008b000 nid=0x2b79 runnable [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+   Locked ownable synchronizers:
+	- None
+
+"C2 CompilerThread1" daemon prio=10 tid=0x00007fdd50088800 nid=0x2b78 waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+   Locked ownable synchronizers:
+	- None
+
+"C2 CompilerThread0" daemon prio=10 tid=0x00007fdd50086800 nid=0x2b77 waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+   Locked ownable synchronizers:
+	- None
+
+"Signal Dispatcher" daemon prio=10 tid=0x00007fdd50084000 nid=0x2b76 runnable [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+   Locked ownable synchronizers:
+	- None
+
+"Finalizer" daemon prio=10 tid=0x00007fdd50068000 nid=0x2b73 in Object.wait() [0x00007fdd5567d000]
+   java.lang.Thread.State: WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x00000000e58a07f8> (a java.lang.ref.ReferenceQueue$Lock)
+	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:118)
+	- locked <0x00000000e58a07f8> (a java.lang.ref.ReferenceQueue$Lock)
+	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:134)
+	at java.lang.ref.Finalizer$FinalizerThread.run(Finalizer.java:159)
+
+   Locked ownable synchronizers:
+	- None
+
+"Reference Handler" daemon prio=10 tid=0x00007fdd50066000 nid=0x2b72 runnable [0x00007fdd5577e000]
+   java.lang.Thread.State: RUNNABLE
+	at sun.misc.Unsafe.freeMemory(Native Method)
+	at java.nio.DirectByteBuffer$Deallocator.run(DirectByteBuffer.java:71)
+	at sun.misc.Cleaner.clean(Cleaner.java:125)
+	at java.lang.ref.Reference$ReferenceHandler.run(Reference.java:124)
+
+   Locked ownable synchronizers:
+	- None
+
+"main" prio=10 tid=0x00007fdd5000a800 nid=0x2b69 in Object.wait() [0x00007fdd566f9000]
+   java.lang.Thread.State: WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x00000000e5bf7600> (a java.lang.Object)
+	at java.lang.Object.wait(Object.java:485)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.join(QueuedThreadPool.java:382)
+	- locked <0x00000000e5bf7600> (a java.lang.Object)
+	at org.eclipse.jetty.server.Server.join(Server.java:399)
+	at com.borqs.server.base.web.JettyServer.run(JettyServer.java:158)
+	at com.borqs.server.base.web.JettyServer.main(JettyServer.java:204)
+
+   Locked ownable synchronizers:
+	- None
+
+"VM Thread" prio=10 tid=0x00007fdd5005f800 nid=0x2b70 runnable 
+
+"VM Periodic Task Thread" prio=10 tid=0x00007fdd50096000 nid=0x2b7a waiting on condition 
+
+JNI global references: 1815
+
+---------------- user occupy cpu -----------
+  2.9%us
+---------------- system occupy cpu -----------
+  1.4%sy
+---------------- memory use -----------
+   1535236k total

@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="market">
+
+
+  <select id="hasAccount" parameterType="Map" resultType="record">
+    SELECT
+    EXISTS(
+    SELECT
+    *
+    FROM
+    accounts
+    WHERE
+    id = #{id}
+    <if test="include_disabled!=true">
+      AND disabled_at=0
+    </if>
+    ) AS account_exists;
+  </select>
+
+  <select id="findAccountIdAndPasswordBySigninId" parameterType="Map" resultType="record">
+    SELECT
+    id,
+    `password`,
+    disabled_at
+    FROM
+    accounts
+    WHERE
+    id = #{signin_id}
+    OR email = #{signin_id}
+    <if test="include_disabled!=true">
+      AND disabled_at=0
+    </if>
+    LIMIT 1
+    ;
+  </select>
+
+  <insert id="createAccount" parameterType="Map">
+    INSERT INTO accounts
+    SET
+    id=#{id},
+    created_at=#{now},
+    updated_at=#{now},
+    <if test="borqs==true">
+      borqs=1,
+    </if>
+    <if test="name!=null">
+      `name`=#{name},
+    </if>
+    <if test="password!=null">
+      `password`=#{password},
+    </if>
+    <if test="avatar_image!=null">
+      avatar_image=#{avatar_image},
+    </if>
+    <if test="email!=null">
+      email=#{email},
+    </if>
+    <if test="phone!=null">
+      phone=#{phone},
+    </if>
+    <if test="website!=null">
+      website=#{website},
+    </if>
+    <if test="google_id!=null">
+      google_id=#{google_id},
+    </if>
+    <if test="facebook_id!=null">
+      facebook_id=#{facebook_id},
+    </if>
+    <if test="twitter_id!=null">
+      twitter_id=#{twitter_id},
+    </if>
+    <if test="qq_id!=null">
+      qq_id=#{qq_id},
+    </if>
+    <if test="weibo_id!=null">
+      weibo_id=#{weibo_id},
+    </if>
+    disabled_at=0
+    ;
+  </insert>
+
+  <update id="disableAccount" parameterType="Map">
+    UPDATE account
+    SET
+      disabled_at=#{now}
+    WHERE
+      id = #{id}
+  </update>
+  <select id="getAccountDisabledAt" parameterType="Map" resultType="record">
+    SELECT
+      disabled_at
+    FROM
+      accounts
+    WHERE
+      id = #{id}
+  </select>
+
+  <update id="updateAccount" parameterType="Map">
+    UPDATE accounts SET
+    <if test="borqs!=null">
+      borqs=#{borqs},
+    </if>
+    <if test="name!=null">
+      `name`=#{name},
+    </if>
+    <if test="password!=null">
+      `password`=#{password},
+    </if>
+    <if test="avatar_image!=null">
+      avatar_image=#{avatar_image},
+    </if>
+    <if test="email!=null">
+      email=#{email},
+    </if>
+    <if test="phone!=null">
+      phone=#{phone},
+    </if>
+    <if test="website!=null">
+      website=#{website},
+    </if>
+    <if test="google_id!=null">
+      google_id=#{google_id},
+    </if>
+    <if test="facebook_id!=null">
+      facebook_id=#{facebook_id},
+    </if>
+    <if test="twitter_id!=null">
+      twitter_id=#{twitter_id},
+    </if>
+    <if test="qq_id!=null">
+      qq_id=#{qq_id},
+    </if>
+    <if test="weibo_id!=null">
+      weibo_id=#{weibo_id},
+    </if>
+    updated_at=#{now}
+    WHERE
+    id=#{id}
+    <if test="include_disabled!=true">
+      AND disabled_at=0
+    </if>
+  </update>
+
+  <select id="findAccountIdByThirdPartyId" resultType="record">
+    SELECT
+      id,
+      disabled_at,
+      `password`
+    FROM
+      accounts
+    WHERE
+      ${third_party_id_column} = #{third_party_id}
+  </select>
+
+  <insert id="createAccountTicket" parameterType="Map">
+    INSERT INTO signin_tickets
+    SET
+      ticket=#{ticket},
+      account_id=#{account_id},
+      created_at=#{now}
+    ;
+  </insert>
+
+  <select id="findAccountIdByTicket" parameterType="Map" resultType="record">
+    <choose>
+      <when test="include_disabled!=true">
+        SELECT
+        A.id AS id,
+        A.borqs AS borqs,
+        A.boss AS boss,
+        A.name,
+        A.email
+        FROM
+        signin_tickets ST, accounts A
+        WHERE
+        ST.account_id=A.id
+        AND ticket=#{ticket}
+        AND A.disabled_at=0
+        ;
+      </when>
+      <otherwise>
+        SELECT
+        account_id AS id
+        FROM
+        signin_tickets
+        WHERE
+        ticket=#{ticket}
+        ;
+      </otherwise>
+    </choose>
+
+
+  </select>
+
+  <delete id="deleteAccountTicket" parameterType="Map">
+    DELETE FROM signin_tickets
+    WHERE
+      ticket = #{ticket}
+    ;
+  </delete>
+
+  <select id="findAccountById" parameterType="Map" resultType="record">
+    SELECT
+    id,
+    created_at,
+    updated_at,
+    borqs,
+    `name`,
+    avatar_image,
+    email,
+    phone,
+    website,
+    google_id,
+    facebook_id,
+    twitter_id,
+    qq_id,
+    weibo_id
+    FROM
+    accounts
+    WHERE
+    id = #{id}
+    <if test="include_disabled!=true">
+      AND disabled_at=0
+    </if>
+    ;
+  </select>
+  <select id="findAccountByEmail" parameterType="Map" resultType="record">
+    SELECT
+    id,
+    created_at,
+    updated_at,
+    borqs,
+    `name`,
+    avatar_image,
+    email,
+    phone,
+    website,
+    google_id,
+    facebook_id,
+    twitter_id,
+    qq_id,
+    weibo_id
+    FROM
+    accounts
+    WHERE
+    email = #{email}
+    <if test="include_disabled!=true">
+      AND disabled_at=0
+    </if>
+    ;
+  </select>
+
+  <select id="accountIsOperator" parameterType="Map" resultType="record">
+    SELECT EXISTS(
+      SELECT * FROM apps
+      WHERE
+        (disabled_at = 0)
+        AND (
+        (operator_id!='' AND operator_id=#{account_id})
+        OR
+        (operator_id='' AND creator_id=#{account_id})
+        )
+    ) AS is_operator;
+
+  </select>
+
+  <select id="getAccountDisplayNames" parameterType="Map" resultType="record">
+    SELECT
+      id,
+      `name`,
+      `email`,
+      `phone`
+    FROM
+      accounts
+    WHERE
+      id IN
+    <foreach item="id" collection="ids" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+    ;
+  </select>
+
+  <select id="getAccountsCount" parameterType="Map" resultType="record">
+    SELECT
+      COUNT(*)
+    FROM
+      accounts
+    ;
+  </select>
+</mapper>

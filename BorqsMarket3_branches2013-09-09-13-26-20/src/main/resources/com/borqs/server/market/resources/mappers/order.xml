@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="order">
+    <select id="getOrder" parameterType="Map" resultType="record">
+
+
+        SELECT SQL_CALC_FOUND_ROWS
+        p.name,
+        t.product_version,
+        t.product_category_id,
+        t.created_at,
+        t.purchaser_id,
+        t.purchaser_locale,
+        p.author_id,
+        t.id,
+        t.status,
+        t.product_app_id,
+        t.purchaser_device_id,
+        t.purchaser_ip
+        FROM orders AS t
+        INNER JOIN products AS p
+        ON p.id = t.product_id
+        AND p.author_id = #{author_id}
+        <if test="product_name!=null">
+            and p.name like '%${product_name}%'
+        </if>
+        <if test="product_id!=null">
+            and p.id=#{product_id}
+        </if>
+        <if test="product_version!=null">
+            and t.product_version =${product_version}
+        </if>
+        <if test="orderStartDate!=null">
+            and t.created_at >= UNIX_TIMESTAMP(#{orderStartDate})*1000
+        </if>
+        <if test="orderEndDate!=null">
+               and t.created_at &lt;= UNIX_TIMESTAMP(#{orderEndDate})*1000
+        </if>
+        <if test="orderMonth!=null">
+               and t.created_at between UNIX_TIMESTAMP(DATE_FORMAT(#{orderMonth} ,'%Y-%m-01'))*1000
+                and UNIX_TIMESTAMP(LAST_DAY(#{orderMonth}))*1000
+        </if>
+        order by t.created_at desc
+        LIMIT #{offset}, #{count};
+
+
+    </select>
+</mapper>

@@ -1,0 +1,2 @@
+#!/bin/bash
+mysql -h borqsservice.mysql.rds.aliyuncs.com -u accounts -p

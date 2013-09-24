@@ -1,0 +1,25 @@
+{
+  "comment_id" : 2810165295274309308,
+  "can_like" : false,
+  "commenter" : 10008,
+  "destroyed_time" : 0,
+  "created_time" : 1339991233479,
+  "device" : "",
+  "message" : "+<a href=\"borqs://profile/details?uid=10008\">yang</a>",
+  "target" : "5:1222232434",
+  "commenter" : {
+  "user_id" : 10008,
+  "nickname" : "",
+  "photo" : {
+    "middle_url" : "http://apitest.borqs.com/profile_image/profile_10008_1337758845265_M.jpg",
+    "small_url" : "http://apitest.borqs.com/profile_image/profile_10008_1337758845265_S.jpg",
+    "large_url" : "http://apitest.borqs.com/profile_image/profile_10008_1337758845265_L.jpg"
+  },
+  "display_name" : "罗 小 飞"
+},
+  "add_to" : [ {
+  "user_id" : 10008,
+  "nickname" : "",
+  "display_name" : "罗 小 飞"
+} ]
+}

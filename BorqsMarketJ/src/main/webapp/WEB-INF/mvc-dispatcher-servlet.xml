@@ -1,0 +1,61 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:component-scan base-package="com.borqs.server.market"/>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <bean id="db.dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://192.168.5.22:3306/BorqsMarket2"/>
+        <property name="username" value="root"/>
+        <property name="password" value="111111"/>
+        <property name="maxActive" value="80"/>
+        <property name="maxIdle" value="20"/>
+        <property name="maxWait" value="3000"/>
+        <property name="connectionProperties" value="useUnicode=yes;characterEncoding=utf8;"/>
+    </bean>
+
+    <bean id="db.sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="db.dataSource"/>
+        <property name="mapperLocations">
+            <array>
+                <value>classpath:com/borqs/server/market/resources/mappers/resultMappers.xml</value>
+                <value>classpath:com/borqs/server/market/resources/mappers/purchaser.xml</value>
+            </array>
+        </property>
+    </bean>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.borqs.server.market.controllers.HttpParams$CleanerInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <mvc:annotation-driven>
+        <mvc:argument-resolvers>
+            <bean class="com.borqs.server.market.controllers.HttpParamsResolver"/>
+            <bean class="com.borqs.server.market.controllers.ServiceContextResolver"/>
+        </mvc:argument-resolvers>
+    </mvc:annotation-driven>
+
+    <bean class="com.borqs.server.market.models.FieldTrimmer" scope="singleton">
+    </bean>
+
+    <bean id="service.purchaserAccountProvider"
+          class="com.borqs.server.market.services.impl.DummyAccountProvider"
+          scope="singleton">
+    </bean>
+    <alias name="service.purchaserAccountProvider" alias="service.publisherAccountProvider"/>
+    <alias name="service.purchaserAccountProvider" alias="service.developerAccountProvider"/>
+    <alias name="service.purchaserAccountProvider" alias="service.adminAccountProvider"/>
+</beans>

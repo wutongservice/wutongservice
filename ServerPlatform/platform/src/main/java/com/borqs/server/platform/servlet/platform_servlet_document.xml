@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/document/template"?>
+<document>
+  <title>Platform API</title>
+  <schemas>
+    <schema name="user">
+      <description>用户相关信息</description>
+      <columns>
+        <column name="user_id" type="int" readonly="true">用户ID</column>
+        <column name="login_email1" type="string">登陆邮箱1</column>
+        <column name="login_email2" type="string">登陆邮箱2</column>
+        <column name="login_email3" type="string">登陆邮箱3</column>
+        <column name="login_phone1" type="string">登陆电话号码1</column>
+        <column name="login_phone2" type="string">登陆电话号码2</column>
+        <column name="login_phone3" type="string">登陆电话号码3</column>
+        <column name="domain_name" type="string">用户域名</column>
+        <column name="display_name" type="string">用户显示名称</column>
+        <column name="created_time" type="int" readonly="true">用户账户创建时间</column>
+        <column name="last_visited_time" type="int" readonly="true">用户最后访问时间</column>
+        <column name="image_url" type="string">用户头像图片URL</column>
+        <column name="small_image_url" type="string">用户小头像图片URL</column>
+        <column name="large_image_url" type="string">用户大头像图片URL</column>
+        <column name="basic_updated_time" type="int" readonly="true">基础信息更新时间</column>
+        <column name="status" type="string">用户当前状态</column>
+        <column name="status_updated_time" type="int" readonly="true">用户状态更新时间</column>
+        <column name="first_name" type="string">First name</column>
+        <column name="middle_name" type="string">Middle name</column>
+        <column name="last_name" type="string">Last name</column>
+        <column name="gender" type="string">性别:m,f</column>
+        <column name="birthday" type="string">生日</column>
+        <column name="timezone" type="string">时区</column>
+        <column name="interests" type="string">兴趣</column>
+        <column name="languages" type="string">语言能力,json数组</column>
+        <column name="marriage" type="string">婚否</column>
+        <column name="religion" type="string">宗教</column>
+        <column name="about_me" type="string">自我描述</column>
+        <column name="profile_updated_time" type="int" readonly="true">用户资料更新时间</column>
+        <column name="company" type="string">用户所在公司</column>
+        <column name="department" type="string">所在工作部门</column>
+        <column name="job_title" type="string">工作头衔</column>
+        <column name="office_address" type="string">办公地址</column>
+        <column name="profession" type="string">职业或专业</column>
+        <column name="job_description" type="string">工作描述</column>
+        <column name="business_updated_time" type="int" readonly="true">商业信息更新时间</column>
+        <column name="contact_info" type="json">用户联系方式，json对象</column>
+        <column name="contact_info_updated_time" type="int" readonly="true">联系方式更新呢时间</column>
+        <column name="family" type="json">用户家庭成员，json数组</column>
+        <column name="coworker" type="json">用户同事，json数组</column>
+        <column name="address" type="json">用户生活或工作地址，json数组</column>
+        <column name="address_updated_time" type="int" readonly="true">用户所在地址更新时间</column>
+        <column name="work_history" type="json">用户工作历史，json数组</column>
+        <column name="work_history_updated_time" type="int" readonly="true">用户工作历史更新时间</column>
+        <column name="education_history" type="json">用户教育历史，json数组</column>
+        <column name="education_history_updated_time" type="int" readonly="true">用户教育历史更新时间</column>
+        <column name="miscellaneous" type="json">其他杂项，json对象</column>
+        <column name="remark" type="string">备注信息</column>
+        <column name="in_circles" type="json" readonly="true">那个用户你的哪些圈子中，json数组，每一项为{circle_id:xx, circle_name:"xx"}</column>
+        <column name="in_his_circles" type="json" readonly="true">你在那个用户的哪些圈子中，json数组，每一项为{circle_id:xx, circle_name:"xx"}</column>
+        <column name="bidi" type="boolean" readonly="true">那个人是否为双向好友(双向关注)</column>
+      </columns>
+    </schema>
+
+    <schema name="login_result">
+      <description>登入结果</description>
+      <columns>
+        <column name="user_id" type="int">USER ID</column>
+        <column name="ticket" type="string">登陆成功的TICKET</column>
+      </columns>
+    </schema>
+
+    <schema name="circle">
+      <description>用户圈子信息</description>
+      <columns>
+        <column name="circle_id" type="int">圈子ID</column>
+        <column name="circle_name" type="string">圈子名称</column>
+        <column name="member_count" type="int">圈子成员数量</column>
+        <column name="members" type="json">JSON数组，为圈子成员列表</column>
+      </columns>
+    </schema>
+
+    <schema name="relation_result">
+      <description>描述一定用户在另一个用户的哪些圈子中</description>
+      <columns>
+        <column name="circle_id" type="int">圈子ID</column>
+        <column name="circle_name" type="string">圈子名称</column>
+      </columns>
+    </schema>
+
+    <schema name="relation_bidi_result">
+      <description>两个用户双向相互关系</description>
+      <columns>
+        <column name="relation1" type="string">源用户在目标用户的哪些圈子中，格式为relation_result</column>
+        <column name="relation2" type="string">目标用户在源用户的哪些圈子中，格式为relation_result</column>
+      </columns>
+    </schema>
+
+    <schema name="privacy_config">
+      <description>当前用户的资源对应的授权圈子和用户列表</description>
+      <columns>
+        <column name="资源字符串" type="string">该资源的授权圈子和用户列表，逗号隔开</column>        
+      </columns>
+    </schema>
+    
+    <schema name="setting">
+      <description>当前用户的配置项列表</description>
+      <columns>
+        <column name="配置项的key" type="string">配置项的值</column>        
+      </columns>
+    </schema>
+    
+    <schema name="usetting">
+      <description>多个用户的某一个配置项的列表</description>
+      <columns>
+        <column name="用户的id" type="string">配置项的值</column>        
+      </columns>
+    </schema>
+  </schemas>
+  <groups>
+    <group name="Account / User group">
+      <description>User与Account方法</description>
+      <methods>
+        <method>account/create</method>
+        <method>account/login</method>
+        <method>account/logout</method>
+        <method>user/show</method>
+        <method>account/update</method>
+      </methods>
+    </group>
+
+    <group>
+      <description>Friend,Circle,Remark方法</description>
+      <methods>
+        <method>circle/create</method>
+        <method>circle/destroy</method>
+        <method>circle/update</method>
+        <method>circle/show</method>
+        <method>friend/set</method>
+        <method>friend/move</method>
+        <method>friend/show</method>
+        <method>follower/show</method>
+        <method>relation/get</method>
+        <method>relation/bidi</method>
+        <method>remark/set</method>
+      </methods>
+    </group>
+    
+    <group>
+      <description>Privacy方法</description>
+      <methods>
+        <method>privacy/set</method>
+        <method>privacy/get</method>
+      </methods>
+    </group>
+    
+    <group>
+      <description>Setting方法</description>
+      <methods>
+        <method>preferences/set</method>
+        <method>preferences/get</method>
+        <method>preferences/get_by_starts</method>
+      </methods>
+    </group>
+
+  </groups>
+  <methods>
+    <!--- Account -->
+
+    <method name="account/create" login="false" appId="false">
+      <description>创建用户账户，并且登入</description>
+      <arguments>
+        <argument name="login_email" optional="true">登陆用EMAIL，此字段与login_phone至少有一个存在</argument>
+        <argument name="login_phone" optional="true">登陆用PHONE，此字段与login_email至少有一个存在</argument>
+        <argument name="password">账户密码</argument>
+        <argument name="appid" optional="true">APPID</argument>
+        <argument name="display_name">昵称</argument>
+        <argument name="gender" optional="true">性别，m|f，默认为m</argument>
+        <argument name="imei" optional="true">IMEI</argument>
+        <argument name="imsi" optional="true">IMSI</argument>
+      </arguments>
+      <return schema="login_result">登入结果</return>
+    </method>
+
+    <method name="account/login" login="false" appId="false">
+      <description>登入</description>
+      <arguments>
+        <argument name="login_name">登录账户名称</argument>
+        <argument name="password">登录密码，需先md5后再hex</argument>
+        <argument name="appid" optional="true">APPID</argument>
+      </arguments>
+      <return schema="login_result">登入结果</return>
+    </method>
+
+    <method name="account/logout">
+      <description>登出</description>
+      <return>BOOLEAN类型，登出是否成功</return>
+    </method>
+
+    <method name="user/show">
+      <description>查看一个或者多个用户信息</description>
+      <arguments>
+        <argument name="users">用逗号分隔的user_id字符串</argument>
+        <argument name="columns" optional="true">用逗号分隔的要查询的用户列名称，如果不指定此参数，则返回该用户所有列信息</argument>
+      </arguments>
+      <return schema="user">
+        查询到的用户信息列表，如果要查询的用户不存在，那么则不包含在此列表中
+      </return>
+    </method>
+
+    <method name="account/update">
+      <description>更新用户信息</description>
+      <arguments>
+        <argument name="..." optional="YES">将要更新的用户信息使用 column=value 的形式作为HTTP GET参数提供</argument>
+      </arguments>
+      <return>BOOLEAN类型，成功为true</return>
+    </method>
+
+
+    <!-- Friend, Circle, Remark -->
+    <method name="circle/create">
+      <description>创建一个圈子</description>
+      <arguments>
+        <argument name="name">圈子名称</argument>
+      </arguments>
+      <return>INT类型，新创建圈子的ID</return>
+    </method>
+
+    <method name="circle/destroy">
+      <description>删除一个或者多个圈子</description>
+      <arguments>
+        <argument name="circles">逗号分隔的圈子ID</argument>
+      </arguments>
+      <return>BOOLEAN类型，成功为true</return>
+    </method>
+
+    <method name="circle/update">
+      <description>更改圈子名称</description>
+      <arguments>
+        <argument name="circle">要更改名称的圈子ID</argument>
+        <argument name="name">圈子的新名称</argument>
+      </arguments>
+      <return>BOOLEAN类型，成功为true</return>
+    </method>
+
+    <method name="circle/show">
+      <description>获取某个user的圈子信息</description>
+      <arguments>
+        <argument name="user" optional="true">指定的user，如果此参数缺失，则显示为当前用户的圈子信息</argument>
+        <argument name="circles">逗号分隔的圈子ID</argument>
+        <argument name="with_users" optional="true">如果为true，则附带上每个圈子的成员信息</argument>
+      </arguments>
+      <return schema="circle">圈子信息列表</return>
+    </method>
+
+    <method name="friend/set">
+      <description>设置某个好友的圈子</description>
+      <arguments>
+        <argument name="friend">朋友ID</argument>
+        <argument name="circles">逗号分隔的圈子ID</argument>
+      </arguments>
+      <return>BOOLEAN类型，成功为true</return>
+    </method>
+
+    <method name="friend/show">
+      <description>显示指定用户的朋友信息</description>
+      <arguments>
+        <argument name="user" optional="true">查看此用户ID指定的用户的好友，如此用户缺失，则查看此登入用户的好友信息</argument>
+        <argument name="circles" optional="true">指定查看此用户的圈子ID，使用逗号分隔，如缺失，则查看此用户的全部好友</argument>
+        <argument name="columns" optional="true">指定查看朋友的列信息，逗号分隔</argument>
+        <argument name="page" optional="true">分页信息，默认为0</argument>
+        <argument name="count" optional="true">每页显示数量，默认为20</argument>
+      </arguments>
+      <return schema="user">好友信息列表</return>
+    </method>
+
+    <method name="follower/show">
+      <description>显示指定用户的粉丝信息</description>
+      <arguments>
+        <argument name="user" optional="true">查看此用户ID指定的用户的粉丝，如此用户缺失，则查看此登入用户的粉丝信息</argument>
+        <argument name="circles" optional="true">指定查看此用户的圈子ID，使用逗号分隔，如缺失，则查看此用户的全部粉丝（黑名单除外）</argument>
+        <argument name="columns" optional="true">指定查看朋友的列信息，逗号分隔</argument>
+        <argument name="page" optional="true">分页信息，默认为0</argument>
+        <argument name="count" optional="true">每页显示数量，默认为20</argument>
+      </arguments>
+      <return schema="user">粉丝信息列表</return>
+    </method>
+
+    <method name="relation/get">
+      <description>查看指定两个用户之间的单向关系</description>
+      <arguments>
+        <argument name="source" optional="true">源用户，如缺失，等同于当前登入用户</argument>
+        <argument name="target">目标用户</argument>
+      </arguments>
+      <return schema="relation_result">源用户在目的用户的哪些圈子中</return>
+    </method>
+
+    <method name="relation/bidi">
+      <description>查看指定两个用户之间的双向关系</description>
+      <arguments>
+        <argument name="source" optional="true">源用户，如缺失，等同于当前登入用户</argument>
+        <argument name="target">目标用户</argument>
+      </arguments>
+      <return schema="relation_bidi_result">双向关系</return>
+    </method>
+
+    <method name="remark/set">
+      <description>设置好友备注</description>
+      <arguments>
+        <argument name="friend">好友ID</argument>
+        <argument name="remark">好友备注，如果为空串，则相当于取消备注</argument>
+      </arguments>
+      <return>BOOLEAN类型，成功为true</return>
+    </method>
+    
+    <method name="account/email_invite">
+      <description>email邀请朋友</description>
+      <arguments>
+        <argument name="emails">邀请朋友的email，逗号隔开</argument>
+        <argument name="phones">邀请朋友的phone，逗号隔开</argument>
+        <argument name="names">邀请朋友的名字，逗号隔开</argument>
+      </arguments>
+      <return>BOOLEAN类型，成功为true</return>
+    </method>
+    
+    <method name="privacy/set">
+      <description>设置当前用户的资源隐私策略</description>
+      <arguments>
+        <argument name="资源字符串">参数表示具体某个资源，值为该资源授权给那些圈子和个人，圈子id前需要加#，逗号隔开</argument>
+      </arguments>
+      <return>BOOLEAN类型，成功为true</return>
+    </method>
+    
+    <method name="privacy/get">
+      <description>获取当前用户的资源授权给哪些圈子和用户</description>
+      <arguments>
+        <argument name="resources">资源列表，逗号隔开</argument>
+      </arguments>
+      <return schema="privacy_config">每个资源对应的授权圈子和用户列表</return>
+    </method>
+    
+    <method name="preferences/set">
+      <description>设置当前用户的全局配置</description>
+      <arguments>
+        <argument name="配置项的key">参数表示具体某个配置项的key，值为该配置项的值</argument>
+      </arguments>
+      <return>BOOLEAN类型，成功为true</return>
+    </method>
+    
+    <method name="preferences/get">
+      <description>获取当前用户的全局配置</description>
+      <arguments>
+        <argument name="keys">配置项key的列表，逗号隔开</argument>
+      </arguments>
+      <return schema="setting">每个配置项对应的值</return>
+    </method>
+    
+    <method name="preferences/get_by_starts">
+      <description>获取当前用户的全局配置，通过配置项key的前缀</description>
+      <arguments>
+        <argument name="starts">配置项key的前缀</argument>
+      </arguments>
+      <return schema="setting">每个配置项对应的值</return>
+    </method>
+    
+    <method name="preferences/get_by_users">
+      <description>获取多个用户的某个配置项的值</description>
+      <arguments>
+        <argument name="key">配置项的key</argument>
+        <argument name="users">多个用户的id列表，逗号隔开</argument>
+      </arguments>
+      <return schema="usetting">每个用户对应的该配置项的值</return>
+    </method>
+  </methods>
+</document>

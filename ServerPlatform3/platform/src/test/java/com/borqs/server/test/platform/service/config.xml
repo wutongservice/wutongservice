@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+
+       default-init-method="init" default-destroy-method="destroy">
+
+    <bean id="service.schedule" class="com.borqs.server.platform.service.ScheduleService" scope="singleton">
+        <property name="jobs">
+            <list>
+                <bean class="com.borqs.server.platform.service.ScheduleService$Job">
+                    <property name="name" value="$job1"/>
+                    <property name="expression" value="*/2 * * * * ?"/>
+                    <property name="main" value="com.borqs.server.test.platform.service.Job1"/>
+                    <property name="args" value="a b c d e"/>
+                </bean>
+                <bean class="com.borqs.server.platform.service.ScheduleService$Job">
+                    <property name="name" value="$job2"/>
+                    <property name="expression" value="*/3 * * * * ?"/>
+                    <property name="main">
+                        <bean class="com.borqs.server.test.platform.service.Job2"/>
+                    </property>
+                    <property name="args" value="f g h i j"/>
+                </bean>
+            </list>
+        </property>
+
+    </bean>
+    <bean id="main" class="com.borqs.server.platform.service.ServiceApp" scope="singleton">
+        <property name="services">
+            <list>
+                <ref bean="service.schedule"/>
+            </list>
+        </property>
+    </bean>
+</beans>

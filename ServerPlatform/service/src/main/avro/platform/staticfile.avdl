@@ -1,0 +1,12 @@
+
+
+
+@namespace("com.borqs.server.service.platform")
+protocol StaticFile {
+    import schema "../../../../../base/src/main/avro/error.avsc";
+
+    boolean saveStaticFile(bytes staticFile) throws com.borqs.server.base.ResponseError;
+    bytes getStaticFile(string userId,boolean asc,int page,int count) throws com.borqs.server.base.ResponseError;
+    bytes getStaticFileById(string file_id) throws com.borqs.server.base.ResponseError;
+    boolean deleteStaticFile(string file_ids) throws com.borqs.server.base.ResponseError;
+}

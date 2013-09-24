@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+       default-init-method="init" default-destroy-method="destroy">
+
+
+    <!-- table -->
+    <import resource="frag.table.xml"/>
+
+    <!-- logic -->
+    <import resource="frag.logic.xml"/>
+
+    <!-- sender -->
+    <import resource="frag.sender.xml"/>
+
+    <!-- cache -->
+    <import resource="frag.cache.xml"/>
+
+    <!-- sendQueue -->
+    <import resource="frag.queue.xml"/>
+
+    <!-- service -->
+    <import resource="frag.service.xml"/>
+
+    <!-- sfs -->
+    <import resource="frag.sfs.xml"/>
+
+    <!-- const -->
+    <import resource="frag.const.xml"/>
+
+    <!-- fts -->
+    <import resource="frag.fts.xml"/>
+
+
+    <!-- receive service -->
+    <bean id="service.recv.comment" class="com.borqs.server.platform.mq.MqReceiveService" scope="singleton">
+        <property name="name" value="comment"/>
+        <property name="mq" ref="mq.comment"/>
+        <property name="queue" value="${queue.comment}"/>
+        <property name="processor">
+            <bean class="com.borqs.server.recv.comment.CommentRecv" scope="singleton">
+                <property name="comment" ref="logic.comment"/>
+            </bean>
+        </property>
+    </bean>
+    <bean id="service.recv.post" class="com.borqs.server.platform.mq.MqReceiveService" scope="singleton">
+        <property name="name" value="post"/>
+        <property name="mq" ref="mq.post"/>
+        <property name="queue" value="${queue.post}"/>
+        <property name="processor">
+            <bean class="com.borqs.server.recv.stream.StreamRecv" scope="singleton">
+                <property name="stream" ref="logic.stream"/>
+            </bean>
+        </property>
+    </bean>
+    <bean id="service.recv.link" class="com.borqs.server.platform.mq.MqReceiveService" scope="singleton">
+        <property name="name" value="link"/>
+        <property name="mq" ref="mq.link"/>
+        <property name="queue" value="${queue.link}"/>
+        <property name="processor">
+            <bean class="com.borqs.server.recv.link.LinkRecv" scope="singleton">
+                <property name="stream" ref="logic.stream"/>
+                <property name="linkLogic" ref="logic.link"/>
+            </bean>
+        </property>
+    </bean>
+
+    <!-- app -->
+    <bean id="main" class="com.borqs.server.platform.service.ServiceApp" scope="singleton">
+        <property name="services">
+            <list>
+                <ref bean="service.recv.comment"/>
+                <ref bean="service.recv.post"/>
+                <ref bean="service.recv.link"/>
+            </list>
+        </property>
+    </bean>
+</beans>

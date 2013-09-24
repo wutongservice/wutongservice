@@ -1,0 +1,10 @@
+{
+    "name":"link_cache",
+    "columns": {
+        "host": "string",
+        "img_name": "string"
+    }
+}
+
+
+

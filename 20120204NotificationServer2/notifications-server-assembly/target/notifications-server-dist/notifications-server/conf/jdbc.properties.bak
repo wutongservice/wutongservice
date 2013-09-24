@@ -1,0 +1,6 @@
+jdbc.username=information
+jdbc.password=information2008
+#jdbc.password=***
+jdbc.url=jdbc:mysql://192.168.5.182:3306/informations?useUnicode=true&characterEncoding=UTF-8
+#jdbc.url=jdbc:mysql://192.168.5.208:3306/informations?useUnicode=true&characterEncoding=UTF-8
+jdbc.driver=com.mysql.jdbc.Driver

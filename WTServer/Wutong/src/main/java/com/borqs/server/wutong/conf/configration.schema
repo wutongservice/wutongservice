@@ -1,0 +1,11 @@
+{
+    "name":"configration",
+    "columns": {        
+        "user_id":"int",
+        "config_key":"string",
+        "value":"string",
+        "version_code":"int",
+        "content_type":"int",
+        "created_time":"int"
+    }
+}

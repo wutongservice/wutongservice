@@ -1,0 +1,7 @@
+{
+    "name":"qapk_notin_pool",
+    "columns": {
+        "apk_id": "string",
+        "created_time": "int"
+    }
+}

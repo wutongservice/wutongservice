@@ -1,0 +1,15 @@
+
+@namespace("com.borqs.server.service.platform")
+protocol Tag {
+    import schema "../../../../../base/src/main/avro/error.avsc";
+
+    string createTag(bytes tag) throws com.borqs.server.base.ResponseError;
+    boolean destroyedTag(bytes tag) throws com.borqs.server.base.ResponseError;
+    boolean hasTag(string userId,string tag)throws com.borqs.server.base.ResponseError;
+    boolean hasTarget(string userId,string target_id,string type)throws com.borqs.server.base.ResponseError;
+    bytes findUserByTag(string tag, int page, int count);
+    bytes findTagByUser(string user_id, int page, int count);
+    bytes findTargetsByTag(string tag, string type, int page, int count) throws com.borqs.server.base.ResponseError;
+    bytes findTargetsByUser(string userId, string type, int page, int count) throws com.borqs.server.base.ResponseError;
+    bytes findUserTagByTarget(string target_id, string type, int page, int count) throws com.borqs.server.base.ResponseError;
+}

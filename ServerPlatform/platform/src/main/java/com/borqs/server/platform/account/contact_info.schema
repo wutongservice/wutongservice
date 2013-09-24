@@ -1,0 +1,7 @@
+{
+    "name": "contact_info",
+    "columns": {
+        "email_address": "string",
+        "mobile_telephone_number": "string"
+    }
+}

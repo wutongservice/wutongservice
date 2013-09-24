@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>module.notif:zh</comment>
+    <entry key="profile.update.notif.displayname">显示名称</entry>
+    <entry key="profile.update.notif.nickname">昵称</entry>
+    <entry key="profile.update.notif.gender">性别</entry>
+    <entry key="profile.update.notif.female">女</entry>
+    <entry key="profile.update.notif.male">男</entry>
+    <entry key="profile.update.notif.hidegender">隐藏性别</entry>
+    <entry key="profile.update.notif.commentapp"> 评论了应用</entry>
+    <entry key="profile.update.notif.commentphoto"> 评论了照片 </entry>
+    <entry key="profile.update.notif.likephoto"> 赞了照片 </entry>
+
+    <entry key="profile.update.notif.birthday">出生日期</entry>
+    <entry key="profile.update.notif.interests">兴趣爱好</entry>
+    <entry key="profile.update.notif.marriage">婚姻状况</entry>
+    <entry key="profile.update.notif.married">已婚</entry>
+    <entry key="profile.update.notif.unmarried">未婚</entry>
+    <entry key="profile.update.notif.religion">宗教</entry>
+    <entry key="profile.update.notif.company">公司名称</entry>
+    <entry key="profile.update.notif.image">头像</entry>
+    <entry key="profile.update.notif.contact">联系方式</entry>
+    <entry key="profile.update.notif.address">地址</entry>
+    <entry key="profile.update.notif.status">状态</entry>
+    <entry key="profile.update.notif.other">资料</entry>
+    <entry key="profile.update.notif.title">{0}更新了资料</entry>
+
+    <entry key="platform.profile.sex.man">他</entry>
+    <entry key="platform.profile.sex.woman">她</entry>
+    <entry key="platform.create.accountcreate.notification">您的联系人好友{0}已经开通了播思账号，赶快关注{1}吧.</entry>
+    <entry key="platform.like.like">赞!</entry>
+    <entry key="platform.notif.suggestuser.title">向您推荐了好友{0}</entry>
+    <entry key="platform.notif.suggestuser.titles">向您推荐了{0}等{1}个好友</entry>
+    <entry key="platform.notif.retweet.title">{0}引用了来源于你的分享:{1}</entry>
+    <entry key="platform.notif.streamlike.title">赞了动态</entry>
+    <entry key="platform.notif.streamcomment.title">评论了动态</entry>
+    <entry key="platform.notif.shareapp.title">给您分享了应用</entry>
+    <entry key="platform.notif.requestattention.title">请求您将他加入您的圈子</entry>
+    <entry key="platform.notif.acceptsuggest.title">基于您的推荐，{0}和{1}成为了好友</entry>
+    <entry key="platform.notif.applike.title">{0}赞了应用{1}</entry>
+    <entry key="platform.notif.newfollower.title">您有新的粉丝{0}</entry>
+</properties>

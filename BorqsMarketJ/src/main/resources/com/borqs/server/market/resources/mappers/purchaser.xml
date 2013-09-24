@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="market">
+    <select id="listProducts_1" parameterType="Map" resultMap="recordMapper">
+        SELECT
+        PV.product_id AS id,
+        P.app_id AS app_id,
+        MAX(PV.version) AS version
+        FROM
+        product_versions PV, products P, pricetags PT
+        <where>
+            (PV.product_id = P.id)
+            AND (P.app_id=PT.app_id) AND (P.category=PT.category) AND (P.pricetag_id=PT.id)
+            AND (P.app_id=#{appId})
+            <if test="category != null and category != '*'">
+                AND (P.category=#{category})
+            </if>
+            <if test="app_vc > 0">
+                AND (#{appVersion} BETWEEN PV.min_app_vc AND PV.max_app_vc)
+            </if>
+            AND (PV.status != 0)
+            <if test="mod != null and mod != ''">
+                AND (supported_mod='' OR supported_mod='*' OR INSTR(supported_mod, #{mod})>0)
+            </if>
+            AND (available_langs='' OR available_langs='*' OR INSTR(available_langs, #{lang}))
+            AND (P.pricetag_id != '')
+            <choose>
+                <when test="price == 1">
+                    <!-- Free -->
+                    AND (PT.free=0)
+                </when>
+                <when test="price == 2">
+                    <!-- paid -->
+                    AND (PT.free!=0)
+                </when>
+            </choose>
+            GROUP BY
+            PV.product_id
+            ORDER BY
+            <choose>
+                <when test="orderBy == 'downloads'">
+                    P.downloads_count DESC
+                </when>
+                <when test="orderBy == 'rating'">
+                    P.rating DESC
+                </when>
+                <otherwise>
+                    P.last_version_created_at DESC
+                </otherwise>
+            </choose>
+            LIMIT
+            #{offset}, #{count}
+        </where>
+    </select>
+
+    <select id="listProducts_2" parameterType="Map" resultMap="recordMapper">
+        SELECT
+        P.id AS id,
+        PV.version AS version,
+        PV.version_name AS version_name,
+        P.name AS name,
+        P.app_id AS app,
+        P.app_id AS app_id,
+        P.category AS category,
+        C.name AS category_name,
+        PT.free AS free,
+        PT.price AS price,
+        P.logo_image AS logo_image,
+        P.download_count AS download_count,
+        P.rating AS rating,
+        P.rating_count AS rating_count,
+        P.default_lang AS default_lang
+        FROM
+        product_versions PV,
+        products P,
+        pricetags PT,
+        categories C
+        <where>
+            (PV.product_id = P.id)
+            AND (P.pricetag_id = PT.id AND P.app_id = PT.app_id AND P.category = PT.category)
+            AND (PT.app_id = C.app_id AND PT.category = C.category)
+            AND (PV.product_id = #{id})
+            AND (PV.version = #{version})
+        </where>
+    </select>
+
+    <select id="attachPurchaseInfo_1" parameterType="Map" resultMap="recordMapper">
+        SELECT
+        id
+        FROM
+        orders
+        <where>
+            <choose>
+                <when test="purchaser_id != null">
+                    (product_id=#{id} AND purchaser_id=#{purchaser_id})
+                </when>
+                <when test="google_ids != null">
+                    (product_id=#{id} AND purchaser_google_id1 IN
+                    <foreach item="item" collection="google_ids"
+                             open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                    )
+                    OR
+                    (product_id=#{id} AND purchaser_google_id2 IN
+                    <foreach item="item" collection="google_ids"
+                             open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                    )
+                    OR
+                    (product_id=#{id} AND purchaser_google_id3 IN
+                    <foreach item="item" collection="google_ids"
+                             open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                    )
+                </when>
+                <when test="device_id != null">
+                    (product_id=#{id} AND purchaser_device_id=#{device_id})
+                </when>
+                <otherwise>
+                    1 = 0
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <select id="getProduct_1" parameterType="Map" resultMap="recordMapper">
+        SELECT
+        PV.product_id AS id,
+        PV.version AS version,
+        PV.version_name AS version_name,
+        P.id AS app,
+        P.id AS app_id,
+        P.category AS category,
+        C.name AS category_name,
+        PT.free AS free,
+        PT.price AS price,
+        P.author_name AS author_name,
+        P.author_email AS author_email,
+        P.author_id AS author_id,
+        P.created_at AS created_at,
+        P.updated_at AS updated_at,
+        P.description AS description,
+        P.logo_image AS logo_image,
+        P.cover_image AS cover_image,
+        PV.recent_change AS recent_change,
+        PV.recent_change AS update_change,
+        PV.screenshot1_image AS screenshot1_image,
+        PV.screenshot2_image AS screenshot2_image,
+        PV.screenshot3_image AS screenshot3_image,
+        PV.screenshot4_image AS screenshot4_image,
+        PV.screenshot5_image AS screenshot5_image,
+        P.download_count AS download_count,
+        P.rating AS rating,
+        P.rating_count AS rating_count,
+        P.default_lang AS default_lang
+        FROM
+        product_versions PV, products P, pricetags PT, categories C
+        <where>
+            (PV.product_id=P.id)
+            AND (P.pricetag_id=PT.id AND P.app_id=PT.app_id AND P.category=PT.category)
+            AND (PT.app_id=C.app_id AND PT.category=C.category)
+            AND (PV.product_id=#{id})
+            AND (PV.version=#{version})
+            AND (PV.status != 0)
+        </where>
+    </select>
+
+    <select id="purchase_1" parameterType="Map" resultMap="recordMapper">
+        SELECT
+        P.id AS id,
+        PV.version AS version,
+        P.app_id AS app_id,
+        PT.free AS free,
+        PT.prices AS price,
+        PV.action AS action,
+        PV.action_url AS action_url,
+        PV.file_size AS file_size,
+        PV.file_md5 AS file_md5
+        FROM
+        product_versions PV, products P, pricetags PT
+        <where>
+            (PV.product_id=P.id)
+            AND (P.pricetag_id=PT.id AND P.app_id=PT.app_id AND P.category=PT.category)
+            AND (PV.product_id=#{id})
+            AND (PV.version=#{version})
+            AND (PV.status!=0)
+        </where>
+    </select>
+
+    <select id="purchase_2" parameterType="Map" resultMap="recordMapper">
+        SELECT
+        id
+        FROM
+        orders
+        <where>
+            (1 = 0)
+            <if test="purchaser_id != null">
+                OR (product_id=#{id} AND purchaser_borqs_id=#{purchaser_id})
+            </if>
+            <if test="google_ids != null">
+                OR (product_id=#{id} AND purchaser_google_id1 IN
+                <foreach item="item" collection="google_ids"
+                         open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+                OR (product_id=#{id} AND purchaser_google_id2 IN
+                <foreach item="item" collection="google_ids"
+                         open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+                OR (product_id=#{id} AND purchaser_google_id3 IN
+                <foreach item="item" collection="google_ids"
+                         open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="device_id != null">
+                OR (product_id=#{id} AND purchaser_device_id=#{device})
+            </if>
+        </where>
+    </select>
+
+    <insert id="purchase_3" parameterType="Map">
+        INSERT INTO orders
+        SET
+            id = #{order_id},
+            created_at = #{created_at},
+            product_id = #{product_id},
+            product_version = #{product_version},
+            app_id = #{app_id},
+            category = #{category},
+            purchaser_id = #{purchaser_id},
+            purchaser_device_id = #{purchaser_device_id},
+            purchaser_google_id1 = #{purchaser_google_id1},
+            purchaser_google_id2 = #{purchaser_google_id2},
+            purchaser_google_id3 = #{purchaser_google_id3},
+            google_iab_order_id = #{google_iab_order_id},
+            purchaser_locale = #{purchaser_locale},
+            purchaser_ip = #{purchaser_ip},
+            purchaser_user_agent = #{purchaser_user_agent}
+    </insert>
+
+    <update id="purchase_4" parameterType="Map">
+        UPDATE products
+        SET download_count=download_count + 1
+        WHERE id = #{id}
+    </update>
+
+    <update id="purchase_5" parameterType="Map">
+        UPDATE product_versions
+        SET download_count=download_count + 1
+        WHERE id = #{id} AND version = #{version}
+    </update>
+</mapper>

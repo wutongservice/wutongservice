@@ -1,0 +1,77 @@
+{
+    "name":"user",
+    "columns": {
+        "user_id": "int",        
+        "password": "string",
+        "login_email1": "string",
+        "login_email2": "string",
+        "login_email3": "string",
+        "login_phone1": "string",
+        "login_phone2": "string",
+        "login_phone3": "string",
+        "domain_name": "string",
+        "display_name": "string",
+        "sort_key": "string",
+        "perhaps_name": "string",
+        "nick_name": "string",
+        "created_time": "int",
+        "last_visited_time": "int",
+        "image_url": "string",
+        "small_image_url": "string",
+        "large_image_url": "string",
+        "basic_updated_time": "int",
+        
+        "status": "string",
+        "status_updated_time": "int",
+        
+        "first_name": "string",
+        "middle_name": "string",
+        "last_name": "string",
+        "gender": "string",
+        "birthday": "string",
+        "timezone": "string",
+        "interests": "string",
+        "languages": "string",
+        "marriage": "string",
+        "religion": "string",
+        "about_me": "string",
+        "profile_updated_time": "int",
+        
+        "company": "string",
+        "department": "string",
+        "job_title": "string",
+        "office_address": "string",
+        "profession": "string",
+        "job_description": "string",
+        "business_updated_time": "int",
+        
+        "contact_info": "json",
+        "contact_info_updated_time": "int",
+        
+        "family": "json",
+        
+        "coworker": "json",
+        
+        "address": "json",
+        "address_updated_time": "int",
+        
+        "work_history": "json",
+        "work_history_updated_time": "int",
+        
+        "education_history": "json",
+        "education_history_updated_time": "int",
+        
+        "miscellaneous": "json"
+    },
+    "groups": {
+        "basic" : "user_id, password, login_email1, login_email2, login_email3, login_phone1, login_phone2, login_phone3, domain_name, display_name, created_time, last_visited_time, image_url, small_image_url, large_image_url, basic_updated_time",
+        "status_": "status, status_updated_time",
+        "profile": "first_name, middle_name, last_name, gender, birthday, timezone, interests, languages, marriage, religion, about_me, profile_updated_time",
+        "business": "company, department, job_title, office_address, profession, job_description, business_updated_time",
+        "contact": "contact_info, contact_info_updated_time",
+        "address_": "address, address_updated_time",
+        "work": "work_history, work_history_updated_time",
+        "education": "education_history, education_history_updated_time",
+        "unmodified": ["user_id", "created_time", "last_visited_time", "basic_updated_time", "status_updated_time", "profile_updated_time", "business_updated_time", "contact_info_updated_time", "address_updated_time", "work_history_updated_time", "education_history_updated_time"]
+    }
+}

@@ -1,0 +1,14 @@
+<tests>
+    <test>
+        <api>/suggest/get</api>
+        <params>
+            count=200
+        </params>
+    </test>
+    <test>
+        <api>/suggest/get</api>
+        <params>
+            count=200
+        </params>
+    </test>
+</tests>

@@ -1,0 +1,50 @@
+
+@namespace("com.borqs.server.service.platform")
+protocol Stream {
+    import schema "../../../../../base/src/main/avro/error.avsc";
+
+    // posts
+    string createPost(string userId, bytes post) throws com.borqs.server.base.ResponseError;
+    bytes destroyPosts(string userId, string postIds) throws com.borqs.server.base.ResponseError;
+    bytes topOneStreamByTarget(int type, string target) throws com.borqs.server.base.ResponseError;
+    string createRepost(string userId,string mentions,boolean secretly,string postId, string message, string device, string location,string appDate,boolean can_comment,boolean can_like,boolean can_reshare,string add_to,string add_contact,boolean has_contact) throws com.borqs.server.base.ResponseError;
+    boolean updatePost(string userId, string postId, bytes post) throws com.borqs.server.base.ResponseError;
+    boolean updateAttachment(string postId, string attach) throws com.borqs.server.base.ResponseError;
+    boolean touch(string postId);
+    string updatePostFor(string post_id, string Attachments,long created_time,long updated_time) throws com.borqs.server.base.ResponseError;
+    boolean updatePostForAttachmentsAndUpdateTime(string post_id, string Attachments,long updated_time) throws com.borqs.server.base.ResponseError;
+    boolean updatePostForCommentOrLike(string post_id,string viewerId,string column, int value) throws com.borqs.server.base.ResponseError;
+
+    // get posts
+    boolean hasPost(string postId) throws com.borqs.server.base.ResponseError;
+    bytes getPosts(string postIds, string cols) throws com.borqs.server.base.ResponseError;
+    bytes getUsersPosts(string viewerId, string userIds, string circleIds, string cols, long since, long max, int type, string appId, int page, int count) throws com.borqs.server.base.ResponseError;
+    bytes selectPostsBySql(string sql) throws com.borqs.server.base.ResponseError;
+    bytes myTopOneStreamByTarget(string userId,int type,string target, string cols) throws com.borqs.server.base.ResponseError;
+    bytes findStreamTemp(string postId,string cols) throws com.borqs.server.base.ResponseError;
+    bytes findWhoSharedApp(string packageName,int limit) throws com.borqs.server.base.ResponseError;
+    bytes findWhoRetweetStream(string target, int limit) throws com.borqs.server.base.ResponseError;
+    bytes topOneStreamBySetFriend(int type,string source,long created_time) throws com.borqs.server.base.ResponseError;
+    bytes topSendStreamUser(int limit) throws com.borqs.server.base.ResponseError;
+    bytes getApkSharedToMe(string viewerId,string userIds,boolean tome,string packageName,int page,int count) throws com.borqs.server.base.ResponseError;
+    bytes getSharedPost(string viewerId,string postId) throws com.borqs.server.base.ResponseError;
+    bytes formatOldDataToConversation(string viewerId) throws com.borqs.server.base.ResponseError;
+    int getSharedCount(string viewerId,string userId,int type) throws com.borqs.server.base.ResponseError;
+    bytes getMySharePosts(string viewerId, string userIds, string cols, long since, long max, int type, string appId, int page, int count) throws com.borqs.server.base.ResponseError;
+
+    bytes getSharedPostHasContact1(string contact) throws com.borqs.server.base.ResponseError;
+    bytes getSharedPostHasContact2(string virtual_friendId) throws com.borqs.server.base.ResponseError;
+    boolean updatePostHasContact2(string postId,string newMentions,string newAddContact,boolean newHasContact) throws com.borqs.server.base.ResponseError;
+    boolean formatStreamLocation() throws com.borqs.server.base.ResponseError;
+    bytes getPostsNearBy(string viewerId, string cols,long since, long max, int type, string appId, int page, int count) throws com.borqs.server.base.ResponseError;
+
+    bytes getSharedByType(string userIds,int type, string cols, int page, int count) throws com.borqs.server.base.ResponseError;
+    bytes topOneStreamByShare(int type, string source,string message,string mentions,int privince, long dateDiff) throws com.borqs.server.base.ResponseError;
+    boolean getPhoto(string viewerId,string photo_id) throws com.borqs.server.base.ResponseError;
+    boolean getFile(string viewerId,string file_id) throws com.borqs.server.base.ResponseError;
+    bytes getVideo(string viewerId,string file_id) throws com.borqs.server.base.ResponseError;
+    bytes getAudio(string viewerId,string file_id) throws com.borqs.server.base.ResponseError;
+    bytes getStaticFile(string viewerId,string file_id) throws com.borqs.server.base.ResponseError;
+
+    bytes getAppliesToUser(string viewerId, string appId, string userId, string cols) throws com.borqs.server.base.ResponseError;
+}

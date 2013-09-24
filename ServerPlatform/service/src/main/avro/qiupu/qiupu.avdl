@@ -1,0 +1,70 @@
+
+@namespace("com.borqs.server.service.qiupu")
+protocol QiupuInterface {
+    import schema "../../../../../base/src/main/avro/error.avsc";
+
+    bytes getAllApps(string sub_category,boolean paid, string sort,string cols, int page, int count,int minSDK) throws com.borqs.server.base.ResponseError;
+    bytes getApps(string packages, string cols,int minSDK) throws com.borqs.server.base.ResponseError;
+    bytes getSingleApp(string apkId, string cols,int minSDK) throws com.borqs.server.base.ResponseError;
+    bytes getUserApps(string userId, int max, string action, string cols, int page, int count,string delApks,int minSDK) throws com.borqs.server.base.ResponseError;
+    bytes getLinkedAppUsers(string viewerId,string app, string reason,string friendIds,int page,int count,int userType) throws com.borqs.server.base.ResponseError;
+    bytes getSingleApps(string packagename, string cols,int minSDK) throws com.borqs.server.base.ResponseError;
+    bytes getUserLinkApps(string userId, string packagename) throws com.borqs.server.base.ResponseError;
+    bytes getManualApkIds(string type, string maxcount,int minSDK) throws com.borqs.server.base.ResponseError;
+    boolean setUserAppPrivancy(string userId, string app, string value) throws com.borqs.server.base.ResponseError;
+    boolean setLinkUserApp(string userId, string apps, int version_code,int arch, string action, string deviceid,int minSDK) throws com.borqs.server.base.ResponseError;
+    boolean existUserLinkedApp(string userId, string app, string reason) throws com.borqs.server.base.ResponseError;
+    boolean existPackage(string packageName) throws com.borqs.server.base.ResponseError;
+    int getReasonFromApp(string userId, string app) throws com.borqs.server.base.ResponseError;
+    int getMaxVersionCode(string app,int minSDK) throws com.borqs.server.base.ResponseError;
+
+    bytes searchApps(string value, string cols,int page,int count,int minSDK) throws com.borqs.server.base.ResponseError;
+    boolean userSettingAll(string userId, string name, string value) throws com.borqs.server.base.ResponseError;
+    boolean updateQappCount(string apkId, string column, long userId, string deviceId) throws com.borqs.server.base.ResponseError;
+    boolean download(string userId, string app, string action, string deviceid) throws com.borqs.server.base.ResponseError;
+    boolean deleteUserQapp(string userId, string app, string action,int minSDK) throws com.borqs.server.base.ResponseError;
+    boolean uploadApk(string user, bytes apkInfo, string deviceid) throws com.borqs.server.base.ResponseError;
+    bytes syncApks(string user, string apkIds, boolean all,string deviceid,int minSDK);
+    bytes findApkByPackageAndVersion(string packageName, string versionCode) throws com.borqs.server.base.ResponseError;
+    bytes getLastInstalledApp(string user, string cols,int minSDK) throws com.borqs.server.base.ResponseError;
+
+    string getUserSettingAll(string userId, string name) throws com.borqs.server.base.ResponseError;
+    string getUserSingleAppPrivancy(string userId, string app) throws com.borqs.server.base.ResponseError;
+    string getLastedDesc(string app) throws com.borqs.server.base.ResponseError;
+    string getLastedScreenshotsUrls(string app) throws com.borqs.server.base.ResponseError;
+
+    boolean manualApks(string apkIds, string types);
+    bytes getManualApks(int type,int minSDK);
+    
+    bytes loadNeedExinfoApks(boolean isAll);
+    int getApplicationCount();
+    int getTodayAppCount();
+    int getNeedExinfoAppCount();
+    int getUserAppCount(string userId) throws com.borqs.server.base.ResponseError;
+    boolean updateApk(bytes info) throws com.borqs.server.base.ResponseError;
+
+    bytes getQapkOtherVersion(string apkId,int minSDK) throws com.borqs.server.base.ResponseError;
+
+    boolean saveQapkSuggest(string sub_id, string sub_name,string policy,string hdpi_img_url,string mdpi_img_url) throws com.borqs.server.base.ResponseError;
+    boolean existSuggestApk(string sub_id, string sub_name) throws com.borqs.server.base.ResponseError;
+    boolean deleteQapkSuggest(string sub_id) throws com.borqs.server.base.ResponseError;
+    boolean updateQapkSuggest(string sub_id,string sub_name, string policy,string hdpi_img_url,string mdpi_img_url) throws com.borqs.server.base.ResponseError;
+    boolean updateQapkIfSuggest(string sub_id) throws com.borqs.server.base.ResponseError;
+    bytes getSuggestApkfromSubId(string sub_id,boolean ifsuggest) throws com.borqs.server.base.ResponseError;
+
+    bytes getApkIdsListByTimes(long datediff, int action, int limit,int minSDK) throws com.borqs.server.base.ResponseError;
+    bytes getApkIdsListByDownloadTimes(int limit,int minSDK) throws com.borqs.server.base.ResponseError;
+    bytes getApkIdsListByRating(int limit,int minSDK) throws com.borqs.server.base.ResponseError;
+    bytes getApkIdsListByBorqs(int limit,int minSDK) throws com.borqs.server.base.ResponseError;
+    bytes getApkIdsListByRandom(int limit,int minSDK) throws com.borqs.server.base.ResponseError;
+    bytes getUsersAppCount(string userIds,string reason) throws com.borqs.server.base.ResponseError;
+
+    bytes getStrongMan(string sub_category,int page,int count) throws com.borqs.server.base.ResponseError;
+
+    boolean createUpdateApkLessDesc(string packageName,int version_code,string app_name,string desc) throws com.borqs.server.base.ResponseError;
+    bytes getUpdateApkLessDesc(int page,int count,string packageName,string app_name) throws com.borqs.server.base.ResponseError;
+    bytes getTop1ApkByCategory(string sub_category) throws com.borqs.server.base.ResponseError;
+    bytes formatOldDataToConversation(string viewerId) throws com.borqs.server.base.ResponseError;
+
+    boolean updateBorqsByPackage(string package_, int borqs) throws com.borqs.server.base.ResponseError;
+}

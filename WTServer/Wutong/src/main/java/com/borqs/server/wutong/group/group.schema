@@ -1,0 +1,23 @@
+{
+    "name":"group",
+    "columns": {
+        "id":"int",
+        "name":"string",
+        "member_limit":"int",
+        "is_stream_public":"int",
+        "can_search":"int",
+        "can_view_members":"int",
+        "can_join":"int",
+        "can_member_invite":"int",
+        "can_member_approve":"int",
+        "can_member_post":"int",
+        "can_member_quit":"int",
+        "need_invited_confirm":"int",
+        "creator":"int",
+        "label":"string",
+        "created_time":"int",
+        "updated_time":"int",
+        "destroyed_time":"int",
+        "sort_key":"string"
+    }
+}

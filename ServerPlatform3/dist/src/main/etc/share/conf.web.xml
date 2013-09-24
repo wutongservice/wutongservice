@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+
+       default-init-method="init" default-destroy-method="destroy">
+
+    <!-- table -->
+    <import resource="frag.table.xml"/>
+
+    <!-- logic -->
+    <import resource="frag.logic.xml"/>
+
+    <!-- sender -->
+    <import resource="frag.sender.xml"/>
+
+    <!-- cache -->
+    <import resource="frag.cache.xml"/>
+
+    <!-- sendQueue -->
+    <import resource="frag.queue.xml"/>
+
+    <!-- service -->
+    <import resource="frag.service.xml"/>
+
+    <!-- sfs -->
+    <import resource="frag.sfs.xml"/>
+
+    <!-- const -->
+    <import resource="frag.const.xml"/>
+
+    <!-- fts -->
+    <import resource="frag.fts.xml"/>
+
+
+    <!-- servlet -->
+    <bean id="servlet.pubApi" class="com.borqs.server.platform.web.topaz.HttpApiServlet" scope="singleton">
+        <property name="routeSummary" value="true"/>
+        <property name="responseDocument" value="true"/>
+        <property name="errorDetail" value="${pubApi.errorDetail}"/>
+        <property name="handlers">
+            <list>
+                <bean class="com.borqs.server.pubapi.LoginApi" scope="singleton">
+                    <property name="login" ref="logic.login"/>
+                </bean>
+                <bean class="com.borqs.server.pubapi.AccountApi$Rpc" scope="singleton">
+                    <property name="account" ref="logic.account"/>
+                    <property name="app" ref="logic.app"/>
+                    <property name="login" ref="logic.login"/>
+                    <property name="cibind" ref="logic.cibind"/>
+                    <property name="status" ref="logic.account"/>
+                </bean>
+                <bean class="com.borqs.server.pubapi.RegisterApi" scope="singleton">
+                    <property name="account" ref="logic.account"/>
+                    <property name="app" ref="logic.app"/>
+                    <property name="login" ref="logic.login"/>
+                    <property name="mailSender" ref="sender.mail"/>
+                    <property name="cibind" ref="logic.cibind"/>
+                    <property name="serverHost" value="${server.host}"/>
+                    <property name="maker">
+                        <bean class="com.borqs.server.impl.mailmk.SimpleMailMaker">
+                        </bean>
+                    </property>
+                    <property name="postQueue">
+                        <bean class="com.borqs.server.platform.mq.QueueName">
+                            <property name="queue" ref="mq.post"/>
+                            <property name="name" value="post"/>
+                        </bean>
+                    </property>
+                    <property name="friend" ref="logic.friend"/>
+                </bean>
+                <bean class="com.borqs.server.pubapi.VcardApi" scope="singleton">
+                    <property name="account" ref="logic.account"/>
+                    <property name="privacyControl" ref="logic.privacy"/>
+                    <property name="login" ref="logic.login"/>
+                    <property name="app" ref="logic.app"/>
+                    <property name="friend" ref="logic.friend"/>
+                </bean>
+                <bean class="com.borqs.server.pubapi.StreamApi" scope="singleton">
+                    <property name="account" ref="logic.account"/>
+                    <property name="app" ref="logic.app"/>
+                    <property name="stream" ref="logic.stream"/>
+                    <property name="login" ref="logic.login"/>
+                    <property name="friend" ref="logic.friend"/>
+                    <property name="favorite" ref="logic.favorite"/>
+                    <property name="comment" ref="logic.comment"/>
+                    <property name="like" ref="logic.like"/>
+
+                    <property name="postQueue">
+                        <bean class="com.borqs.server.platform.mq.QueueName">
+                            <property name="queue" ref="mq.post"/>
+                            <property name="name" value="post"/>
+                        </bean>
+                    </property>
+                    <property name="linkQueue">
+                        <bean class="com.borqs.server.platform.mq.QueueName">
+                            <property name="queue" ref="mq.post"/>
+                            <property name="name" value="link"/>
+                        </bean>
+                    </property>
+                    <property name="destroyQueue">
+                        <bean class="com.borqs.server.platform.mq.QueueName">
+                            <property name="queue" ref="mq.post"/>
+                            <property name="name" value="post"/>
+                        </bean>
+                    </property>
+                    <property name="updateQueue">
+                        <bean class="com.borqs.server.platform.mq.QueueName">
+                            <property name="queue" ref="mq.post"/>
+                            <property name="name" value="post"/>
+                        </bean>
+                    </property>
+                    <property name="commentQueue">
+                        <bean class="com.borqs.server.platform.mq.QueueName">
+                            <property name="queue" ref="mq.comment"/>
+                            <property name="name" value="comment"/>
+                        </bean>
+                    </property>
+                </bean>
+                <bean class="com.borqs.server.pubapi.PeopleSuggestApi" scope="singleton">
+                    <property name="account" ref="logic.account"/>
+                    <property name="psuggest" ref="logic.psuggest"/>
+                    <property name="login" ref="logic.login"/>
+                    <property name="app" ref="logic.app"/>
+                </bean>
+                <bean class="com.borqs.server.pubapi.ContactApi" scope="singleton">
+                    <property name="account" ref="logic.account"/>
+                    <property name="contactLogic" ref="logic.contact"/>
+                    <property name="login" ref="logic.login"/>
+                    <property name="app" ref="logic.app"/>
+                </bean>
+                <bean class="com.borqs.server.pubapi.RequestApi" scope="singleton">
+                    <property name="account" ref="logic.account"/>
+                    <property name="request" ref="logic.request"/>
+                    <property name="login" ref="logic.login"/>
+                    <property name="app" ref="logic.app"/>
+                </bean>
+                <bean class="com.borqs.server.pubapi.FriendApi" scope="singleton">
+                    <property name="friend" ref="logic.friend"/>
+                    <property name="account" ref="logic.account"/>
+                    <property name="login" ref="logic.login"/>
+                    <property name="app" ref="logic.app"/>
+                    <property name="privacyControl" ref="logic.privacy"/>
+                </bean>
+                <bean class="com.borqs.server.pubapi.ResetPasswordApi" scope="singleton">
+                    <property name="account" ref="logic.account"/>
+                    <property name="app" ref="logic.app"/>
+                    <property name="login" ref="logic.login"/>
+                    <property name="cibind" ref="logic.cibind"/>
+                    <property name="mailSender" ref="sender.mail"/>
+                    <property name="smsSender" ref="sender.sms"/>
+                    <property name="serverHost" value="${server.host}"/>
+                    <property name="maker">
+                        <bean class="com.borqs.server.impl.mailmk.SimpleMailMaker">
+                        </bean>
+                    </property>
+                </bean>
+                <bean class="com.borqs.server.pubapi.TargetApi" scope="singleton">
+                    <property name="app" ref="logic.app"/>
+                    <property name="login" ref="logic.login"/>
+                </bean>
+                <bean class="com.borqs.server.pubapi.PhotoApi" scope="singleton">
+                    <property name="photoLogic" ref="logic.photo"/>
+                    <property name="login" ref="logic.login"/>
+                </bean>
+
+            </list>
+        </property>
+    </bean>
+
+    <bean id="servlet.pubApi1" class="com.borqs.server.platform.web.topaz.HttpApiServlet" scope="singleton">
+        <property name="routeSummary" value="true"/>
+        <property name="responseDocument" value="false"/>
+        <property name="errorDetail" value="${pubApi.errorDetail}"/>
+        <property name="handlers">
+            <list>
+                <bean class="com.borqs.server.pubapi.v1.Tool1Api" scope="singleton"/>
+                <bean class="com.borqs.server.pubapi.v1.Login1Api" scope="singleton">
+                    <property name="login" ref="logic.login"/>
+                </bean>
+                <bean class="com.borqs.server.pubapi.v1.Account1Api" scope="singleton">
+                    <property name="account" ref="logic.account"/>
+                    <property name="app" ref="logic.app"/>
+                    <property name="login" ref="logic.login"/>
+                    <property name="cibind" ref="logic.cibind"/>
+                    <property name="mailSender" ref="sender.mail"/>
+                    <property name="smsSender" ref="sender.sms"/>
+                    <property name="serverHost" value="${server.host}"/>
+                    <property name="maker">
+                        <bean class="com.borqs.server.impl.mailmk.SimpleMailMaker">
+                        </bean>
+                    </property>
+                    <property name="profileImageSFS" ref="sfs.profileImage"/>
+                </bean>
+                <bean class="com.borqs.server.pubapi.v1.Register1Api" scope="singleton">
+                    <property name="account" ref="logic.account"/>
+                    <property name="app" ref="logic.app"/>
+                    <property name="login" ref="logic.login"/>
+                    <property name="mailSender" ref="sender.mail"/>
+                    <property name="cibind" ref="logic.cibind"/>
+                    <property name="serverHost" value="${server.host}"/>
+                    <property name="maker">
+                        <bean class="com.borqs.server.impl.mailmk.SimpleMailMaker">
+                        </bean>
+                    </property>
+                    <property name="postQueue">
+                        <bean class="com.borqs.server.platform.mq.QueueName">
+                            <property name="queue" ref="mq.post"/>
+                            <property name="name" value="post"/>
+                        </bean>
+                    </property>
+                    <property name="friend" ref="logic.friend"/>
+                </bean>
+                <bean class="com.borqs.server.pubapi.v1.Comment1Api" scope="singleton">
+                    <property name="account" ref="logic.account"/>
+                    <property name="app" ref="logic.app"/>
+                    <property name="comment" ref="logic.comment"/>
+                    <property name="login" ref="logic.login"/>
+                    <property name="commentQueue">
+                        <bean class="com.borqs.server.platform.mq.QueueName">
+                            <property name="queue" ref="mq.comment"/>
+                            <property name="name" value="comment"/>
+                        </bean>
+                    </property>
+                </bean>
+                <bean class="com.borqs.server.pubapi.v1.Stream1Api" scope="singleton">
+                    <property name="account" ref="logic.account"/>
+                    <property name="app" ref="logic.app"/>
+                    <property name="stream" ref="logic.stream"/>
+                    <property name="login" ref="logic.login"/>
+                    <property name="friend" ref="logic.friend"/>
+                    <property name="status" ref="logic.account"/>
+                    <property name="comment" ref="logic.comment"/>
+                    <property name="like" ref="logic.like"/>
+                    <property name="photo" ref="logic.photo"/>
+
+                    <property name="postQueue">
+                        <bean class="com.borqs.server.platform.mq.QueueName">
+                            <property name="queue" ref="mq.post"/>
+                            <property name="name" value="post"/>
+                        </bean>
+                    </property>
+                    <property name="destroyQueue">
+                        <bean class="com.borqs.server.platform.mq.QueueName">
+                            <property name="queue" ref="mq.post"/>
+                            <property name="name" value="post"/>
+                        </bean>
+                    </property>
+                    <property name="updateQueue">
+                        <bean class="com.borqs.server.platform.mq.QueueName">
+                            <property name="queue" ref="mq.post"/>
+                            <property name="name" value="post"/>
+                        </bean>
+                    </property>
+                    <property name="commentQueue">
+                        <bean class="com.borqs.server.platform.mq.QueueName">
+                            <property name="queue" ref="mq.comment"/>
+                            <property name="name" value="comment"/>
+                        </bean>
+                    </property>
+                </bean>
+                <bean class="com.borqs.server.pubapi.v1.PeopleSuggest1Api" scope="singleton">
+                    <property name="account" ref="logic.account"/>
+                    <property name="psuggest" ref="logic.psuggest"/>
+                    <property name="login" ref="logic.login"/>
+                    <property name="app" ref="logic.app"/>
+                </bean>
+                <bean class="com.borqs.server.pubapi.v1.Contact1Api" scope="singleton">
+                    <property name="account" ref="logic.account"/>
+                    <property name="contactLogic" ref="logic.contact"/>
+                    <property name="login" ref="logic.login"/>
+                    <property name="app" ref="logic.app"/>
+                    <property name="cibind" ref="logic.cibind"/>
+                    <property name="friend" ref="logic.friend"/>
+                    <property name="setting" ref="logic.setting"/>
+                    <property name="psuggest" ref="logic.psuggest"/>
+                </bean>
+                <bean class="com.borqs.server.pubapi.v1.Request1Api" scope="singleton">
+                    <property name="account" ref="logic.account"/>
+                    <property name="request" ref="logic.request"/>
+                    <property name="login" ref="logic.login"/>
+                    <property name="app" ref="logic.app"/>
+                </bean>
+                <bean class="com.borqs.server.pubapi.v1.Friend1Api" scope="singleton">
+                    <property name="friend" ref="logic.friend"/>
+                    <property name="account" ref="logic.account"/>
+                    <property name="request" ref="logic.request"/>
+                    <property name="login" ref="logic.login"/>
+                    <property name="app" ref="logic.app"/>
+                    <property name="privacyControl" ref="logic.privacy"/>
+                </bean>
+                <bean class="com.borqs.server.pubapi.v1.Like1Api" scope="singleton">
+                    <property name="account" ref="logic.account"/>
+                    <property name="app" ref="logic.app"/>
+                    <property name="login" ref="logic.login"/>
+                    <property name="like" ref="logic.like"/>
+                </bean>
+                <bean class="com.borqs.server.pubapi.v1.ResetPassword1Api" scope="singleton">
+                    <property name="account" ref="logic.account"/>
+                    <property name="app" ref="logic.app"/>
+                    <property name="login" ref="logic.login"/>
+                    <property name="cibind" ref="logic.cibind"/>
+                    <property name="mailSender" ref="sender.mail"/>
+                    <property name="smsSender" ref="sender.sms"/>
+                    <property name="serverHost" value="${server.host}"/>
+                    <property name="maker">
+                        <bean class="com.borqs.server.impl.mailmk.SimpleMailMaker">
+                        </bean>
+                    </property>
+                    <property name="syncBbsPwd" value="true"/>
+                </bean>
+                <bean class="com.borqs.server.pubapi.v1.Setting1Api" scope="singleton">
+                    <property name="account" ref="logic.account"/>
+                    <property name="app" ref="logic.app"/>
+                    <property name="login" ref="logic.login"/>
+                    <property name="settingLogic" ref="logic.setting"/>
+                </bean>
+                <bean class="com.borqs.server.pubapi.v1.Photo1Api" scope="singleton">
+                    <property name="photoLogic" ref="logic.photo"/>
+                    <property name="login" ref="logic.login"/>
+                </bean>
+                <bean class="com.borqs.server.pubapi.v1.StaticFile1Api" scope="singleton">
+                    <property name="account" ref="logic.account"/>
+                    <property name="video" ref="logic.video"/>
+                    <property name="audio" ref="logic.audio"/>
+                    <property name="staticFile" ref="logic.staticfile"/>
+                    <property name="stream" ref="logic.stream"/>
+                    <property name="sfsVideo" ref="sfs.video"/>
+                    <property name="sfsAudio" ref="sfs.audio"/>
+                    <property name="sfsStaticFile" ref="sfs.staticfile"/>
+                    <property name="login" ref="logic.login"/>
+                    <property name="app" ref="logic.app"/>
+                </bean>
+                <bean class="com.borqs.server.pubapi.v1.Config1Api" scope="singleton">
+                    <property name="account" ref="logic.account"/>
+                    <property name="config" ref="logic.config"/>
+                    <property name="sfsConfigFile" ref="sfs.config"/>
+                    <property name="login" ref="logic.login"/>
+                    <property name="app" ref="logic.app"/>
+                </bean>
+                <bean class="com.borqs.server.pubapi.v1.PhoneBook1Api" scope="singleton">
+                    <property name="account" ref="logic.account"/>
+                    <property name="contact" ref="logic.contact"/>
+                    <property name="cibind" ref="logic.cibind"/>
+                    <property name="login" ref="logic.login"/>
+                    <property name="app" ref="logic.app"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="servlet.intrApi1" class="com.borqs.server.platform.web.topaz.HttpApiServlet" scope="singleton">
+        <property name="routeSummary" value="true"/>
+        <property name="responseDocument" value="false"/>
+        <property name="errorDetail" value="${pubApi.errorDetail}"/>
+        <property name="handlers">
+            <list>
+                <bean class="com.borqs.server.intrapi.v1.Register1Api" scope="singleton">
+                    <property name="account" ref="logic.account"/>
+                    <property name="app" ref="logic.app"/>
+                    <property name="login" ref="logic.login"/>
+                    <property name="cibind" ref="logic.cibind"/>
+                    <property name="postQueue">
+                        <bean class="com.borqs.server.platform.mq.QueueName">
+                            <property name="queue" ref="mq.post"/>
+                            <property name="name" value="post"/>
+                        </bean>
+                    </property>
+                    <property name="friend" ref="logic.friend"/>
+                    <property name="qiupuId" value="10002"/>
+                </bean>
+                <bean class="com.borqs.server.intrapi.v1.Photo1Api" scope="singleton">
+                    <property name="photoLogic" ref="logic.photo"/>
+                    <property name="login" ref="logic.login"/>
+                </bean>
+                <bean class="com.borqs.server.intrapi.v1.Friend1Api" scope="singleton">
+                    <property name="account" ref="logic.account"/>
+                    <property name="friend" ref="logic.friend"/>
+                    <property name="privacyControl" ref="logic.privacy"/>
+                    <property name="login" ref="logic.login"/>
+                    <property name="app" ref="logic.app"/>
+                </bean>
+                <bean class="com.borqs.server.intrapi.v1.Account1Api" scope="singleton">
+                    <property name="account" ref="logic.account"/>
+                    <property name="friend" ref="logic.friend"/>
+                    <property name="cibind" ref="logic.cibind"/>
+                    <property name="login" ref="logic.login"/>
+                    <property name="app" ref="logic.app"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="servlet.qiupu" class="com.borqs.server.qiupu.servlet.QiupuServlet" scope="singleton">
+        <property name="qiupuFactory" ref="logic.qiupuFactory"/>
+        <property name="configuration" ref="const.qiupuConfig"/>
+        <property name="app" ref="logic.app"/>
+        <property name="login" ref="logic.login"/>
+    </bean>
+
+    <!-- service -->
+    <bean id="service.pubWeb" class="com.borqs.server.platform.web.JettyService" scope="singleton">
+        <property name="addresses">
+            <set>
+                <value>${web.server.address}</value>
+            </set>
+        </property>
+        <property name="apps">
+            <list>
+                <bean class="com.borqs.server.platform.web.WebApp" factory-method="createDescriptorBased">
+                    <constructor-arg index="0" value="/"/>
+                    <constructor-arg index="1" value="${web.app.descriptor}"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+
+    <!-- app -->
+    <bean id="main" class="com.borqs.server.platform.service.ServiceApp" scope="singleton">
+        <property name="services">
+            <list>
+                <ref bean="service.pubWeb"/>
+                <ref bean="service.telnetLog"/>
+
+            </list>
+        </property>
+    </bean>
+
+</beans>

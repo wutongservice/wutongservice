@@ -1,0 +1,35 @@
+{
+    "name":"stream",
+    "columns": {
+        "post_id": "int",
+        "source": "int",
+        "created_time": "int",
+        "updated_time": "int",
+        "quote": "int",
+        "destroyed_time": "int",
+        "root": "int",
+        "mentions": "string",
+        "app": "int",
+        "type": "int",
+        "message": "string",
+        "app_data": "string",
+        "attachments": "json",
+        "device": "string",
+        "can_comment": "boolean",
+        "can_like": "boolean",
+        "can_reshare": "boolean",
+        "privince": "boolean",
+        "target": "string",
+        "location": "string",
+        "add_to": "string",
+        "add_contact": "string",
+        "has_contact": "int",
+        "longitude": "string",
+        "latitude": "string",
+        "post_source": "int",
+        "scene": "int"
+    }
+}
+
+
+

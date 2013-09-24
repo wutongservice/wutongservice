@@ -1,0 +1,12 @@
+<tests>
+    <test>
+        <api>/request/count</api>
+        <params>
+        </params>
+    </test>
+    <test>
+        <api>/request/get</api>
+        <params>
+        </params>
+    </test>
+</tests>

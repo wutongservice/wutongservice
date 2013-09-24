@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+
+       default-init-method="init" default-destroy-method="destroy">
+    <!--Sql.executor-->
+    <bean id="sql.executor" class="com.borqs.server.platform.sql.SqlExecutor" scope="singleton">
+        <property name="connectionFactory">
+            <bean class="com.borqs.server.platform.sql.SimpleConnectionFactory" scope="singleton"/>
+        </property>
+    </bean>
+
+    <!-- Tables -->
+    <bean id="table.contact0" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db" value="jdbc:mysql://localhost:3306/account_platform_test?user=root"/>
+        <property name="table" value="contact0"/>
+    </bean>
+
+    <bean id="table.contact1" class="com.borqs.server.platform.sql.SingleTable">
+        <property name="db" value="jdbc:mysql://localhost:3306/account_platform_test?user=root"/>
+        <property name="table" value="contact1"/>
+    </bean>
+
+    <bean id="logic.account" class="com.borqs.server.platform.test.mock.ServerTeam" factory-method="account" scope="singleton">
+    </bean>
+    <!-- Logic -->
+    <bean id="logic.contact" class="com.borqs.server.impl.contact.ContactImpl" scope="singleton">
+        <property name="sqlExecutor" ref="sql.executor"/>
+        <property name="contactTable0" ref="table.contact0"/>
+        <property name="contactTable1" ref="table.contact1"/>
+        <property name="account" ref="logic.account"/>
+    </bean>
+</beans>

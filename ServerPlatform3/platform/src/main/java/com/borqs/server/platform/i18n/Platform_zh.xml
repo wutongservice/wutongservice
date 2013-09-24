@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>module.friend:zh</comment>
+    <entry key="circle.name.blocked">黑名单</entry>
+    <entry key="circle.name.address_book">地址本</entry>
+    <entry key="circle.name.default">泛泛之交</entry>
+    <entry key="circle.name.family">家庭</entry>
+    <entry key="circle.name.acquaintance">熟人</entry>
+    <entry key="circle.name.closed_friends">密友</entry>
+</properties>

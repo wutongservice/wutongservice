@@ -1,0 +1,1 @@
+/home/wutong/workWT/dist-r3-distribution/bin/bsapp -Dlogback.configurationFile=/home/wutong/workWT/dist-r3-distribution/etc/test.logback.xml com.borqs.server.wutong.task.ActionMQReceiver /home/wutong/workWT/dist-r3-distribution/etc/production.config.properties

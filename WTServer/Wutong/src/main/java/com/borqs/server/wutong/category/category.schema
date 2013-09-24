@@ -1,0 +1,12 @@
+{
+    "name":"category",
+    "columns": {
+        "id":"int",
+        "category_id":"int",
+        "user_id":"int",
+        "target_id":"int",
+        "target_type":"int",
+        "created_time":"int",
+        "destroyed_time":"int"
+    }
+}

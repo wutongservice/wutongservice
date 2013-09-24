@@ -1,0 +1,14 @@
+{
+    "name":"suggested_user",
+    "columns": {
+        "user": "int",
+        "suggested": "int",
+        "create_time": "int",
+        "refuse_time": "int",
+        "type": "int",
+        "reason": "string"   
+    }
+}
+
+
+

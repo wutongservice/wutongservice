@@ -1,0 +1,19 @@
+{
+    "name":"video",
+    "columns": {        
+        "file_id":"int",
+        "level":"int",
+        "video_time_length":"int",
+        "video_width":"int",
+        "video_height":"int",
+        "video_data_rate":"int",
+        "video_bit_rate":"int",
+        "video_frame_rate":"int",
+        "audio_bit_rate":"int",
+        "audio_channel":"int",
+        "audio_Sampling_rate":"int",
+        "thumbnail":"string",
+        "coding_type":"string",
+        "compression_type":"string"
+    }
+}

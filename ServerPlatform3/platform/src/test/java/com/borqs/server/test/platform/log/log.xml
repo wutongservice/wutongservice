@@ -1,0 +1,16 @@
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="com.borqs.server.platform.log.CsvLayout"/>
+        </encoder>
+    </appender>
+
+    <appender name="TELNET" class="com.borqs.server.platform.log.TelnetAppender">
+        <layout class="com.borqs.server.platform.log.CsvLayout"/>
+    </appender>
+
+    <root level="trace">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="TELNET"/>
+    </root>
+</configuration>

@@ -1,0 +1,175 @@
+/** 
+ *	Information Service interface
+ *  java -jar avro-tools-*.jar idl IInformationsService.avdl IInformationsService.avpr 
+**/
+@namespace("com.borqs.information.rpc.service")
+protocol IInformationsService {
+	/* deprecated, information structure for sending */
+	record SendInfo {
+		// application identity
+		string appId;
+		// sender identity
+		string senderId;
+		// receiver identity
+		string receiverId;
+		// information type
+		string type;
+		
+		// URI about information
+		union {null,string} uri;
+		// information title
+		union {null,string} title;
+		// detail information
+		union {null,string} data;
+		
+		// process method(default is 1)
+		// 1 -- loaded from server
+		// 2 -- click list item
+		// 3 -- start activity for result and result is OK
+		union {null, int} processMethod;
+		// importance(default is 30)
+		// 50 -- most important
+		// 40 -- more important
+		// 30 -- normal important
+		// 20 -- less important
+		// 10 -- not important
+		union {null, int} importance;
+		
+		union {null, string} body;
+		union {null, string} bodyHtml;
+		union {null, string} titleHtml;
+		// object ID
+		union {null, string} objectId;
+		
+		// the following have been deprecated
+		// be used to update information if 'guid' field isn't null
+		union {null, string} guid;
+		// client action, deprecated
+		//union {null,string} action;
+		
+		// control whether push a message to Pushe server
+		boolean push = false;
+
+		// information scene
+        union {null,string} scene;
+
+        // information user image
+        union {null,string} imageUrl;
+	}
+	
+	record Info {
+		// information ID, readonly
+		union {null, long} id;
+		
+		// application identity
+		string appId;
+		// sender identity
+		string senderId;
+		// receiver identity
+		string receiverId;
+		// information type
+		string type;
+		
+		// URI about information
+		union {null,string} uri;
+		// information title
+		union {null,string} title;
+		// detail information
+		union {null,string} data;
+		
+		// process method(default is 1)
+		// 1 -- start activity for result and result is OK
+		// 2 -- click list item
+		// 3 -- loaded from server
+		union {null, int} processMethod;
+		
+		// processed mark, readonly
+		union {null, boolean} processed;
+		// read or unread mark, readonly
+		union {null, boolean} read;
+		
+		// importance(default is 30)
+		// 50 -- most important
+		// 40 -- more important
+		// 30 -- normal important
+		// 20 -- less important
+		// 10 -- not important
+		union {null, int} importance;
+		
+		// be used to update information if 'guid' field isn't null
+		union {null, string} body;
+		union {null, string} bodyHtml;
+		union {null, string} titleHtml;
+		// object ID
+		union {null, string} objectId;
+		
+		// create date time, readonly
+		union {null, long} cDateTime;		
+		// last modify time, readonly
+		union {null, long} lastModified;
+		
+		// the following have been deprecated
+		// for replace information
+		union {null, string} guid;
+		// client action
+		union {null,string} action;
+				
+		// control whether push a message to Pushe server
+		union {null, boolean} push;
+
+		// information scene
+        union {null,string} scene;
+
+        // information user image
+        union {null,string} imageUrl;
+	}
+	
+	/* returned result */
+	record StateResult {
+		string mid;
+		string status;
+	}
+
+	// deprecated, send an information
+	StateResult sendInfo(SendInfo info);
+	// deprecated, batch send informations
+	StateResult batchSendInfo(array<SendInfo> infos);
+	// deprecated, replace information by appId, type, object and receiver ID.
+	StateResult replaceInfo(SendInfo info);
+	// deprecated, batch replace information by appId, type, object and receiver ID.
+	StateResult batchReplaceInfo(array<SendInfo> infos);
+	
+	// send an information
+	StateResult sendInf(Info info);
+	// batch send informations
+	StateResult batchSendInf(array<Info> infos);
+	// mark information processed state
+	StateResult markProcessed(string mid);
+	// mark information read state
+	StateResult markRead(string mid);
+	// query informations by appid, type, object and receiver ID.
+	array<Info> queryInfo(string appId, string type, string receiverId, string objectId);
+	// replace information by appId, type, object and receiver ID.
+	StateResult replaceInf(Info info);
+	// batch replace information by appId, type, object and receiver ID.
+	StateResult batchReplaceInf(array<Info> infos);
+	
+	array<Info> list(string receiverId, string status="0", long from=0, int size=20);
+	array<Info> listById(string receiverId, string status="0", long mid=0, int count=20);
+	array<Info> listByTime(string receiverId, string status="0", long from=0, int count=20);
+	array<Info> top(string receiverId, string status="0", int topn=5);
+	int count(string receiverId, string status="0");
+	
+	// send and information by JSON
+	string send(string message);
+	// batch send informations by JSON
+	string batchSend(string messages);
+	// mark information processed state by JSON
+	string process(string mid);	
+	// query informations by appid, type, object and receiver ID.
+	string query(string appId, string type, string receiverId, string objectId);
+	// replace information by appId, type, object and receiver ID.
+	string replace(string message);
+	// batch replace information by appId, type, object and receiver ID.
+	string batchReplace(string messages);
+}

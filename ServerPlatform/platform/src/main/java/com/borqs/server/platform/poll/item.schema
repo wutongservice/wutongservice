@@ -1,0 +1,13 @@
+{
+    "name":"item",
+    "columns": {
+        "poll_id":"int",
+        "item_id":"int",
+        "type":"int",
+        "message":"string",
+        "attachments":"string",
+        "created_time":"int",
+        "updated_time":"int",
+        "destroyed_time":"int"
+    }
+}

@@ -1,0 +1,14 @@
+
+
+
+@namespace("com.borqs.server.service.platform")
+protocol Conversation {
+    import schema "../../../../../base/src/main/avro/error.avsc";
+
+    boolean createConversation(bytes conversation) throws com.borqs.server.base.ResponseError;
+    boolean deleteConversation(int target_type, string target_id, int reason, long from) throws com.borqs.server.base.ResponseError;
+    bytes getConversation(int target_type, string target_id, string reasons, long from, int page, int count) throws com.borqs.server.base.ResponseError;
+    boolean ifExistConversation(int target_type, string target_id, int reason, long from) throws com.borqs.server.base.ResponseError;
+    boolean updateConversationTarget( string old_target_id, string new_target_id) throws com.borqs.server.base.ResponseError;
+
+}

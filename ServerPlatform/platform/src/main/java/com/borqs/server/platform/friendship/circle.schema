@@ -1,0 +1,12 @@
+{
+    "name":"circle",
+    "columns": {
+        "user": "int",
+        "circle": "int",
+        "name": "string",
+        "created_time": "int",
+        "updated_time": "int",
+        "member_count": "int"
+    }
+}
+

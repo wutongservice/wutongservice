@@ -1,0 +1,20 @@
+[
+    {
+        "userId":10001,
+        "resource":"vcard",
+        "target":{
+            "scope":1,
+            "id":""
+        },
+        "allow":true
+    },
+    {
+        "userId":10001,
+        "resource":"vcard",
+        "target":{
+            "scope":4,
+            "id":"10002"
+        },
+        "allow":false
+    }
+]

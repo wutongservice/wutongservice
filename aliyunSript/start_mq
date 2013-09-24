@@ -1,0 +1,2 @@
+#!/bin/sh
+memcacheq -d -p 22201 -r -H memcacheq -N -R -v -L 1024 -B 3072 > mq_error.log 2>&1

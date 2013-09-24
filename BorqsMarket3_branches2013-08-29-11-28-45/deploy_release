@@ -1,0 +1,2 @@
+#!/bin/bash
+fab -H 42.121.15.199 -u wutong -p borqs.com 'deploy:tomcat_dir=/home/wutong/BorqsMarket/tomcat7'

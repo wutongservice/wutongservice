@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS conversation0;
+DROP TABLE IF EXISTS conversation1;

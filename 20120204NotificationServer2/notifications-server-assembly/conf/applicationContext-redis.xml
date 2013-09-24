@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:redis="http://www.springframework.org/schema/redis"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd 
+        http://www.springframework.org/schema/redis 
+        http://www.springframework.org/schema/redis/spring-redis.xsd">
+
+	<bean id="redisMQPublisher" class="com.borqs.information.mq.RedisMQPublisher">
+		<property name="topic" value="${mq.topic}" />
+		<property name="template" ref="redisTemplate" />
+	</bean>
+
+	<!-- messages listener -->
+	<bean id="redisListener" class="com.borqs.information.mq.RedisMQListener">
+		<property name="pushService" ref="pushService" />
+	</bean>
+	<!--redis:listener-container connection-factory="jedisConnectionFactory">
+		<redis:listener ref="redisListener" method="handleMessage" 
+			topic="${mq.topic}" />
+	</redis:listener-container-->
+	
+	<!-- this is the Message Driven POJO (MDP) -->
+	<bean id="redisSerializer" class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+	<bean id="messageListenerAdapter" class="org.springframework.data.redis.listener.adapter.MessageListenerAdapter">
+	    <!--constructor-arg>
+	        <bean class="com.borqs.information.mq.RedisMQListene"/>
+	    </constructor-arg-->
+	    <property name="delegate" ref="redisListener" />
+	    <property name="serializer" ref="redisSerializer" />
+	</bean>
+	
+	<!-- and this is the message listener container... -->
+	<bean id="redisMQContainer" class="org.springframework.data.redis.listener.RedisMessageListenerContainer">
+	    <property name="connectionFactory" ref="jedisConnectionFactory"/>
+	    <property name="messageListeners">
+	      <!-- map of listeners and their associated topics (channels or/and patterns) -->
+	      <map>
+	        <entry key-ref="messageListenerAdapter">
+	            <bean class="org.springframework.data.redis.listener.ChannelTopic">
+	               <constructor-arg value="${mq.topic}" />
+	            </bean>
+	        </entry>
+	      </map>
+	    </property>
+	</bean>
+
+	<!-- factory and listener configuration -->
+	<bean id="jedisConnectionFactory"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+		p:use-pool="true" >
+		<!--property name="hostName" value="${mq.redis.host}" />
+		<property name="port" value="${mq.redis.port}" /-->
+	</bean>
+
+	<!-- redis template definition -->
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
+		p:connection-factory-ref="jedisConnectionFactory" />
+</beans>

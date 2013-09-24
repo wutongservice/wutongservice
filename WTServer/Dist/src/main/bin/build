@@ -1,0 +1,25 @@
+#!/bin/sh
+cd Base
+mvn -DskipTests clean package install
+cd ..
+cd temp
+mvn -DskipTests clean package install
+cd ..
+cd Wutong
+mvn -DskipTests clean package install
+cd ..
+cd Qiupu
+mvn -DskipTests clean package install
+cd ..
+cd elearning
+mvn -DskipTests clean package install
+cd ..
+cd link
+mvn -DskipTests clean package install
+cd ..
+cd Dist
+mvn -DskipTests clean package
+cd ..
+
+
+

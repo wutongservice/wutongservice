@@ -1,0 +1,31 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <span class="brand">Borqs Market</span>
+      <c:if test="${navType!='signin'}">
+        <c:choose>
+          <c:when test="${navType=='publish'}">
+            <c:set value="active" var="navPublishClass"/>
+          </c:when>
+          <c:otherwise>
+            <c:set value="" var="navPublishClass"/>
+          </c:otherwise>
+        </c:choose>
+        <div class="nav-collapse">
+          <ul class="nav pull-left">
+            <li class="${navPublishClass}">
+              <a href="/publish">Publish</a>
+            </li>
+          </ul>
+          <ul class="nav pull-right">
+            <li>
+              <a href="/signout">Sign out</a>
+            </li>
+          </ul>
+        </div>
+      </c:if>
+
+    </div>
+  </div>
+</div>

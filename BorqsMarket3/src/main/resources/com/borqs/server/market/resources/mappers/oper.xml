@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="market">
+
+  <select id="listAppsForOper" parameterType="Map" resultType="record">
+    SELECT
+      id,
+      `name`,
+      created_at,
+      updated_at
+    FROM
+      apps
+    WHERE
+      (disabled_at = 0)
+      AND (
+      (operator_id!='' AND operator_id=#{account_id})
+      OR
+      (operator_id='' AND creator_id=#{account_id})
+      )
+    ;
+  </select>
+
+  <select id="listPartitionsForOper" parameterType="Map" resultType="record">
+    SELECT
+      SQL_CALC_FOUND_ROWS
+      id,
+      created_at,
+      app_id,
+      category_id,
+      `name`,
+      description,
+      logo_image,
+      `status`,
+      `type`,
+      rule,
+      `list`
+    FROM
+      `partitions`
+    WHERE
+      app_id = #{app_id} AND category_id = #{category_id}
+    ORDER BY
+      created_at DESC
+    LIMIT
+      #{offset}, #{count}
+    ;
+  </select>
+
+  <select id="findPartitionForOper" parameterType="Map" resultType="record">
+    SELECT
+      SQL_CALC_FOUND_ROWS
+      id,
+      created_at,
+      app_id,
+      category_id,
+      `name`,
+      description,
+      logo_image,
+      `status`,
+      `type`,
+      rule,
+      `list`
+    FROM
+      `partitions`
+    WHERE
+      id = #{id}
+    ;
+  </select>
+
+  <delete id="deletePartitionForOper" parameterType="Map">
+    DELETE FROM
+             `partitions`
+    WHERE
+      id = #{id}
+    ;
+  </delete>
+
+  <insert id="insertPartitionForOper" parameterType="Map">
+    INSERT INTO `partitions`
+    SET
+      id=#{id},
+      created_at=#{now},
+      updated_at=#{now},
+      creator_id=#{creator_id},
+      app_id=#{app_id},
+      category_id=#{category_id},
+      `name`=#{name},
+      `description`=#{description},
+      logo_image=#{logo_image},
+      `status`=#{status},
+      `type`=#{type},
+      rule=#{rule},
+      `list`=#{list}
+    ;
+  </insert>
+
+  <select id="findCategoryForOper" parameterType="Map" resultType="record">
+    SELECT
+      app_id,
+      category_id
+    FROM
+      product_categories
+    WHERE
+      app_id = #{app_id} AND category_id = #{category_id}
+    ;
+  </select>
+
+  <select id="listActivePartitionsForOper" parameterType="Map" resultType="record">
+    SELECT
+      id,
+      created_at,
+      app_id,
+      category_id,
+      `name`,
+      description,
+      logo_image,
+      `status`,
+      `type`,
+      rule,
+      `list`
+    FROM
+      `partitions`
+    WHERE
+      app_id=#{app_id} AND category_id=#{category_id}
+      AND `status` > 0
+    ORDER BY
+      `status`
+    ;
+  </select>
+
+  <select id="filterProductIdsForOper" parameterType="Map" resultType="record">
+    SELECT
+      `id`
+    FROM
+      products
+    WHERE
+      app_id=#{app_id} AND category_id=#{category_id}
+      AND id IN
+      <foreach collection="product_ids" open="(" close=")" separator="," item="pid">
+        #{pid}
+      </foreach>
+    ORDER BY
+      find_in_set(id, #{joined_product_ids})
+    ;
+  </select>
+
+  <select id="listAllProductsForOper" parameterType="Map" resultType="record">
+    SELECT
+      id,
+      created_at,
+      `name`,
+      description,
+      logo_image,
+      cover_image
+    FROM
+      products
+    WHERE
+      app_id=#{app_id} AND category_id=#{category_id};
+  </select>
+
+  <update id="setActivePartitionForOper" parameterType="Map">
+    UPDATE `partitions`
+    SET
+      `status` = #{status}
+    WHERE
+      id=#{id} AND app_id=#{app_id} AND category_id=#{category_id}
+    ;
+  </update>
+
+  <update id="clearActivePartitionForOper" parameterType="Map">
+    UPDATE `partitions`
+    SET
+      `status` = 0
+    WHERE
+      app_id=#{app_id} AND category_id=#{category_id} AND `status`=#{active_status}
+    ;
+  </update>
+
+  <update id="changeAppOperIdForOper" parameterType="Map">
+    UPDATE `apps`
+    SET
+      operator_id = #{oper_id}
+    WHERE
+      id=#{app_id}
+    ;
+  </update>
+
+  <select id="findAppOperIdForOper" parameterType="Map" resultType="record">
+    SELECT
+      id,
+      creator_id,
+      operator_id
+    FROM
+      apps
+    WHERE
+      id=#{app_id}
+    ;
+  </select>
+
+  <update id="updatePartitionForOper" parameterType="Map">
+    UPDATE `partitions`
+    SET
+      <if test="name!=null">
+        `name` = #{name},
+      </if>
+      <if test="description!=null">
+        description=#{description},
+      </if>
+      <if test="logo_image!=null">
+        logo_image=#{logo_image},
+      </if>
+      <if test="type!=null">
+        `type`=#{type},
+      </if>
+      <if test="rule!=null">
+        `rule`=#{rule},
+      </if>
+      <if test="list!=null">
+        `list`=#{list},
+      </if>
+      updated_at = #{now}
+    WHERE
+      id=#{id}
+    ;
+  </update>
+
+  <update id="setPromotionsForOper" parameterType="Map">
+    INSERT INTO `promotions`
+    (`app_id`, `category_id`, `created_at`, `updated_at`, `list`)
+      VALUES
+    (#{app_id}, #{category_id}, #{now}, #{now}, #{list})
+    ON DUPLICATE KEY UPDATE
+      `list`=#{list},
+      `updated_at`=#{now}
+    ;
+  </update>
+
+  <select id="getPromotionsForOper" parameterType="Map" resultType="record">
+    SELECT
+      app_id,
+      category_id,
+      created_at,
+      updated_at,
+      `list`
+    FROM `promotions`
+    WHERE app_id=#{app_id} AND category_id=#{category_id}
+      ;
+  </select>
+
+</mapper>

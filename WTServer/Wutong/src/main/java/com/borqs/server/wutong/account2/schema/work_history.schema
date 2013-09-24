@@ -1,0 +1,12 @@
+{
+    "name": "work_history",
+    "columns": {
+        "from": "string",
+        "to": "string",
+        "company": "string",
+        "address": "string",
+        "title": "string",
+        "profession": "string",
+        "description": "string"
+    }
+}

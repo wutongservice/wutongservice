@@ -1,0 +1,81 @@
+{% extends 'layout.jinja2' %}
+{% block body %}
+    <div id="loading_layer" style="display:none">
+        <img src="/static/img/ajax_loader.gif" alt=""/>
+    </div>
+    <div id="maincontainer" class="clearfix">
+        {% block header %}
+            <header>
+                <div class="navbar navbar-fixed-top">
+                    <div class="navbar-inner">
+                        <div class="container-fluid">
+                            <span class="brand" href="products_list.htm"><i class="icon-home icon-white"></i> Borqs Market</span>
+                            <ul class="nav user_menu pull-right">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account<b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/account/signout.html?ticket={{ ticket|escape }}">Log Out</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        {% endblock %}
+        {% block leftbar %}
+            <div class="sidebar" id="leftbar">
+                <div class="accordion">
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                             <h3 class="accordion-toggle">Borqs Applications</h3>
+                        </div>
+                        <div class="accordion-body">
+                            <div class="accordion-inner">
+                                <ul class="nav nav-list">
+                                    {% for app in all_apps %}
+                                    <li class="{{ 'sdb_h_active' if app.id==app_id else ''}}"><a href="{{ '/publisher/products/list.html?app=' + app.id }}">{{ app.name }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+
+        <div id="contentwrapper">
+            <div class="main_content">
+                {% block main_content %}
+                    <h1>Main Content</h1>
+                {% endblock %}
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{% block footer %}
+    <footer style="text-align: center">
+        <small>Copyright © 2007 - 2013 Borqs. All Rights Reserved</small>
+    </footer>
+{% endblock %}
+{% macro nav_bar(paths=[]) -%}
+    <div class="breadCrumb module" id="jCrumbs">
+        <div style="overflow:hidden; position:relative; width: 967px;">
+            <div>
+                <ul style="width: 5000px;">
+                    <li class="first">
+                        <a href="/publisher/index.html"><i class="icon-home"></i></a>
+                    </li>
+                    {% for path in paths %}
+                        <li style="background: none repeat scroll 0% 0% transparent;">
+                            <span style="width: 80px; overflow: hidden;"><a href="{{ path[1]|escape }}" style="width: 85px;">{{ path[0]|escape }}</a></span>
+                            <div class="chevronOverlay" style="display: block;"></div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{%- endmacro %}
+
